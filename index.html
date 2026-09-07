@@ -487,6 +487,41 @@
         font-size: 38px;
       }
     }
+
+    /* ATUALIZAÇÃO VISUAL THE BEST DIGITAL */
+    body { background: #0b1730; }
+    header { background: rgba(11,23,48,0.90); }
+    .brand-logo { width: 235px; max-width: 48vw; height: auto; display:block; }
+    .calculator { background: rgba(22,39,68,0.96); }
+    .field input, .result-card { background: #10213d; }
+    .card { background: rgba(24,43,73,0.90); }
+    .offer-box { background: linear-gradient(135deg, #12345c, #0d2342); }
+    .dashboard-section { max-width:1100px; margin:auto; padding:20px 20px 90px; }
+    .dashboard-wrap { display:grid; grid-template-columns:0.9fr 1.4fr; gap:28px; align-items:center; padding:28px; border-radius:24px; background:linear-gradient(135deg,#16385f,#102847); border:1px solid rgba(76,190,255,.32); box-shadow:0 25px 80px rgba(0,0,0,.22); }
+    .dashboard-copy h2 { font-size:38px; line-height:1.05; margin-bottom:14px; }
+    .dashboard-copy h2 span { color:#55d7ff; }
+    .dashboard-copy p { color:#c0cee0; margin-bottom:18px; }
+    .dashboard-copy ul { list-style:none; display:grid; gap:9px; color:#e7f2ff; }
+    .dashboard-copy li::before { content:'✓'; color:#55d7ff; font-weight:900; margin-right:9px; }
+    .dashboard-demo { background:#eaf5ff; border-radius:18px; padding:14px; color:#10213d; box-shadow:0 15px 45px rgba(0,0,0,.25); }
+    .dash-top { display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin-bottom:10px; }
+    .kpi { background:white; border-radius:10px; padding:12px; }
+    .kpi small { display:block; color:#66758a; font-size:10px; }
+    .kpi strong { display:block; margin-top:3px; font-size:18px; }
+    .dash-grid { display:grid; grid-template-columns:1.4fr 1fr; gap:10px; }
+    .chart-card { background:white; border-radius:10px; padding:12px; min-height:190px; }
+    .bars { height:125px; display:flex; align-items:end; gap:7px; padding-top:18px; }
+    .bars i { display:block; flex:1; background:linear-gradient(#21b9ff,#087cff); border-radius:4px 4px 0 0; }
+    .donut { width:120px; height:120px; margin:20px auto 0; border-radius:50%; background:conic-gradient(#087cff 0 42%,#21b9ff 42% 67%,#78d9ff 67% 82%,#b6eaff 82% 100%); position:relative; }
+    .donut::after { content:'28,7%'; position:absolute; inset:28px; background:white; border-radius:50%; display:grid; place-items:center; font-weight:900; }
+    .dashboard-note { margin-top:12px; font-size:12px; color:#9fb2ca; }
+
+    .dashboard-image-card { background:#f4f9ff; border-radius:18px; padding:12px; box-shadow:0 15px 45px rgba(0,0,0,.25); }
+    .dashboard-image-card img { width:100%; height:auto; display:block; border-radius:12px; }
+    .dashboard-image-card small { display:block; margin-top:8px; text-align:center; color:#52667f; font-size:12px; }
+    @media(max-width:800px){ .dashboard-wrap{grid-template-columns:1fr;} .dashboard-copy h2{font-size:31px;} }
+    @media(max-width:520px){ .brand-logo{width:180px;max-width:58vw;} .dash-top{grid-template-columns:1fr 1fr;} .dash-grid{grid-template-columns:1fr;} }
+
   </style>
 </head>
 
@@ -494,7 +529,7 @@
 
 <header>
   <div class="nav">
-    <div class="logo">THE BEST <span>DIGITAL</span></div>
+    <img src="logo-the-best-digital.png" alt="THE BEST DIGITAL" class="brand-logo">
 
     <a href="#calculadora" class="nav-button">
       Calculadora grátis
@@ -656,6 +691,32 @@
 
 </section>
 
+
+
+<section class="dashboard-section" id="dashboard">
+  <div class="section-title">
+    <h2>📊 Dashboard em estilo Power BI</h2>
+    <p>Veja uma prévia visual do painel que acompanha a planilha e facilita a leitura dos principais números da operação.</p>
+  </div>
+  <div class="dashboard-wrap">
+    <div class="dashboard-copy">
+      <h2>Transforme dados em <span>decisões mais rápidas</span></h2>
+      <p>O dashboard da planilha reúne os indicadores mais importantes em uma tela, com visual inspirado em painéis profissionais.</p>
+      <ul>
+        <li>Faturamento e lucro líquido</li>
+        <li>Margem real e unidades vendidas</li>
+        <li>Resumo mensal com gráfico</li>
+        <li>Valor em estoque e alertas</li>
+        <li>Meta de lucro e vendas necessárias</li>
+      </ul>
+      <div class="dashboard-note">* Painel criado dentro da planilha Excel, com visual inspirado no Power BI. Os dados são atualizados conforme o usuário preenche as abas do kit.</div>
+    </div>
+    <div class="dashboard-image-card">
+      <img src="dashboard_powerbi_preview.png" alt="Exemplo do dashboard do THE BEST KIT MARKETPLACE">
+      <small>Exemplo visual do dashboard incluído na planilha.</small>
+    </div>
+  </div>
+</section>
 
 <section class="offer">
 
