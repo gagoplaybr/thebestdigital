@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>The Best Digital | Venda mais. Lucre de verdade.</title>
+
+<meta name="description" content="Calculadora gratuita de lucro e preço de venda para vendedores de marketplaces.">
+
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f5f8fc;
+    color: #172033;
+    line-height: 1.5;
+}
+
+header {
+    background: #071a35;
+    padding: 22px 7%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    color: white;
+    font-size: 23px;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+.logo span {
+    color: #16a8ff;
+}
+
+.header-button {
+    background: #16a8ff;
+    color: white;
+    padding: 11px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.hero {
+    background: linear-gradient(135deg, #071a35, #0b315d);
+    color: white;
+    padding: 80px 7% 90px;
+    text-align: center;
+}
+
+.hero h1 {
+    font-size: clamp(38px, 6vw, 68px);
+    line-height: 1.05;
+    max-width: 900px;
+    margin: auto;
+}
+
+.hero h1 span {
+    color: #16a8ff;
+}
+
+.hero p {
+    max-width: 700px;
+    margin: 25px auto 35px;
+    font-size: 19px;
+    color: #d7e5f5;
+}
+
+.cta {
+    display: inline-block;
+    background: #16a8ff;
+    color: white;
+    padding: 16px 30px;
+    border-radius: 9px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 17px;
+    box-shadow: 0 8px 25px rgba(22,168,255,.25);
+}
+
+.section {
+    max-width: 1100px;
+    margin: auto;
+    padding: 70px 20px;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 34px;
+    margin-bottom: 15px;
+}
+
+.section-subtitle {
+    text-align: center;
+    color: #65738a;
+    max-width: 700px;
+    margin: 0 auto 40px;
+}
+
+.calculator {
+    background: white;
+    max-width: 800px;
+    margin: auto;
+    padding: 35px;
+    border-radius: 18px;
+    box-shadow: 0 10px 40px rgba(0,0,0,.08);
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
+}
+
+.field.full {
+    grid-column: 1 / -1;
+}
+
+label {
+    font-weight: bold;
+    margin-bottom: 7px;
+}
+
+input {
+    width: 100%;
+    padding: 14px;
+    border: 1px solid #d5dce6;
+    border-radius: 8px;
+    font-size: 16px;
+    outline: none;
+}
+
+input:focus {
+    border-color: #16a8ff;
+}
+
+.calculate {
+    width: 100%;
+    border: none;
+    background: #071a35;
+    color: white;
+    padding: 16px;
+    margin-top: 25px;
+    border-radius: 9px;
+    font-size: 17px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.result {
+    display: none;
+    margin-top: 30px;
+    background: #eef8ff;
+    border: 1px solid #b9e4ff;
+    padding: 25px;
+    border-radius: 12px;
+}
+
+.result h3 {
+    margin-bottom: 18px;
+}
+
+.result-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.result-card {
+    background: white;
+    padding: 18px;
+    border-radius: 10px;
+}
+
+.result-card small {
+    display: block;
+    color: #65738a;
+    margin-bottom: 5px;
+}
+
+.result-card strong {
+    font-size: 23px;
+}
+
+.highlight {
+    color: #07883f;
+}
+
+.warning {
+    color: #c87900;
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.card {
+    background: white;
+    padding: 28px;
+    border-radius: 14px;
+    box-shadow: 0 8px 30px rgba(0,0,0,.06);
+}
+
+.card-icon {
+    font-size: 35px;
+    margin-bottom: 15px;
+}
+
+.card h3 {
+    margin-bottom: 10px;
+}
+
+.card p {
+    color: #65738a;
+}
+
+.offer {
+    background: #071a35;
+    color: white;
+    text-align: center;
+    border-radius: 20px;
+    padding: 55px 25px;
+}
+
+.offer h2 {
+    font-size: 38px;
+    margin-bottom: 15px;
+}
+
+.offer p {
+    color: #d7e5f5;
+    max-width: 650px;
+    margin: 0 auto 25px;
+}
+
+.price {
+    font-size: 45px;
+    font-weight: 800;
+    margin: 20px 0;
+}
+
+footer {
+    background: #041125;
+    color: #aebbd0;
+    text-align: center;
+    padding: 30px 20px;
+}
+
+@media(max-width: 700px) {
+    .form-grid,
+    .result-grid,
+    .cards {
+        grid-template-columns: 1fr;
+    }
+
+    header {
+        padding: 18px 5%;
+    }
+
+    .header-button {
+        display: none;
+    }
+
+    .hero {
+        padding: 60px 20px;
+    }
+
+    .calculator {
+        padding: 22px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">THE BEST <span>DIGITAL</span></div>
+    <a href="#calculadora" class="header-button">Calcular meu lucro</a>
+</header>
+
+<section class="hero">
+
+    <h1>
+        Venda mais.<br>
+        <span>Lucre de verdade.</span>
+    </h1>
+
+    <p>
+        Descubra quanto realmente sobra no seu bolso depois de custos,
+        frete, comissão e impostos.
+    </p>
+
+    <a href="#calculadora" class="cta">
+        🧮 CALCULAR MEU LUCRO GRÁTIS
+    </a>
+
+</section>
+
+<section class="section" id="calculadora">
+
+    <h2 class="section-title">
+        Você sabe quanto realmente lucra?
+    </h2>
+
+    <p class="section-subtitle">
+        Informe os dados do seu produto e descubra seu lucro estimado
+        em poucos segundos.
+    </p>
+
+    <div class="calculator">
+
+        <div class="form-grid">
+
+            <div class="field full">
+                <label>Nome do produto</label>
+                <input type="text" id="produto" placeholder="Ex: Fone Bluetooth">
+            </div>
+
+            <div class="field">
+                <label>Custo do produto (R$)</label>
+                <input type="number" id="custo" placeholder="0,00" step="0.01">
+            </div>
+
+            <div class="field">
+                <label>Preço de venda (R$)</label>
+                <input type="number" id="venda" placeholder="0,00" step="0.01">
+            </div>
+
+            <div class="field">
+                <label>Embalagem (R$)</label>
+                <input type="number" id="embalagem" placeholder="0,00" step="0.01">
+            </div>
+
+            <div class="field">
+                <label>Frete (R$)</label>
+                <input type="number" id="frete" placeholder="0,00" step="0.01">
+            </div>
+
+            <div class="field">
+                <label>Comissão do marketplace (%)</label>
+                <input type="number" id="comissao" placeholder="Ex: 15" step="0.01">
+            </div>
+
+            <div class="field">
+                <label>Imposto (%)</label>
+                <input type="number" id="imposto" placeholder="Ex: 6" step="0.01">
+            </div>
+
+        </div>
+
+        <button class="calculate" onclick="calcular()">
+            CALCULAR MEU LUCRO
+        </button>
+
+        <div class="result" id="resultado">
+
+            <h3>📊 Resultado da análise</h3>
+
+            <div class="result-grid">
+
+                <div class="result-card">
+                    <small>Produto</small>
+                    <strong id="resultadoProduto">-</strong>
+                </div>
+
+                <div class="result-card">
+                    <small>Preço de venda</small>
+                    <strong id="resultadoVenda">R$ 0,00</strong>
+                </div>
+
+                <div class="result-card">
+                    <small>Custos totais</small>
+                    <strong id="resultadoCustos">R$ 0,00</strong>
+                </div>
+
+                <div class="result-card">
+                    <small>Lucro líquido estimado</small>
+                    <strong id="resultadoLucro" class="highlight">R$ 0,00</strong>
+                </div>
+
+                <div class="result-card">
+                    <small>Margem líquida</small>
+                    <strong id="resultadoMargem">0%</strong>
+                </div>
+
+                <div class="result-card">
+                    <small>Preço para margem de 30%</small>
+                    <strong id="preco30">R$ 0,00</strong>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<section class="section">
+
+    <h2 class="section-title">
+        Feito para quem vende na internet
+    </h2>
+
+    <p class="section-subtitle">
+        Ferramentas simples para ajudar você a tomar decisões melhores.
+    </p>
+
+    <div class="cards">
+
+        <div class="card">
+            <div class="card-icon">🧮</div>
+            <h3>Precificação</h3>
+            <p>
+                Descubra preços de venda mais seguros considerando seus custos.
+            </p>
+        </div>
+
+        <div class="card">
+            <div class="card-icon">📦</div>
+            <h3>Controle</h3>
+            <p>
+                Organize seus produtos, vendas, custos e estoque.
+            </p>
+        </div>
+
+        <div class="card">
+            <div class="card-icon">📈</div>
+            <h3>Mais lucro</h3>
+            <p>
+                Enxergue onde seu dinheiro está indo e tome decisões melhores.
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+<section class="section">
+
+    <div class="offer">
+
+        <h2>THE BEST KIT MARKETPLACE</h2>
+
+        <p>
+            Em breve: um kit completo para vendedores controlarem
+            preços, custos, estoque, vendas e lucro.
+        </p>
+
+        <div class="price">R$ 29,90</div>
+
+        <a href="#" class="cta">
+            QUERO CONHECER O KIT
+        </a>
+
+    </div>
+
+</section>
+
+<footer>
+
+    <p>
+        © 2026 The Best Digital
+    </p>
+
+    <p>
+        Ferramentas digitais para quem quer vender melhor.
+    </p>
+
+</footer>
+
+<script>
+
+function dinheiro(valor) {
+    return valor.toLocaleString('pt-BR', {
+        style: 'currency',
+        currency: 'BRL'
+    });
+}
+
+function calcular() {
+
+    const produto = document.getElementById("produto").value || "Seu produto";
+
+    const custo = parseFloat(document.getElementById("custo").value) || 0;
+    const venda = parseFloat(document.getElementById("venda").value) || 0;
+    const embalagem = parseFloat(document.getElementById("embalagem").value) || 0;
+    const frete = parseFloat(document.getElementById("frete").value) || 0;
+    const comissao = parseFloat(document.getElementById("comissao").value) || 0;
+    const imposto = parseFloat(document.getElementById("imposto").value) || 0;
+
+    const valorComissao = venda * (comissao / 100);
+    const valorImposto = venda * (imposto / 100);
+
+    const custos = custo + embalagem + frete + valorComissao + valorImposto;
+
+    const lucro = venda - custos;
+
+    const margem = venda > 0 ? (lucro / venda) * 100 : 0;
+
+    const margemDesejada = 30;
+
+    const custosFixos = custo + embalagem + frete;
+
+    const preco30 = custosFixos /
+        (1 - (comissao / 100) - (imposto / 100) - (margemDesejada / 100));
+
+    document.getElementById("resultadoProduto").textContent = produto;
+
+    document.getElementById("resultadoVenda").textContent =
+        dinheiro(venda);
+
+    document.getElementById("resultadoCustos").textContent =
+        dinheiro(custos);
+
+    document.getElementById("resultadoLucro").textContent =
+        dinheiro(lucro);
+
+    document.getElementById("resultadoMargem").textContent =
+        margem.toFixed(2) + "%";
+
+    document.getElementById("preco30").textContent =
+        dinheiro(preco30);
+
+    const lucroElemento = document.getElementById("resultadoLucro");
+
+    if (lucro < 0) {
+        lucroElemento.className = "warning";
+    } else {
+        lucroElemento.className = "highlight";
+    }
+
+    document.getElementById("resultado").style.display = "block";
+
+    document.getElementById("resultado").scrollIntoView({
+        behavior: "smooth",
+        block: "center"
+    });
+}
+
+</script>
+
+</body>
+</html>
