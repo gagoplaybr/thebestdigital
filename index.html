@@ -11,6 +11,16 @@
   </script>
 
   <meta charset="UTF-8">
+  <!-- PWA -->
+  <link rel="manifest" href="/manifest.webmanifest">
+  <meta name="application-name" content="THE BEST Precificação">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="THE BEST">
+  <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="/icons/icon-192.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="/icons/icon-512.png">
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>Calculadora de Precificação Grátis para Marketplace | The Best Digital</title>
@@ -653,6 +663,46 @@
       .seo-box h2 { font-size: 27px; }
     }
 
+    .install-app-wrap {
+      margin-top: 14px;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .install-app-button {
+      border: 1px solid rgba(85,215,255,.45);
+      background: rgba(13,35,66,.88);
+      color: #eaf8ff;
+      padding: 13px 22px;
+      min-height: 46px;
+      border-radius: 12px;
+      font-weight: 900;
+      cursor: pointer;
+      display: none;
+    }
+
+    .install-app-button:hover {
+      border-color: #55d7ff;
+      transform: translateY(-1px);
+    }
+
+    .install-hint {
+      width: 100%;
+      max-width: 560px;
+      margin: 6px auto 0;
+      padding: 12px 14px;
+      border-radius: 12px;
+      color: #c9d8e8;
+      background: rgba(9,25,48,.72);
+      border: 1px solid rgba(255,255,255,.08);
+      font-size: 13px;
+      display: none;
+    }
+
+    .install-hint.show { display: block; }
+
   </style>
 </head>
 
@@ -688,6 +738,11 @@
   <a href="#calculadora" class="hero-button">
     🧮 USAR CALCULADORA GRÁTIS
   </a>
+
+  <div class="install-app-wrap">
+    <button type="button" id="installAppButton" class="install-app-button">📱 INSTALAR APP</button>
+    <div id="installHint" class="install-hint" aria-live="polite"></div>
+  </div>
 
 </section>
 
@@ -1041,6 +1096,66 @@ function calcular() {
   document.getElementById("resultados").style.display = "block";
 
 }
+
+
+
+/* PWA: instalação e modo offline */
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", function () {
+    navigator.serviceWorker.register("/sw.js").catch(function () {});
+  });
+}
+
+(function () {
+  var installButton = document.getElementById("installAppButton");
+  var installHint = document.getElementById("installHint");
+  var deferredPrompt = null;
+
+  function isStandalone() {
+    return window.matchMedia("(display-mode: standalone)").matches ||
+           window.navigator.standalone === true;
+  }
+
+  var ua = window.navigator.userAgent || "";
+  var isIOS = /iPad|iPhone|iPod/.test(ua);
+  var isSafari = /Safari/.test(ua) && !/CriOS|FxiOS|EdgiOS/.test(ua);
+
+  if (!isStandalone() && isIOS && isSafari) {
+    installButton.style.display = "inline-block";
+  }
+
+  window.addEventListener("beforeinstallprompt", function (event) {
+    event.preventDefault();
+    deferredPrompt = event;
+    if (!isStandalone()) installButton.style.display = "inline-block";
+  });
+
+  installButton.addEventListener("click", async function () {
+    if (deferredPrompt) {
+      deferredPrompt.prompt();
+      try {
+        await deferredPrompt.userChoice;
+      } catch (e) {}
+      deferredPrompt = null;
+      installButton.style.display = "none";
+      return;
+    }
+
+    if (isIOS && isSafari) {
+      installHint.textContent = 'No iPhone/iPad: toque em Compartilhar e depois em "Adicionar à Tela de Início".';
+      installHint.classList.add("show");
+      return;
+    }
+
+    installHint.textContent = "Abra o menu do navegador e escolha Instalar app ou Adicionar à tela inicial.";
+    installHint.classList.add("show");
+  });
+
+  window.addEventListener("appinstalled", function () {
+    installButton.style.display = "none";
+    installHint.classList.remove("show");
+  });
+})();
 
 </script>
 
