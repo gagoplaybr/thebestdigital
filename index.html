@@ -703,10 +703,176 @@
 
     .install-hint.show { display: block; }
 
+  
+
+    /* ===== MODO APP INSTALADO ===== */
+    .app-topbar,
+    .app-home,
+    .app-bottom-nav { display: none; }
+
+    @media (display-mode: standalone) {
+      body { padding-bottom: 82px; background: #081326; }
+      header { display: none; }
+
+      .app-topbar {
+        position: sticky;
+        top: 0;
+        z-index: 120;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 14px 18px;
+        background: rgba(8,19,38,.94);
+        border-bottom: 1px solid rgba(255,255,255,.08);
+        backdrop-filter: blur(16px);
+      }
+
+      .app-topbar img {
+        width: 42px;
+        height: 42px;
+        object-fit: contain;
+      }
+
+      .app-topbar strong { display:block; font-size: 15px; letter-spacing:.3px; }
+      .app-topbar span { display:block; color:#75cfff; font-size:12px; margin-top:2px; }
+
+      .app-home {
+        display: block;
+        max-width: 760px;
+        margin: 0 auto;
+        padding: 28px 18px 10px;
+      }
+
+      .app-welcome {
+        background: linear-gradient(145deg, rgba(0,126,255,.20), rgba(0,183,255,.06));
+        border: 1px solid rgba(88,199,255,.25);
+        border-radius: 22px;
+        padding: 22px;
+        box-shadow: 0 18px 60px rgba(0,0,0,.20);
+      }
+
+      .app-welcome small { color:#67c8ff; font-weight:700; }
+      .app-welcome h2 { font-size:28px; line-height:1.08; margin:8px 0 8px; }
+      .app-welcome p { color:#c9d7eb; font-size:14px; }
+
+      .app-quick-grid {
+        display:grid;
+        grid-template-columns: repeat(2, minmax(0,1fr));
+        gap:12px;
+        margin-top:16px;
+      }
+
+      .app-quick-card {
+        text-decoration:none;
+        color:white;
+        background:rgba(255,255,255,.045);
+        border:1px solid rgba(255,255,255,.08);
+        border-radius:17px;
+        padding:16px;
+        min-height:112px;
+        display:flex;
+        flex-direction:column;
+        justify-content:space-between;
+        transition:.2s ease;
+      }
+
+      .app-quick-card:active { transform:scale(.98); background:rgba(0,126,255,.14); }
+      .app-quick-icon { font-size:26px; }
+      .app-quick-card b { font-size:15px; }
+      .app-quick-card em { font-style:normal; font-size:12px; color:#9fb4d0; margin-top:4px; }
+
+      .hero { padding-top: 30px; }
+      .hero .badge, .hero h1, .hero > p { display:none; }
+      .hero .cta-button { margin-top:0; }
+      #installAppButton, #installHint { display:none !important; }
+
+      .app-bottom-nav {
+        position: fixed;
+        left: 12px;
+        right: 12px;
+        bottom: 10px;
+        z-index: 150;
+        display:grid;
+        grid-template-columns: repeat(4,1fr);
+        gap:4px;
+        padding:8px;
+        background:rgba(7,16,34,.96);
+        border:1px solid rgba(255,255,255,.10);
+        border-radius:20px;
+        box-shadow:0 18px 60px rgba(0,0,0,.42);
+        backdrop-filter:blur(18px);
+      }
+
+      .app-nav-link {
+        text-decoration:none;
+        color:#8fa7c7;
+        display:flex;
+        min-width:0;
+        flex-direction:column;
+        align-items:center;
+        justify-content:center;
+        gap:4px;
+        min-height:54px;
+        border-radius:14px;
+        font-size:10px;
+        font-weight:700;
+        transition:.2s ease;
+      }
+
+      .app-nav-link .nav-ico { font-size:20px; line-height:1; }
+      .app-nav-link.active { color:white; background:rgba(0,126,255,.18); }
+
+      .calculator-section,
+      .dashboard-section,
+      .offer { scroll-margin-top: 78px; }
+    }
+
+    @media (display-mode: standalone) and (max-width:520px) {
+      .calculator-section { padding-top:42px; }
+      .dashboard-section { padding-top:46px; }
+      .offer { padding-top:46px; }
+    }
+
   </style>
 </head>
 
 <body>
+
+
+<div class="app-topbar" aria-label="Cabeçalho do aplicativo">
+  <img src="/icons/icon-192.png" alt="THE BEST">
+  <div>
+    <strong>THE BEST Precificação</strong>
+    <span>Seu painel de vendas</span>
+  </div>
+</div>
+
+<section class="app-home" id="app-inicio" aria-label="Início do aplicativo">
+  <div class="app-welcome">
+    <small>THE BEST DIGITAL</small>
+    <h2>Controle melhor. Venda com margem.</h2>
+    <p>Acesse rapidamente as ferramentas principais do seu app.</p>
+  </div>
+
+  <div class="app-quick-grid">
+    <a class="app-quick-card" href="#calculadora" data-app-nav="calculadora">
+      <span class="app-quick-icon">🧮</span>
+      <span><b>Calculadora</b><em>Preço, lucro e margem</em></span>
+    </a>
+    <a class="app-quick-card" href="#dashboard" data-app-nav="dashboard">
+      <span class="app-quick-icon">📊</span>
+      <span><b>Dashboard</b><em>Visão dos principais números</em></span>
+    </a>
+    <a class="app-quick-card" href="#kit" data-app-nav="kit">
+      <span class="app-quick-icon">📦</span>
+      <span><b>THE BEST KIT</b><em>Planilha e materiais</em></span>
+    </a>
+    <a class="app-quick-card" href="https://thebestdigital.com.br/" target="_blank" rel="noopener" data-app-nav="site">
+      <span class="app-quick-icon">🌐</span>
+      <span><b>Site</b><em>Abrir versão completa</em></span>
+    </a>
+  </div>
+</section>
 
 <header>
   <div class="nav">
@@ -942,7 +1108,7 @@
   </div>
 </section>
 
-<section class="offer">
+<section class="offer" id="kit">
 
   <div class="offer-box">
 
@@ -982,6 +1148,13 @@
 
 </footer>
 
+
+<nav class="app-bottom-nav" aria-label="Navegação do aplicativo">
+  <a class="app-nav-link active" href="#app-inicio" data-section="app-inicio"><span class="nav-ico">⌂</span><span>Início</span></a>
+  <a class="app-nav-link" href="#calculadora" data-section="calculadora"><span class="nav-ico">🧮</span><span>Calcular</span></a>
+  <a class="app-nav-link" href="#dashboard" data-section="dashboard"><span class="nav-ico">📊</span><span>Dashboard</span></a>
+  <a class="app-nav-link" href="#kit" data-section="kit"><span class="nav-ico">📦</span><span>Kit</span></a>
+</nav>
 
 <script>
 
@@ -1154,6 +1327,45 @@ if ("serviceWorker" in navigator) {
   window.addEventListener("appinstalled", function () {
     installButton.style.display = "none";
     installHint.classList.remove("show");
+  });
+})();
+
+
+/* Navegação visual do app instalado */
+(function () {
+  var standalone = window.matchMedia("(display-mode: standalone)").matches || window.navigator.standalone === true;
+  if (!standalone) return;
+
+  var links = Array.from(document.querySelectorAll(".app-nav-link"));
+  var sections = ["app-inicio", "calculadora", "dashboard", "kit"]
+    .map(function (id) { return document.getElementById(id); })
+    .filter(Boolean);
+
+  function setActive(id) {
+    links.forEach(function (link) {
+      link.classList.toggle("active", link.getAttribute("data-section") === id);
+    });
+  }
+
+  var observer = new IntersectionObserver(function (entries) {
+    var visible = entries
+      .filter(function (entry) { return entry.isIntersecting; })
+      .sort(function (a,b) { return b.intersectionRatio - a.intersectionRatio; });
+    if (visible[0]) setActive(visible[0].target.id);
+  }, { threshold:[0.18,0.35,0.55], rootMargin:"-70px 0px -35% 0px" });
+
+  sections.forEach(function (section) { observer.observe(section); });
+
+  document.querySelectorAll("[data-app-nav], .app-nav-link").forEach(function (el) {
+    el.addEventListener("click", function () {
+      var dest = el.getAttribute("data-app-nav") || el.getAttribute("data-section") || "desconhecido";
+      if (typeof gtag === "function") {
+        gtag("event", "app_nav_click", {
+          event_category: "pwa",
+          event_label: dest
+        });
+      }
+    });
   });
 })();
 
