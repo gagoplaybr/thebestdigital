@@ -913,7 +913,7 @@
     }
 
     /* Estrutura pronta para vídeo de apresentação do kit */
-    .kit-video-slot { display:none; }
+    .kit-video-slot { display:block; }
     .kit-video-slot.active { display:block; max-width:1100px; margin:0 auto; padding:10px 20px 90px; }
     .kit-video-shell { background:linear-gradient(145deg,#122d50,#0d203a); border:1px solid rgba(89,205,255,.22); border-radius:24px; padding:24px; }
     .kit-video-shell h2 { font-size:34px; margin-bottom:8px; }
@@ -970,9 +970,9 @@
       <span class="app-quick-icon-wrap">📦</span>
       <span><b>THE BEST KIT</b><em>Planilha e materiais</em></span>
     </a>
-    <a class="app-quick-card" href="https://thebestdigital.com.br/" target="_blank" rel="noopener" data-app-nav="site">
-      <span class="app-quick-icon-wrap">🌐</span>
-      <span><b>Site oficial</b><em>Abrir no navegador</em></span>
+    <a class="app-quick-card highlight" href="#apresentacao-kit" data-app-nav="video">
+      <span class="app-quick-icon-wrap">🎬</span>
+      <span><b>Conheça o Kit</b><em>Veja o vídeo completo</em></span>
     </a>
   </div>
 
@@ -1192,11 +1192,15 @@
 
 
 <!-- Área preparada para o vídeo de apresentação. Quando o vídeo estiver pronto, basta ativar a classe "active" e inserir o arquivo/URL. -->
-<section class="kit-video-slot" id="apresentacao-kit" aria-label="Apresentação do THE BEST KIT MARKETPLACE">
+<section class="kit-video-slot active" id="apresentacao-kit" aria-label="Apresentação do THE BEST KIT MARKETPLACE">
   <div class="kit-video-shell">
     <h2>Veja o que você recebe no THE BEST KIT</h2>
     <p>Apresentação completa da planilha, dashboard, checklist, guias e bônus.</p>
-    <!-- Exemplo futuro: <video controls poster="dashboard_powerbi_preview.png"><source src="video-the-best-kit.mp4" type="video/mp4"></video> -->
+    <video controls playsinline preload="metadata" poster="video-poster.jpg" aria-label="Vídeo de apresentação do THE BEST KIT MARKETPLACE">
+      <source src="video-the-best-kit.mp4" type="video/mp4">
+      Seu navegador não suporta reprodução de vídeo.
+    </video>
+    <a href="#kit" class="offer-button" style="display:block;max-width:420px;margin:20px auto 0;text-align:center;">QUERO MEU KIT</a>
   </div>
 </section>
 
