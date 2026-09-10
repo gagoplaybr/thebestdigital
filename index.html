@@ -833,6 +833,94 @@
       .offer { padding-top:46px; }
     }
 
+
+    /* ===== APP V3 ===== */
+    @media (display-mode: standalone) {
+      .app-home { padding-top: 20px; }
+      .app-welcome-v3 {
+        position: relative;
+        overflow: hidden;
+        border-radius: 26px;
+        padding: 24px;
+        background:
+          radial-gradient(circle at 88% 5%, rgba(81,221,255,.25), transparent 30%),
+          linear-gradient(145deg, #0d2d55, #0b1c38 62%, #08172f);
+        border: 1px solid rgba(98,211,255,.28);
+        box-shadow: 0 24px 70px rgba(0,0,0,.28);
+      }
+      .app-welcome-v3::after {
+        content:"";
+        position:absolute;
+        width:180px;height:180px;
+        right:-70px;bottom:-90px;
+        border-radius:50%;
+        background:#008cff;
+        filter:blur(55px);
+        opacity:.22;
+      }
+      .app-mini-brand {
+        display:flex;align-items:center;justify-content:space-between;gap:10px;
+        color:#7bdcff;font-size:11px;font-weight:800;letter-spacing:.8px;
+        text-transform:uppercase;
+      }
+      .app-mini-brand .live-dot {
+        display:inline-flex;align-items:center;gap:6px;
+        padding:6px 9px;border-radius:999px;
+        background:rgba(0,190,255,.08);border:1px solid rgba(86,217,255,.18);
+        color:#b9edff;font-size:10px;letter-spacing:.3px;
+      }
+      .app-mini-brand .live-dot::before {
+        content:"";width:7px;height:7px;border-radius:50%;background:#42e39c;
+        box-shadow:0 0 12px rgba(66,227,156,.8);
+      }
+      .app-welcome-v3 h2 { font-size:31px; line-height:1.02; margin:16px 0 10px; max-width:430px; }
+      .app-welcome-v3 h2 span { color:#62d9ff; }
+      .app-welcome-v3 p { color:#b9c9df; font-size:13px; max-width:500px; }
+      .app-primary-actions { display:grid;grid-template-columns:1.25fr .75fr;gap:10px;margin-top:18px; }
+      .app-primary-btn, .app-secondary-btn {
+        min-height:48px;border-radius:14px;text-decoration:none;font-weight:900;font-size:13px;
+        display:flex;align-items:center;justify-content:center;gap:8px;
+      }
+      .app-primary-btn { color:white;background:linear-gradient(90deg,#087cff,#00b8ff);box-shadow:0 10px 30px rgba(0,140,255,.28); }
+      .app-secondary-btn { color:#d8efff;background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.10); }
+      .app-insight-row { display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px; }
+      .app-insight {
+        background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);
+        padding:10px;border-radius:14px;min-width:0;
+      }
+      .app-insight b { display:block;font-size:12px;color:#eaf7ff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis; }
+      .app-insight span { display:block;font-size:10px;color:#8098b8;margin-top:2px; }
+      .app-section-label { margin:21px 2px 10px;color:#dceaff;font-size:13px;font-weight:900; }
+      .app-quick-grid { margin-top:0; }
+      .app-quick-card {
+        min-height:118px;
+        background:linear-gradient(160deg,rgba(255,255,255,.055),rgba(255,255,255,.025));
+      }
+      .app-quick-card.highlight { border-color:rgba(69,202,255,.30); background:linear-gradient(160deg,rgba(0,139,255,.16),rgba(255,255,255,.025)); }
+      .app-quick-icon-wrap {
+        width:39px;height:39px;border-radius:12px;display:grid;place-items:center;
+        background:rgba(0,144,255,.13);border:1px solid rgba(74,198,255,.18);font-size:20px;
+      }
+      .app-tip-card {
+        margin-top:12px;padding:14px 15px;border-radius:16px;display:flex;align-items:center;gap:12px;
+        background:rgba(0,150,255,.075);border:1px solid rgba(86,205,255,.15);color:#cfe5f8;
+      }
+      .app-tip-card strong { display:block;color:#fff;font-size:12px;margin-bottom:2px; }
+      .app-tip-card span { font-size:11px;color:#92aac6; }
+      .app-tip-ico { font-size:22px; }
+      .app-bottom-nav { padding:7px; border-radius:22px; }
+      .app-nav-link.active { background:linear-gradient(180deg,rgba(0,139,255,.24),rgba(0,139,255,.12)); box-shadow:inset 0 0 0 1px rgba(87,208,255,.12); }
+    }
+
+    /* Estrutura pronta para vídeo de apresentação do kit */
+    .kit-video-slot { display:none; }
+    .kit-video-slot.active { display:block; max-width:1100px; margin:0 auto; padding:10px 20px 90px; }
+    .kit-video-shell { background:linear-gradient(145deg,#122d50,#0d203a); border:1px solid rgba(89,205,255,.22); border-radius:24px; padding:24px; }
+    .kit-video-shell h2 { font-size:34px; margin-bottom:8px; }
+    .kit-video-shell p { color:#b4c5da; margin-bottom:18px; }
+    .kit-video-shell video, .kit-video-shell iframe { width:100%; aspect-ratio:16/9; border:0; border-radius:16px; background:#050914; display:block; }
+    @media(max-width:600px){ .kit-video-shell h2{font-size:26px;} .kit-video-shell{padding:16px;} }
+
   </style>
 </head>
 
@@ -848,29 +936,49 @@
 </div>
 
 <section class="app-home" id="app-inicio" aria-label="Início do aplicativo">
-  <div class="app-welcome">
-    <small>THE BEST DIGITAL</small>
-    <h2>Controle melhor. Venda com margem.</h2>
-    <p>Acesse rapidamente as ferramentas principais do seu app.</p>
+  <div class="app-welcome-v3">
+    <div class="app-mini-brand">
+      <span>THE BEST DIGITAL</span>
+      <span class="live-dot">App ativo</span>
+    </div>
+    <h2>Precifique com <span>clareza</span> antes de vender.</h2>
+    <p>Calcule preço, margem e lucro e acesse rapidamente as principais ferramentas do THE BEST.</p>
+
+    <div class="app-primary-actions">
+      <a class="app-primary-btn" href="#calculadora" data-app-nav="calculadora">🧮 Calcular agora</a>
+      <a class="app-secondary-btn" href="#kit" data-app-nav="kit">📦 Ver Kit</a>
+    </div>
+
+    <div class="app-insight-row" aria-label="Recursos principais">
+      <div class="app-insight"><b>Lucro</b><span>Veja o que sobra</span></div>
+      <div class="app-insight"><b>Margem</b><span>Confira sua meta</span></div>
+      <div class="app-insight"><b>Preço</b><span>Venda com lógica</span></div>
+    </div>
   </div>
 
+  <div class="app-section-label">Acesso rápido</div>
   <div class="app-quick-grid">
-    <a class="app-quick-card" href="#calculadora" data-app-nav="calculadora">
-      <span class="app-quick-icon">🧮</span>
+    <a class="app-quick-card highlight" href="#calculadora" data-app-nav="calculadora">
+      <span class="app-quick-icon-wrap">🧮</span>
       <span><b>Calculadora</b><em>Preço, lucro e margem</em></span>
     </a>
     <a class="app-quick-card" href="#dashboard" data-app-nav="dashboard">
-      <span class="app-quick-icon">📊</span>
-      <span><b>Dashboard</b><em>Visão dos principais números</em></span>
+      <span class="app-quick-icon-wrap">📊</span>
+      <span><b>Dashboard</b><em>Visão dos seus números</em></span>
     </a>
     <a class="app-quick-card" href="#kit" data-app-nav="kit">
-      <span class="app-quick-icon">📦</span>
+      <span class="app-quick-icon-wrap">📦</span>
       <span><b>THE BEST KIT</b><em>Planilha e materiais</em></span>
     </a>
     <a class="app-quick-card" href="https://thebestdigital.com.br/" target="_blank" rel="noopener" data-app-nav="site">
-      <span class="app-quick-icon">🌐</span>
-      <span><b>Site</b><em>Abrir versão completa</em></span>
+      <span class="app-quick-icon-wrap">🌐</span>
+      <span><b>Site oficial</b><em>Abrir no navegador</em></span>
     </a>
+  </div>
+
+  <div class="app-tip-card">
+    <div class="app-tip-ico">💡</div>
+    <div><strong>Dica rápida</strong><span>Use a calculadora antes de anunciar para enxergar a margem real da venda.</span></div>
   </div>
 </section>
 
@@ -1082,6 +1190,15 @@
 </section>
 
 
+
+<!-- Área preparada para o vídeo de apresentação. Quando o vídeo estiver pronto, basta ativar a classe "active" e inserir o arquivo/URL. -->
+<section class="kit-video-slot" id="apresentacao-kit" aria-label="Apresentação do THE BEST KIT MARKETPLACE">
+  <div class="kit-video-shell">
+    <h2>Veja o que você recebe no THE BEST KIT</h2>
+    <p>Apresentação completa da planilha, dashboard, checklist, guias e bônus.</p>
+    <!-- Exemplo futuro: <video controls poster="dashboard_powerbi_preview.png"><source src="video-the-best-kit.mp4" type="video/mp4"></video> -->
+  </div>
+</section>
 
 <section class="dashboard-section" id="dashboard">
   <div class="section-title">

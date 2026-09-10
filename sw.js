@@ -1,4 +1,4 @@
-const CACHE = 'the-best-pwa-v2';
+const CACHE = 'the-best-pwa-v3';
 const CORE = [
   '/', '/index.html', '/manifest.webmanifest',
   '/logo-the-best-digital.png', '/dashboard_powerbi_preview.png',
