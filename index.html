@@ -13,7 +13,7 @@
   <meta charset="UTF-8">
   <!-- PWA -->
   <link rel="manifest" href="/manifest.webmanifest">
-  <meta name="application-name" content="THE BEST Precificação">
+  <meta name="application-name" content="THE BEST Marketplace">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="THE BEST">
@@ -921,6 +921,60 @@
     .kit-video-shell video, .kit-video-shell iframe { width:100%; aspect-ratio:16/9; border:0; border-radius:16px; background:#050914; display:block; }
     @media(max-width:600px){ .kit-video-shell h2{font-size:26px;} .kit-video-shell{padding:16px;} }
 
+  
+
+    /* ===== THE BEST PWA V5 ===== */
+    .app-v5-only { display:none; }
+    .v5-toast {
+      position:fixed; left:50%; bottom:96px; transform:translateX(-50%) translateY(18px);
+      background:#0f2542; color:#e9f7ff; border:1px solid rgba(81,205,255,.3);
+      box-shadow:0 16px 45px rgba(0,0,0,.35); padding:11px 15px; border-radius:14px;
+      font-size:12px; font-weight:800; z-index:9999; opacity:0; pointer-events:none; transition:.25s;
+    }
+    .v5-toast.show { opacity:1; transform:translateX(-50%) translateY(0); }
+
+    @media (display-mode: standalone) {
+      .app-v5-only { display:block; }
+      .app-v5-section { max-width:680px; margin:0 auto; padding:26px 16px 18px; }
+      .app-v5-head { display:flex; align-items:end; justify-content:space-between; gap:12px; margin-bottom:13px; }
+      .app-v5-head h2 { font-size:23px; line-height:1.05; }
+      .app-v5-head p { color:#8fa9c8; font-size:11px; margin-top:5px; }
+      .app-v5-badge { font-size:10px; font-weight:900; color:#65d5ff; background:rgba(0,153,255,.1); border:1px solid rgba(69,204,255,.22); padding:5px 9px; border-radius:999px; white-space:nowrap; }
+      .app-v5-panel { background:linear-gradient(145deg,#112b4c,#0d2038); border:1px solid rgba(79,199,255,.18); border-radius:22px; padding:16px; box-shadow:0 18px 45px rgba(0,0,0,.18); }
+      .v5-actions { display:grid; grid-template-columns:1fr 1fr; gap:9px; margin-top:12px; }
+      .v5-btn { border:0; border-radius:13px; padding:12px 13px; font-weight:900; font-size:12px; cursor:pointer; text-decoration:none; text-align:center; color:white; background:linear-gradient(90deg,#087cff,#00b8ff); }
+      .v5-btn.ghost { background:rgba(255,255,255,.055); border:1px solid rgba(255,255,255,.1); color:#d8efff; }
+      .v5-list { display:grid; gap:9px; margin-top:12px; }
+      .v5-item { background:rgba(255,255,255,.035); border:1px solid rgba(255,255,255,.075); border-radius:15px; padding:12px; }
+      .v5-item-top { display:flex; justify-content:space-between; gap:10px; align-items:flex-start; }
+      .v5-item strong { display:block; font-size:13px; }
+      .v5-item small { display:block; color:#8ea6c2; font-size:10px; margin-top:3px; }
+      .v5-kpis { display:grid; grid-template-columns:repeat(3,1fr); gap:7px; margin-top:9px; }
+      .v5-kpi { background:#09192c; border-radius:10px; padding:8px; }
+      .v5-kpi span { display:block; font-size:9px; color:#7893b4; }
+      .v5-kpi b { display:block; font-size:11px; color:#eaf7ff; margin-top:2px; }
+      .v5-item-controls { display:flex; gap:7px; margin-top:9px; }
+      .v5-mini { border:1px solid rgba(77,199,255,.2); background:rgba(0,132,255,.08); color:#bfeaff; border-radius:9px; padding:7px 9px; font-size:10px; font-weight:800; cursor:pointer; }
+      .v5-mini.danger { color:#ffb8bd; border-color:rgba(255,89,104,.2); background:rgba(255,70,88,.07); }
+      .v5-empty { text-align:center; color:#7f9ab8; font-size:11px; padding:18px 8px; }
+      .v5-form-grid { display:grid; grid-template-columns:1fr 1fr; gap:9px; }
+      .v5-form-grid .full { grid-column:1/-1; }
+      .v5-form-grid label { display:block; color:#a8bdd5; font-size:10px; font-weight:800; margin-bottom:4px; }
+      .v5-form-grid input { width:100%; border:1px solid rgba(255,255,255,.1); background:#09192c; color:white; border-radius:11px; padding:11px; outline:none; }
+      .client-hero { position:relative; overflow:hidden; background:linear-gradient(135deg,#102e52,#071524); border:1px solid rgba(93,210,255,.22); border-radius:24px; padding:20px; }
+      .client-hero::after { content:""; position:absolute; width:220px; height:220px; border-radius:50%; background:#007dff; filter:blur(80px); opacity:.15; right:-80px; top:-80px; }
+      .client-lock { width:46px; height:46px; border-radius:15px; display:grid; place-items:center; background:linear-gradient(135deg,#0b87ff,#00c8ff); font-size:22px; box-shadow:0 10px 30px rgba(0,140,255,.26); }
+      .client-hero h2 { margin-top:14px; font-size:26px; }
+      .client-hero p { color:#a9bdd4; font-size:12px; margin-top:7px; max-width:540px; }
+      .client-points { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:15px; }
+      .client-point { background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.07); border-radius:12px; padding:10px; font-size:11px; color:#c9d9eb; }
+      .client-note { margin-top:12px; color:#7f9bb8; font-size:10px; }
+      .app-bottom-nav { grid-template-columns:repeat(5,1fr); }
+      .app-nav-link { padding:8px 5px; font-size:9px; }
+      .app-nav-link .nav-ico { font-size:18px; }
+      .app-quick-grid { grid-template-columns:1fr 1fr; }
+    }
+
   </style>
 </head>
 
@@ -973,6 +1027,14 @@
     <a class="app-quick-card highlight" href="#apresentacao-kit" data-app-nav="video">
       <span class="app-quick-icon-wrap">🎬</span>
       <span><b>Conheça o Kit</b><em>Veja o vídeo completo</em></span>
+    </a>
+    <a class="app-quick-card" href="#meus-dados" data-app-nav="meus-dados">
+      <span class="app-quick-icon-wrap">💾</span>
+      <span><b>Meus dados</b><em>Cálculos e produtos salvos</em></span>
+    </a>
+    <a class="app-quick-card highlight" href="#area-cliente" data-app-nav="area-cliente">
+      <span class="app-quick-icon-wrap">🔐</span>
+      <span><b>Área do Cliente</b><em>Acesse seus materiais</em></span>
     </a>
   </div>
 
@@ -1077,6 +1139,9 @@
     <button class="calculate" onclick="calcular()">
       CALCULAR MEU LUCRO
     </button>
+    <div class="app-v5-only" style="margin-top:9px;">
+      <button class="v5-btn ghost" style="width:100%;" onclick="salvarCalculo()">💾 SALVAR ESTE CÁLCULO</button>
+    </div>
 
 
     <div class="results" id="resultados">
@@ -1229,6 +1294,60 @@
   </div>
 </section>
 
+
+<section class="app-v5-only app-v5-section" id="meus-dados" aria-label="Meus dados no aplicativo">
+  <div class="app-v5-head">
+    <div><h2>💾 Meus dados</h2><p>Seus cálculos e produtos ficam salvos neste aparelho.</p></div>
+    <span class="app-v5-badge">V5</span>
+  </div>
+
+  <div class="app-v5-panel">
+    <div class="app-v5-head" style="margin-bottom:8px;">
+      <div><h2 style="font-size:17px;">Histórico de cálculos</h2><p>Salve uma precificação e consulte depois.</p></div>
+      <button class="v5-mini danger" onclick="limparHistorico()">Limpar</button>
+    </div>
+    <div id="historicoCalculos" class="v5-list"></div>
+  </div>
+
+  <div class="app-v5-panel" style="margin-top:12px;">
+    <div class="app-v5-head" style="margin-bottom:12px;">
+      <div><h2 style="font-size:17px;">Meus produtos</h2><p>Cadastre itens para reutilizar na calculadora.</p></div>
+      <span class="app-v5-badge" id="contadorProdutos">0 itens</span>
+    </div>
+    <div class="v5-form-grid">
+      <div class="full"><label>Nome do produto</label><input id="v5ProdutoNome" type="text" placeholder="Ex.: Fone Bluetooth"></div>
+      <div><label>SKU</label><input id="v5ProdutoSku" type="text" placeholder="SKU-001"></div>
+      <div><label>Custo (R$)</label><input id="v5ProdutoCusto" type="number" step="0.01" placeholder="0,00"></div>
+      <div><label>Preço de venda (R$)</label><input id="v5ProdutoVenda" type="number" step="0.01" placeholder="0,00"></div>
+      <div><label>Frete (R$)</label><input id="v5ProdutoFrete" type="number" step="0.01" placeholder="0,00"></div>
+    </div>
+    <div class="v5-actions">
+      <button class="v5-btn" onclick="salvarProdutoV5()">+ SALVAR PRODUTO</button>
+      <button class="v5-btn ghost" onclick="limparFormularioProduto()">LIMPAR CAMPOS</button>
+    </div>
+    <div id="listaProdutosV5" class="v5-list"></div>
+  </div>
+</section>
+
+<section class="app-v5-only app-v5-section" id="area-cliente" aria-label="Área exclusiva para clientes">
+  <div class="client-hero">
+    <div class="client-lock">🔐</div>
+    <h2>Área do Cliente</h2>
+    <p>Comprou o THE BEST KIT MARKETPLACE? Seus arquivos e materiais continuam protegidos pela plataforma de pagamento. Entre com o mesmo e-mail usado na compra para acessar seus conteúdos.</p>
+    <div class="client-points">
+      <div class="client-point">📘 Manual profissional</div>
+      <div class="client-point">✅ Checklist do vendedor</div>
+      <div class="client-point">📚 Guias práticos</div>
+      <div class="client-point">🎁 Materiais bônus</div>
+    </div>
+    <div class="v5-actions">
+      <a class="v5-btn" href="https://my.eduzz.com/" target="_blank" rel="noopener" onclick="trackV5('area_cliente_eduzz')">ACESSAR MEUS MATERIAIS</a>
+      <a class="v5-btn ghost" href="https://sun.eduzz.com/89AXQ8DG0D" target="_blank" rel="noopener" onclick="trackV5('area_cliente_comprar')">AINDA NÃO SOU CLIENTE</a>
+    </div>
+    <div class="client-note">O login e a liberação dos arquivos são feitos pela Eduzz. O app THE BEST não armazena sua senha nem seus dados de pagamento.</div>
+  </div>
+</section>
+
 <section class="offer" id="kit">
 
   <div class="offer-box">
@@ -1273,8 +1392,9 @@
 <nav class="app-bottom-nav" aria-label="Navegação do aplicativo">
   <a class="app-nav-link active" href="#app-inicio" data-section="app-inicio"><span class="nav-ico">⌂</span><span>Início</span></a>
   <a class="app-nav-link" href="#calculadora" data-section="calculadora"><span class="nav-ico">🧮</span><span>Calcular</span></a>
-  <a class="app-nav-link" href="#dashboard" data-section="dashboard"><span class="nav-ico">📊</span><span>Dashboard</span></a>
-  <a class="app-nav-link" href="#kit" data-section="kit"><span class="nav-ico">📦</span><span>Kit</span></a>
+  <a class="app-nav-link" href="#dashboard" data-section="dashboard"><span class="nav-ico">📊</span><span>Painel</span></a>
+  <a class="app-nav-link" href="#meus-dados" data-section="meus-dados"><span class="nav-ico">💾</span><span>Meus dados</span></a>
+  <a class="app-nav-link" href="#area-cliente" data-section="area-cliente"><span class="nav-ico">🔐</span><span>Cliente</span></a>
 </nav>
 
 <script>
@@ -1458,7 +1578,7 @@ if ("serviceWorker" in navigator) {
   if (!standalone) return;
 
   var links = Array.from(document.querySelectorAll(".app-nav-link"));
-  var sections = ["app-inicio", "calculadora", "dashboard", "kit"]
+  var sections = ["app-inicio", "calculadora", "dashboard", "meus-dados", "area-cliente"]
     .map(function (id) { return document.getElementById(id); })
     .filter(Boolean);
 
@@ -1488,6 +1608,76 @@ if ("serviceWorker" in navigator) {
       }
     });
   });
+})();
+
+
+/* ===== V5: dados locais, histórico e produtos ===== */
+(function(){
+  const HIST_KEY = "theBestHistoricoV5";
+  const PROD_KEY = "theBestProdutosV5";
+
+  window.trackV5 = function(label){
+    if (typeof gtag === "function") gtag("event","app_v5_click",{event_category:"pwa_v5",event_label:label});
+  };
+
+  function toast(msg){
+    let el=document.getElementById("v5Toast");
+    if(!el){ el=document.createElement("div"); el.id="v5Toast"; el.className="v5-toast"; document.body.appendChild(el); }
+    el.textContent=msg; el.classList.add("show");
+    clearTimeout(window.__v5ToastTimer); window.__v5ToastTimer=setTimeout(()=>el.classList.remove("show"),2200);
+  }
+  window.v5Toast=toast;
+
+  function getJson(key){ try{return JSON.parse(localStorage.getItem(key)||"[]")}catch(e){return[]} }
+  function setJson(key,val){ localStorage.setItem(key,JSON.stringify(val)); }
+  function num(id){ return parseFloat(document.getElementById(id)?.value)||0; }
+  function brl(v){ return Number(v||0).toLocaleString("pt-BR",{style:"currency",currency:"BRL"}); }
+  function esc(s){ return String(s||"").replace(/[&<>\"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'\"':"&quot;","'":"&#39;"}[m])); }
+
+  window.salvarCalculo=function(){
+    calcular();
+    const venda=num("venda");
+    if(venda<=0){ toast("Faça um cálculo válido antes de salvar."); return; }
+    const custo=num("custo"), embalagem=num("embalagem"), frete=num("frete"), comissao=num("comissao"), imposto=num("imposto"), margem=num("margem");
+    const custoTotal=custo+embalagem+frete+(venda*comissao/100)+(venda*imposto/100);
+    const lucro=venda-custoTotal, margemReal=venda?lucro/venda*100:0;
+    const divisor=1-comissao/100-imposto/100-margem/100;
+    const precoRec=divisor>0?(custo+embalagem+frete)/divisor:0;
+    const item={id:Date.now(), produto:(document.getElementById("produto").value||"Produto sem nome").trim(), custo,venda,embalagem,frete,comissao,imposto,margem,custoTotal,lucro,margemReal,precoRec,data:new Date().toISOString()};
+    const arr=getJson(HIST_KEY); arr.unshift(item); setJson(HIST_KEY,arr.slice(0,30)); renderHistorico(); toast("Cálculo salvo neste aparelho."); trackV5("salvar_calculo");
+  };
+
+  window.carregarCalculo=function(id){
+    const x=getJson(HIST_KEY).find(i=>i.id===id); if(!x)return;
+    [["produto",x.produto],["custo",x.custo],["venda",x.venda],["embalagem",x.embalagem],["frete",x.frete],["comissao",x.comissao],["imposto",x.imposto],["margem",x.margem]].forEach(([id,v])=>{const e=document.getElementById(id); if(e)e.value=v;});
+    calcular(); document.getElementById("calculadora").scrollIntoView({behavior:"smooth"}); toast("Cálculo carregado.");
+  };
+
+  window.excluirCalculo=function(id){ const arr=getJson(HIST_KEY).filter(i=>i.id!==id); setJson(HIST_KEY,arr); renderHistorico(); };
+  window.limparHistorico=function(){ if(confirm("Apagar todo o histórico salvo neste aparelho?")){setJson(HIST_KEY,[]); renderHistorico(); toast("Histórico apagado.");} };
+
+  function renderHistorico(){
+    const el=document.getElementById("historicoCalculos"); if(!el)return;
+    const arr=getJson(HIST_KEY);
+    if(!arr.length){ el.innerHTML='<div class="v5-empty">Nenhum cálculo salvo ainda.</div>'; return; }
+    el.innerHTML=arr.map(x=>`<div class="v5-item"><div class="v5-item-top"><div><strong>${esc(x.produto)}</strong><small>${new Date(x.data).toLocaleString("pt-BR")}</small></div><small>${brl(x.venda)}</small></div><div class="v5-kpis"><div class="v5-kpi"><span>Lucro</span><b>${brl(x.lucro)}</b></div><div class="v5-kpi"><span>Margem</span><b>${Number(x.margemReal).toFixed(1)}%</b></div><div class="v5-kpi"><span>Preço ideal</span><b>${x.precoRec?brl(x.precoRec):"-"}</b></div></div><div class="v5-item-controls"><button class="v5-mini" onclick="carregarCalculo(${x.id})">Usar novamente</button><button class="v5-mini danger" onclick="excluirCalculo(${x.id})">Excluir</button></div></div>`).join("");
+  }
+
+  window.salvarProdutoV5=function(){
+    const nome=(document.getElementById("v5ProdutoNome").value||"").trim(); if(!nome){toast("Digite o nome do produto.");return;}
+    const item={id:Date.now(),nome,sku:(document.getElementById("v5ProdutoSku").value||"").trim(),custo:num("v5ProdutoCusto"),venda:num("v5ProdutoVenda"),frete:num("v5ProdutoFrete")};
+    const arr=getJson(PROD_KEY); arr.unshift(item); setJson(PROD_KEY,arr.slice(0,80)); limparFormularioProduto(); renderProdutos(); toast("Produto salvo."); trackV5("salvar_produto");
+  };
+  window.limparFormularioProduto=function(){ ["v5ProdutoNome","v5ProdutoSku","v5ProdutoCusto","v5ProdutoVenda","v5ProdutoFrete"].forEach(id=>{const e=document.getElementById(id);if(e)e.value="";}); };
+  window.excluirProdutoV5=function(id){ setJson(PROD_KEY,getJson(PROD_KEY).filter(x=>x.id!==id)); renderProdutos(); };
+  window.usarProdutoV5=function(id){ const x=getJson(PROD_KEY).find(i=>i.id===id);if(!x)return; document.getElementById("produto").value=x.nome;document.getElementById("custo").value=x.custo||"";document.getElementById("venda").value=x.venda||"";document.getElementById("frete").value=x.frete||"";document.getElementById("calculadora").scrollIntoView({behavior:"smooth"});toast("Produto carregado na calculadora."); };
+  function renderProdutos(){
+    const el=document.getElementById("listaProdutosV5"), count=document.getElementById("contadorProdutos"); if(!el)return; const arr=getJson(PROD_KEY); if(count)count.textContent=arr.length+" "+(arr.length===1?"item":"itens");
+    if(!arr.length){el.innerHTML='<div class="v5-empty">Cadastre seu primeiro produto para reutilizar custos e preço.</div>';return;}
+    el.innerHTML=arr.map(x=>`<div class="v5-item"><div class="v5-item-top"><div><strong>${esc(x.nome)}</strong><small>${x.sku?"SKU: "+esc(x.sku):"Sem SKU"}</small></div><small>${brl(x.venda)}</small></div><div class="v5-kpis"><div class="v5-kpi"><span>Custo</span><b>${brl(x.custo)}</b></div><div class="v5-kpi"><span>Venda</span><b>${brl(x.venda)}</b></div><div class="v5-kpi"><span>Frete</span><b>${brl(x.frete)}</b></div></div><div class="v5-item-controls"><button class="v5-mini" onclick="usarProdutoV5(${x.id})">Usar na calculadora</button><button class="v5-mini danger" onclick="excluirProdutoV5(${x.id})">Excluir</button></div></div>`).join("");
+  }
+
+  window.addEventListener("load",()=>{renderHistorico();renderProdutos();});
 })();
 
 </script>

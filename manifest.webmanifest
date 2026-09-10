@@ -1,7 +1,7 @@
 {
-  "name": "THE BEST Precificação",
+  "name": "THE BEST Marketplace",
   "short_name": "THE BEST",
-  "description": "Calculadora de precificação para vendedores de marketplace.",
+  "description": "Calculadora, histórico, produtos e área do cliente para vendedores de marketplace.",
   "id": "/",
   "start_url": "/?source=pwa",
   "scope": "/",
