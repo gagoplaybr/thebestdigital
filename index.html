@@ -981,6 +981,26 @@
 .premium-lock-box{text-align:center}.premium-lock-icon{font-size:34px;margin-bottom:8px}.premium-lock-box h3,.premium-login-box h3,.premium-ok-box h3{margin:0 0 7px;color:#fff}.premium-lock-box p,.premium-login-box p,.premium-ok-box p{margin:0;color:#b9c8dc;line-height:1.55}.premium-login-row{display:grid;grid-template-columns:1fr auto;gap:9px;margin-top:13px}.premium-login-row input{min-width:0;background:#081a32;border:1px solid rgba(128,191,255,.28);color:#fff;border-radius:12px;padding:12px 13px;outline:none}.premium-login-row button{border:0;border-radius:12px;padding:12px 15px;background:linear-gradient(135deg,#1ea7ff,#39d0ff);color:#021324;font-weight:900;cursor:pointer}.premium-status{display:inline-flex;align-items:center;gap:7px;margin-top:12px;padding:7px 10px;border-radius:999px;background:rgba(255,255,255,.07);font-size:12px;color:#dbeaff}.premium-status.ok{background:rgba(38,208,137,.13);color:#8df0bf;border:1px solid rgba(38,208,137,.3)}.premium-status.no{background:rgba(255,184,74,.12);color:#ffd18a;border:1px solid rgba(255,184,74,.28)}.premium-status.err{background:rgba(255,94,94,.12);color:#ffb0b0;border:1px solid rgba(255,94,94,.28)}.premium-products-wrap[hidden],.premium-lock-wrap[hidden]{display:none!important}.premium-pill{display:inline-flex;padding:6px 10px;border-radius:999px;background:linear-gradient(135deg,rgba(255,192,71,.18),rgba(53,175,255,.14));border:1px solid rgba(255,203,102,.32);color:#ffd788;font-size:11px;font-weight:900;letter-spacing:.04em}.premium-sync-note{font-size:12px;color:#9fb4ce;margin:8px 0 0}.premium-account-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.premium-account-actions button,.premium-account-actions a{border:1px solid rgba(124,190,255,.25);background:#0a2140;color:#fff;text-decoration:none;border-radius:10px;padding:9px 12px;font-weight:800;font-size:12px;cursor:pointer}.premium-account-actions .danger{border-color:rgba(255,100,100,.25);color:#ffb1b1}.premium-config-warning{font-size:12px;color:#ffd18a;margin-top:10px}.premium-mini-loader{display:inline-block;width:12px;height:12px;border:2px solid rgba(255,255,255,.25);border-top-color:#fff;border-radius:50%;animation:premiumSpin .8s linear infinite}@keyframes premiumSpin{to{transform:rotate(360deg)}}
 @media(max-width:640px){.premium-login-row{grid-template-columns:1fr}.premium-login-row button{width:100%}}
 
+/* V6.2: Área do Cliente também no site */
+.site-premium-section{max-width:1150px;margin:0 auto;padding:70px 20px 24px;}
+.premium-products-section{max-width:1150px;margin:0 auto;padding:18px 20px 60px;}
+.premium-products-section[hidden]{display:none!important;}
+.nav-actions{display:flex;align-items:center;gap:10px;}
+.nav-button.client-area{background:linear-gradient(90deg,#0b2140,#104b7a);border:1px solid rgba(78,200,255,.28);}
+@media(max-width:520px){.site-premium-section{padding:42px 16px 18px}.premium-products-section{padding:10px 16px 90px}}
+
+/* Visual web da Área do Cliente e Meus Produtos */
+.site-premium-section .client-hero{position:relative;overflow:hidden;background:linear-gradient(135deg,#102e52,#071524);border:1px solid rgba(93,210,255,.22);border-radius:24px;padding:24px;box-shadow:0 18px 45px rgba(0,0,0,.18)}
+.site-premium-section .client-hero::after{content:"";position:absolute;width:220px;height:220px;border-radius:50%;background:#007dff;filter:blur(80px);opacity:.15;right:-80px;top:-80px;pointer-events:none}
+.site-premium-section .client-lock{width:46px;height:46px;border-radius:15px;display:grid;place-items:center;background:linear-gradient(135deg,#0b87ff,#00c8ff);font-size:22px;box-shadow:0 10px 30px rgba(0,140,255,.26)}
+.site-premium-section .client-hero h2{margin-top:14px;font-size:30px}.site-premium-section .client-hero>p{color:#a9bdd4;font-size:14px;margin-top:7px;max-width:720px}
+.site-premium-section .client-points{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:15px}.site-premium-section .client-point{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:11px;font-size:12px;color:#c9d9eb}
+.site-premium-section .v5-actions,.premium-products-section .v5-actions{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:14px}.site-premium-section .v5-btn,.premium-products-section .v5-btn{border:0;border-radius:13px;padding:12px 13px;font-weight:900;font-size:12px;cursor:pointer;text-decoration:none;text-align:center;color:white;background:linear-gradient(90deg,#087cff,#00b8ff)}.site-premium-section .v5-btn.ghost,.premium-products-section .v5-btn.ghost{background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.1);color:#d8efff}
+.site-premium-section .client-note{margin-top:12px;color:#7f9bb8;font-size:11px}
+.premium-products-section .app-v5-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}.premium-products-section .app-v5-head h2{font-size:24px;line-height:1.1}.premium-products-section .app-v5-head p{color:#8fa9c8;font-size:12px;margin-top:5px}.premium-products-section .app-v5-badge{font-size:10px;font-weight:900;color:#65d5ff;background:rgba(0,153,255,.1);border:1px solid rgba(69,204,255,.22);padding:5px 9px;border-radius:999px;white-space:nowrap}.premium-products-section .app-v5-panel{background:linear-gradient(145deg,#112b4c,#0d2038);border:1px solid rgba(79,199,255,.18);border-radius:22px;padding:18px;box-shadow:0 18px 45px rgba(0,0,0,.18)}
+.premium-products-section .v5-form-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}.premium-products-section .v5-form-grid .full{grid-column:1/-1}.premium-products-section .v5-form-grid label{display:block;color:#a8bdd5;font-size:10px;font-weight:800;margin-bottom:4px}.premium-products-section .v5-form-grid input{width:100%;border:1px solid rgba(255,255,255,.1);background:#09192c;color:white;border-radius:11px;padding:11px;outline:none}.premium-products-section .v5-list{display:grid;gap:9px;margin-top:12px}.premium-products-section .v5-item{background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.075);border-radius:15px;padding:12px}.premium-products-section .v5-item-top{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}.premium-products-section .v5-item strong{display:block;font-size:13px}.premium-products-section .v5-item small{display:block;color:#8ea6c2;font-size:10px;margin-top:3px}.premium-products-section .v5-kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-top:9px}.premium-products-section .v5-kpi{background:#09192c;border-radius:10px;padding:8px}.premium-products-section .v5-kpi span{display:block;font-size:9px;color:#7893b4}.premium-products-section .v5-kpi b{display:block;font-size:11px;color:#eaf7ff;margin-top:2px}.premium-products-section .v5-item-controls{display:flex;gap:7px;margin-top:9px}.premium-products-section .v5-mini{border:1px solid rgba(77,199,255,.2);background:rgba(0,132,255,.08);color:#bfeaff;border-radius:9px;padding:7px 9px;font-size:10px;font-weight:800;cursor:pointer}.premium-products-section .v5-mini.danger{color:#ffb8bd;border-color:rgba(255,89,104,.2);background:rgba(255,70,88,.07)}.premium-products-section .v5-empty{text-align:center;color:#7f9ab8;font-size:11px;padding:18px 8px}
+@media(max-width:640px){.site-premium-section .client-points,.site-premium-section .v5-actions,.premium-products-section .v5-actions,.premium-products-section .v5-form-grid{grid-template-columns:1fr}.premium-products-section .v5-form-grid .full{grid-column:auto}.premium-products-section .app-v5-head{flex-direction:column}}
+
 </style>
 
   <!-- THE BEST V6 Premium -->
@@ -1059,9 +1079,10 @@
   <div class="nav">
     <img src="logo-the-best-digital.png" alt="THE BEST DIGITAL" class="brand-logo">
 
-    <a href="#calculadora" class="nav-button">
-      Calculadora grátis
-    </a>
+    <div class="nav-actions">
+      <a href="#area-cliente" class="nav-button client-area">Área do Cliente</a>
+      <a href="#calculadora" class="nav-button">Calculadora grátis</a>
+    </div>
   </div>
 </header>
 
@@ -1308,7 +1329,7 @@
 
 <section class="app-v5-only app-v5-section" id="meus-dados" aria-label="Meus dados no aplicativo">
   <div class="app-v5-head">
-    <div><h2>💾 Meus dados</h2><p>Seus cálculos e produtos ficam salvos neste aparelho.</p></div>
+    <div><h2>💾 Meus dados</h2><p>Seus cálculos ficam salvos neste aparelho. Produtos Premium ficam vinculados à sua conta.</p></div>
     <span class="app-v5-badge">V5</span>
   </div>
 
@@ -1320,45 +1341,13 @@
     <div id="historicoCalculos" class="v5-list"></div>
   </div>
 
-  <div class="app-v5-panel" style="margin-top:12px;">
-    <div class="app-v5-head" style="margin-bottom:12px;">
-      <div><h2 style="font-size:17px;">Meus produtos <span class="premium-pill">CLIENTE PREMIUM</span></h2><p>Cadastro, salvamento e reutilização exclusivos para compradores do THE BEST KIT MARKETPLACE.</p></div>
-      <span class="app-v5-badge" id="contadorProdutos">🔒</span>
-    </div>
-    <div id="premiumLockMeusDados" class="premium-lock-wrap">
-      <div class="premium-lock-box">
-        <div class="premium-lock-icon">🔐</div>
-        <h3>Recurso exclusivo para clientes</h3>
-        <p>Entre na Área do Cliente com o mesmo e-mail usado na compra para liberar cadastro de produtos, salvamento e sincronização entre aparelhos.</p>
-        <div class="v5-actions" style="justify-content:center;margin-top:14px;">
-          <a class="v5-btn" href="#area-cliente">ENTRAR COMO CLIENTE</a>
-          <a class="v5-btn ghost" href="https://sun.eduzz.com/89AXQ8DG0D" target="_blank" rel="noopener">QUERO O KIT</a>
-        </div>
-      </div>
-    </div>
-    <div id="premiumProductsPanel" class="premium-products-wrap" hidden>
-      <div class="v5-form-grid">
-        <div class="full"><label>Nome do produto</label><input id="v5ProdutoNome" type="text" placeholder="Ex.: Fone Bluetooth"></div>
-        <div><label>SKU</label><input id="v5ProdutoSku" type="text" placeholder="SKU-001"></div>
-        <div><label>Custo (R$)</label><input id="v5ProdutoCusto" type="number" step="0.01" placeholder="0,00"></div>
-        <div><label>Preço de venda (R$)</label><input id="v5ProdutoVenda" type="number" step="0.01" placeholder="0,00"></div>
-        <div><label>Frete (R$)</label><input id="v5ProdutoFrete" type="number" step="0.01" placeholder="0,00"></div>
-      </div>
-      <div class="v5-actions">
-        <button class="v5-btn" onclick="salvarProdutoV5()">+ SALVAR PRODUTO</button>
-        <button class="v5-btn ghost" onclick="limparFormularioProduto()">LIMPAR CAMPOS</button>
-      </div>
-      <p class="premium-sync-note">☁️ Produtos Premium ficam vinculados à conta e podem aparecer em outros aparelhos após o login.</p>
-      <div id="listaProdutosV5" class="v5-list"></div>
-    </div>
-  </div>
 </section>
 
-<section class="app-v5-only app-v5-section" id="area-cliente" aria-label="Área exclusiva para clientes">
+<section class="site-premium-section" id="area-cliente" aria-label="Área exclusiva para clientes">
   <div class="client-hero">
     <div class="client-lock">🔐</div>
     <h2>Área do Cliente Premium</h2>
-    <p>Use o mesmo e-mail informado na compra do THE BEST KIT MARKETPLACE. O acesso Premium libera os recursos exclusivos do aplicativo.</p>
+    <p>Use o mesmo e-mail informado na compra do THE BEST KIT MARKETPLACE. O acesso Premium libera os recursos exclusivos no site e no aplicativo.</p>
     <div id="premiumLoginBox" class="premium-login-box">
       <h3>Entrar como cliente</h3>
       <p>Digite seu e-mail de compra. Você receberá um link seguro para entrar sem precisar criar senha.</p>
@@ -1374,6 +1363,7 @@
       <p id="premiumAccountText">Verificando sua compra...</p>
       <div id="premiumAccessStatus" class="premium-status">Verificando acesso</div>
       <div class="premium-account-actions">
+        <a id="premiumProductsLink" href="#meus-produtos" hidden>MEUS PRODUTOS</a>
         <button type="button" onclick="refreshPremiumAccess()">ATUALIZAR ACESSO</button>
         <button type="button" class="danger" onclick="theBestPremiumLogout()">SAIR</button>
       </div>
@@ -1391,6 +1381,31 @@
     <div class="client-note">O app não armazena senha ou dados de pagamento. A confirmação Premium é feita pelo e-mail de compra e pelo servidor de acesso.</div>
   </div>
 </section>
+<section id="meus-produtos" class="premium-products-section" hidden aria-label="Meus produtos Premium">
+  <div class="app-v5-panel">
+    <div class="app-v5-head" style="margin-bottom:12px;">
+      <div><h2 style="font-size:17px;">Meus produtos <span class="premium-pill">CLIENTE PREMIUM</span></h2><p>Cadastro, salvamento e reutilização exclusivos para compradores do THE BEST KIT MARKETPLACE.</p></div>
+      <span class="app-v5-badge" id="contadorProdutos">🔒</span>
+    </div>
+    <div id="premiumProductsPanel" class="premium-products-wrap">
+      <div class="v5-form-grid">
+        <div class="full"><label>Nome do produto</label><input id="v5ProdutoNome" type="text" placeholder="Ex.: Fone Bluetooth"></div>
+        <div><label>SKU</label><input id="v5ProdutoSku" type="text" placeholder="SKU-001"></div>
+        <div><label>Custo (R$)</label><input id="v5ProdutoCusto" type="number" step="0.01" placeholder="0,00"></div>
+        <div><label>Preço de venda (R$)</label><input id="v5ProdutoVenda" type="number" step="0.01" placeholder="0,00"></div>
+        <div><label>Frete (R$)</label><input id="v5ProdutoFrete" type="number" step="0.01" placeholder="0,00"></div>
+      </div>
+      <div class="v5-actions">
+        <button class="v5-btn" onclick="salvarProdutoV5()">+ SALVAR PRODUTO</button>
+        <button class="v5-btn ghost" onclick="limparFormularioProduto()">LIMPAR CAMPOS</button>
+      </div>
+      <p class="premium-sync-note">☁️ Produtos Premium ficam vinculados à conta e podem aparecer em outros aparelhos após o login.</p>
+      <div id="listaProdutosV5" class="v5-list"></div>
+    </div>
+  </div>
+
+</section>
+
 
 <section class="offer" id="kit">
 
@@ -1722,10 +1737,12 @@ if ("serviceWorker" in navigator) {
     const el=document.getElementById("premiumLoginStatus"); if(el){el.textContent=text;el.className="premium-status"+(kind?" "+kind:"");}
   }
   function showPremiumState(){
-    const lock=document.getElementById("premiumLockMeusDados"), panel=document.getElementById("premiumProductsPanel");
-    if(lock) lock.hidden=premiumActive;
-    if(panel) panel.hidden=!premiumActive;
-    const count=document.getElementById("contadorProdutos"); if(count&&!premiumActive) count.textContent="🔒";
+    const productsSection=document.getElementById("meus-produtos");
+    const productsLink=document.getElementById("premiumProductsLink");
+    if(productsSection) productsSection.hidden=!premiumActive;
+    if(productsLink) productsLink.hidden=!premiumActive;
+    const count=document.getElementById("contadorProdutos");
+    if(count&&!premiumActive) count.textContent="🔒";
   }
   async function initPremium(){
     const warn=document.getElementById("premiumConfigWarning");
@@ -1760,9 +1777,14 @@ if ("serviceWorker" in navigator) {
     if(!premiumUser){premiumActive=false;showPremiumState();if(login)login.hidden=false;if(acc)acc.hidden=true;renderProdutos();return;}
     if(login)login.hidden=true;if(acc)acc.hidden=false;if(txt)txt.textContent=premiumUser.email;
     if(st){st.textContent="Verificando compra...";st.className="premium-status";}
-    const {data,error}=await premiumClient.from("customer_access").select("active,product_id").eq("email",premiumUser.email.toLowerCase()).eq("product_id",PREMIUM_PRODUCT_ID).eq("active",true).maybeSingle();
+    const {data,error}=await premiumClient.from("customer_access")
+      .select("premium,purchase_status,product_name")
+      .eq("email",premiumUser.email.toLowerCase())
+      .eq("premium",true)
+      .eq("purchase_status","approved")
+      .maybeSingle();
     premiumActive=!!data&&!error;
-    if(st){st.textContent=premiumActive?"✅ Acesso Premium liberado":"🔒 Compra não localizada para este e-mail";st.className="premium-status "+(premiumActive?"ok":"no");}
+    if(st){st.textContent=premiumActive?"✅ Acesso Premium liberado":"🔒 Acesso Premium ainda não liberado para este e-mail";st.className="premium-status "+(premiumActive?"ok":"no");}
     showPremiumState();
     if(premiumActive){await renderProdutos();trackV5("premium_liberado");}else{premiumProducts=[];renderProdutos();}
   };

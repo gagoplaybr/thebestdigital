@@ -1,0 +1,13 @@
+THE BEST DIGITAL V6.2 - PATCH
+
+Envie para o GitHub somente os arquivos desta pasta.
+O arquivo premium-config.js NÃO está neste patch de propósito, para preservar o Project URL e a Publishable key que já estão configurados no repositório.
+
+Alterações:
+- Área do Cliente aparece no site e no app.
+- Botão Área do Cliente adicionado ao cabeçalho do site.
+- Área Meus Produtos fica totalmente invisível para visitantes e usuários sem Premium.
+- Meus Produtos aparece somente quando o login está autenticado e o acesso Premium está aprovado.
+- Consulta ao Supabase corrigida para as colunas premium/purchase_status criadas no banco.
+- Service Worker atualizado para V6.2.
+- Edge Function da Eduzz alinhada com o schema final customer_access.
