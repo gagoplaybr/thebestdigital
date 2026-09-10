@@ -1,0 +1,26 @@
+THE BEST DIGITAL - V6.1 PREMIUM
+
+IMPORTANTE: NÃO publique esta V6 antes de configurar o Supabase.
+
+O que esta versão faz:
+- Calculadora continua pública.
+- Histórico de cálculos continua local e público.
+- Cadastro/salvamento/reutilização de produtos ficam exclusivos.
+- Cliente entra com o mesmo e-mail da compra por link mágico.
+- Compra aprovada na Eduzz libera o acesso automaticamente.
+- Reembolso/cancelamento/chargeback revoga o acesso.
+- Produtos Premium são salvos na nuvem e sincronizam entre aparelhos.
+
+Arquivos:
+1) supabase-schema.sql -> rodar no SQL Editor.
+2) premium-config.js -> preencher Project URL e Publishable key.
+3) supabase-edge-function/eduzz-webhook/index.ts -> publicar como Edge Function.
+4) Definir EDUZZ_WEBHOOK_SECRET na função.
+5) Na Eduzz, criar webhook para a função com eventos paid/refunded/canceled/chargeback e filtro productId 3103335.
+
+SEGURANÇA:
+- Nunca coloque SUPABASE_SERVICE_ROLE_KEY nem EDUZZ_WEBHOOK_SECRET no GitHub.
+- A anon key pode ficar no site porque as políticas RLS protegem os dados.
+
+
+V6.1: o arquivo premium-config.js tem dois marcadores claros: COLE_AQUI_PROJECT_URL e COLE_AQUI_PUBLISHABLE_KEY.

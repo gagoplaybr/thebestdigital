@@ -975,7 +975,18 @@
       .app-quick-grid { grid-template-columns:1fr 1fr; }
     }
 
-  </style>
+  
+/* ===== V6: Área exclusiva de clientes ===== */
+.premium-lock-box,.premium-login-box,.premium-ok-box{border:1px solid rgba(74,181,255,.25);background:linear-gradient(145deg,rgba(8,30,61,.96),rgba(4,18,39,.96));border-radius:18px;padding:18px;margin:14px 0;box-shadow:0 16px 40px rgba(0,0,0,.22)}
+.premium-lock-box{text-align:center}.premium-lock-icon{font-size:34px;margin-bottom:8px}.premium-lock-box h3,.premium-login-box h3,.premium-ok-box h3{margin:0 0 7px;color:#fff}.premium-lock-box p,.premium-login-box p,.premium-ok-box p{margin:0;color:#b9c8dc;line-height:1.55}.premium-login-row{display:grid;grid-template-columns:1fr auto;gap:9px;margin-top:13px}.premium-login-row input{min-width:0;background:#081a32;border:1px solid rgba(128,191,255,.28);color:#fff;border-radius:12px;padding:12px 13px;outline:none}.premium-login-row button{border:0;border-radius:12px;padding:12px 15px;background:linear-gradient(135deg,#1ea7ff,#39d0ff);color:#021324;font-weight:900;cursor:pointer}.premium-status{display:inline-flex;align-items:center;gap:7px;margin-top:12px;padding:7px 10px;border-radius:999px;background:rgba(255,255,255,.07);font-size:12px;color:#dbeaff}.premium-status.ok{background:rgba(38,208,137,.13);color:#8df0bf;border:1px solid rgba(38,208,137,.3)}.premium-status.no{background:rgba(255,184,74,.12);color:#ffd18a;border:1px solid rgba(255,184,74,.28)}.premium-status.err{background:rgba(255,94,94,.12);color:#ffb0b0;border:1px solid rgba(255,94,94,.28)}.premium-products-wrap[hidden],.premium-lock-wrap[hidden]{display:none!important}.premium-pill{display:inline-flex;padding:6px 10px;border-radius:999px;background:linear-gradient(135deg,rgba(255,192,71,.18),rgba(53,175,255,.14));border:1px solid rgba(255,203,102,.32);color:#ffd788;font-size:11px;font-weight:900;letter-spacing:.04em}.premium-sync-note{font-size:12px;color:#9fb4ce;margin:8px 0 0}.premium-account-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.premium-account-actions button,.premium-account-actions a{border:1px solid rgba(124,190,255,.25);background:#0a2140;color:#fff;text-decoration:none;border-radius:10px;padding:9px 12px;font-weight:800;font-size:12px;cursor:pointer}.premium-account-actions .danger{border-color:rgba(255,100,100,.25);color:#ffb1b1}.premium-config-warning{font-size:12px;color:#ffd18a;margin-top:10px}.premium-mini-loader{display:inline-block;width:12px;height:12px;border:2px solid rgba(255,255,255,.25);border-top-color:#fff;border-radius:50%;animation:premiumSpin .8s linear infinite}@keyframes premiumSpin{to{transform:rotate(360deg)}}
+@media(max-width:640px){.premium-login-row{grid-template-columns:1fr}.premium-login-row button{width:100%}}
+
+</style>
+
+  <!-- THE BEST V6 Premium -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="premium-config.js"></script>
+
 </head>
 
 <body>
@@ -1030,7 +1041,7 @@
     </a>
     <a class="app-quick-card" href="#meus-dados" data-app-nav="meus-dados">
       <span class="app-quick-icon-wrap">💾</span>
-      <span><b>Meus dados</b><em>Cálculos e produtos salvos</em></span>
+      <span><b>Meus dados</b><em>Histórico + recursos Premium</em></span>
     </a>
     <a class="app-quick-card highlight" href="#area-cliente" data-app-nav="area-cliente">
       <span class="app-quick-icon-wrap">🔐</span>
@@ -1311,40 +1322,73 @@
 
   <div class="app-v5-panel" style="margin-top:12px;">
     <div class="app-v5-head" style="margin-bottom:12px;">
-      <div><h2 style="font-size:17px;">Meus produtos</h2><p>Cadastre itens para reutilizar na calculadora.</p></div>
-      <span class="app-v5-badge" id="contadorProdutos">0 itens</span>
+      <div><h2 style="font-size:17px;">Meus produtos <span class="premium-pill">CLIENTE PREMIUM</span></h2><p>Cadastro, salvamento e reutilização exclusivos para compradores do THE BEST KIT MARKETPLACE.</p></div>
+      <span class="app-v5-badge" id="contadorProdutos">🔒</span>
     </div>
-    <div class="v5-form-grid">
-      <div class="full"><label>Nome do produto</label><input id="v5ProdutoNome" type="text" placeholder="Ex.: Fone Bluetooth"></div>
-      <div><label>SKU</label><input id="v5ProdutoSku" type="text" placeholder="SKU-001"></div>
-      <div><label>Custo (R$)</label><input id="v5ProdutoCusto" type="number" step="0.01" placeholder="0,00"></div>
-      <div><label>Preço de venda (R$)</label><input id="v5ProdutoVenda" type="number" step="0.01" placeholder="0,00"></div>
-      <div><label>Frete (R$)</label><input id="v5ProdutoFrete" type="number" step="0.01" placeholder="0,00"></div>
+    <div id="premiumLockMeusDados" class="premium-lock-wrap">
+      <div class="premium-lock-box">
+        <div class="premium-lock-icon">🔐</div>
+        <h3>Recurso exclusivo para clientes</h3>
+        <p>Entre na Área do Cliente com o mesmo e-mail usado na compra para liberar cadastro de produtos, salvamento e sincronização entre aparelhos.</p>
+        <div class="v5-actions" style="justify-content:center;margin-top:14px;">
+          <a class="v5-btn" href="#area-cliente">ENTRAR COMO CLIENTE</a>
+          <a class="v5-btn ghost" href="https://sun.eduzz.com/89AXQ8DG0D" target="_blank" rel="noopener">QUERO O KIT</a>
+        </div>
+      </div>
     </div>
-    <div class="v5-actions">
-      <button class="v5-btn" onclick="salvarProdutoV5()">+ SALVAR PRODUTO</button>
-      <button class="v5-btn ghost" onclick="limparFormularioProduto()">LIMPAR CAMPOS</button>
+    <div id="premiumProductsPanel" class="premium-products-wrap" hidden>
+      <div class="v5-form-grid">
+        <div class="full"><label>Nome do produto</label><input id="v5ProdutoNome" type="text" placeholder="Ex.: Fone Bluetooth"></div>
+        <div><label>SKU</label><input id="v5ProdutoSku" type="text" placeholder="SKU-001"></div>
+        <div><label>Custo (R$)</label><input id="v5ProdutoCusto" type="number" step="0.01" placeholder="0,00"></div>
+        <div><label>Preço de venda (R$)</label><input id="v5ProdutoVenda" type="number" step="0.01" placeholder="0,00"></div>
+        <div><label>Frete (R$)</label><input id="v5ProdutoFrete" type="number" step="0.01" placeholder="0,00"></div>
+      </div>
+      <div class="v5-actions">
+        <button class="v5-btn" onclick="salvarProdutoV5()">+ SALVAR PRODUTO</button>
+        <button class="v5-btn ghost" onclick="limparFormularioProduto()">LIMPAR CAMPOS</button>
+      </div>
+      <p class="premium-sync-note">☁️ Produtos Premium ficam vinculados à conta e podem aparecer em outros aparelhos após o login.</p>
+      <div id="listaProdutosV5" class="v5-list"></div>
     </div>
-    <div id="listaProdutosV5" class="v5-list"></div>
   </div>
 </section>
 
 <section class="app-v5-only app-v5-section" id="area-cliente" aria-label="Área exclusiva para clientes">
   <div class="client-hero">
     <div class="client-lock">🔐</div>
-    <h2>Área do Cliente</h2>
-    <p>Comprou o THE BEST KIT MARKETPLACE? Seus arquivos e materiais continuam protegidos pela plataforma de pagamento. Entre com o mesmo e-mail usado na compra para acessar seus conteúdos.</p>
+    <h2>Área do Cliente Premium</h2>
+    <p>Use o mesmo e-mail informado na compra do THE BEST KIT MARKETPLACE. O acesso Premium libera os recursos exclusivos do aplicativo.</p>
+    <div id="premiumLoginBox" class="premium-login-box">
+      <h3>Entrar como cliente</h3>
+      <p>Digite seu e-mail de compra. Você receberá um link seguro para entrar sem precisar criar senha.</p>
+      <div class="premium-login-row">
+        <input id="premiumEmail" type="email" autocomplete="email" placeholder="seuemail@exemplo.com">
+        <button id="premiumLoginBtn" type="button" onclick="theBestPremiumLogin()">RECEBER LINK</button>
+      </div>
+      <div id="premiumLoginStatus" class="premium-status">Aguardando login</div>
+      <div id="premiumConfigWarning" class="premium-config-warning" hidden>Integração Premium ainda não configurada.</div>
+    </div>
+    <div id="premiumAccountBox" class="premium-ok-box" hidden>
+      <h3>✅ Cliente identificado</h3>
+      <p id="premiumAccountText">Verificando sua compra...</p>
+      <div id="premiumAccessStatus" class="premium-status">Verificando acesso</div>
+      <div class="premium-account-actions">
+        <button type="button" onclick="refreshPremiumAccess()">ATUALIZAR ACESSO</button>
+        <button type="button" class="danger" onclick="theBestPremiumLogout()">SAIR</button>
+      </div>
+    </div>
     <div class="client-points">
-      <div class="client-point">📘 Manual profissional</div>
-      <div class="client-point">✅ Checklist do vendedor</div>
-      <div class="client-point">📚 Guias práticos</div>
-      <div class="client-point">🎁 Materiais bônus</div>
+      <div class="client-point">☁️ Produtos salvos na nuvem</div>
+      <div class="client-point">🔁 Reutilização na calculadora</div>
+      <div class="client-point">📱 Acesso em outros aparelhos</div>
+      <div class="client-point">📚 Materiais do Kit na Eduzz</div>
     </div>
     <div class="v5-actions">
-      <a class="v5-btn" href="https://my.eduzz.com/" target="_blank" rel="noopener" onclick="trackV5('area_cliente_eduzz')">ACESSAR MEUS MATERIAIS</a>
+      <a class="v5-btn" href="https://my.eduzz.com/" target="_blank" rel="noopener" onclick="trackV5('area_cliente_eduzz')">MEUS MATERIAIS NA EDUZZ</a>
       <a class="v5-btn ghost" href="https://sun.eduzz.com/89AXQ8DG0D" target="_blank" rel="noopener" onclick="trackV5('area_cliente_comprar')">AINDA NÃO SOU CLIENTE</a>
     </div>
-    <div class="client-note">O login e a liberação dos arquivos são feitos pela Eduzz. O app THE BEST não armazena sua senha nem seus dados de pagamento.</div>
+    <div class="client-note">O app não armazena senha ou dados de pagamento. A confirmação Premium é feita pelo e-mail de compra e pelo servidor de acesso.</div>
   </div>
 </section>
 
@@ -1663,21 +1707,89 @@ if ("serviceWorker" in navigator) {
     el.innerHTML=arr.map(x=>`<div class="v5-item"><div class="v5-item-top"><div><strong>${esc(x.produto)}</strong><small>${new Date(x.data).toLocaleString("pt-BR")}</small></div><small>${brl(x.venda)}</small></div><div class="v5-kpis"><div class="v5-kpi"><span>Lucro</span><b>${brl(x.lucro)}</b></div><div class="v5-kpi"><span>Margem</span><b>${Number(x.margemReal).toFixed(1)}%</b></div><div class="v5-kpi"><span>Preço ideal</span><b>${x.precoRec?brl(x.precoRec):"-"}</b></div></div><div class="v5-item-controls"><button class="v5-mini" onclick="carregarCalculo(${x.id})">Usar novamente</button><button class="v5-mini danger" onclick="excluirCalculo(${x.id})">Excluir</button></div></div>`).join("");
   }
 
-  window.salvarProdutoV5=function(){
+  /* V6 Premium: produtos na nuvem, liberados apenas para clientes ativos */
+  let premiumClient = null;
+  let premiumUser = null;
+  let premiumActive = false;
+  let premiumProducts = [];
+  const PREMIUM_PRODUCT_ID = "3103335";
+
+  function premiumConfigured(){
+    const c=window.THE_BEST_PREMIUM_CONFIG||{};
+    return !!(c.supabaseUrl && c.supabaseAnonKey && !c.supabaseUrl.includes("COLE_") && !c.supabaseAnonKey.includes("COLE_"));
+  }
+  function setPremiumStatus(text,kind){
+    const el=document.getElementById("premiumLoginStatus"); if(el){el.textContent=text;el.className="premium-status"+(kind?" "+kind:"");}
+  }
+  function showPremiumState(){
+    const lock=document.getElementById("premiumLockMeusDados"), panel=document.getElementById("premiumProductsPanel");
+    if(lock) lock.hidden=premiumActive;
+    if(panel) panel.hidden=!premiumActive;
+    const count=document.getElementById("contadorProdutos"); if(count&&!premiumActive) count.textContent="🔒";
+  }
+  async function initPremium(){
+    const warn=document.getElementById("premiumConfigWarning");
+    if(!premiumConfigured() || !window.supabase){ if(warn)warn.hidden=false; setPremiumStatus("Acesso Premium aguardando configuração","no"); showPremiumState(); return; }
+    const c=window.THE_BEST_PREMIUM_CONFIG;
+    premiumClient=window.supabase.createClient(c.supabaseUrl,c.supabaseAnonKey,{auth:{persistSession:true,detectSessionInUrl:true,autoRefreshToken:true}});
+    premiumClient.auth.onAuthStateChange(()=>setTimeout(refreshPremiumAccess,0));
+    await refreshPremiumAccess();
+  }
+  window.theBestPremiumLogin=async function(){
+    if(!premiumClient){setPremiumStatus("Integração ainda não configurada","no");return;}
+    const email=(document.getElementById("premiumEmail")?.value||"").trim().toLowerCase();
+    if(!email || !email.includes("@")){setPremiumStatus("Digite um e-mail válido","err");return;}
+    const btn=document.getElementById("premiumLoginBtn"); if(btn){btn.disabled=true;btn.innerHTML='<span class="premium-mini-loader"></span> ENVIANDO';}
+    const redirect=(window.THE_BEST_PREMIUM_CONFIG?.redirectUrl||location.origin+location.pathname)+"#area-cliente";
+    const {error}=await premiumClient.auth.signInWithOtp({email,options:{emailRedirectTo:redirect,shouldCreateUser:true}});
+    if(btn){btn.disabled=false;btn.textContent="RECEBER LINK";}
+    if(error){setPremiumStatus("Não foi possível enviar o link. Tente novamente.","err");return;}
+    setPremiumStatus("Link enviado. Abra seu e-mail e toque no link de acesso.","ok");
+    trackV5("premium_link_enviado");
+  };
+  window.theBestPremiumLogout=async function(){
+    if(premiumClient) await premiumClient.auth.signOut();
+    premiumUser=null;premiumActive=false;premiumProducts=[];showPremiumState();renderProdutos();
+    const login=document.getElementById("premiumLoginBox"),acc=document.getElementById("premiumAccountBox"); if(login)login.hidden=false;if(acc)acc.hidden=true;
+    setPremiumStatus("Aguardando login","");
+  };
+  window.refreshPremiumAccess=async function(){
+    if(!premiumClient){showPremiumState();return;}
+    const {data:{user}}=await premiumClient.auth.getUser(); premiumUser=user||null;
+    const login=document.getElementById("premiumLoginBox"),acc=document.getElementById("premiumAccountBox"),txt=document.getElementById("premiumAccountText"),st=document.getElementById("premiumAccessStatus");
+    if(!premiumUser){premiumActive=false;showPremiumState();if(login)login.hidden=false;if(acc)acc.hidden=true;renderProdutos();return;}
+    if(login)login.hidden=true;if(acc)acc.hidden=false;if(txt)txt.textContent=premiumUser.email;
+    if(st){st.textContent="Verificando compra...";st.className="premium-status";}
+    const {data,error}=await premiumClient.from("customer_access").select("active,product_id").eq("email",premiumUser.email.toLowerCase()).eq("product_id",PREMIUM_PRODUCT_ID).eq("active",true).maybeSingle();
+    premiumActive=!!data&&!error;
+    if(st){st.textContent=premiumActive?"✅ Acesso Premium liberado":"🔒 Compra não localizada para este e-mail";st.className="premium-status "+(premiumActive?"ok":"no");}
+    showPremiumState();
+    if(premiumActive){await renderProdutos();trackV5("premium_liberado");}else{premiumProducts=[];renderProdutos();}
+  };
+  function requirePremium(){
+    if(!premiumActive || !premiumUser || !premiumClient){toast("Recurso exclusivo para clientes do THE BEST KIT.");document.getElementById("area-cliente")?.scrollIntoView({behavior:"smooth"});return false;} return true;
+  }
+  window.salvarProdutoV5=async function(){
+    if(!requirePremium())return;
     const nome=(document.getElementById("v5ProdutoNome").value||"").trim(); if(!nome){toast("Digite o nome do produto.");return;}
-    const item={id:Date.now(),nome,sku:(document.getElementById("v5ProdutoSku").value||"").trim(),custo:num("v5ProdutoCusto"),venda:num("v5ProdutoVenda"),frete:num("v5ProdutoFrete")};
-    const arr=getJson(PROD_KEY); arr.unshift(item); setJson(PROD_KEY,arr.slice(0,80)); limparFormularioProduto(); renderProdutos(); toast("Produto salvo."); trackV5("salvar_produto");
+    const payload={user_id:premiumUser.id,name:nome,sku:(document.getElementById("v5ProdutoSku").value||"").trim(),cost:num("v5ProdutoCusto"),sale_price:num("v5ProdutoVenda"),shipping:num("v5ProdutoFrete")};
+    const {error}=await premiumClient.from("saved_products").insert(payload);
+    if(error){toast("Não foi possível salvar o produto.");return;}
+    limparFormularioProduto();await renderProdutos();toast("Produto Premium salvo na nuvem.");trackV5("salvar_produto_premium");
   };
   window.limparFormularioProduto=function(){ ["v5ProdutoNome","v5ProdutoSku","v5ProdutoCusto","v5ProdutoVenda","v5ProdutoFrete"].forEach(id=>{const e=document.getElementById(id);if(e)e.value="";}); };
-  window.excluirProdutoV5=function(id){ setJson(PROD_KEY,getJson(PROD_KEY).filter(x=>x.id!==id)); renderProdutos(); };
-  window.usarProdutoV5=function(id){ const x=getJson(PROD_KEY).find(i=>i.id===id);if(!x)return; document.getElementById("produto").value=x.nome;document.getElementById("custo").value=x.custo||"";document.getElementById("venda").value=x.venda||"";document.getElementById("frete").value=x.frete||"";document.getElementById("calculadora").scrollIntoView({behavior:"smooth"});toast("Produto carregado na calculadora."); };
-  function renderProdutos(){
-    const el=document.getElementById("listaProdutosV5"), count=document.getElementById("contadorProdutos"); if(!el)return; const arr=getJson(PROD_KEY); if(count)count.textContent=arr.length+" "+(arr.length===1?"item":"itens");
-    if(!arr.length){el.innerHTML='<div class="v5-empty">Cadastre seu primeiro produto para reutilizar custos e preço.</div>';return;}
-    el.innerHTML=arr.map(x=>`<div class="v5-item"><div class="v5-item-top"><div><strong>${esc(x.nome)}</strong><small>${x.sku?"SKU: "+esc(x.sku):"Sem SKU"}</small></div><small>${brl(x.venda)}</small></div><div class="v5-kpis"><div class="v5-kpi"><span>Custo</span><b>${brl(x.custo)}</b></div><div class="v5-kpi"><span>Venda</span><b>${brl(x.venda)}</b></div><div class="v5-kpi"><span>Frete</span><b>${brl(x.frete)}</b></div></div><div class="v5-item-controls"><button class="v5-mini" onclick="usarProdutoV5(${x.id})">Usar na calculadora</button><button class="v5-mini danger" onclick="excluirProdutoV5(${x.id})">Excluir</button></div></div>`).join("");
+  window.excluirProdutoV5=async function(id){if(!requirePremium())return;const {error}=await premiumClient.from("saved_products").delete().eq("id",id).eq("user_id",premiumUser.id);if(!error){await renderProdutos();toast("Produto excluído.");}};
+  window.usarProdutoV5=function(id){ if(!requirePremium())return; const x=premiumProducts.find(i=>String(i.id)===String(id));if(!x)return; document.getElementById("produto").value=x.name;document.getElementById("custo").value=x.cost||"";document.getElementById("venda").value=x.sale_price||"";document.getElementById("frete").value=x.shipping||"";document.getElementById("calculadora").scrollIntoView({behavior:"smooth"});toast("Produto carregado na calculadora."); };
+  async function renderProdutos(){
+    const el=document.getElementById("listaProdutosV5"),count=document.getElementById("contadorProdutos"); if(!el)return;
+    if(!premiumActive || !premiumUser || !premiumClient){premiumProducts=[];el.innerHTML="";if(count)count.textContent="🔒";return;}
+    const {data,error}=await premiumClient.from("saved_products").select("id,name,sku,cost,sale_price,shipping,created_at").eq("user_id",premiumUser.id).order("created_at",{ascending:false}).limit(100);
+    if(error){el.innerHTML='<div class="v5-empty">Não foi possível carregar seus produtos.</div>';return;}
+    premiumProducts=data||[];if(count)count.textContent=premiumProducts.length+" "+(premiumProducts.length===1?"item":"itens");
+    if(!premiumProducts.length){el.innerHTML='<div class="v5-empty">Cadastre seu primeiro produto Premium. Ele ficará vinculado à sua conta.</div>';return;}
+    el.innerHTML=premiumProducts.map(x=>`<div class="v5-item"><div class="v5-item-top"><div><strong>${esc(x.name)}</strong><small>${x.sku?"SKU: "+esc(x.sku):"Sem SKU"}</small></div><small>${brl(x.sale_price)}</small></div><div class="v5-kpis"><div class="v5-kpi"><span>Custo</span><b>${brl(x.cost)}</b></div><div class="v5-kpi"><span>Venda</span><b>${brl(x.sale_price)}</b></div><div class="v5-kpi"><span>Frete</span><b>${brl(x.shipping)}</b></div></div><div class="v5-item-controls"><button class="v5-mini" onclick="usarProdutoV5('${x.id}')">Usar na calculadora</button><button class="v5-mini danger" onclick="excluirProdutoV5('${x.id}')">Excluir</button></div></div>`).join("");
   }
-
-  window.addEventListener("load",()=>{renderHistorico();renderProdutos();});
+  window.addEventListener("load",()=>{renderHistorico();showPremiumState();initPremium();});
 })();
 
 </script>
