@@ -1350,10 +1350,14 @@
     <p>Use o mesmo e-mail informado na compra do THE BEST KIT MARKETPLACE. O acesso Premium libera os recursos exclusivos no site e no aplicativo.</p>
     <div id="premiumLoginBox" class="premium-login-box">
       <h3>Entrar como cliente</h3>
-      <p>Digite seu e-mail de compra. Você receberá um link seguro para entrar sem precisar criar senha.</p>
+      <p>Use seu e-mail de compra e a senha criada no primeiro acesso.</p>
       <div class="premium-login-row">
         <input id="premiumEmail" type="email" autocomplete="email" placeholder="seuemail@exemplo.com">
-        <button id="premiumLoginBtn" type="button" onclick="theBestPremiumLogin()">RECEBER LINK</button>
+        <input id="premiumPassword" type="password" autocomplete="current-password" placeholder="Sua senha" minlength="8">
+        <button id="premiumLoginBtn" type="button" onclick="theBestPremiumPasswordLogin()">ENTRAR</button>
+      </div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px;">
+        <button type="button" class="v5-mini" onclick="theBestPremiumMagicLink()">PRIMEIRO ACESSO / RECEBER LINK</button>
       </div>
       <div id="premiumLoginStatus" class="premium-status">Aguardando login</div>
       <div id="premiumConfigWarning" class="premium-config-warning" hidden>Integração Premium ainda não configurada.</div>
@@ -1366,6 +1370,16 @@
         <a id="premiumProductsLink" href="#meus-produtos" hidden>MEUS PRODUTOS</a>
         <button type="button" onclick="refreshPremiumAccess()">ATUALIZAR ACESSO</button>
         <button type="button" class="danger" onclick="theBestPremiumLogout()">SAIR</button>
+      </div>
+      <div id="premiumPasswordSetup" style="margin-top:16px;padding:14px;border:1px solid rgba(56,189,248,.28);border-radius:14px;background:rgba(2,18,38,.45);">
+        <strong style="display:block;margin-bottom:6px;">🔑 Criar ou alterar minha senha</strong>
+        <small style="display:block;margin-bottom:10px;opacity:.78;">Depois de criar a senha, seus próximos acessos podem ser feitos com e-mail e senha.</small>
+        <div class="premium-login-row">
+          <input id="premiumNewPassword" type="password" autocomplete="new-password" placeholder="Nova senha (mínimo 8 caracteres)" minlength="8">
+          <input id="premiumConfirmPassword" type="password" autocomplete="new-password" placeholder="Confirmar nova senha" minlength="8">
+          <button type="button" onclick="theBestPremiumSetPassword()">SALVAR SENHA</button>
+        </div>
+        <div id="premiumPasswordStatus" class="premium-status" style="margin-top:8px;">Use uma senha exclusiva para sua conta.</div>
       </div>
     </div>
     <div class="client-points">
@@ -1752,17 +1766,45 @@ if ("serviceWorker" in navigator) {
     premiumClient.auth.onAuthStateChange(()=>setTimeout(refreshPremiumAccess,0));
     await refreshPremiumAccess();
   }
-  window.theBestPremiumLogin=async function(){
+  window.theBestPremiumPasswordLogin=async function(){
+    if(!premiumClient){setPremiumStatus("Integração ainda não configurada","no");return;}
+    const email=(document.getElementById("premiumEmail")?.value||"").trim().toLowerCase();
+    const password=document.getElementById("premiumPassword")?.value||"";
+    if(!email || !email.includes("@")){setPremiumStatus("Digite um e-mail válido","err");return;}
+    if(password.length<8){setPremiumStatus("Digite sua senha com pelo menos 8 caracteres","err");return;}
+    const btn=document.getElementById("premiumLoginBtn"); if(btn){btn.disabled=true;btn.textContent="ENTRANDO...";}
+    const {error}=await premiumClient.auth.signInWithPassword({email,password});
+    if(btn){btn.disabled=false;btn.textContent="ENTRAR";}
+    if(error){setPremiumStatus("E-mail ou senha inválidos. Se for seu primeiro acesso, use o botão de receber link.","err");return;}
+    setPremiumStatus("Login realizado.","ok");
+    await refreshPremiumAccess();
+    trackV5("premium_login_senha");
+  };
+  window.theBestPremiumMagicLink=async function(){
     if(!premiumClient){setPremiumStatus("Integração ainda não configurada","no");return;}
     const email=(document.getElementById("premiumEmail")?.value||"").trim().toLowerCase();
     if(!email || !email.includes("@")){setPremiumStatus("Digite um e-mail válido","err");return;}
-    const btn=document.getElementById("premiumLoginBtn"); if(btn){btn.disabled=true;btn.innerHTML='<span class="premium-mini-loader"></span> ENVIANDO';}
+    setPremiumStatus("Enviando link de primeiro acesso...","");
     const redirect=(window.THE_BEST_PREMIUM_CONFIG?.redirectUrl||location.origin+location.pathname);
     const {error}=await premiumClient.auth.signInWithOtp({email,options:{emailRedirectTo:redirect,shouldCreateUser:true}});
-    if(btn){btn.disabled=false;btn.textContent="RECEBER LINK";}
-    if(error){setPremiumStatus("Não foi possível enviar o link. Tente novamente.","err");return;}
-    setPremiumStatus("Link enviado. Abra seu e-mail e toque no link de acesso.","ok");
+    if(error){setPremiumStatus(error.status===429?"Limite temporário de e-mails atingido. Aguarde e tente mais tarde.":"Não foi possível enviar o link. Tente novamente.","err");return;}
+    setPremiumStatus("Link enviado. Abra o e-mail mais recente e toque no link de acesso.","ok");
     trackV5("premium_link_enviado");
+  };
+  window.theBestPremiumSetPassword=async function(){
+    if(!premiumClient || !premiumUser){return;}
+    const p1=document.getElementById("premiumNewPassword")?.value||"";
+    const p2=document.getElementById("premiumConfirmPassword")?.value||"";
+    const st=document.getElementById("premiumPasswordStatus");
+    const setPwStatus=(t,k)=>{if(st){st.textContent=t;st.className="premium-status"+(k?" "+k:"");}};
+    if(p1.length<8){setPwStatus("Use uma senha com pelo menos 8 caracteres.","err");return;}
+    if(p1!==p2){setPwStatus("As duas senhas não conferem.","err");return;}
+    setPwStatus("Salvando senha...","");
+    const {error}=await premiumClient.auth.updateUser({password:p1});
+    if(error){setPwStatus("Não foi possível salvar a senha. Tente novamente.","err");return;}
+    const a=document.getElementById("premiumNewPassword"),b=document.getElementById("premiumConfirmPassword"); if(a)a.value="";if(b)b.value="";
+    setPwStatus("✅ Senha criada com sucesso. Nos próximos acessos, use e-mail e senha.","ok");
+    trackV5("premium_senha_criada");
   };
   window.theBestPremiumLogout=async function(){
     if(premiumClient) await premiumClient.auth.signOut();

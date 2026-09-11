@@ -1,0 +1,5 @@
+V6.3 LOGIN PREMIUM
+- Login principal com e-mail e senha
+- Primeiro acesso por Magic Link mantido como alternativa
+- Cliente autenticado pode criar/alterar a própria senha
+- Não substitua premium-config.js
