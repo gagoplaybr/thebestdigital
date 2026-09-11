@@ -1413,7 +1413,11 @@
         <button class="v5-btn" onclick="salvarProdutoV5()">+ SALVAR PRODUTO</button>
         <button class="v5-btn ghost" onclick="limparFormularioProduto()">LIMPAR CAMPOS</button>
       </div>
-      <p class="premium-sync-note">☁️ Produtos Premium ficam vinculados à conta e podem aparecer em outros aparelhos após o login.</p>
+      <div class="v5-actions" style="margin-top:9px;">
+        <button class="v5-btn" onclick="baixarProdutosCSV()">📥 BAIXAR LISTA DE PRODUTOS</button>
+        <button class="v5-btn ghost" onclick="renderProdutos()">↻ ATUALIZAR LISTA</button>
+      </div>
+      <p class="premium-sync-note">☁️ Produtos Premium ficam vinculados à conta e podem aparecer em outros aparelhos após o login. O download é gerado em CSV compatível com Excel e ordenado por SKU.</p>
       <div id="listaProdutosV5" class="v5-list"></div>
     </div>
   </div>
@@ -1844,6 +1848,49 @@ if ("serviceWorker" in navigator) {
   window.limparFormularioProduto=function(){ ["v5ProdutoNome","v5ProdutoSku","v5ProdutoCusto","v5ProdutoVenda","v5ProdutoFrete"].forEach(id=>{const e=document.getElementById(id);if(e)e.value="";}); };
   window.excluirProdutoV5=async function(id){if(!requirePremium())return;const {error}=await premiumClient.from("saved_products").delete().eq("id",id).eq("user_id",premiumUser.id);if(!error){await renderProdutos();toast("Produto excluído.");}};
   window.usarProdutoV5=function(id){ if(!requirePremium())return; const x=premiumProducts.find(i=>String(i.id)===String(id));if(!x)return; document.getElementById("produto").value=x.name;document.getElementById("custo").value=x.cost||"";document.getElementById("venda").value=x.sale_price||"";document.getElementById("frete").value=x.shipping||"";document.getElementById("calculadora").scrollIntoView({behavior:"smooth"});toast("Produto carregado na calculadora."); };
+
+  function csvCell(value){
+    const v=String(value??"").replace(/"/g,'""');
+    return '"'+v+'"';
+  }
+  function csvMoney(value){
+    const n=Number(value||0);
+    return Number.isFinite(n)?n.toFixed(2).replace('.',','):'0,00';
+  }
+  window.baixarProdutosCSV=async function(){
+    if(!requirePremium())return;
+    toast("Preparando sua lista de produtos...");
+    let todos=[];
+    const lote=1000;
+    for(let inicio=0;;inicio+=lote){
+      const fim=inicio+lote-1;
+      const {data,error}=await premiumClient.from("saved_products")
+        .select("sku,name,cost,shipping,sale_price")
+        .eq("user_id",premiumUser.id)
+        .order("sku",{ascending:true})
+        .range(inicio,fim);
+      if(error){toast("Não foi possível gerar a lista de produtos.");return;}
+      const parte=data||[];todos=todos.concat(parte);
+      if(parte.length<lote)break;
+    }
+    if(!todos.length){toast("Você ainda não possui produtos cadastrados.");return;}
+    todos.sort((a,b)=>String(a.sku||"").localeCompare(String(b.sku||""),"pt-BR",{numeric:true,sensitivity:"base"}) || String(a.name||"").localeCompare(String(b.name||""),"pt-BR",{sensitivity:"base"}));
+    const linhas=[
+      ["SKU","Nome do produto","Custo (R$)","Frete (R$)","Preço de venda (R$)"],
+      ...todos.map(x=>[x.sku||"",x.name||"",csvMoney(x.cost),csvMoney(x.shipping),csvMoney(x.sale_price)])
+    ];
+    const csv='\ufeff'+linhas.map(l=>l.map(csvCell).join(';')).join('\r\n');
+    const blob=new Blob([csv],{type:'text/csv;charset=utf-8;'});
+    const url=URL.createObjectURL(blob);
+    const a=document.createElement('a');
+    const dataHoje=new Date().toISOString().slice(0,10);
+    a.href=url;a.download='THE_BEST_Produtos_'+dataHoje+'.csv';
+    document.body.appendChild(a);a.click();a.remove();
+    setTimeout(()=>URL.revokeObjectURL(url),1500);
+    toast("Lista baixada em ordem de SKU.");
+    trackV5("baixar_produtos_csv");
+  };
+
   async function renderProdutos(){
     const el=document.getElementById("listaProdutosV5"),count=document.getElementById("contadorProdutos"); if(!el)return;
     if(!premiumActive || !premiumUser || !premiumClient){premiumProducts=[];el.innerHTML="";if(count)count.textContent="🔒";return;}
@@ -1853,6 +1900,7 @@ if ("serviceWorker" in navigator) {
     if(!premiumProducts.length){el.innerHTML='<div class="v5-empty">Cadastre seu primeiro produto Premium. Ele ficará vinculado à sua conta.</div>';return;}
     el.innerHTML=premiumProducts.map(x=>`<div class="v5-item"><div class="v5-item-top"><div><strong>${esc(x.name)}</strong><small>${x.sku?"SKU: "+esc(x.sku):"Sem SKU"}</small></div><small>${brl(x.sale_price)}</small></div><div class="v5-kpis"><div class="v5-kpi"><span>Custo</span><b>${brl(x.cost)}</b></div><div class="v5-kpi"><span>Venda</span><b>${brl(x.sale_price)}</b></div><div class="v5-kpi"><span>Frete</span><b>${brl(x.shipping)}</b></div></div><div class="v5-item-controls"><button class="v5-mini" onclick="usarProdutoV5('${x.id}')">Usar na calculadora</button><button class="v5-mini danger" onclick="excluirProdutoV5('${x.id}')">Excluir</button></div></div>`).join("");
   }
+  window.renderProdutos=renderProdutos;
   window.addEventListener("load",()=>{renderHistorico();showPremiumState();initPremium();});
 })();
 

@@ -1,0 +1,16 @@
+THE BEST DIGITAL - V6.4 EXPORT PREMIUM
+
+Patch sobre a V6.3.
+
+NOVO:
+- Botão "BAIXAR LISTA DE PRODUTOS" em Meus Produtos.
+- Exporta CSV compatível com Excel.
+- Ordena por SKU (ordem natural, ex.: SKU-2 antes de SKU-10).
+- Colunas: SKU, Nome do produto, Custo, Frete, Preço de venda.
+- Busca todos os produtos do cliente em lotes de até 1000 por consulta.
+- Mantém a Área Meus Produtos exclusiva para cliente Premium.
+- Botão "ATUALIZAR LISTA".
+
+IMPORTANTE:
+- Este patch NÃO inclui premium-config.js. Não sobrescreva sua configuração atual.
+- Envie somente index.html, sw.js e LEIA-ME-V6.4.txt ao GitHub.
