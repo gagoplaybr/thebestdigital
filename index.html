@@ -1757,7 +1757,7 @@ if ("serviceWorker" in navigator) {
     const email=(document.getElementById("premiumEmail")?.value||"").trim().toLowerCase();
     if(!email || !email.includes("@")){setPremiumStatus("Digite um e-mail válido","err");return;}
     const btn=document.getElementById("premiumLoginBtn"); if(btn){btn.disabled=true;btn.innerHTML='<span class="premium-mini-loader"></span> ENVIANDO';}
-    const redirect=(window.THE_BEST_PREMIUM_CONFIG?.redirectUrl||location.origin+location.pathname)+"#area-cliente";
+    const redirect=(window.THE_BEST_PREMIUM_CONFIG?.redirectUrl||location.origin+location.pathname);
     const {error}=await premiumClient.auth.signInWithOtp({email,options:{emailRedirectTo:redirect,shouldCreateUser:true}});
     if(btn){btn.disabled=false;btn.textContent="RECEBER LINK";}
     if(error){setPremiumStatus("Não foi possível enviar o link. Tente novamente.","err");return;}
