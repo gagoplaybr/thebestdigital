@@ -1013,7 +1013,9 @@
 .tb-kpi-card:after{content:'';position:absolute;width:70px;height:70px;border-radius:50%;background:#0aa9ff;filter:blur(38px);opacity:.15;right:-15px;top:-15px}
 .tb-kpi-label{font-size:10px;color:#7f9ab8;text-transform:uppercase;font-weight:900;letter-spacing:.7px}.tb-kpi-value{display:block;font-size:25px;margin-top:9px;color:#f4fbff}.tb-kpi-note{display:block;font-size:10px;color:#69d8ff;margin-top:4px}
 .tb-chart-grid{display:grid;grid-template-columns:1.55fr 1fr;gap:12px;margin-top:12px}.tb-chart-card{background:#0b1d33;border:1px solid rgba(255,255,255,.07);border-radius:17px;padding:16px;min-height:270px}.tb-chart-card h3{font-size:13px}.tb-chart-card p{font-size:10px;color:#7f99b7;margin-top:3px}
-.tb-bars-live{height:175px;display:flex;align-items:flex-end;gap:8px;margin-top:22px;border-bottom:1px solid rgba(255,255,255,.08);padding:0 5px}.tb-bars-live i{flex:1;min-height:4px;background:linear-gradient(180deg,#55d7ff,#087cff);border-radius:6px 6px 0 0;box-shadow:0 0 18px rgba(0,157,255,.14)}
+.tb-bars-live{height:205px;margin-top:14px;position:relative;border-radius:14px;overflow:hidden;background:linear-gradient(180deg,rgba(8,32,58,.62),rgba(5,20,38,.36));border:1px solid rgba(85,215,255,.08)}
+.tb-line-toolbar{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-top:14px}.tb-line-value{display:flex;align-items:baseline;gap:8px}.tb-line-value b{font-size:24px}.tb-line-value small{color:#75dfff;font-weight:800}.tb-range-buttons{display:flex;gap:6px;padding:4px;border-radius:11px;background:#071426;border:1px solid rgba(85,215,255,.12)}.tb-range-buttons button{border:0;background:transparent;color:#8fa9c8;padding:7px 10px;border-radius:8px;font-size:10px;font-weight:900;cursor:pointer}.tb-range-buttons button.active{background:linear-gradient(90deg,#087cff,#20c8ff);color:white;box-shadow:0 6px 18px rgba(0,140,255,.22)}
+.tb-line-chart{width:100%;height:100%;display:block}.tb-chart-gridline{stroke:rgba(150,190,225,.12);stroke-width:1}.tb-chart-axis{fill:#7892ae;font-size:9px}.tb-chart-area{fill:url(#tbAreaGradient)}.tb-chart-path{fill:none;stroke:#27c8ff;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 0 6px rgba(31,184,255,.42))}.tb-chart-dot{fill:#baf4ff;stroke:#087cff;stroke-width:2}.tb-chart-caption{position:absolute;left:14px;bottom:8px;color:#6f89a6;font-size:9px}.tb-line-empty{height:100%;display:grid;place-items:center;color:#6f88a5;font-size:11px;text-align:center;padding:20px}
 .tb-market-list{display:grid;gap:12px;margin-top:22px}.tb-market-row{display:grid;grid-template-columns:90px 1fr 52px;gap:8px;align-items:center;font-size:11px}.tb-market-track{height:8px;background:#071426;border-radius:99px;overflow:hidden}.tb-market-fill{height:100%;background:linear-gradient(90deg,#087cff,#55d7ff);border-radius:99px}
 .tb-lower-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-top:12px}.tb-mini-card{background:#0b1d33;border:1px solid rgba(255,255,255,.07);border-radius:17px;padding:16px;min-height:190px}.tb-mini-card h3{font-size:13px;margin-bottom:14px}.tb-progress{height:10px;background:#06111f;border-radius:99px;overflow:hidden;margin:8px 0}.tb-progress span{display:block;height:100%;background:linear-gradient(90deg,#087cff,#55d7ff);border-radius:99px}.tb-goal-line{margin-bottom:14px}.tb-goal-line small{color:#91a8c2}.tb-goal-line b{float:right}.tb-stock-alert{display:flex;justify-content:space-between;gap:10px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.06);font-size:11px}.tb-stock-alert:last-child{border-bottom:0}.tb-stock-low{color:#ffd178}.tb-empty-chart{height:170px;display:grid;place-items:center;color:#6f88a5;font-size:11px;text-align:center}.tb-dash-refresh{border:1px solid rgba(85,215,255,.25);background:#0d2948;color:#dff7ff;border-radius:11px;padding:9px 12px;font-weight:900;cursor:pointer}
 @media(max-width:1000px){.tb-kpi-grid{grid-template-columns:repeat(2,1fr)}.tb-chart-grid,.tb-lower-grid{grid-template-columns:1fr}.tb-kpi-card:last-child{grid-column:1/-1}}
@@ -1481,7 +1483,20 @@
       <div class="tb-kpi-card"><span class="tb-kpi-label">Estoque baixo</span><b class="tb-kpi-value" id="tbLowStock">0</b><span class="tb-kpi-note">Produtos em atenção</span></div>
     </div>
     <div class="tb-chart-grid">
-      <div class="tb-chart-card"><h3>EVOLUÇÃO DAS VENDAS</h3><p>Faturamento das vendas mais recentes</p><div id="tbSalesBars" class="tb-bars-live"></div></div>
+      <div class="tb-chart-card tb-evolution-card">
+        <h3>📈 EVOLUÇÃO DAS VENDAS</h3>
+        <p>Faturamento ao longo do período</p>
+        <div class="tb-line-toolbar">
+          <div class="tb-line-value"><b id="tbChartRevenue">R$ 0,00</b><small id="tbChartPeriodLabel">últimos 30 dias</small></div>
+          <div class="tb-range-buttons" aria-label="Período do gráfico">
+            <button type="button" data-range="7" onclick="setDashboardChartRange(7,this)">7 dias</button>
+            <button type="button" data-range="30" class="active" onclick="setDashboardChartRange(30,this)">30 dias</button>
+            <button type="button" data-range="90" onclick="setDashboardChartRange(90,this)">90 dias</button>
+            <button type="button" data-range="365" onclick="setDashboardChartRange(365,this)">12 meses</button>
+          </div>
+        </div>
+        <div id="tbSalesBars" class="tb-bars-live"></div>
+      </div>
       <div class="tb-chart-card"><h3>VENDAS POR MARKETPLACE</h3><p>Participação por canal</p><div id="tbMarketplaces" class="tb-market-list"></div></div>
     </div>
     <div class="tb-lower-grid">
@@ -2244,6 +2259,48 @@ window.refreshPremiumAccess=async function(){
   async function renderGoalProgress(month,year,goal){const start=`${year}-${String(month).padStart(2,"0")}-01T00:00:00`;const next=month===12?`${year+1}-01-01T00:00:00`:`${year}-${String(month+1).padStart(2,"0")}-01T00:00:00`;const {data}=await premiumClient.from("sales").select("gross_revenue,net_profit").eq("user_id",premiumUser.id).gte("sold_at",start).lt("sold_at",next);const rows=data||[],rev=rows.reduce((a,x)=>a+Number(x.gross_revenue||0),0),prof=rows.reduce((a,x)=>a+Number(x.net_profit||0),0),count=rows.length;const pct=(v,t)=>t?Math.min(100,v/Number(t)*100):0;document.getElementById("goalPreviewRevenue").textContent=brl(rev);document.getElementById("goalPreviewProfit").textContent=brl(prof);document.getElementById("goalPreviewSales").textContent=count;document.getElementById("goalProgressRevenue").textContent=pct(rev,goal?.revenue_goal).toFixed(0)+"% alcançado";document.getElementById("goalProgressProfit").textContent=pct(prof,goal?.profit_goal).toFixed(0)+"% alcançado";document.getElementById("goalProgressSales").textContent=pct(count,goal?.sales_goal).toFixed(0)+"% alcançado";}
   window.saveMonthlyGoal=async function(){if(!requirePremium())return;initGoalFields();const month=Number(document.getElementById("goalMonth").value),year=Number(document.getElementById("goalYear").value),revenue=Math.max(0,Number(document.getElementById("goalRevenue").value||0)),profit=Math.max(0,Number(document.getElementById("goalProfit").value||0)),sales=Math.max(0,Math.floor(Number(document.getElementById("goalSales").value||0)));if(!month||!year){toast("Informe mês e ano.");return;}const payload={user_id:premiumUser.id,period_month:month,period_year:year,revenue_goal:revenue,profit_goal:profit,sales_goal:sales,updated_at:new Date().toISOString()};const {error}=await premiumClient.from("goals").upsert(payload,{onConflict:"user_id,period_month,period_year"});if(error){console.error(error);toast("Não foi possível salvar a meta.");return;}toast("Meta mensal salva com sucesso.");trackV5("meta_mensal_premium");await loadGoalForm();await loadMarketplaceDashboard();};
   document.addEventListener("change",e=>{if(e.target?.id==="goalMonth"||e.target?.id==="goalYear")loadGoalForm();});
+  let tbDashboardChartRange=30;
+  window.setDashboardChartRange=function(days,btn){
+    tbDashboardChartRange=Number(days)||30;
+    document.querySelectorAll('.tb-range-buttons button').forEach(b=>b.classList.toggle('active',b===btn));
+    if(Array.isArray(window.tbLastDashboardSales)) renderSalesEvolutionChart(window.tbLastDashboardSales);
+  };
+  function renderSalesEvolutionChart(sales){
+    window.tbLastDashboardSales=sales||[];
+    const host=document.getElementById('tbSalesBars');
+    if(!host)return;
+    const days=tbDashboardChartRange;
+    const today=new Date(); today.setHours(23,59,59,999);
+    const start=new Date(today); start.setDate(start.getDate()-days+1); start.setHours(0,0,0,0);
+    const filtered=(sales||[]).filter(x=>{const d=new Date(x.sold_at);return !isNaN(d)&&d>=start&&d<=today;});
+    const byDay={};
+    filtered.forEach(x=>{const d=new Date(x.sold_at);const k=d.toISOString().slice(0,10);byDay[k]=(byDay[k]||0)+Number(x.gross_revenue||Number(x.unit_price||0)*Number(x.quantity||1));});
+    const points=[];
+    const step=days<=30?1:days<=90?3:Math.max(7,Math.round(days/24));
+    for(let i=0;i<days;i+=step){
+      const d=new Date(start);d.setDate(start.getDate()+i);
+      let v=0;
+      for(let j=0;j<step && i+j<days;j++){const dj=new Date(d);dj.setDate(d.getDate()+j);v+=byDay[dj.toISOString().slice(0,10)]||0;}
+      points.push({date:d,value:v});
+    }
+    const total=filtered.reduce((a,x)=>a+Number(x.gross_revenue||Number(x.unit_price||0)*Number(x.quantity||1)),0);
+    const val=document.getElementById('tbChartRevenue');if(val)val.textContent=brl(total);
+    const lab=document.getElementById('tbChartPeriodLabel');if(lab)lab.textContent=days===365?'últimos 12 meses':`últimos ${days} dias`;
+    if(!filtered.length){host.innerHTML='<div class="tb-line-empty">Nenhuma venda neste período. Registre vendas ou escolha outro intervalo.</div>';return;}
+    const W=760,H=200,padL=46,padR=14,padT=16,padB=30,plotW=W-padL-padR,plotH=H-padT-padB;
+    const maxVal=Math.max(1,...points.map(p=>p.value));
+    const x=i=>padL+(points.length===1?plotW/2:(i/(points.length-1))*plotW);
+    const y=v=>padT+plotH-(v/maxVal)*plotH;
+    const coords=points.map((p,i)=>[x(i),y(p.value)]);
+    const line=coords.map((c,i)=>(i?'L':'M')+c[0].toFixed(1)+' '+c[1].toFixed(1)).join(' ');
+    const area=line+` L ${x(points.length-1).toFixed(1)} ${(padT+plotH).toFixed(1)} L ${x(0).toFixed(1)} ${(padT+plotH).toFixed(1)} Z`;
+    let grid=''; for(let g=0;g<=4;g++){const gy=padT+(plotH/4)*g;const gv=maxVal*(1-g/4);grid+=`<line class="tb-chart-gridline" x1="${padL}" y1="${gy}" x2="${W-padR}" y2="${gy}"/><text class="tb-chart-axis" x="4" y="${gy+3}">${brl(gv).replace(',00','')}</text>`;}
+    const labelIdx=[0,Math.floor((points.length-1)/2),points.length-1].filter((v,i,a)=>a.indexOf(v)===i);
+    let labels='';labelIdx.forEach(i=>{const d=points[i].date;labels+=`<text class="tb-chart-axis" text-anchor="middle" x="${x(i)}" y="${H-8}">${String(d.getDate()).padStart(2,'0')}/${String(d.getMonth()+1).padStart(2,'0')}</text>`});
+    const dots=points.map((p,i)=>p.value>0?`<circle class="tb-chart-dot" cx="${x(i)}" cy="${y(p.value)}" r="4"><title>${p.date.toLocaleDateString('pt-BR')}: ${brl(p.value)}</title></circle>`:'').join('');
+    host.innerHTML=`<svg class="tb-line-chart" viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" role="img" aria-label="Gráfico de evolução das vendas"><defs><linearGradient id="tbAreaGradient" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#20c8ff" stop-opacity=".38"/><stop offset="100%" stop-color="#087cff" stop-opacity=".02"/></linearGradient></defs>${grid}<path class="tb-chart-area" d="${area}"/><path class="tb-chart-path" d="${line}"/>${dots}${labels}</svg><div class="tb-chart-caption">Passe o mouse sobre os pontos para ver os valores.</div>`;
+  }
+
   window.loadMarketplaceDashboard=async function(){
     if(!premiumActive || !premiumUser || !premiumClient)return;
     const uid=premiumUser.id;
@@ -2262,8 +2319,7 @@ window.refreshPremiumAccess=async function(){
     const low=I.filter(x=>Number(x.quantity||0)<=Number(x.minimum_stock||0));
     const set=(id,v)=>{const e=document.getElementById(id);if(e)e.textContent=v};
     set("tbRevenue",brl(revenue));set("tbProfit",brl(profit));set("tbSales",S.length);set("tbUnits",units+" unidades");set("tbStockValue",brl(stockValue));set("tbStockUnits",stockUnits+" unidades");set("tbLowStock",low.length);set("tbMargin","Margem "+(revenue?((profit/revenue)*100).toFixed(1):"0.0").replace(".",",")+"%");
-    const bars=document.getElementById("tbSalesBars");
-    if(bars){const recent=S.slice(-12);const vals=recent.map(x=>Number(x.gross_revenue||Number(x.unit_price||0)*Number(x.quantity||1)));const max=Math.max(1,...vals);bars.innerHTML=recent.length?recent.map((x,i)=>`<i title="${esc(x.product_name||'Venda')}: ${brl(vals[i])}" style="height:${Math.max(5,(vals[i]/max)*100)}%"></i>`).join(""):'<div class="tb-empty-chart">Registre suas primeiras vendas para ver o gráfico.</div>';}
+    renderSalesEvolutionChart(S);
     const market={};S.forEach(x=>{const k=(x.marketplace||"Não informado").trim()||"Não informado";market[k]=(market[k]||0)+Number(x.gross_revenue||Number(x.unit_price||0)*Number(x.quantity||1));});
     const mEl=document.getElementById("tbMarketplaces");if(mEl){const arr=Object.entries(market).sort((a,b)=>b[1]-a[1]).slice(0,6);const max=Math.max(1,...arr.map(x=>x[1]));mEl.innerHTML=arr.length?arr.map(([k,v])=>`<div class="tb-market-row"><span>${esc(k)}</span><div class="tb-market-track"><div class="tb-market-fill" style="width:${(v/max)*100}%"></div></div><b>${Math.round(revenue?v/revenue*100:0)}%</b></div>`).join(""):'<div class="tb-empty-chart">Os marketplaces aparecerão aqui.</div>';}
     const now=new Date();const goal=G.find(x=>Number(x.period_month)===now.getMonth()+1&&Number(x.period_year)===now.getFullYear())||G[0];
