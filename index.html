@@ -1155,6 +1155,21 @@
 .tb-fin-alert.info{background:rgba(0,153,255,.08);border-color:rgba(69,204,255,.20)}.tb-fin-alert.info b{color:#8ee8ff}
 .tb-fin-alert.success{background:rgba(45,211,139,.08);border-color:rgba(45,211,139,.20)}.tb-fin-alert.success b{color:#78efb7}
 
+
+/* ===== V6.9: CALENDÁRIO FINANCEIRO ===== */
+.tb-calendar-card{margin-top:12px;background:#0b1d33;border:1px solid rgba(255,255,255,.07);border-radius:17px;padding:16px}
+.tb-calendar-head{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.tb-calendar-head h3{font-size:13px;margin:0}.tb-calendar-head p{font-size:10px;color:#7f99b7;margin-top:3px}
+.tb-calendar-nav{display:flex;align-items:center;gap:8px}.tb-calendar-nav button{border:1px solid rgba(85,215,255,.22);background:#0d2948;color:#dff7ff;border-radius:10px;padding:8px 11px;font-weight:900;cursor:pointer}.tb-calendar-nav b{min-width:120px;text-align:center;font-size:11px;text-transform:uppercase;color:#dff7ff}
+.tb-calendar-summary{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-top:14px}
+.tb-calendar-kpi{background:#08192d;border:1px solid rgba(255,255,255,.06);border-radius:13px;padding:12px}.tb-calendar-kpi span{display:block;color:#7894b4;font-size:9px;text-transform:uppercase;font-weight:900}.tb-calendar-kpi b{display:block;font-size:17px;margin-top:4px}.tb-calendar-kpi.in b{color:#55e6a8}.tb-calendar-kpi.out b{color:#ff9da8}.tb-calendar-kpi.balance b{color:#72dcff}
+.tb-calendar-week{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin-top:14px}.tb-calendar-week span{text-align:center;color:#718ba8;font-size:9px;font-weight:900;text-transform:uppercase;padding:4px}
+.tb-calendar-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
+.tb-cal-day{min-height:92px;background:#08192d;border:1px solid rgba(255,255,255,.055);border-radius:12px;padding:8px;cursor:pointer;transition:.18s;overflow:hidden}.tb-cal-day:hover{border-color:rgba(85,215,255,.28);transform:translateY(-1px)}.tb-cal-day.empty{opacity:.28;cursor:default}.tb-cal-day.today{box-shadow:inset 0 0 0 1px rgba(85,215,255,.5);background:#0b2542}.tb-cal-day.selected{border-color:#55d7ff;background:#0d2b4b}
+.tb-cal-num{font-size:11px;font-weight:900;color:#dcecff}.tb-cal-events{display:grid;gap:4px;margin-top:6px}.tb-cal-event{display:block;border-radius:7px;padding:4px 5px;font-size:8px;font-weight:900;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.tb-cal-event.receive{background:rgba(45,211,139,.11);color:#72efb5}.tb-cal-event.pay{background:rgba(255,83,101,.10);color:#ffadb6}.tb-cal-event.done{opacity:.58;text-decoration:line-through}.tb-cal-more{font-size:8px;color:#79a2c8;margin-top:2px}
+.tb-calendar-detail{margin-top:12px;background:#08192d;border:1px solid rgba(255,255,255,.06);border-radius:13px;padding:13px}.tb-calendar-detail h4{font-size:11px;margin:0 0 8px}.tb-cal-detail-list{display:grid;gap:6px}.tb-cal-detail-row{display:grid;grid-template-columns:1fr auto auto;gap:9px;align-items:center;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.055);font-size:10px}.tb-cal-detail-row:last-child{border-bottom:0}.tb-cal-detail-row small{display:block;color:#7894b4;margin-top:2px}.tb-cal-detail-row .receive{color:#55e6a8;font-weight:900}.tb-cal-detail-row .pay{color:#ff9da8;font-weight:900}.tb-cal-status{padding:4px 7px;border-radius:999px;background:rgba(255,193,74,.10);color:#ffd17e;font-size:8px;font-weight:900}.tb-cal-status.done{background:rgba(45,211,139,.10);color:#78efb7}
+@media(max-width:700px){.tb-calendar-summary{grid-template-columns:1fr}.tb-cal-day{min-height:70px;padding:5px}.tb-cal-event{font-size:0;padding:3px;height:6px}.tb-cal-event.receive{background:#38d99b}.tb-cal-event.pay{background:#ff7184}.tb-calendar-week{gap:3px}.tb-calendar-grid{gap:3px}.tb-cal-detail-row{grid-template-columns:1fr auto}.tb-cal-detail-row .tb-cal-status{grid-column:1/-1;width:max-content}}
+
 </style>
 
   <!-- THE BEST V6 Premium -->
@@ -1777,6 +1792,32 @@
           <div class="tb-proj-line"><span>A pagar</span><b id="proj90Out">R$ 0,00</b></div>
           <div class="tb-proj-balance"><span>Saldo projetado</span><strong id="proj90Balance">R$ 0,00</strong></div>
         </div>
+      </div>
+    </div>
+
+
+
+    <div class="tb-calendar-card">
+      <div class="tb-calendar-head">
+        <div>
+          <h3>📅 CALENDÁRIO FINANCEIRO</h3>
+          <p>Vencimentos de contas a pagar e a receber organizados por mês.</p>
+        </div>
+        <div class="tb-calendar-nav">
+          <button type="button" onclick="changeFinanceCalendarMonth(-1)" aria-label="Mês anterior">‹</button>
+          <b id="financeCalendarTitle">MÊS</b>
+          <button type="button" onclick="changeFinanceCalendarMonth(1)" aria-label="Próximo mês">›</button>
+        </div>
+      </div>
+      <div class="tb-calendar-summary">
+        <div class="tb-calendar-kpi in"><span>A receber no mês</span><b id="calendarMonthIn">R$ 0,00</b></div>
+        <div class="tb-calendar-kpi out"><span>A pagar no mês</span><b id="calendarMonthOut">R$ 0,00</b></div>
+        <div class="tb-calendar-kpi balance"><span>Saldo previsto do mês</span><b id="calendarMonthBalance">R$ 0,00</b></div>
+      </div>
+      <div class="tb-calendar-week"><span>DOM</span><span>SEG</span><span>TER</span><span>QUA</span><span>QUI</span><span>SEX</span><span>SÁB</span></div>
+      <div id="financeCalendarGrid" class="tb-calendar-grid"></div>
+      <div id="financeCalendarDetail" class="tb-calendar-detail">
+        <h4>Selecione um dia para ver os vencimentos.</h4>
       </div>
     </div>
 
@@ -2792,6 +2833,91 @@ window.refreshPremiumAccess=async function(){
   };
 
 
+
+  /* V6.9: Calendário financeiro */
+  let tbCalendarDate=new Date();
+  tbCalendarDate=new Date(tbCalendarDate.getFullYear(),tbCalendarDate.getMonth(),1);
+  let tbCalendarRows=[];
+  let tbCalendarSelected='';
+
+  function tbCalendarDateKey(y,m,d){
+    return `${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+  }
+
+  function tbCalendarStatusText(row){
+    if(row.status==='paid')return 'PAGO';
+    if(row.status==='received')return 'RECEBIDO';
+    const today=tbLocalDateISO();
+    return row.due_date<today?'VENCIDO':'PENDENTE';
+  }
+
+  window.changeFinanceCalendarMonth=function(step){
+    tbCalendarDate=new Date(tbCalendarDate.getFullYear(),tbCalendarDate.getMonth()+Number(step||0),1);
+    tbCalendarSelected='';
+    renderFinanceCalendar(tbCalendarRows);
+  };
+
+  window.openFinanceCalendarDay=function(dateKey){
+    tbCalendarSelected=dateKey;
+    renderFinanceCalendar(tbCalendarRows);
+  };
+
+  function renderFinanceCalendar(rows){
+    tbCalendarRows=Array.isArray(rows)?rows:[];
+    const grid=document.getElementById('financeCalendarGrid');
+    const title=document.getElementById('financeCalendarTitle');
+    const detail=document.getElementById('financeCalendarDetail');
+    if(!grid||!title)return;
+
+    const y=tbCalendarDate.getFullYear(),m=tbCalendarDate.getMonth();
+    title.textContent=tbCalendarDate.toLocaleDateString('pt-BR',{month:'long',year:'numeric'}).toUpperCase();
+
+    const monthPrefix=`${y}-${String(m+1).padStart(2,'0')}-`;
+    const monthRows=tbCalendarRows.filter(r=>String(r.due_date||'').startsWith(monthPrefix));
+    const pending=monthRows.filter(r=>r.status==='pending');
+    const monthIn=pending.filter(r=>r.type==='receivable').reduce((s,r)=>s+Number(r.amount||0),0);
+    const monthOut=pending.filter(r=>r.type==='payable').reduce((s,r)=>s+Number(r.amount||0),0);
+    const setCal=(id,val)=>{const el=document.getElementById(id);if(el)el.textContent=val;};
+    setCal('calendarMonthIn',brl(monthIn));
+    setCal('calendarMonthOut',brl(monthOut));
+    setCal('calendarMonthBalance',brl(monthIn-monthOut));
+    const bal=document.getElementById('calendarMonthBalance');
+    if(bal)bal.style.color=(monthIn-monthOut)>=0?'#55e6a8':'#ff8f9b';
+
+    const firstDay=new Date(y,m,1).getDay();
+    const daysInMonth=new Date(y,m+1,0).getDate();
+    const todayKey=tbLocalDateISO();
+    let cells='';
+    for(let i=0;i<firstDay;i++)cells+='<div class="tb-cal-day empty"></div>';
+    for(let d=1;d<=daysInMonth;d++){
+      const key=tbCalendarDateKey(y,m,d);
+      const dayRows=monthRows.filter(r=>r.due_date===key);
+      const preview=dayRows.slice(0,3).map(r=>{
+        const done=r.status==='paid'||r.status==='received';
+        return `<span class="tb-cal-event ${r.type==='receivable'?'receive':'pay'} ${done?'done':''}" title="${esc(r.description)} • ${brl(r.amount)}">${r.type==='receivable'?'↑':'↓'} ${esc(r.description)} ${brl(r.amount)}</span>`;
+      }).join('');
+      const more=dayRows.length>3?`<div class="tb-cal-more">+${dayRows.length-3} lançamento(s)</div>`:'';
+      cells+=`<div class="tb-cal-day ${key===todayKey?'today':''} ${key===tbCalendarSelected?'selected':''}" onclick="openFinanceCalendarDay('${key}')"><div class="tb-cal-num">${d}</div><div class="tb-cal-events">${preview}${more}</div></div>`;
+    }
+    grid.innerHTML=cells;
+
+    if(detail){
+      if(!tbCalendarSelected){
+        const next=monthRows.filter(r=>r.status==='pending').sort((a,b)=>String(a.due_date).localeCompare(String(b.due_date)))[0];
+        detail.innerHTML=next
+          ? `<h4>Próximo vencimento: ${new Date(next.due_date+'T12:00:00').toLocaleDateString('pt-BR')}</h4><div class="tb-cal-detail-list"><div class="tb-cal-detail-row"><div><b>${esc(next.description)}</b><small>${esc(next.category||'Outros')} • ${esc(next.payment_method||'-')}</small></div><span class="${next.type==='receivable'?'receive':'pay'}">${brl(next.amount)}</span><span class="tb-cal-status">${tbCalendarStatusText(next)}</span></div></div>`
+          : '<h4>Nenhum vencimento pendente neste mês.</h4>';
+      }else{
+        const selectedRows=monthRows.filter(r=>r.due_date===tbCalendarSelected);
+        const label=new Date(tbCalendarSelected+'T12:00:00').toLocaleDateString('pt-BR');
+        detail.innerHTML=`<h4>Vencimentos de ${label}</h4>`+(selectedRows.length
+          ? `<div class="tb-cal-detail-list">${selectedRows.map(r=>{const done=r.status==='paid'||r.status==='received';return `<div class="tb-cal-detail-row"><div><b>${esc(r.description)}</b><small>${r.type==='receivable'?'A RECEBER':'A PAGAR'} • ${esc(r.category||'Outros')} • ${esc(r.payment_method||'-')}</small></div><span class="${r.type==='receivable'?'receive':'pay'}">${brl(r.amount)}</span><span class="tb-cal-status ${done?'done':''}">${tbCalendarStatusText(r)}</span></div>`}).join('')}</div>`
+          : '<div class="v5-empty">Nenhuma conta com vencimento neste dia.</div>');
+      }
+    }
+  }
+
+
   /* Contas a pagar e receber */
   let tbAccountRows=[];
 
@@ -2815,6 +2941,7 @@ window.refreshPremiumAccess=async function(){
     toast('Conta salva na nuvem.');
     trackV5('financeiro_salvar_conta');
     await loadAccountsPremium();
+    renderFinanceCalendar(tbAccountRows);
   };
 
   window.settleAccountPremium=async function(id,type){
