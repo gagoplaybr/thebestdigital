@@ -1298,6 +1298,31 @@ body.tb-premium-nav-active #area-cliente{
   .tb-premium-sidebar{top:8px}
 }
 
+
+/* ===== V7.0.1: correção de âncora dos títulos =====
+   Evita que o cabeçalho fixo esconda o título da seção ao clicar no menu lateral. */
+body.tb-premium-nav-active #painel-premium,
+body.tb-premium-nav-active #controle-vendas,
+body.tb-premium-nav-active #controle-estoque,
+body.tb-premium-nav-active #controle-metas,
+body.tb-premium-nav-active #relatorios-premium,
+body.tb-premium-nav-active #financeiro-premium,
+body.tb-premium-nav-active #meus-produtos{
+  scroll-margin-top:96px;
+}
+
+@media (display-mode:standalone){
+  body.tb-premium-nav-active #painel-premium,
+  body.tb-premium-nav-active #controle-vendas,
+  body.tb-premium-nav-active #controle-estoque,
+  body.tb-premium-nav-active #controle-metas,
+  body.tb-premium-nav-active #relatorios-premium,
+  body.tb-premium-nav-active #financeiro-premium,
+  body.tb-premium-nav-active #meus-produtos{
+    scroll-margin-top:16px;
+  }
+}
+
 </style>
 
   <!-- THE BEST V6 Premium -->
@@ -2591,7 +2616,15 @@ if ("serviceWorker" in navigator) {
   document.addEventListener('click',function(ev){
     const link=ev.target.closest?.('.tb-side-link[data-premium-section]');
     if(!link)return;
-    tbSetPremiumSidebarActive(link.dataset.premiumSection);
+
+    const sectionId=link.dataset.premiumSection;
+    const target=document.getElementById(sectionId);
+    if(target){
+      ev.preventDefault();
+      tbSetPremiumSidebarActive(sectionId);
+      target.scrollIntoView({behavior:'smooth',block:'start'});
+      try{history.replaceState(null,'','#'+sectionId);}catch(_){}
+    }
   });
 
   function tbUpdatePremiumSidebarState(){
