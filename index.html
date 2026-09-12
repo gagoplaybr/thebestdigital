@@ -1868,7 +1868,7 @@ body.tb-user-logged-in #calculadora{
 
 
 <style id="tb-v811-fixes">
-/* V8.1.6.1: correções da vitrine Premium */
+/* V8.3.0.1: correções da vitrine Premium */
 @media (min-width: 769px){
   .tb-mobile-menu-toggle,
   .tb-menu-toggle,
@@ -2007,7 +2007,7 @@ body.tb-user-logged-in #calculadora{
 
 
 <style id="tb-mobile-presentation-only">
-/* V8.2.0: celular/tablet = somente apresentação pública.
+/* V8.3.0: celular/tablet = somente apresentação pública.
    Área Premium/ERP continua disponível apenas em computador/programa desktop. */
 #tbMobileDesktopNotice{display:none}
 
@@ -2074,6 +2074,179 @@ body.tb-user-logged-in #calculadora{
 }
 </style>
 
+
+<style id="tb-program-desktop-v830">
+/* V8.3.0 • experiência de programa para desktop instalado */
+@media (display-mode:standalone) and (min-width:1025px){
+  .tb-app-login-cover{
+    display:flex!important;
+    align-items:center;
+    justify-content:center;
+    padding:24px;
+    background:
+      radial-gradient(circle at 15% 20%,rgba(0,130,255,.18),transparent 30%),
+      radial-gradient(circle at 88% 82%,rgba(0,211,255,.10),transparent 27%),
+      linear-gradient(145deg,#030914 0%,#061426 50%,#04101f 100%);
+  }
+  body.tb-app-authenticated .tb-app-login-cover{display:none!important}
+
+  .tb-program-window{
+    width:min(1180px,96vw);
+    min-height:690px;
+    border-radius:24px;
+    overflow:hidden;
+    border:1px solid rgba(91,187,255,.22);
+    background:#071424;
+    box-shadow:0 38px 110px rgba(0,0,0,.55),0 0 0 1px rgba(255,255,255,.02) inset;
+  }
+  .tb-program-titlebar{
+    height:48px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 18px;
+    border-bottom:1px solid rgba(255,255,255,.07);
+    background:linear-gradient(180deg,rgba(15,32,52,.98),rgba(8,23,39,.98));
+    color:#9eb3c9;
+    font-size:11px;
+    letter-spacing:.7px;
+  }
+  .tb-program-title-left,.tb-program-title-right{display:flex;align-items:center;gap:10px}
+  .tb-program-title-left strong{color:#e8f5ff;font-size:11px}
+  .tb-program-title-right span{padding:5px 8px;border-radius:7px;background:rgba(255,255,255,.04)}
+  .tb-program-appdot{width:9px;height:9px;border-radius:50%;background:#2fc4ff;box-shadow:0 0 15px rgba(47,196,255,.85)}
+
+  .tb-program-grid{display:grid;grid-template-columns:1.18fr .82fr;min-height:642px}
+  .tb-program-brand{
+    position:relative;
+    display:flex;
+    flex-direction:column;
+    padding:42px 48px 30px;
+    overflow:hidden;
+    background:
+      linear-gradient(rgba(8,24,43,.88),rgba(6,20,37,.96)),
+      radial-gradient(circle at 72% 26%,rgba(0,130,255,.25),transparent 31%);
+  }
+  .tb-program-brand:before{
+    content:"";
+    position:absolute;inset:0;
+    background-image:
+      linear-gradient(rgba(51,171,255,.035) 1px,transparent 1px),
+      linear-gradient(90deg,rgba(51,171,255,.035) 1px,transparent 1px);
+    background-size:34px 34px;
+    mask-image:linear-gradient(to bottom,rgba(0,0,0,.7),transparent 92%);
+    pointer-events:none;
+  }
+  .tb-program-brand-top,.tb-program-copy,.tb-program-feature-grid,.tb-program-roadmap-mini,.tb-program-version{position:relative;z-index:1}
+  .tb-program-brand-top{display:flex;justify-content:space-between;align-items:center;gap:20px}
+  .tb-program-logo-wrap img{width:210px;max-height:74px;object-fit:contain;object-position:left center}
+  .tb-program-cloud-status{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:8px 11px;border:1px solid rgba(63,200,255,.18);border-radius:999px;
+    color:#8fdcff;background:rgba(18,109,165,.10);font-size:10px;font-weight:800;letter-spacing:.8px
+  }
+  .tb-program-cloud-status b{width:7px;height:7px;border-radius:50%;background:#38e19f;box-shadow:0 0 12px rgba(56,225,159,.7)}
+
+  .tb-program-copy{margin-top:55px;max-width:650px}
+  .tb-program-eyebrow{color:#52bfff;font-weight:900;font-size:11px;letter-spacing:1.5px;margin-bottom:13px}
+  .tb-program-copy h1{margin:0;color:#fff;font-size:clamp(35px,4.2vw,59px);line-height:1.03;letter-spacing:-1.8px}
+  .tb-program-copy h1 span{color:#32b9ff;text-shadow:0 0 32px rgba(50,185,255,.22)}
+  .tb-program-copy p{margin:18px 0 0;color:#a8bdd2;line-height:1.65;font-size:14px;max-width:590px}
+
+  .tb-program-feature-grid{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin-top:30px}
+  .tb-program-feature-grid>div{
+    display:flex;align-items:center;gap:12px;padding:13px 14px;border-radius:14px;
+    border:1px solid rgba(75,177,255,.13);background:rgba(9,33,57,.64)
+  }
+  .tb-program-feature-grid i{
+    width:38px;height:38px;border-radius:11px;display:grid;place-items:center;font-style:normal;
+    background:linear-gradient(145deg,rgba(25,131,225,.22),rgba(27,189,255,.09));font-size:17px
+  }
+  .tb-program-feature-grid b{display:block;color:#e9f6ff;font-size:12px}
+  .tb-program-feature-grid small{display:block;color:#7895b0;font-size:10px;margin-top:3px}
+
+  .tb-program-roadmap-mini{
+    margin-top:18px;padding:13px 15px;border-radius:14px;border:1px solid rgba(255,193,60,.16);
+    background:linear-gradient(135deg,rgba(255,188,28,.055),rgba(13,44,74,.4))
+  }
+  .tb-program-roadmap-mini span{display:block;color:#e8bc54;font-size:9px;font-weight:900;letter-spacing:1px}
+  .tb-program-roadmap-mini strong{display:block;color:#fff;font-size:12px;margin-top:4px}
+  .tb-program-roadmap-mini small{display:block;color:#8fa8c0;font-size:10px;margin-top:3px}
+  .tb-program-version{margin-top:auto;color:#5d7994;font-size:9px;letter-spacing:1px;padding-top:22px}
+
+  .tb-program-login-panel{
+    display:flex;flex-direction:column;justify-content:center;padding:54px 48px;
+    background:linear-gradient(180deg,#0b1c30 0%,#081726 100%);
+    border-left:1px solid rgba(255,255,255,.06)
+  }
+  .tb-program-login-badge{
+    align-self:flex-start;padding:7px 10px;border-radius:8px;background:rgba(24,148,255,.10);
+    border:1px solid rgba(54,174,255,.22);color:#5fc7ff;font-size:9px;font-weight:900;letter-spacing:1.1px
+  }
+  .tb-program-login-panel h2{margin:15px 0 6px;color:#fff;font-size:28px;letter-spacing:-.5px}
+  .tb-program-login-sub{margin:0 0 25px;color:#8ea8c0;line-height:1.55;font-size:12px}
+  .tb-program-login-panel .tb-app-login-field{margin:0 0 14px}
+  .tb-program-login-panel .tb-app-login-field label{display:block;color:#adc1d5;font-size:10px;font-weight:800;margin:0 0 7px}
+  .tb-program-input-wrap{
+    height:49px;display:flex;align-items:center;gap:10px;padding:0 13px;border-radius:12px;
+    background:#061321;border:1px solid rgba(107,176,230,.18);transition:.2s ease
+  }
+  .tb-program-input-wrap:focus-within{border-color:rgba(56,184,255,.58);box-shadow:0 0 0 3px rgba(25,154,255,.08)}
+  .tb-program-input-wrap span{font-size:13px;opacity:.75}
+  .tb-program-input-wrap input{
+    flex:1;min-width:0;height:100%;border:0!important;outline:0!important;background:transparent!important;
+    color:#fff!important;padding:0!important;box-shadow:none!important;font-size:13px
+  }
+  .tb-program-login-panel .tb-app-login-btn{
+    width:100%;height:49px;margin-top:5px;border:0;border-radius:12px;cursor:pointer;
+    background:linear-gradient(135deg,#087cff,#00b9ff);color:#fff;font-weight:950;font-size:12px;letter-spacing:.7px;
+    box-shadow:0 14px 30px rgba(0,118,255,.22)
+  }
+  .tb-program-login-panel .tb-app-login-btn:hover{filter:brightness(1.08);transform:translateY(-1px)}
+  .tb-program-login-panel .tb-app-login-secondary{
+    width:100%;height:43px;margin-top:10px;border-radius:12px;cursor:pointer;
+    border:1px solid rgba(93,174,231,.17);background:rgba(8,31,53,.72);color:#9fc8e5;font-size:10px;font-weight:850
+  }
+  .tb-program-login-panel .tb-app-login-status{
+    margin-top:14px;padding:9px 11px;border-radius:10px;background:rgba(255,255,255,.035);
+    color:#8ea7be;font-size:10px;text-align:center
+  }
+  .tb-program-security{
+    display:flex;gap:10px;align-items:flex-start;margin-top:17px;padding:12px;border-radius:12px;
+    border:1px solid rgba(74,183,255,.10);background:rgba(7,25,43,.55)
+  }
+  .tb-program-security span{font-size:15px}
+  .tb-program-security p{margin:0;color:#6f8aa4;font-size:9px;line-height:1.55}
+  .tb-program-security strong{color:#9bb9d2}
+  .tb-program-login-foot{text-align:center;margin-top:18px;color:#4f6d89;font-size:8px;letter-spacing:1px}
+
+  /* depois do login, o programa não exibe a antiga home/marketing */
+  body.tb-app-authenticated .app-home,
+  body.tb-app-authenticated > header,
+  body.tb-app-authenticated .hero,
+  body.tb-app-authenticated .seo-content,
+  body.tb-app-authenticated .problems,
+  body.tb-app-authenticated .dashboard-section,
+  body.tb-app-authenticated #kit,
+  body.tb-app-authenticated #apresentacao-kit{
+    display:none!important;
+  }
+
+  body.tb-app-authenticated .app-topbar{
+    display:none!important;
+  }
+}
+
+@media (display-mode:standalone) and (min-width:1025px) and (max-height:760px){
+  .tb-program-window{min-height:620px}
+  .tb-program-grid{min-height:572px}
+  .tb-program-brand{padding:32px 40px 24px}
+  .tb-program-copy{margin-top:34px}
+  .tb-program-feature-grid{margin-top:22px}
+  .tb-program-login-panel{padding:38px 42px}
+}
+</style>
+
 </head>
 
 <body>
@@ -2088,57 +2261,85 @@ body.tb-user-logged-in #calculadora{
 
 
 <div id="tbAppLoginCover" class="tb-app-login-cover">
-  <div class="tb-app-login-shell">
-    <section class="tb-app-login-brand">
-      <div class="tb-app-login-logo">
-        <img src="logo-the-best-digital.png" alt="THE BEST DIGITAL">
+  <div class="tb-program-window">
+    <div class="tb-program-titlebar">
+      <div class="tb-program-title-left">
+        <span class="tb-program-appdot"></span>
+        <strong>THE BEST MARKETPLACE PREMIUM</strong>
       </div>
+      <div class="tb-program-title-right">
+        <span>DESKTOP</span>
+        <span>V8.3.0</span>
+      </div>
+    </div>
 
-      <div class="tb-app-login-copy">
-        <span class="tag">☁ PREMIUM • NUVEM</span>
-        <h1>Seu negócio em um <span>só lugar.</span></h1>
-        <p>Acesse o THE BEST Marketplace e acompanhe vendas, estoque, metas, financeiro, relatórios e projeções em tempo real.</p>
-
-        <div class="tb-app-login-points">
-          <div class="tb-app-login-point"><i>📊</i><span>Dashboard gerencial</span></div>
-          <div class="tb-app-login-point"><i>📦</i><span>Estoque em nuvem</span></div>
-          <div class="tb-app-login-point"><i>💰</i><span>Financeiro e DRE</span></div>
-          <div class="tb-app-login-point"><i>📅</i><span>Calendário financeiro</span></div>
+    <div class="tb-program-grid">
+      <section class="tb-program-brand">
+        <div class="tb-program-brand-top">
+          <div class="tb-program-logo-wrap">
+            <img src="logo-the-best-digital.png" alt="THE BEST DIGITAL">
+          </div>
+          <span class="tb-program-cloud-status"><b></b> SISTEMA EM NUVEM</span>
         </div>
-      </div>
 
-      <div class="tb-app-login-version">THE BEST DIGITAL • PROGRAMA PREMIUM • V8.1.6</div>
-    </section>
+        <div class="tb-program-copy">
+          <div class="tb-program-eyebrow">GESTÃO INTELIGENTE PARA MARKETPLACES</div>
+          <h1>Controle sua operação em uma única <span>central.</span></h1>
+          <p>Vendas, estoque, metas, relatórios, financeiro, DRE, calendário e precificação conectados no mesmo ambiente.</p>
+        </div>
 
-    <section class="tb-app-login-panel">
-      <h2>Bem-vindo</h2>
-      <p>Entre com o mesmo e-mail utilizado na compra do THE BEST MARKETPLACE PREMIUM.</p>
+        <div class="tb-program-feature-grid">
+          <div><i>📊</i><span><b>Dashboard</b><small>Indicadores do negócio</small></span></div>
+          <div><i>💰</i><span><b>Financeiro</b><small>Fluxo de caixa e DRE</small></span></div>
+          <div><i>📦</i><span><b>Estoque</b><small>Controle e movimentações</small></span></div>
+          <div><i>🎯</i><span><b>Metas</b><small>Acompanhe sua evolução</small></span></div>
+        </div>
 
-      <div class="tb-app-login-field">
-        <label>E-mail</label>
-        <input id="tbAppLoginEmail" type="email" autocomplete="email" placeholder="seuemail@exemplo.com">
-      </div>
+        <div class="tb-program-roadmap-mini">
+          <span>PRÓXIMA EVOLUÇÃO</span>
+          <strong>THE BEST MARKETPLACE ERP</strong>
+          <small>Integração inicial planejada: Mercado Livre</small>
+        </div>
 
-      <div class="tb-app-login-field">
-        <label>Senha</label>
-        <input id="tbAppLoginPassword" type="password" autocomplete="current-password" minlength="8" placeholder="Sua senha">
-      </div>
+        <div class="tb-program-version">THE BEST DIGITAL • PROGRAMA PREMIUM • V8.3.0</div>
+      </section>
 
-      <button id="tbAppLoginButton" class="tb-app-login-btn" type="button" onclick="tbAppProgramLogin()">ENTRAR NO PROGRAMA</button>
-      <button class="tb-app-login-secondary" type="button" onclick="tbAppProgramMagicLink()">PRIMEIRO ACESSO / RECEBER LINK</button>
+      <section class="tb-program-login-panel">
+        <div class="tb-program-login-badge">ACESSO PREMIUM</div>
+        <h2>Bem-vindo ao programa</h2>
+        <p class="tb-program-login-sub">Entre com o e-mail utilizado na sua assinatura do THE BEST MARKETPLACE PREMIUM.</p>
 
-      <div id="tbAppLoginStatus" class="tb-app-login-status">Aguardando login.</div>
-      <div class="tb-app-login-note">O programa não armazena sua senha. A autenticação é feita pelo servidor de acesso Premium.</div>
-    </section>
+        <div class="tb-app-login-field">
+          <label for="tbAppLoginEmail">E-mail</label>
+          <div class="tb-program-input-wrap"><span>✉</span><input id="tbAppLoginEmail" type="email" autocomplete="email" placeholder="seuemail@exemplo.com"></div>
+        </div>
+
+        <div class="tb-app-login-field">
+          <label for="tbAppLoginPassword">Senha</label>
+          <div class="tb-program-input-wrap"><span>🔒</span><input id="tbAppLoginPassword" type="password" autocomplete="current-password" minlength="8" placeholder="Sua senha"></div>
+        </div>
+
+        <button id="tbAppLoginButton" class="tb-app-login-btn" type="button" onclick="tbAppProgramLogin()">ENTRAR NO PROGRAMA</button>
+        <button class="tb-app-login-secondary" type="button" onclick="tbAppProgramMagicLink()">PRIMEIRO ACESSO / RECEBER LINK</button>
+
+        <div id="tbAppLoginStatus" class="tb-app-login-status">Aguardando login.</div>
+
+        <div class="tb-program-security">
+          <span>🔐</span>
+          <p><strong>Acesso protegido</strong><br>O programa não armazena sua senha. A autenticação é validada pelo servidor Premium.</p>
+        </div>
+
+        <div class="tb-program-login-foot">THE BEST DIGITAL • Organize. Venda. Cresça.</div>
+      </section>
+    </div>
   </div>
 </div>
-
 
 
 <div class="app-topbar" aria-label="Cabeçalho do aplicativo">
   <img src="/icons/icon-192.png" alt="THE BEST">
   <div>
-    <strong>THE BEST Marketplace</strong>
+    <strong>THE BEST MARKETPLACE PREMIUM</strong>
     <span>Gestão Premium do seu negócio</span>
   </div>
 </div>
@@ -3811,7 +4012,7 @@ window.refreshPremiumAccess=async function(){
   window.limparFormularioProduto=function(){ ["v5ProdutoNome","v5ProdutoSku","v5ProdutoCusto","v5ProdutoVenda","v5ProdutoFrete"].forEach(id=>{const e=document.getElementById(id);if(e)e.value="";}); };
   window.excluirProdutoV5=async function(id){if(!requirePremium())return;const {error}=await premiumClient.from("saved_products").delete().eq("id",id).eq("user_id",premiumUser.id);if(!error){await renderProdutos();toast("Produto excluído.");}};
   window.usarProdutoV5=function(id){ if(!requirePremium())return; const x=premiumProducts.find(i=>String(i.id)===String(id));if(!x)return; document.getElementById("produto").value=x.name;document.getElementById("custo").value=x.cost||"";document.getElementById("venda").value=x.sale_price||"";document.getElementById("frete").value=x.shipping||"";document.getElementById("calculadora").scrollIntoView({behavior:"smooth"});toast("Produto carregado na calculadora."); 
-    /* V8.1.6: depois de carregar o produto, abre a Calculadora automaticamente */
+    /* V8.3.0: depois de carregar o produto, abre a Calculadora automaticamente */
     if(typeof tbShowPremiumModule === "function"){
       tbShowPremiumModule("calculadora",{scroll:true});
     }else{
