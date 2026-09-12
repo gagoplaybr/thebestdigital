@@ -1,4 +1,4 @@
-const CACHE_NAME = "the-best-marketplace-v8-1-3-botao-sobre-imagem";
+const CACHE_NAME = "the-best-marketplace-v8-1-4-card-premium-final";
 const APP_SHELL = [
   "/",
   "/index.html",
