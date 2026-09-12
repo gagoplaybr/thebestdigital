@@ -1053,6 +1053,27 @@
 @media(max-width:900px){.tb-compare-grid{grid-template-columns:1fr 1fr}}@media(max-width:560px){.tb-compare-grid{grid-template-columns:1fr}.tb-compare-head{align-items:flex-start;flex-direction:column}.tb-compare-period{text-align:left}}
 @media(max-width:1000px){.tb-report-kpis{grid-template-columns:repeat(3,1fr)}.tb-report-grid{grid-template-columns:1fr}}@media(max-width:700px){.tb-reports-section{padding:14px 14px 90px}.tb-reports-shell{padding:15px}.tb-reports-filters{grid-template-columns:1fr 1fr}.tb-report-kpis{grid-template-columns:1fr 1fr}}
 
+
+/* ===== V6: FINANCEIRO PREMIUM ===== */
+.tb-finance-section{max-width:1360px;margin:0 auto;padding:18px 22px 70px}.tb-finance-section[hidden]{display:none!important}
+.tb-finance-shell{background:linear-gradient(145deg,#0b1f38,#08182c);border:1px solid rgba(70,190,255,.20);border-radius:24px;padding:22px;box-shadow:0 22px 70px rgba(0,0,0,.22)}
+.tb-finance-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr 1fr;gap:10px;align-items:end}
+.tb-finance-field label{display:block;color:#9fb7d2;font-size:10px;font-weight:900;margin:0 0 5px;text-transform:uppercase;letter-spacing:.04em}
+.tb-finance-field input,.tb-finance-field select{width:100%;border:1px solid rgba(120,190,255,.16);background:#07182b;color:#fff;border-radius:11px;padding:12px;outline:none;font:inherit}
+.tb-finance-actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:12px}
+.tb-finance-btn{border:0;border-radius:11px;padding:11px 14px;background:linear-gradient(90deg,#087cff,#00b8ff);color:#fff;font-weight:900;cursor:pointer}
+.tb-finance-btn.ghost{background:#0d2948;border:1px solid rgba(85,215,255,.22);color:#dff7ff}
+.tb-finance-kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:16px}
+.tb-finance-kpi{background:linear-gradient(145deg,#102b4a,#0b1d33);border:1px solid rgba(255,255,255,.07);border-radius:16px;padding:15px}
+.tb-finance-kpi span{display:block;color:#7894b4;font-size:9px;text-transform:uppercase;font-weight:900}.tb-finance-kpi b{display:block;font-size:20px;margin-top:6px}.tb-finance-kpi small{display:block;color:#6edaff;font-size:10px;margin-top:4px}
+.tb-finance-kpi.result-positive b{color:#52e6a0}.tb-finance-kpi.result-negative b{color:#ff8d98}
+.tb-finance-lower{display:grid;grid-template-columns:.9fr 1.5fr;gap:12px;margin-top:12px}
+.tb-finance-card{background:#0b1d33;border:1px solid rgba(255,255,255,.07);border-radius:17px;padding:16px;min-height:220px}.tb-finance-card h3{font-size:13px;margin-bottom:13px}
+.tb-expense-bars{display:grid;gap:11px}.tb-expense-row{display:grid;grid-template-columns:110px 1fr 85px;gap:9px;align-items:center;font-size:11px}.tb-expense-track{height:9px;background:#06111f;border-radius:99px;overflow:hidden}.tb-expense-fill{height:100%;background:linear-gradient(90deg,#087cff,#55d7ff);border-radius:99px}
+.tb-expense-list{display:grid;gap:8px}.tb-expense-item{display:grid;grid-template-columns:1fr auto auto;gap:10px;align-items:center;padding:11px 0;border-bottom:1px solid rgba(255,255,255,.06)}.tb-expense-item:last-child{border-bottom:0}.tb-expense-item strong{font-size:12px}.tb-expense-item small{display:block;color:#7f99b8;font-size:10px;margin-top:2px}.tb-expense-value{font-weight:900;color:#ffb7bd;font-size:12px}.tb-expense-delete{border:1px solid rgba(255,100,100,.22);background:rgba(255,70,88,.07);color:#ffb8bd;border-radius:9px;padding:7px 9px;font-size:10px;font-weight:900;cursor:pointer}
+@media(max-width:1000px){.tb-finance-grid{grid-template-columns:repeat(2,1fr)}.tb-finance-kpis{grid-template-columns:repeat(2,1fr)}.tb-finance-lower{grid-template-columns:1fr}}
+@media(max-width:560px){.tb-finance-section{padding:14px 14px 90px}.tb-finance-shell{padding:15px}.tb-finance-grid,.tb-finance-kpis{grid-template-columns:1fr}.tb-expense-row{grid-template-columns:88px 1fr 72px}}
+
 </style>
 
   <!-- THE BEST V6 Premium -->
@@ -1448,6 +1469,7 @@
         <a id="premiumStockLink" href="#controle-estoque" hidden>📦 ESTOQUE</a>
         <a id="premiumGoalsLink" href="#controle-metas" onclick="setTimeout(loadGoalForm,0)" hidden>🎯 METAS</a>
         <a id="premiumReportsLink" href="#relatorios-premium" onclick="setTimeout(loadPremiumReports,0)" hidden>📑 RELATÓRIOS</a>
+        <a id="premiumFinanceLink" href="#financeiro-premium" onclick="setTimeout(loadFinanceiroPremium,0)" hidden>💰 FINANCEIRO</a>
         <a id="premiumProductsLink" href="#meus-produtos" hidden>MEUS PRODUTOS</a>
         <button type="button" onclick="refreshPremiumAccess()">ATUALIZAR ACESSO</button>
         <button type="button" class="danger" onclick="theBestPremiumLogout()">SAIR</button>
@@ -1575,6 +1597,48 @@
   </div>
 </section>
 
+
+
+
+<section id="financeiro-premium" class="tb-finance-section" hidden aria-label="Financeiro Premium">
+  <div class="tb-finance-shell">
+    <div class="tb-sales-head">
+      <div><h2>💰 Financeiro <span>Premium</span></h2><p>Controle despesas e acompanhe o resultado real da sua operação.</p></div>
+      <span class="tb-sales-badge">PREMIUM • NUVEM</span>
+    </div>
+
+    <div class="tb-finance-grid">
+      <div class="tb-finance-field"><label>Descrição</label><input id="expenseDescription" type="text" maxlength="120" placeholder="Ex.: Embalagens"></div>
+      <div class="tb-finance-field"><label>Categoria</label><select id="expenseCategory"><option>Mercadoria</option><option>Embalagem</option><option>Frete</option><option>Publicidade</option><option>Taxas</option><option>Impostos</option><option>Software</option><option>Operacional</option><option>Outros</option></select></div>
+      <div class="tb-finance-field"><label>Valor (R$)</label><input id="expenseAmount" type="number" min="0" step="0.01" placeholder="0,00"></div>
+      <div class="tb-finance-field"><label>Data</label><input id="expenseDate" type="date"></div>
+      <div class="tb-finance-field"><label>Forma de pagamento</label><select id="expensePayment"><option>Pix</option><option>Cartão de crédito</option><option>Cartão de débito</option><option>Boleto</option><option>Dinheiro</option><option>Transferência</option><option>Outro</option></select></div>
+    </div>
+
+    <div class="tb-finance-actions">
+      <button class="tb-finance-btn" type="button" onclick="saveExpensePremium()">+ SALVAR DESPESA</button>
+      <button class="tb-finance-btn ghost" type="button" onclick="loadFinanceiroPremium()">↻ ATUALIZAR FINANCEIRO</button>
+    </div>
+
+    <div class="tb-finance-kpis">
+      <div class="tb-finance-kpi"><span>Faturamento</span><b id="financeRevenue">R$ 0,00</b><small>Vendas dos últimos 30 dias</small></div>
+      <div class="tb-finance-kpi"><span>Lucro das vendas</span><b id="financeSalesProfit">R$ 0,00</b><small>Antes das despesas operacionais</small></div>
+      <div class="tb-finance-kpi"><span>Despesas</span><b id="financeExpenses">R$ 0,00</b><small>Despesas dos últimos 30 dias</small></div>
+      <div class="tb-finance-kpi" id="financeResultCard"><span>Resultado operacional</span><b id="financeResult">R$ 0,00</b><small id="financeResultNote">Lucro das vendas menos despesas</small></div>
+    </div>
+
+    <div class="tb-finance-lower">
+      <div class="tb-finance-card">
+        <h3>📊 DESPESAS POR CATEGORIA</h3>
+        <div id="financeCategories" class="tb-expense-bars"><div class="v5-empty">Nenhuma despesa no período.</div></div>
+      </div>
+      <div class="tb-finance-card">
+        <h3>🧾 ÚLTIMAS DESPESAS</h3>
+        <div id="financeExpenseList" class="tb-expense-list"><div class="v5-empty">Nenhuma despesa cadastrada.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
 
 
 <section id="relatorios-premium" class="tb-reports-section" hidden aria-label="Relatórios Premium">
@@ -2009,6 +2073,8 @@ if ("serviceWorker" in navigator) {
     const goalsLink=document.getElementById("premiumGoalsLink");
     const reportsSection=document.getElementById("relatorios-premium");
     const reportsLink=document.getElementById("premiumReportsLink");
+    const financeSection=document.getElementById("financeiro-premium");
+    const financeLink=document.getElementById("premiumFinanceLink");
     if(productsSection) productsSection.hidden=!premiumActive;
     if(productsLink) productsLink.hidden=!premiumActive;
     if(salesSection) salesSection.hidden=!premiumActive;
@@ -2019,6 +2085,8 @@ if ("serviceWorker" in navigator) {
     if(goalsLink) goalsLink.hidden=!premiumActive;
     if(reportsSection) reportsSection.hidden=!premiumActive;
     if(reportsLink) reportsLink.hidden=!premiumActive;
+    if(financeSection) financeSection.hidden=!premiumActive;
+    if(financeLink) financeLink.hidden=!premiumActive;
     const count=document.getElementById("contadorProdutos");
     if(count&&!premiumActive) count.textContent="🔒";
   }
@@ -2169,6 +2237,7 @@ window.refreshPremiumAccess=async function(){
     await renderStockControl();
     await loadGoalForm();
     await loadPremiumReports();
+    await loadFinanceiroPremium();
     trackV5("premium_liberado");
   }else{
     const dash=document.getElementById("painel-premium"),dashLink=document.getElementById("premiumDashboardLink"); if(dash)dash.hidden=true;if(dashLink)dashLink.hidden=true;
@@ -2434,6 +2503,133 @@ window.refreshPremiumAccess=async function(){
     if(!premiumProducts.length){el.innerHTML='<div class="v5-empty">Cadastre seu primeiro produto Premium. Ele ficará vinculado à sua conta.</div>';return;}
     el.innerHTML=premiumProducts.map(x=>`<div class="v5-item"><div class="v5-item-top"><div><strong>${esc(x.name)}</strong><small>${x.sku?"SKU: "+esc(x.sku):"Sem SKU"}</small></div><small>${brl(x.sale_price)}</small></div><div class="v5-kpis"><div class="v5-kpi"><span>Custo</span><b>${brl(x.cost)}</b></div><div class="v5-kpi"><span>Venda</span><b>${brl(x.sale_price)}</b></div><div class="v5-kpi"><span>Frete</span><b>${brl(x.shipping)}</b></div></div><div class="v5-item-controls"><button class="v5-mini" onclick="usarProdutoV5('${x.id}')">Usar na calculadora</button><button class="v5-mini danger" onclick="excluirProdutoV5('${x.id}')">Excluir</button></div></div>`).join("");
   }
+
+  /* ===== V6 FINANCEIRO PREMIUM ===== */
+  let tbExpenseRows=[];
+
+  function tbLocalDateISO(d=new Date()){
+    const y=d.getFullYear(),m=String(d.getMonth()+1).padStart(2,'0'),day=String(d.getDate()).padStart(2,'0');
+    return `${y}-${m}-${day}`;
+  }
+
+  function tbFinanceStartDate(){
+    const d=new Date();
+    d.setDate(d.getDate()-29);
+    d.setHours(0,0,0,0);
+    return d;
+  }
+
+  window.saveExpensePremium=async function(){
+    if(!requirePremium())return;
+    const description=(document.getElementById('expenseDescription')?.value||'').trim();
+    const category=(document.getElementById('expenseCategory')?.value||'Outros').trim();
+    const amount=Number(document.getElementById('expenseAmount')?.value||0);
+    const expense_date=document.getElementById('expenseDate')?.value||tbLocalDateISO();
+    const payment_method=(document.getElementById('expensePayment')?.value||'Outro').trim();
+
+    if(!description){toast('Digite a descrição da despesa.');return;}
+    if(!(amount>0)){toast('Digite um valor de despesa maior que zero.');return;}
+
+    const {error}=await premiumClient.from('expenses').insert({
+      user_id:premiumUser.id,description,category,amount,expense_date,payment_method
+    });
+    if(error){console.error('Erro ao salvar despesa:',error);toast('Não foi possível salvar a despesa. Verifique o acesso da tabela expenses.');return;}
+
+    document.getElementById('expenseDescription').value='';
+    document.getElementById('expenseAmount').value='';
+    document.getElementById('expenseDate').value=tbLocalDateISO();
+    toast('Despesa salva na nuvem.');
+    trackV5('financeiro_salvar_despesa');
+    await loadFinanceiroPremium();
+  };
+
+  window.deleteExpensePremium=async function(id){
+    if(!requirePremium())return;
+    if(!confirm('Excluir esta despesa?'))return;
+    const {error}=await premiumClient.from('expenses').delete().eq('id',id).eq('user_id',premiumUser.id);
+    if(error){toast('Não foi possível excluir a despesa.');return;}
+    toast('Despesa excluída.');
+    await loadFinanceiroPremium();
+  };
+
+  window.loadFinanceiroPremium=async function(){
+    if(!premiumActive||!premiumUser||!premiumClient)return;
+
+    const dateEl=document.getElementById('expenseDate');
+    if(dateEl&&!dateEl.value)dateEl.value=tbLocalDateISO();
+
+    const start=tbFinanceStartDate();
+    const startISO=start.toISOString();
+    const startDate=tbLocalDateISO(start);
+
+    const [expenseRes,salesRes]=await Promise.all([
+      premiumClient.from('expenses')
+        .select('id,description,category,amount,expense_date,payment_method,created_at')
+        .eq('user_id',premiumUser.id)
+        .gte('expense_date',startDate)
+        .order('expense_date',{ascending:false})
+        .order('created_at',{ascending:false})
+        .limit(500),
+      premiumClient.from('sales')
+        .select('gross_revenue,net_profit,sold_at')
+        .eq('user_id',premiumUser.id)
+        .gte('sold_at',startISO)
+        .order('sold_at',{ascending:false})
+        .limit(1000)
+    ]);
+
+    if(expenseRes.error){
+      console.error('Erro expenses:',expenseRes.error);
+      const list=document.getElementById('financeExpenseList');
+      if(list)list.innerHTML='<div class="v5-empty">Não foi possível carregar as despesas. Confira Data API e RLS da tabela expenses.</div>';
+      return;
+    }
+
+    tbExpenseRows=expenseRes.data||[];
+    const sales=salesRes.error?[]:(salesRes.data||[]);
+    const revenue=sales.reduce((a,x)=>a+Number(x.gross_revenue||0),0);
+    const salesProfit=sales.reduce((a,x)=>a+Number(x.net_profit||0),0);
+    const expenses=tbExpenseRows.reduce((a,x)=>a+Number(x.amount||0),0);
+    const result=salesProfit-expenses;
+
+    const set=(id,val)=>{const e=document.getElementById(id);if(e)e.textContent=val;};
+    set('financeRevenue',brl(revenue));
+    set('financeSalesProfit',brl(salesProfit));
+    set('financeExpenses',brl(expenses));
+    set('financeResult',brl(result));
+
+    const resultCard=document.getElementById('financeResultCard');
+    if(resultCard){
+      resultCard.classList.remove('result-positive','result-negative');
+      resultCard.classList.add(result>=0?'result-positive':'result-negative');
+    }
+    set('financeResultNote',result>=0?'Operação positiva no período':'Atenção: despesas acima do lucro das vendas');
+
+    const grouped={};
+    tbExpenseRows.forEach(x=>{
+      const k=(x.category||'Outros').trim()||'Outros';
+      grouped[k]=(grouped[k]||0)+Number(x.amount||0);
+    });
+    const cats=Object.entries(grouped).sort((a,b)=>b[1]-a[1]);
+    const max=cats.length?cats[0][1]:0;
+    const catEl=document.getElementById('financeCategories');
+    if(catEl)catEl.innerHTML=cats.length?cats.map(([name,value])=>`
+      <div class="tb-expense-row">
+        <span>${esc(name)}</span>
+        <div class="tb-expense-track"><div class="tb-expense-fill" style="width:${max?Math.max(4,(value/max)*100):0}%"></div></div>
+        <b>${brl(value)}</b>
+      </div>`).join(''):'<div class="v5-empty">Nenhuma despesa no período.</div>';
+
+    const list=document.getElementById('financeExpenseList');
+    if(list)list.innerHTML=tbExpenseRows.length?tbExpenseRows.slice(0,20).map(x=>`
+      <div class="tb-expense-item">
+        <div><strong>${esc(x.description)}</strong><small>${esc(x.category||'Outros')} • ${x.expense_date?new Date(x.expense_date+'T12:00:00').toLocaleDateString('pt-BR'):'-'} • ${esc(x.payment_method||'-')}</small></div>
+        <span class="tb-expense-value">${brl(x.amount)}</span>
+        <button class="tb-expense-delete" type="button" onclick="deleteExpensePremium('${x.id}')">EXCLUIR</button>
+      </div>`).join(''):'<div class="v5-empty">Nenhuma despesa cadastrada nos últimos 30 dias.</div>';
+  };
+
+
   window.renderProdutos=renderProdutos;
   window.addEventListener("load",()=>{renderHistorico();showPremiumState();initPremium();});
 })();
