@@ -1437,7 +1437,7 @@
         <a id="premiumDashboardLink" href="#painel-premium" hidden>📊 DASHBOARD</a>
         <a id="premiumSalesLink" href="#controle-vendas" hidden>💰 VENDAS</a>
         <a id="premiumStockLink" href="#controle-estoque" hidden>📦 ESTOQUE</a>
-        <a id="premiumGoalsLink" href="#controle-metas" hidden>🎯 METAS</a>
+        <a id="premiumGoalsLink" href="#controle-metas" onclick="setTimeout(loadGoalForm,0)" hidden>🎯 METAS</a>
         <a id="premiumProductsLink" href="#meus-produtos" hidden>MEUS PRODUTOS</a>
         <button type="button" onclick="refreshPremiumAccess()">ATUALIZAR ACESSO</button>
         <button type="button" class="danger" onclick="theBestPremiumLogout()">SAIR</button>
@@ -1549,6 +1549,36 @@
     <div class="tb-sales-actions"><button class="tb-sales-btn" type="button" onclick="saveStockMovement()">+ SALVAR MOVIMENTAÇÃO</button><button class="tb-sales-btn ghost" type="button" onclick="renderStockControl()">↻ ATUALIZAR ESTOQUE</button></div>
     <div class="tb-stock-kpis"><div class="tb-stock-kpi"><span>Unidades em estoque</span><b id="stockTotalUnits">0</b></div><div class="tb-stock-kpi"><span>Valor em estoque</span><b id="stockTotalValue">R$ 0,00</b></div><div class="tb-stock-kpi"><span>Produtos em atenção</span><b id="stockLowCount">0</b></div></div>
     <div class="tb-sales-history"><h3>Posição atual do estoque</h3><div id="tbStockControlList" class="tb-stock-list"><div class="v5-empty">Nenhum estoque cadastrado ainda.</div></div></div>
+  </div>
+</section>
+
+
+<section id="controle-metas" class="tb-goals-section" hidden aria-label="Metas mensais Premium">
+  <div class="tb-goals-shell">
+    <div class="tb-sales-head">
+      <div><h2>🎯 Controle de <span>Metas</span></h2><p>Defina suas metas mensais e acompanhe o progresso automaticamente pelo Dashboard.</p></div>
+      <span class="tb-sales-badge">PREMIUM • NUVEM</span>
+    </div>
+    <div class="tb-goals-grid">
+      <div class="tb-goals-field"><label>Mês</label><select id="goalMonth"></select></div>
+      <div class="tb-goals-field"><label>Ano</label><input id="goalYear" type="number" min="2024" max="2100"></div>
+      <div class="tb-goals-field"><label>Meta de faturamento (R$)</label><input id="goalRevenue" type="number" min="0" step="0.01" placeholder="0,00"></div>
+      <div class="tb-goals-field"><label>Meta de lucro (R$)</label><input id="goalProfit" type="number" min="0" step="0.01" placeholder="0,00"></div>
+      <div class="tb-goals-field"><label>Meta de vendas</label><input id="goalSales" type="number" min="0" step="1" placeholder="0"></div>
+    </div>
+    <div class="tb-sales-actions">
+      <button class="tb-sales-btn" type="button" onclick="saveMonthlyGoal()">+ SALVAR META</button>
+      <button class="tb-sales-btn ghost" type="button" onclick="loadGoalForm()">↻ ATUALIZAR META</button>
+    </div>
+    <div class="tb-goals-preview">
+      <div class="tb-goal-preview-card"><span>Faturamento atual</span><b id="goalPreviewRevenue">R$ 0,00</b><small id="goalProgressRevenue">0% alcançado</small></div>
+      <div class="tb-goal-preview-card"><span>Lucro atual</span><b id="goalPreviewProfit">R$ 0,00</b><small id="goalProgressProfit">0% alcançado</small></div>
+      <div class="tb-goal-preview-card"><span>Vendas atuais</span><b id="goalPreviewSales">0</b><small id="goalProgressSales">0% alcançado</small></div>
+    </div>
+    <div class="tb-goals-current">
+      <h3 style="font-size:14px;margin-bottom:10px;">Meta cadastrada para o período</h3>
+      <div id="tbGoalCurrent"><div class="v5-empty">Nenhuma meta cadastrada para este período.</div></div>
+    </div>
   </div>
 </section>
 
@@ -2075,6 +2105,8 @@ window.refreshPremiumAccess=async function(){
     await loadMarketplaceDashboard();
     await renderProdutos();
     await renderSalesHistory();
+    await renderStockControl();
+    await loadGoalForm();
     trackV5("premium_liberado");
   }else{
     const dash=document.getElementById("painel-premium"),dashLink=document.getElementById("premiumDashboardLink"); if(dash)dash.hidden=true;if(dashLink)dashLink.hidden=true;
