@@ -1894,7 +1894,7 @@ body.tb-user-logged-in #calculadora{
         </div>
       </div>
 
-      <div class="tb-app-login-version">THE BEST DIGITAL • PROGRAMA PREMIUM • V8.0.1</div>
+      <div class="tb-app-login-version">THE BEST DIGITAL • PROGRAMA PREMIUM • V8.0.2</div>
     </section>
 
     <section class="tb-app-login-panel">
@@ -3569,7 +3569,18 @@ window.refreshPremiumAccess=async function(){
   };
   window.limparFormularioProduto=function(){ ["v5ProdutoNome","v5ProdutoSku","v5ProdutoCusto","v5ProdutoVenda","v5ProdutoFrete"].forEach(id=>{const e=document.getElementById(id);if(e)e.value="";}); };
   window.excluirProdutoV5=async function(id){if(!requirePremium())return;const {error}=await premiumClient.from("saved_products").delete().eq("id",id).eq("user_id",premiumUser.id);if(!error){await renderProdutos();toast("Produto excluído.");}};
-  window.usarProdutoV5=function(id){ if(!requirePremium())return; const x=premiumProducts.find(i=>String(i.id)===String(id));if(!x)return; document.getElementById("produto").value=x.name;document.getElementById("custo").value=x.cost||"";document.getElementById("venda").value=x.sale_price||"";document.getElementById("frete").value=x.shipping||"";document.getElementById("calculadora").scrollIntoView({behavior:"smooth"});toast("Produto carregado na calculadora."); };
+  window.usarProdutoV5=function(id){ if(!requirePremium())return; const x=premiumProducts.find(i=>String(i.id)===String(id));if(!x)return; document.getElementById("produto").value=x.name;document.getElementById("custo").value=x.cost||"";document.getElementById("venda").value=x.sale_price||"";document.getElementById("frete").value=x.shipping||"";document.getElementById("calculadora").scrollIntoView({behavior:"smooth"});toast("Produto carregado na calculadora."); 
+    /* V8.0.2: depois de carregar o produto, abre a Calculadora automaticamente */
+    if(typeof tbShowPremiumModule === "function"){
+      tbShowPremiumModule("calculadora",{scroll:true});
+    }else{
+      const calc=document.getElementById("calculadora");
+      if(calc){
+        calc.scrollIntoView({behavior:"smooth",block:"start"});
+      }
+    }
+
+  };
 
   function csvCell(value){
     const v=String(value??"").replace(/"/g,'""');
