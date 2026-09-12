@@ -1866,6 +1866,35 @@ body.tb-user-logged-in #calculadora{
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="premium-config.js"></script>
 
+
+<style id="tb-v811-fixes">
+/* V8.1.1.1: correções da vitrine Premium */
+@media (min-width: 769px){
+  .tb-mobile-menu-toggle,
+  .tb-menu-toggle,
+  .mobile-menu-toggle,
+  .menu-toggle,
+  #tbMobileMenuToggle,
+  #mobileMenuToggle,
+  button[aria-label="Menu"].tb-mobile-only {
+    display:none !important;
+  }
+}
+.tb-v811-premium-badge{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:8px 14px;
+  border:1px solid rgba(56,189,248,.38);
+  border-radius:999px;
+  color:#7dd3fc;
+  font-weight:800;
+  font-size:.82rem;
+  letter-spacing:.04em;
+  background:rgba(14,165,233,.07);
+}
+</style>
+
 </head>
 
 <body>
@@ -1894,7 +1923,7 @@ body.tb-user-logged-in #calculadora{
         </div>
       </div>
 
-      <div class="tb-app-login-version">THE BEST DIGITAL • PROGRAMA PREMIUM • V8.1</div>
+      <div class="tb-app-login-version">THE BEST DIGITAL • PROGRAMA PREMIUM • V8.1.1</div>
     </section>
 
     <section class="tb-app-login-panel">
@@ -2201,25 +2230,25 @@ body.tb-user-logged-in #calculadora{
 <!-- Área preparada para o vídeo de apresentação. Quando o vídeo estiver pronto, basta ativar a classe "active" e inserir o arquivo/URL. -->
 <section class="kit-video-slot active" id="apresentacao-kit" aria-label="Apresentação do THE BEST MARKETPLACE PREMIUM">
   <div class="kit-video-shell">
-    <h2>Veja o que você recebe no THE BEST KIT</h2>
-    <p>Apresentação completa da planilha, dashboard, checklist, guias e bônus.</p>
+    <h2>BÔNUS: Kit Marketplace incluso no Premium</h2>
+    <p>Além do acesso ao sistema, assinantes recebem materiais digitais extras para apoiar a operação.</p>
     <video controls playsinline preload="metadata" poster="video-poster.jpg" aria-label="Vídeo de apresentação do THE BEST MARKETPLACE PREMIUM">
       <source src="video-the-best-kit.mp4" type="video/mp4">
       Seu navegador não suporta reprodução de vídeo.
     </video>
-    <a href="#kit" class="offer-button" style="display:block;max-width:420px;margin:20px auto 0;text-align:center;">QUERO MEU KIT</a>
+    <a href="#kit" class="offer-button" style="display:block;max-width:420px;margin:20px auto 0;text-align:center;">ASSINAR PREMIUM</a>
   </div>
 </section>
 
 <section class="dashboard-section" id="dashboard">
   <div class="section-title">
-    <h2>📊 Dashboard em estilo Power BI</h2>
-    <p>Veja uma prévia visual do painel que acompanha a planilha e facilita a leitura dos principais números da operação.</p>
+    <h2>📊 Dashboard profissional de gestão</h2>
+    <p>Acompanhe os principais números da sua operação em um painel profissional, direto no sistema.</p>
   </div>
   <div class="dashboard-wrap">
     <div class="dashboard-copy">
       <h2>Transforme dados em <span>decisões mais rápidas</span></h2>
-      <p>O dashboard da planilha reúne os indicadores mais importantes em uma tela, com visual inspirado em painéis profissionais.</p>
+      <p>O dashboard reúne os indicadores mais importantes da operação em uma única tela, com visual profissional e leitura rápida.</p>
       <ul>
         <li>Faturamento e lucro líquido</li>
         <li>Margem real e unidades vendidas</li>
@@ -2231,7 +2260,7 @@ body.tb-user-logged-in #calculadora{
     </div>
     <div class="dashboard-image-card">
       <img src="dashboard_powerbi_preview.png" alt="Dashboard de vendas e precificação para marketplace do THE BEST MARKETPLACE PREMIUM">
-      <small>Exemplo visual do dashboard incluído na planilha.</small>
+      <small>Exemplo visual do dashboard disponível no THE BEST MARKETPLACE PREMIUM.</small>
     </div>
   </div>
 </section>
@@ -2326,10 +2355,10 @@ body.tb-user-logged-in #calculadora{
       <div class="client-point">☁️ Produtos salvos na nuvem</div>
       <div class="client-point">🔁 Reutilização na calculadora</div>
       <div class="client-point">📱 Acesso em outros aparelhos</div>
-      <div class="client-point">📚 Materiais do Kit na Eduzz</div>
+      <div class="client-point">📚 Bônus Kit Marketplace na Eduzz</div>
     </div>
     <div class="v5-actions">
-      <a class="v5-btn" href="https://my.eduzz.com/" target="_blank" rel="noopener" onclick="trackV5('area_cliente_eduzz')">MEUS MATERIAIS NA EDUZZ</a>
+      <a class="v5-btn" href="https://my.eduzz.com/" target="_blank" rel="noopener" onclick="trackV5('area_cliente_eduzz')">ACESSAR BÔNUS NA EDUZZ</a>
       <a class="v5-btn ghost" href="https://sun.eduzz.com/89AXQ8DG0D" target="_blank" rel="noopener" onclick="trackV5('area_cliente_comprar')">AINDA NÃO SOU CLIENTE</a>
     </div>
     <div class="client-note">O app não armazena senha ou dados de pagamento. A confirmação Premium é feita pelo e-mail de compra e pelo servidor de acesso.</div>
@@ -2824,7 +2853,7 @@ body.tb-user-logged-in #calculadora{
     </p>
 
     <div class="price">
-      R$ 19,90/mês <small>pagamento único</small>
+      R$ 19,90/mês <small>assinatura mensal</small>
     </div>
 
    <a href="https://sun.eduzz.com/89AXQ8DG0D"
@@ -3576,7 +3605,7 @@ window.refreshPremiumAccess=async function(){
   window.limparFormularioProduto=function(){ ["v5ProdutoNome","v5ProdutoSku","v5ProdutoCusto","v5ProdutoVenda","v5ProdutoFrete"].forEach(id=>{const e=document.getElementById(id);if(e)e.value="";}); };
   window.excluirProdutoV5=async function(id){if(!requirePremium())return;const {error}=await premiumClient.from("saved_products").delete().eq("id",id).eq("user_id",premiumUser.id);if(!error){await renderProdutos();toast("Produto excluído.");}};
   window.usarProdutoV5=function(id){ if(!requirePremium())return; const x=premiumProducts.find(i=>String(i.id)===String(id));if(!x)return; document.getElementById("produto").value=x.name;document.getElementById("custo").value=x.cost||"";document.getElementById("venda").value=x.sale_price||"";document.getElementById("frete").value=x.shipping||"";document.getElementById("calculadora").scrollIntoView({behavior:"smooth"});toast("Produto carregado na calculadora."); 
-    /* V8.1: depois de carregar o produto, abre a Calculadora automaticamente */
+    /* V8.1.1: depois de carregar o produto, abre a Calculadora automaticamente */
     if(typeof tbShowPremiumModule === "function"){
       tbShowPremiumModule("calculadora",{scroll:true});
     }else{
@@ -4607,6 +4636,19 @@ window.refreshPremiumAccess=async function(){
   window.addEventListener("load",()=>{renderHistorico();showPremiumState();initPremium();});
 })();
 
+</script>
+
+
+<script id="tb-v811-menu-fix">
+document.addEventListener('DOMContentLoaded', function(){
+  if (window.innerWidth > 768) {
+    document.querySelectorAll('button').forEach(function(b){
+      if ((b.textContent || '').trim().toUpperCase() === 'MENU' && b.getBoundingClientRect().top < 40) {
+        b.style.display = 'none';
+      }
+    });
+  }
+});
 </script>
 
 </body>
