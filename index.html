@@ -1146,6 +1146,15 @@
 @media(max-width:900px){.tb-proj-summary{grid-template-columns:repeat(2,1fr)}.tb-proj-periods{grid-template-columns:1fr}}
 @media(max-width:520px){.tb-proj-summary{grid-template-columns:1fr}}
 
+/* ===== V6.8: ALERTAS FINANCEIROS INTELIGENTES ===== */
+.tb-fin-alerts{display:grid;gap:8px;margin-top:12px}
+.tb-fin-alert{display:flex;align-items:flex-start;gap:10px;padding:11px 12px;border-radius:13px;border:1px solid rgba(255,255,255,.07);background:#08192d}
+.tb-fin-alert-ico{font-size:17px;line-height:1.1}.tb-fin-alert-copy{min-width:0;flex:1}.tb-fin-alert-copy b{display:block;font-size:11px}.tb-fin-alert-copy span{display:block;margin-top:2px;color:#91a9c4;font-size:10px;line-height:1.45}
+.tb-fin-alert.danger{background:rgba(255,83,101,.08);border-color:rgba(255,83,101,.25)}.tb-fin-alert.danger b{color:#ffadb6}
+.tb-fin-alert.warning{background:rgba(255,193,74,.08);border-color:rgba(255,193,74,.22)}.tb-fin-alert.warning b{color:#ffd17e}
+.tb-fin-alert.info{background:rgba(0,153,255,.08);border-color:rgba(69,204,255,.20)}.tb-fin-alert.info b{color:#8ee8ff}
+.tb-fin-alert.success{background:rgba(45,211,139,.08);border-color:rgba(45,211,139,.20)}.tb-fin-alert.success b{color:#78efb7}
+
 </style>
 
   <!-- THE BEST V6 Premium -->
@@ -1745,6 +1754,9 @@
         <div class="tb-proj-kpi out"><span>A pagar pendente</span><b id="projPendingOut">R$ 0,00</b><small>Todas as contas pendentes</small></div>
         <div class="tb-proj-kpi projected"><span>Saldo projetado total</span><b id="projTotalBalance">R$ 0,00</b><small>Caixa + receber − pagar</small></div>
       </div>
+
+
+      <div id="financeSmartAlerts" class="tb-fin-alerts" aria-live="polite"></div>
 
       <div class="tb-proj-periods">
         <div class="tb-proj-period">
@@ -3229,6 +3241,39 @@ window.refreshPremiumAccess=async function(){
       const val=id==='projTotalBalance'?projectedTotal:id==='proj7Balance'?p7.balance:id==='proj30Balance'?p30.balance:p90.balance;
       el.style.color=val>=0?'#55e6a8':'#ff8f9b';
     });
+
+
+
+    /* V6.8: Alertas financeiros inteligentes */
+    const alertBox=document.getElementById('financeSmartAlerts');
+    if(alertBox){
+      const overdue=pendingAccounts.filter(a=>{
+        if(!a.due_date)return false;
+        const due=new Date(a.due_date+'T12:00:00');
+        return !Number.isNaN(due.getTime()) && due<today;
+      });
+      const overdueIn=overdue.filter(a=>a.type==='receivable').reduce((s,a)=>s+Number(a.amount||0),0);
+      const overdueOut=overdue.filter(a=>a.type==='payable').reduce((s,a)=>s+Number(a.amount||0),0);
+      const due7=pendingAccounts.filter(a=>{
+        if(!a.due_date)return false;
+        const due=new Date(a.due_date+'T12:00:00');
+        const end=new Date(today); end.setDate(end.getDate()+7);
+        return !Number.isNaN(due.getTime()) && due>=today && due<=end;
+      });
+      const due7Out=due7.filter(a=>a.type==='payable').reduce((s,a)=>s+Number(a.amount||0),0);
+      const alerts=[];
+      if(overdueOut>0)alerts.push({type:'danger',ico:'🚨',title:'Contas a pagar vencidas',text:`Você tem ${brl(overdueOut)} em contas vencidas. Regularize para manter o caixa sob controle.`});
+      if(overdueIn>0)alerts.push({type:'warning',ico:'⚠️',title:'Valores a receber vencidos',text:`Há ${brl(overdueIn)} em recebimentos vencidos. Vale conferir a cobrança.`});
+      if(due7Out>0)alerts.push({type:'warning',ico:'⏰',title:'Pagamentos nos próximos 7 dias',text:`${brl(due7Out)} vencem nos próximos 7 dias.`});
+      if(p30.incoming>0)alerts.push({type:'info',ico:'💰',title:'Entradas previstas nos próximos 30 dias',text:`Você tem ${brl(p30.incoming)} programados para receber.`});
+      const negativePeriods=[['7 dias',p7.balance],['30 dias',p30.balance],['90 dias',p90.balance]].filter(([,v])=>v<0);
+      if(projectedTotal<0 || negativePeriods.length){
+        const first=negativePeriods[0];
+        alerts.unshift({type:'danger',ico:'📉',title:'Atenção ao saldo projetado',text:first?`A projeção fica negativa em até ${first[0]}: ${brl(first[1])}.`:`O saldo projetado total está negativo: ${brl(projectedTotal)}.`});
+      }
+      if(!alerts.length)alerts.push({type:'success',ico:'✅',title:'Financeiro sem alertas críticos',text:'Nenhum vencimento ou saldo negativo exige atenção neste momento.'});
+      alertBox.innerHTML=alerts.map(a=>`<div class="tb-fin-alert ${a.type}"><div class="tb-fin-alert-ico">${a.ico}</div><div class="tb-fin-alert-copy"><b>${a.title}</b><span>${a.text}</span></div></div>`).join('');
+    }
 
     const chart=document.getElementById('cashflowChart');
     if(chart){
