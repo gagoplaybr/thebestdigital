@@ -1366,6 +1366,30 @@
       <h3>✅ Cliente identificado</h3>
       <p id="premiumAccountText">Verificando sua compra...</p>
       <div id="premiumAccessStatus" class="premium-status">Verificando acesso</div>
+      <div id="premiumPurchaseInfo" hidden
+     style="margin-top:12px;padding:14px;border:1px solid rgba(56,189,248,.28);border-radius:14px;background:rgba(2,18,38,.45);">
+  
+  <strong style="display:block;margin-bottom:10px;">
+    📋 Status da compra
+  </strong>
+
+  <div style="display:grid;gap:6px;">
+    <div>
+      <strong>Acesso Premium:</strong>
+      <span id="premiumInfoAccess">Verificando...</span>
+    </div>
+
+    <div>
+      <strong>Status da compra:</strong>
+      <span id="premiumInfoStatus">Verificando...</span>
+    </div>
+
+    <div>
+      <strong>Produto:</strong>
+      <span id="premiumInfoProduct">Verificando...</span>
+    </div>
+  </div>
+</div>
       <div class="premium-account-actions">
         <a id="premiumProductsLink" href="#meus-produtos" hidden>MEUS PRODUTOS</a>
         <button type="button" onclick="refreshPremiumAccess()">ATUALIZAR ACESSO</button>
@@ -1816,24 +1840,99 @@ if ("serviceWorker" in navigator) {
     const login=document.getElementById("premiumLoginBox"),acc=document.getElementById("premiumAccountBox"); if(login)login.hidden=false;if(acc)acc.hidden=true;
     setPremiumStatus("Aguardando login","");
   };
-  window.refreshPremiumAccess=async function(){
-    if(!premiumClient){showPremiumState();return;}
-    const {data:{user}}=await premiumClient.auth.getUser(); premiumUser=user||null;
-    const login=document.getElementById("premiumLoginBox"),acc=document.getElementById("premiumAccountBox"),txt=document.getElementById("premiumAccountText"),st=document.getElementById("premiumAccessStatus");
-    if(!premiumUser){premiumActive=false;showPremiumState();if(login)login.hidden=false;if(acc)acc.hidden=true;renderProdutos();return;}
-    if(login)login.hidden=true;if(acc)acc.hidden=false;if(txt)txt.textContent=premiumUser.email;
-    if(st){st.textContent="Verificando compra...";st.className="premium-status";}
-    const {data,error}=await premiumClient.from("customer_access")
-      .select("premium,purchase_status,product_name")
-      .eq("email",premiumUser.email.toLowerCase())
-      .eq("premium",true)
-      .eq("purchase_status","approved")
-      .maybeSingle();
-    premiumActive=!!data&&!error;
-    if(st){st.textContent=premiumActive?"✅ Acesso Premium liberado":"🔒 Acesso Premium ainda não liberado para este e-mail";st.className="premium-status "+(premiumActive?"ok":"no");}
+window.refreshPremiumAccess=async function(){
+  if(!premiumClient){showPremiumState();return;}
+
+  const {data:{user}}=await premiumClient.auth.getUser();
+  premiumUser=user||null;
+
+  const login=document.getElementById("premiumLoginBox");
+  const acc=document.getElementById("premiumAccountBox");
+  const txt=document.getElementById("premiumAccountText");
+  const st=document.getElementById("premiumAccessStatus");
+
+  const infoBox=document.getElementById("premiumPurchaseInfo");
+  const infoAccess=document.getElementById("premiumInfoAccess");
+  const infoStatus=document.getElementById("premiumInfoStatus");
+  const infoProduct=document.getElementById("premiumInfoProduct");
+
+  if(!premiumUser){
+    premiumActive=false;
     showPremiumState();
-    if(premiumActive){await renderProdutos();trackV5("premium_liberado");}else{premiumProducts=[];renderProdutos();}
-  };
+
+    if(login)login.hidden=false;
+    if(acc)acc.hidden=true;
+    if(infoBox)infoBox.hidden=true;
+
+    renderProdutos();
+    return;
+  }
+
+  if(login)login.hidden=true;
+  if(acc)acc.hidden=false;
+  if(txt)txt.textContent=premiumUser.email;
+
+  if(st){
+    st.textContent="Verificando compra...";
+    st.className="premium-status";
+  }
+
+  const {data,error}=await premiumClient
+    .from("customer_access")
+    .select("premium,purchase_status,product_name")
+    .eq("email",premiumUser.email.toLowerCase())
+    .maybeSingle();
+
+  premiumActive=
+    !!data &&
+    !error &&
+    data.premium===true &&
+    data.purchase_status==="approved";
+
+  if(st){
+    st.textContent=premiumActive
+      ?"✅ Acesso Premium liberado"
+      :"🔒 Acesso Premium ainda não liberado para este e-mail";
+
+    st.className="premium-status "+(premiumActive?"ok":"no");
+  }
+
+  if(infoBox){
+    infoBox.hidden=false;
+  }
+
+  if(infoAccess){
+    infoAccess.textContent=premiumActive?"ATIVO":"INATIVO";
+  }
+
+  if(infoStatus){
+    const statusMap={
+      approved:"APROVADA",
+      pending:"PENDENTE",
+      canceled:"CANCELADA",
+      refunded:"REEMBOLSADA",
+      chargeback:"CHARGEBACK"
+    };
+
+    infoStatus.textContent=data
+      ? (statusMap[data.purchase_status] || String(data.purchase_status||"SEM STATUS").toUpperCase())
+      : "NENHUMA COMPRA ENCONTRADA";
+  }
+
+  if(infoProduct){
+    infoProduct.textContent=data?.product_name || "THE BEST KIT MARKETPLACE";
+  }
+
+  showPremiumState();
+
+  if(premiumActive){
+    await renderProdutos();
+    trackV5("premium_liberado");
+  }else{
+    premiumProducts=[];
+    renderProdutos();
+  }
+};
   function requirePremium(){
     if(!premiumActive || !premiumUser || !premiumClient){toast("Recurso exclusivo para clientes do THE BEST KIT.");document.getElementById("area-cliente")?.scrollIntoView({behavior:"smooth"});return false;} return true;
   }
