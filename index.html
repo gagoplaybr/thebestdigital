@@ -1868,7 +1868,7 @@ body.tb-user-logged-in #calculadora{
 
 
 <style id="tb-v811-fixes">
-/* V8.1.5.1: correções da vitrine Premium */
+/* V8.1.6.1: correções da vitrine Premium */
 @media (min-width: 769px){
   .tb-mobile-menu-toggle,
   .tb-menu-toggle,
@@ -1986,7 +1986,7 @@ body.tb-user-logged-in #calculadora{
         </div>
       </div>
 
-      <div class="tb-app-login-version">THE BEST DIGITAL • PROGRAMA PREMIUM • V8.1.5</div>
+      <div class="tb-app-login-version">THE BEST DIGITAL • PROGRAMA PREMIUM • V8.1.6</div>
     </section>
 
     <section class="tb-app-login-panel">
@@ -2291,12 +2291,12 @@ body.tb-user-logged-in #calculadora{
 
 
 <!-- Área preparada para o vídeo de apresentação. Quando o vídeo estiver pronto, basta ativar a classe "active" e inserir o arquivo/URL. -->
-<section class="kit-video-slot active" id="apresentacao-kit" aria-label="Apresentação do THE BEST MARKETPLACE PREMIUM">
+<section class="kit-video-slot active" id="apresentacao-kit" aria-label="Demonstração do THE BEST MARKETPLACE PREMIUM">
   <div class="kit-video-shell">
-    <h2>BÔNUS: Kit Marketplace incluso no Premium</h2>
-    <p>Além do acesso ao sistema, assinantes recebem materiais digitais extras para apoiar a operação.</p>
-    <video controls playsinline preload="metadata" poster="video-poster.jpg" aria-label="Vídeo de apresentação do THE BEST MARKETPLACE PREMIUM">
-      <source src="video-the-best-kit.mp4" type="video/mp4">
+    <h2>🎬 VEJA O THE BEST MARKETPLACE PREMIUM EM AÇÃO</h2>
+    <p>Conheça o sistema por dentro: login, dashboard, calculadora, vendas, estoque, metas, relatórios, financeiro, calendário e muito mais.</p>
+    <video controls playsinline preload="metadata" poster="the-best-marketplace-premium-poster.png" aria-label="Demonstração do THE BEST MARKETPLACE PREMIUM em Full HD">
+      <source src="the-best-marketplace-premium-demo.mp4" type="video/mp4">
       Seu navegador não suporta reprodução de vídeo.
     </video>
     <a href="#kit" class="offer-button" style="display:block;max-width:420px;margin:20px auto 0;text-align:center;">ASSINAR PREMIUM</a>
@@ -2319,7 +2319,7 @@ body.tb-user-logged-in #calculadora{
         <li>Valor em estoque e alertas</li>
         <li>Meta de lucro e vendas necessárias</li>
       </ul>
-      <div class="dashboard-note">* Painel criado dentro da planilha Excel, com visual inspirado no Power BI. Os dados são atualizados conforme o usuário preenche as abas do kit.</div>
+      <div class="dashboard-note">* Painel integrado ao THE BEST MARKETPLACE PREMIUM. Os indicadores são atualizados conforme os registros realizados na plataforma.</div>
     </div>
     <div class="dashboard-image-card">
       <img src="dashboard_powerbi_preview.png" alt="Dashboard de vendas e precificação para marketplace do THE BEST MARKETPLACE PREMIUM">
@@ -3665,7 +3665,7 @@ window.refreshPremiumAccess=async function(){
   window.limparFormularioProduto=function(){ ["v5ProdutoNome","v5ProdutoSku","v5ProdutoCusto","v5ProdutoVenda","v5ProdutoFrete"].forEach(id=>{const e=document.getElementById(id);if(e)e.value="";}); };
   window.excluirProdutoV5=async function(id){if(!requirePremium())return;const {error}=await premiumClient.from("saved_products").delete().eq("id",id).eq("user_id",premiumUser.id);if(!error){await renderProdutos();toast("Produto excluído.");}};
   window.usarProdutoV5=function(id){ if(!requirePremium())return; const x=premiumProducts.find(i=>String(i.id)===String(id));if(!x)return; document.getElementById("produto").value=x.name;document.getElementById("custo").value=x.cost||"";document.getElementById("venda").value=x.sale_price||"";document.getElementById("frete").value=x.shipping||"";document.getElementById("calculadora").scrollIntoView({behavior:"smooth"});toast("Produto carregado na calculadora."); 
-    /* V8.1.5: depois de carregar o produto, abre a Calculadora automaticamente */
+    /* V8.1.6: depois de carregar o produto, abre a Calculadora automaticamente */
     if(typeof tbShowPremiumModule === "function"){
       tbShowPremiumModule("calculadora",{scroll:true});
     }else{
