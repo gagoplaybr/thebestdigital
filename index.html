@@ -1036,6 +1036,10 @@
 @media(max-width:900px){.tb-sales-grid{grid-template-columns:repeat(2,1fr)}.tb-sales-summary{grid-template-columns:repeat(2,1fr)}.tb-sale-row{grid-template-columns:1fr 1fr}.tb-sale-main{grid-column:1/-1}}
 @media(max-width:560px){.tb-sales-section{padding:14px 14px 90px}.tb-sales-shell{padding:15px}.tb-sales-head{flex-direction:column}.tb-sales-grid{grid-template-columns:1fr}.tb-sales-field.span2,.tb-sales-field.full{grid-column:auto}.tb-sales-summary{grid-template-columns:1fr 1fr}.tb-sale-row{grid-template-columns:1fr 1fr}}
 
+
+/* ===== V3: CONTROLE DE ESTOQUE ===== */
+.tb-stock-section{max-width:1360px;margin:0 auto;padding:18px 22px 64px}.tb-stock-section[hidden]{display:none!important}.tb-stock-shell{background:linear-gradient(145deg,#0b1f38,#08182c);border:1px solid rgba(70,190,255,.20);border-radius:24px;padding:22px;box-shadow:0 22px 70px rgba(0,0,0,.22)}.tb-stock-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}.tb-stock-field.span2{grid-column:span 2}.tb-stock-field label{display:block;color:#9fb7d2;font-size:10px;font-weight:900;margin:0 0 5px;text-transform:uppercase}.tb-stock-field input,.tb-stock-field select{width:100%;border:1px solid rgba(120,190,255,.16);background:#07182b;color:#fff;border-radius:11px;padding:12px;outline:none;font:inherit}.tb-stock-kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:14px}.tb-stock-kpi{background:#08192d;border:1px solid rgba(255,255,255,.06);border-radius:13px;padding:12px}.tb-stock-kpi span{display:block;color:#7894b4;font-size:9px;text-transform:uppercase;font-weight:900}.tb-stock-kpi b{display:block;font-size:16px;margin-top:4px}.tb-stock-list{display:grid;gap:8px;margin-top:12px}.tb-stock-row{display:grid;grid-template-columns:1.5fr .7fr .7fr .7fr .9fr;gap:10px;align-items:center;padding:12px;border-radius:13px;background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.065)}.tb-stock-row small{display:block;color:#7f99b8;font-size:10px}.tb-stock-cell span{display:block;color:#7894b4;font-size:9px;text-transform:uppercase}.tb-stock-cell b{font-size:11px}.tb-stock-warn{color:#ffd178!important}@media(max-width:900px){.tb-stock-grid{grid-template-columns:repeat(2,1fr)}.tb-stock-row{grid-template-columns:1fr 1fr}.tb-stock-main{grid-column:1/-1}}@media(max-width:560px){.tb-stock-section{padding:14px 14px 90px}.tb-stock-shell{padding:15px}.tb-stock-grid,.tb-stock-kpis{grid-template-columns:1fr}.tb-stock-field.span2{grid-column:auto}}
+
 </style>
 
   <!-- THE BEST V6 Premium -->
@@ -1428,6 +1432,7 @@
       <div class="premium-account-actions">
         <a id="premiumDashboardLink" href="#painel-premium" hidden>📊 DASHBOARD</a>
         <a id="premiumSalesLink" href="#controle-vendas" hidden>💰 VENDAS</a>
+        <a id="premiumStockLink" href="#controle-estoque" hidden>📦 ESTOQUE</a>
         <a id="premiumProductsLink" href="#meus-produtos" hidden>MEUS PRODUTOS</a>
         <button type="button" onclick="refreshPremiumAccess()">ATUALIZAR ACESSO</button>
         <button type="button" class="danger" onclick="theBestPremiumLogout()">SAIR</button>
@@ -1520,6 +1525,25 @@
       <h3>Últimas vendas</h3>
       <div id="tbSalesHistory" class="tb-sales-list"><div class="v5-empty">Nenhuma venda registrada ainda.</div></div>
     </div>
+  </div>
+</section>
+
+
+<section id="controle-estoque" class="tb-stock-section" hidden aria-label="Controle de estoque Premium">
+  <div class="tb-stock-shell">
+    <div class="tb-sales-head"><div><h2>📦 Controle de <span>Estoque</span></h2><p>Cadastre o saldo inicial, entradas e ajustes. As vendas fazem a baixa automática.</p></div><span class="tb-sales-badge">PREMIUM • NUVEM</span></div>
+    <div class="tb-stock-grid">
+      <div class="tb-stock-field span2"><label>Produto cadastrado</label><select id="stockProduct" onchange="stockProductChanged()"><option value="">Selecione um produto</option></select></div>
+      <div class="tb-stock-field"><label>SKU</label><input id="stockSku" readonly placeholder="SKU"></div>
+      <div class="tb-stock-field"><label>Estoque mínimo</label><input id="stockMinimum" type="number" min="0" step="1" value="0"></div>
+      <div class="tb-stock-field"><label>Quantidade da movimentação</label><input id="stockQty" type="number" min="0" step="1" value="1"></div>
+      <div class="tb-stock-field"><label>Custo unitário (R$)</label><input id="stockCost" type="number" min="0" step="0.01" value="0"></div>
+      <div class="tb-stock-field"><label>Tipo</label><select id="stockType"><option value="entry">Entrada</option><option value="adjustment">Definir saldo atual</option><option value="return">Devolução</option></select></div>
+      <div class="tb-stock-field"><label>Observação</label><input id="stockNote" placeholder="Ex.: Compra fornecedor"></div>
+    </div>
+    <div class="tb-sales-actions"><button class="tb-sales-btn" type="button" onclick="saveStockMovement()">+ SALVAR MOVIMENTAÇÃO</button><button class="tb-sales-btn ghost" type="button" onclick="renderStockControl()">↻ ATUALIZAR ESTOQUE</button></div>
+    <div class="tb-stock-kpis"><div class="tb-stock-kpi"><span>Unidades em estoque</span><b id="stockTotalUnits">0</b></div><div class="tb-stock-kpi"><span>Valor em estoque</span><b id="stockTotalValue">R$ 0,00</b></div><div class="tb-stock-kpi"><span>Produtos em atenção</span><b id="stockLowCount">0</b></div></div>
+    <div class="tb-sales-history"><h3>Posição atual do estoque</h3><div id="tbStockControlList" class="tb-stock-list"><div class="v5-empty">Nenhum estoque cadastrado ainda.</div></div></div>
   </div>
 </section>
 
@@ -1887,10 +1911,14 @@ if ("serviceWorker" in navigator) {
     const productsLink=document.getElementById("premiumProductsLink");
     const salesSection=document.getElementById("controle-vendas");
     const salesLink=document.getElementById("premiumSalesLink");
+    const stockSection=document.getElementById("controle-estoque");
+    const stockLink=document.getElementById("premiumStockLink");
     if(productsSection) productsSection.hidden=!premiumActive;
     if(productsLink) productsLink.hidden=!premiumActive;
     if(salesSection) salesSection.hidden=!premiumActive;
     if(salesLink) salesLink.hidden=!premiumActive;
+    if(stockSection) stockSection.hidden=!premiumActive;
+    if(stockLink) stockLink.hidden=!premiumActive;
     const count=document.getElementById("contadorProdutos");
     if(count&&!premiumActive) count.textContent="🔒";
   }
@@ -2166,6 +2194,10 @@ window.refreshPremiumAccess=async function(){
     el.innerHTML=rows.length?rows.map(x=>`<div class="tb-sale-row"><div class="tb-sale-main"><strong>${esc(x.product_name||'Produto')}</strong><small>${x.sku?'SKU: '+esc(x.sku)+' • ':''}${new Date(x.sold_at).toLocaleString('pt-BR')}</small></div><div class="tb-sale-cell"><span>Qtd.</span><b>${Number(x.quantity||0)}</b></div><div class="tb-sale-cell"><span>Faturamento</span><b>${brl(x.gross_revenue)}</b></div><div class="tb-sale-cell"><span>Lucro</span><b class="tb-sale-profit">${brl(x.net_profit)}</b></div><div class="tb-sale-cell"><span>Canal</span><b>${esc(x.marketplace||'Não informado')}</b></div></div>`).join(''):'<div class="v5-empty">Nenhuma venda registrada ainda.</div>';
   };
 
+  function stockProductOptions(){const sel=document.getElementById("stockProduct");if(!sel)return;const cur=sel.value;sel.innerHTML='<option value="">Selecione um produto</option>'+premiumProducts.map(p=>`<option value="${p.id}">${esc(p.name)}${p.sku?' • '+esc(p.sku):''}</option>`).join('');if([...sel.options].some(o=>o.value===cur))sel.value=cur;}
+  window.stockProductChanged=function(){const id=document.getElementById("stockProduct")?.value;const p=premiumProducts.find(x=>String(x.id)===String(id));setv("stockSku",p?.sku||"");setv("stockCost",p?.cost||0);};
+  window.saveStockMovement=async function(){if(!requirePremium())return;const pid=document.getElementById("stockProduct")?.value;const p=premiumProducts.find(x=>String(x.id)===String(pid));if(!p){toast("Selecione um produto cadastrado.");return;}const qty=Math.max(0,Math.floor(Number(document.getElementById("stockQty")?.value||0)));const min=Math.max(0,Math.floor(Number(document.getElementById("stockMinimum")?.value||0)));const cost=Math.max(0,Number(document.getElementById("stockCost")?.value||0));const type=document.getElementById("stockType")?.value||"entry";if(type!=="adjustment"&&qty<1){toast("Informe uma quantidade válida.");return;}const {data:inv,error:readErr}=await premiumClient.from("inventory").select("id,quantity,average_cost").eq("user_id",premiumUser.id).eq("product_id",p.id).maybeSingle();if(readErr){console.error(readErr);toast("Não foi possível consultar o estoque.");return;}const oldQty=Number(inv?.quantity||0);const newQty=type==="adjustment"?qty:oldQty+qty;let inventoryId=inv?.id;let err;if(inv){({error:err}=await premiumClient.from("inventory").update({product_name:p.name,sku:p.sku||null,quantity:newQty,minimum_stock:min,average_cost:cost,updated_at:new Date().toISOString()}).eq("id",inv.id).eq("user_id",premiumUser.id));}else{const r=await premiumClient.from("inventory").insert({user_id:premiumUser.id,product_id:p.id,product_name:p.name,sku:p.sku||null,quantity:newQty,minimum_stock:min,average_cost:cost}).select("id").single();err=r.error;inventoryId=r.data?.id;}if(err){console.error(err);toast("Não foi possível salvar o estoque.");return;}await premiumClient.from("inventory_movements").insert({user_id:premiumUser.id,product_id:p.id,inventory_id:inventoryId,product_name:p.name,sku:p.sku||null,movement_type:type,quantity:qty,unit_cost:cost,note:(document.getElementById("stockNote")?.value||"").trim()||null});toast("Estoque atualizado com sucesso.");trackV5("estoque_movimentacao_premium");await renderStockControl();await loadMarketplaceDashboard();};
+  window.renderStockControl=async function(){const el=document.getElementById("tbStockControlList");if(!el||!premiumActive||!premiumUser)return;const {data,error}=await premiumClient.from("inventory").select("id,product_name,sku,quantity,minimum_stock,average_cost,updated_at").eq("user_id",premiumUser.id).order("product_name");if(error){el.innerHTML='<div class="v5-empty">Não foi possível carregar o estoque.</div>';return;}const rows=data||[];const units=rows.reduce((a,x)=>a+Number(x.quantity||0),0);const value=rows.reduce((a,x)=>a+Number(x.quantity||0)*Number(x.average_cost||0),0);const low=rows.filter(x=>Number(x.quantity||0)<=Number(x.minimum_stock||0));const e1=document.getElementById("stockTotalUnits"),e2=document.getElementById("stockTotalValue"),e3=document.getElementById("stockLowCount");if(e1)e1.textContent=units;if(e2)e2.textContent=brl(value);if(e3)e3.textContent=low.length;el.innerHTML=rows.length?rows.map(x=>`<div class="tb-stock-row"><div class="tb-stock-main"><strong>${esc(x.product_name)}</strong><small>${x.sku?'SKU: '+esc(x.sku):'Sem SKU'}</small></div><div class="tb-stock-cell"><span>Quantidade</span><b class="${Number(x.quantity||0)<=Number(x.minimum_stock||0)?'tb-stock-warn':''}">${Number(x.quantity||0)} un.</b></div><div class="tb-stock-cell"><span>Estoque mínimo</span><b>${Number(x.minimum_stock||0)} un.</b></div><div class="tb-stock-cell"><span>Custo médio</span><b>${brl(x.average_cost)}</b></div><div class="tb-stock-cell"><span>Valor</span><b>${brl(Number(x.quantity||0)*Number(x.average_cost||0))}</b></div></div>`).join(''):'<div class="v5-empty">Nenhum estoque cadastrado ainda.</div>';};
   window.loadMarketplaceDashboard=async function(){
     if(!premiumActive || !premiumUser || !premiumClient)return;
     const uid=premiumUser.id;
@@ -2201,6 +2233,7 @@ window.refreshPremiumAccess=async function(){
     if(error){el.innerHTML='<div class="v5-empty">Não foi possível carregar seus produtos.</div>';return;}
     premiumProducts=data||[];if(count)count.textContent=premiumProducts.length+" "+(premiumProducts.length===1?"item":"itens");
     saleProductOptions();
+    stockProductOptions();
     if(!premiumProducts.length){el.innerHTML='<div class="v5-empty">Cadastre seu primeiro produto Premium. Ele ficará vinculado à sua conta.</div>';return;}
     el.innerHTML=premiumProducts.map(x=>`<div class="v5-item"><div class="v5-item-top"><div><strong>${esc(x.name)}</strong><small>${x.sku?"SKU: "+esc(x.sku):"Sem SKU"}</small></div><small>${brl(x.sale_price)}</small></div><div class="v5-kpis"><div class="v5-kpi"><span>Custo</span><b>${brl(x.cost)}</b></div><div class="v5-kpi"><span>Venda</span><b>${brl(x.sale_price)}</b></div><div class="v5-kpi"><span>Frete</span><b>${brl(x.shipping)}</b></div></div><div class="v5-item-controls"><button class="v5-mini" onclick="usarProdutoV5('${x.id}')">Usar na calculadora</button><button class="v5-mini danger" onclick="excluirProdutoV5('${x.id}')">Excluir</button></div></div>`).join("");
   }
