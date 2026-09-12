@@ -1019,6 +1019,23 @@
 @media(max-width:1000px){.tb-kpi-grid{grid-template-columns:repeat(2,1fr)}.tb-chart-grid,.tb-lower-grid{grid-template-columns:1fr}.tb-kpi-card:last-child{grid-column:1/-1}}
 @media(max-width:560px){.tb-system-dashboard{padding:18px 12px 90px}.tb-dash-shell{padding:14px;border-radius:20px}.tb-dash-head{align-items:flex-start;flex-direction:column}.tb-dash-head h2{font-size:25px}.tb-kpi-grid{grid-template-columns:1fr 1fr}.tb-kpi-value{font-size:20px}.tb-market-row{grid-template-columns:72px 1fr 45px}}
 
+
+/* ===== V2: CONTROLE DE VENDAS ===== */
+.tb-sales-section{max-width:1360px;margin:0 auto;padding:18px 22px 64px;}
+.tb-sales-section[hidden]{display:none!important;}
+.tb-sales-shell{background:linear-gradient(145deg,#0b1f38,#08182c);border:1px solid rgba(70,190,255,.20);border-radius:24px;padding:22px;box-shadow:0 22px 70px rgba(0,0,0,.22)}
+.tb-sales-head{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;margin-bottom:18px}
+.tb-sales-head h2{font-size:24px;line-height:1.1;margin:0}.tb-sales-head h2 span{color:#55d7ff}.tb-sales-head p{color:#8fa9c8;font-size:12px;margin-top:5px}
+.tb-sales-badge{font-size:10px;font-weight:900;color:#8ee8ff;background:rgba(0,153,255,.10);border:1px solid rgba(69,204,255,.24);padding:6px 10px;border-radius:999px;white-space:nowrap}
+.tb-sales-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}.tb-sales-field.full{grid-column:1/-1}.tb-sales-field.span2{grid-column:span 2}
+.tb-sales-field label{display:block;color:#9fb7d2;font-size:10px;font-weight:900;margin:0 0 5px;text-transform:uppercase;letter-spacing:.04em}
+.tb-sales-field input,.tb-sales-field select{width:100%;border:1px solid rgba(120,190,255,.16);background:#07182b;color:#fff;border-radius:11px;padding:12px;outline:none;font:inherit}.tb-sales-field input:focus,.tb-sales-field select:focus{border-color:#27bfff;box-shadow:0 0 0 3px rgba(39,191,255,.08)}
+.tb-sales-summary{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:14px}.tb-sales-mini{background:#08192d;border:1px solid rgba(255,255,255,.06);border-radius:13px;padding:12px}.tb-sales-mini span{display:block;color:#7894b4;font-size:9px;text-transform:uppercase;font-weight:900}.tb-sales-mini b{display:block;color:#eaf8ff;font-size:15px;margin-top:4px}.tb-sales-mini.profit b{color:#73f0b8}
+.tb-sales-actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:14px}.tb-sales-btn{border:0;border-radius:12px;padding:12px 16px;font-weight:900;font-size:12px;cursor:pointer;color:#fff;background:linear-gradient(90deg,#087cff,#00b8ff)}.tb-sales-btn.ghost{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.10);color:#d7ecff}
+.tb-sales-history{margin-top:20px}.tb-sales-history h3{font-size:14px;margin-bottom:10px}.tb-sales-list{display:grid;gap:8px}.tb-sale-row{display:grid;grid-template-columns:1.5fr .7fr .7fr .7fr .9fr;gap:10px;align-items:center;padding:12px;border-radius:13px;background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.065)}.tb-sale-row strong{font-size:12px}.tb-sale-row small{display:block;color:#7f99b8;font-size:10px;margin-top:2px}.tb-sale-cell span{display:block;color:#7894b4;font-size:9px;text-transform:uppercase}.tb-sale-cell b{font-size:11px;color:#eaf7ff}.tb-sale-profit{color:#70e9ae!important}
+@media(max-width:900px){.tb-sales-grid{grid-template-columns:repeat(2,1fr)}.tb-sales-summary{grid-template-columns:repeat(2,1fr)}.tb-sale-row{grid-template-columns:1fr 1fr}.tb-sale-main{grid-column:1/-1}}
+@media(max-width:560px){.tb-sales-section{padding:14px 14px 90px}.tb-sales-shell{padding:15px}.tb-sales-head{flex-direction:column}.tb-sales-grid{grid-template-columns:1fr}.tb-sales-field.span2,.tb-sales-field.full{grid-column:auto}.tb-sales-summary{grid-template-columns:1fr 1fr}.tb-sale-row{grid-template-columns:1fr 1fr}}
+
 </style>
 
   <!-- THE BEST V6 Premium -->
@@ -1410,6 +1427,7 @@
 </div>
       <div class="premium-account-actions">
         <a id="premiumDashboardLink" href="#painel-premium" hidden>📊 DASHBOARD</a>
+        <a id="premiumSalesLink" href="#controle-vendas" hidden>💰 VENDAS</a>
         <a id="premiumProductsLink" href="#meus-produtos" hidden>MEUS PRODUTOS</a>
         <button type="button" onclick="refreshPremiumAccess()">ATUALIZAR ACESSO</button>
         <button type="button" class="danger" onclick="theBestPremiumLogout()">SAIR</button>
@@ -1460,6 +1478,47 @@
       <div class="tb-mini-card"><h3>🎯 METAS DO MÊS</h3><div id="tbGoals"></div></div>
       <div class="tb-mini-card"><h3>🏆 PRODUTOS MAIS VENDIDOS</h3><div id="tbTopProducts"></div></div>
       <div class="tb-mini-card"><h3>⚠️ ALERTAS DE ESTOQUE</h3><div id="tbStockAlerts"></div></div>
+    </div>
+  </div>
+</section>
+
+
+<section id="controle-vendas" class="tb-sales-section" hidden aria-label="Controle de vendas Premium">
+  <div class="tb-sales-shell">
+    <div class="tb-sales-head">
+      <div><h2>💰 Controle de <span>Vendas</span></h2><p>Registre cada venda e alimente automaticamente o Dashboard.</p></div>
+      <span class="tb-sales-badge">PREMIUM • NUVEM</span>
+    </div>
+
+    <div class="tb-sales-grid">
+      <div class="tb-sales-field span2"><label>Produto cadastrado</label><select id="saleProduct" onchange="saleProductChanged()"><option value="">Selecione um produto</option></select></div>
+      <div class="tb-sales-field"><label>SKU</label><input id="saleSku" type="text" readonly placeholder="SKU"></div>
+      <div class="tb-sales-field"><label>Quantidade</label><input id="saleQty" type="number" min="1" step="1" value="1" oninput="updateSalePreview()"></div>
+      <div class="tb-sales-field"><label>Preço unitário (R$)</label><input id="saleUnitPrice" type="number" min="0" step="0.01" placeholder="0,00" oninput="updateSalePreview()"></div>
+      <div class="tb-sales-field"><label>Custo unitário (R$)</label><input id="saleUnitCost" type="number" min="0" step="0.01" placeholder="0,00" oninput="updateSalePreview()"></div>
+      <div class="tb-sales-field"><label>Frete total (R$)</label><input id="saleShipping" type="number" min="0" step="0.01" placeholder="0,00" oninput="updateSalePreview()"></div>
+      <div class="tb-sales-field"><label>Marketplace</label><select id="saleMarketplace"><option value="Mercado Livre">Mercado Livre</option><option value="Shopee">Shopee</option><option value="Amazon">Amazon</option><option value="Shein">Shein</option><option value="TikTok Shop">TikTok Shop</option><option value="Site próprio">Site próprio</option><option value="Outro">Outro</option></select></div>
+      <div class="tb-sales-field"><label>Taxa marketplace (%)</label><input id="saleFee" type="number" min="0" step="0.01" value="0" oninput="updateSalePreview()"></div>
+      <div class="tb-sales-field"><label>Impostos (%)</label><input id="saleTaxes" type="number" min="0" step="0.01" value="0" oninput="updateSalePreview()"></div>
+      <div class="tb-sales-field span2"><label>Data da venda</label><input id="saleDate" type="datetime-local"></div>
+    </div>
+
+    <div class="tb-sales-summary">
+      <div class="tb-sales-mini"><span>Faturamento</span><b id="salePreviewRevenue">R$ 0,00</b></div>
+      <div class="tb-sales-mini"><span>Custos</span><b id="salePreviewCosts">R$ 0,00</b></div>
+      <div class="tb-sales-mini"><span>Taxas + impostos</span><b id="salePreviewFees">R$ 0,00</b></div>
+      <div class="tb-sales-mini profit"><span>Lucro líquido</span><b id="salePreviewProfit">R$ 0,00</b></div>
+    </div>
+
+    <div class="tb-sales-actions">
+      <button class="tb-sales-btn" type="button" onclick="saveMarketplaceSale()">+ REGISTRAR VENDA</button>
+      <button class="tb-sales-btn ghost" type="button" onclick="clearSaleForm()">LIMPAR</button>
+      <button class="tb-sales-btn ghost" type="button" onclick="renderSalesHistory()">↻ ATUALIZAR VENDAS</button>
+    </div>
+
+    <div class="tb-sales-history">
+      <h3>Últimas vendas</h3>
+      <div id="tbSalesHistory" class="tb-sales-list"><div class="v5-empty">Nenhuma venda registrada ainda.</div></div>
     </div>
   </div>
 </section>
@@ -1826,8 +1885,12 @@ if ("serviceWorker" in navigator) {
   function showPremiumState(){
     const productsSection=document.getElementById("meus-produtos");
     const productsLink=document.getElementById("premiumProductsLink");
+    const salesSection=document.getElementById("controle-vendas");
+    const salesLink=document.getElementById("premiumSalesLink");
     if(productsSection) productsSection.hidden=!premiumActive;
     if(productsLink) productsLink.hidden=!premiumActive;
+    if(salesSection) salesSection.hidden=!premiumActive;
+    if(salesLink) salesLink.hidden=!premiumActive;
     const count=document.getElementById("contadorProdutos");
     if(count&&!premiumActive) count.textContent="🔒";
   }
@@ -1881,7 +1944,7 @@ if ("serviceWorker" in navigator) {
   };
   window.theBestPremiumLogout=async function(){
     if(premiumClient) await premiumClient.auth.signOut();
-    premiumUser=null;premiumActive=false;premiumProducts=[];showPremiumState();renderProdutos();
+    premiumUser=null;premiumActive=false;premiumProducts=[];showPremiumState();renderProdutos();renderSalesHistory();
     const login=document.getElementById("premiumLoginBox"),acc=document.getElementById("premiumAccountBox"); if(login)login.hidden=false;if(acc)acc.hidden=true;
     setPremiumStatus("Aguardando login","");
   };
@@ -1974,6 +2037,7 @@ window.refreshPremiumAccess=async function(){
     const dash=document.getElementById("painel-premium"),dashLink=document.getElementById("premiumDashboardLink"); if(dash)dash.hidden=false;if(dashLink)dashLink.hidden=false;
     await loadMarketplaceDashboard();
     await renderProdutos();
+    await renderSalesHistory();
     trackV5("premium_liberado");
   }else{
     const dash=document.getElementById("painel-premium"),dashLink=document.getElementById("premiumDashboardLink"); if(dash)dash.hidden=true;if(dashLink)dashLink.hidden=true;
@@ -2038,6 +2102,70 @@ window.refreshPremiumAccess=async function(){
     trackV5("baixar_produtos_csv");
   };
 
+
+  function saleProductOptions(){
+    const sel=document.getElementById("saleProduct"); if(!sel)return;
+    const current=sel.value;
+    sel.innerHTML='<option value="">Selecione um produto</option>'+premiumProducts.map(x=>`<option value="${x.id}">${esc(x.name)}${x.sku?' • '+esc(x.sku):''}</option>`).join("");
+    if(premiumProducts.some(x=>String(x.id)===String(current)))sel.value=current;
+  }
+  window.saleProductChanged=function(){
+    const id=document.getElementById("saleProduct")?.value;
+    const p=premiumProducts.find(x=>String(x.id)===String(id));
+    const setv=(i,v)=>{const e=document.getElementById(i);if(e)e.value=v??""};
+    if(!p){setv("saleSku","");return updateSalePreview();}
+    setv("saleSku",p.sku||"");setv("saleUnitPrice",p.sale_price||0);setv("saleUnitCost",p.cost||0);setv("saleShipping",p.shipping||0);
+    updateSalePreview();
+  };
+  function saleCalc(){
+    const q=Math.max(1,Number(document.getElementById("saleQty")?.value||1));
+    const price=Number(document.getElementById("saleUnitPrice")?.value||0);
+    const cost=Number(document.getElementById("saleUnitCost")?.value||0);
+    const ship=Number(document.getElementById("saleShipping")?.value||0);
+    const feePct=Number(document.getElementById("saleFee")?.value||0);
+    const taxPct=Number(document.getElementById("saleTaxes")?.value||0);
+    const revenue=price*q, productCost=cost*q, feeValue=revenue*feePct/100, taxValue=revenue*taxPct/100;
+    const profit=revenue-productCost-ship-feeValue-taxValue;
+    return {q,price,cost,ship,feePct,taxPct,revenue,productCost,feeValue,taxValue,profit};
+  }
+  window.updateSalePreview=function(){
+    const c=saleCalc();
+    const t=(id,v)=>{const e=document.getElementById(id);if(e)e.textContent=brl(v)};
+    t("salePreviewRevenue",c.revenue);t("salePreviewCosts",c.productCost+c.ship);t("salePreviewFees",c.feeValue+c.taxValue);t("salePreviewProfit",c.profit);
+  };
+  window.clearSaleForm=function(){
+    const ids=["saleProduct","saleSku","saleUnitPrice","saleUnitCost","saleShipping"];ids.forEach(id=>{const e=document.getElementById(id);if(e)e.value=""});
+    const q=document.getElementById("saleQty");if(q)q.value=1;const f=document.getElementById("saleFee");if(f)f.value=0;const t=document.getElementById("saleTaxes");if(t)t.value=0;const d=document.getElementById("saleDate");if(d)d.value="";updateSalePreview();
+  };
+  window.saveMarketplaceSale=async function(){
+    if(!requirePremium())return;
+    const productId=document.getElementById("saleProduct")?.value;
+    const p=premiumProducts.find(x=>String(x.id)===String(productId));
+    if(!p){toast("Selecione um produto cadastrado.");return;}
+    const c=saleCalc();if(c.price<=0){toast("Informe um preço de venda válido.");return;}if(c.q<1){toast("Informe a quantidade vendida.");return;}
+    const dt=document.getElementById("saleDate")?.value;
+    const payload={user_id:premiumUser.id,product_id:p.id,product_name:p.name,sku:p.sku||null,quantity:c.q,unit_price:c.price,unit_cost:c.cost,shipping:c.ship,marketplace:(document.getElementById("saleMarketplace")?.value||"Outro"),marketplace_fee:c.feePct,taxes:c.taxPct,gross_revenue:c.revenue,net_profit:c.profit,sold_at:dt?new Date(dt).toISOString():new Date().toISOString()};
+    const {error}=await premiumClient.from("sales").insert(payload);
+    if(error){console.error(error);toast("Não foi possível registrar a venda.");return;}
+    try{
+      const {data:inv}=await premiumClient.from("inventory").select("id,quantity,product_name,sku,average_cost").eq("user_id",premiumUser.id).eq("product_id",p.id).maybeSingle();
+      if(inv){
+        const newQty=Math.max(0,Number(inv.quantity||0)-c.q);
+        await premiumClient.from("inventory").update({quantity:newQty,updated_at:new Date().toISOString()}).eq("id",inv.id).eq("user_id",premiumUser.id);
+        await premiumClient.from("inventory_movements").insert({user_id:premiumUser.id,product_id:p.id,inventory_id:inv.id,product_name:p.name,sku:p.sku||null,movement_type:"sale",quantity:c.q,unit_cost:c.cost,note:"Baixa automática ao registrar venda"});
+      }
+    }catch(e){console.warn("Venda salva, mas a baixa de estoque não pôde ser concluída.",e)}
+    toast("Venda registrada com sucesso.");trackV5("registrar_venda_premium");clearSaleForm();await renderSalesHistory();await loadMarketplaceDashboard();
+  };
+  window.renderSalesHistory=async function(){
+    const el=document.getElementById("tbSalesHistory");if(!el)return;
+    if(!premiumActive||!premiumUser||!premiumClient){el.innerHTML='<div class="v5-empty">Faça login para visualizar suas vendas.</div>';return;}
+    const {data,error}=await premiumClient.from("sales").select("id,product_name,sku,quantity,gross_revenue,net_profit,marketplace,sold_at").eq("user_id",premiumUser.id).order("sold_at",{ascending:false}).limit(20);
+    if(error){el.innerHTML='<div class="v5-empty">Não foi possível carregar as vendas.</div>';return;}
+    const rows=data||[];
+    el.innerHTML=rows.length?rows.map(x=>`<div class="tb-sale-row"><div class="tb-sale-main"><strong>${esc(x.product_name||'Produto')}</strong><small>${x.sku?'SKU: '+esc(x.sku)+' • ':''}${new Date(x.sold_at).toLocaleString('pt-BR')}</small></div><div class="tb-sale-cell"><span>Qtd.</span><b>${Number(x.quantity||0)}</b></div><div class="tb-sale-cell"><span>Faturamento</span><b>${brl(x.gross_revenue)}</b></div><div class="tb-sale-cell"><span>Lucro</span><b class="tb-sale-profit">${brl(x.net_profit)}</b></div><div class="tb-sale-cell"><span>Canal</span><b>${esc(x.marketplace||'Não informado')}</b></div></div>`).join(''):'<div class="v5-empty">Nenhuma venda registrada ainda.</div>';
+  };
+
   window.loadMarketplaceDashboard=async function(){
     if(!premiumActive || !premiumUser || !premiumClient)return;
     const uid=premiumUser.id;
@@ -2072,6 +2200,7 @@ window.refreshPremiumAccess=async function(){
     const {data,error}=await premiumClient.from("saved_products").select("id,name,sku,cost,sale_price,shipping,created_at").eq("user_id",premiumUser.id).order("created_at",{ascending:false}).limit(100);
     if(error){el.innerHTML='<div class="v5-empty">Não foi possível carregar seus produtos.</div>';return;}
     premiumProducts=data||[];if(count)count.textContent=premiumProducts.length+" "+(premiumProducts.length===1?"item":"itens");
+    saleProductOptions();
     if(!premiumProducts.length){el.innerHTML='<div class="v5-empty">Cadastre seu primeiro produto Premium. Ele ficará vinculado à sua conta.</div>';return;}
     el.innerHTML=premiumProducts.map(x=>`<div class="v5-item"><div class="v5-item-top"><div><strong>${esc(x.name)}</strong><small>${x.sku?"SKU: "+esc(x.sku):"Sem SKU"}</small></div><small>${brl(x.sale_price)}</small></div><div class="v5-kpis"><div class="v5-kpi"><span>Custo</span><b>${brl(x.cost)}</b></div><div class="v5-kpi"><span>Venda</span><b>${brl(x.sale_price)}</b></div><div class="v5-kpi"><span>Frete</span><b>${brl(x.shipping)}</b></div></div><div class="v5-item-controls"><button class="v5-mini" onclick="usarProdutoV5('${x.id}')">Usar na calculadora</button><button class="v5-mini danger" onclick="excluirProdutoV5('${x.id}')">Excluir</button></div></div>`).join("");
   }
