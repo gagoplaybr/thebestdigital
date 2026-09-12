@@ -1116,6 +1116,18 @@
 @media(max-width:850px){.tb-dre-grid{grid-template-columns:1fr}.tb-dre-kpis{grid-template-columns:1fr 1fr}}
 @media(max-width:520px){.tb-dre-kpis{grid-template-columns:1fr}}
 
+
+/* ===== V6.4: CONTAS A PAGAR E RECEBER ===== */
+.tb-accounts-card{margin-top:12px;background:#0b1d33;border:1px solid rgba(255,255,255,.07);border-radius:17px;padding:16px}
+.tb-accounts-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;flex-wrap:wrap}.tb-accounts-head h3{font-size:13px;margin:0}.tb-accounts-head p{font-size:10px;color:#7f99b7;margin-top:3px}
+.tb-accounts-form{display:grid;grid-template-columns:.8fr 1.5fr 1fr .8fr 1fr 1fr;gap:9px;margin-top:14px;align-items:end}.tb-account-field label{display:block;color:#9fb7d2;font-size:9px;font-weight:900;margin-bottom:5px;text-transform:uppercase}.tb-account-field input,.tb-account-field select{width:100%;border:1px solid rgba(120,190,255,.16);background:#07182b;color:#fff;border-radius:10px;padding:10px;outline:none;font:inherit}.tb-account-field.full{grid-column:1/-1}
+.tb-account-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}.tb-account-btn{border:0;border-radius:10px;padding:10px 12px;background:linear-gradient(90deg,#087cff,#00b8ff);color:#fff;font-weight:900;cursor:pointer;font-size:11px}.tb-account-btn.ghost{background:#0d2948;border:1px solid rgba(85,215,255,.22);color:#dff7ff}.tb-account-btn.success{background:rgba(45,211,139,.12);border:1px solid rgba(45,211,139,.32);color:#76efb5}.tb-account-btn.danger{background:rgba(255,83,101,.08);border:1px solid rgba(255,83,101,.25);color:#ffadb6}
+.tb-accounts-kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;margin-top:14px}.tb-account-kpi{background:#08192d;border:1px solid rgba(255,255,255,.06);border-radius:13px;padding:12px}.tb-account-kpi span{display:block;color:#7894b4;font-size:9px;text-transform:uppercase;font-weight:900}.tb-account-kpi b{display:block;font-size:18px;margin-top:4px}.tb-account-kpi.receive b{color:#55e6a8}.tb-account-kpi.pay b,.tb-account-kpi.overdue b{color:#ff9ea9}.tb-account-kpi.balance b{color:#72dcff}
+.tb-accounts-list{display:grid;gap:8px;margin-top:14px}.tb-account-item{display:grid;grid-template-columns:1.4fr .75fr .75fr auto;gap:10px;align-items:center;background:#08192d;border:1px solid rgba(255,255,255,.055);border-radius:12px;padding:11px}.tb-account-main strong{display:block;font-size:12px}.tb-account-main small{display:block;color:#8099b6;font-size:9px;margin-top:3px}.tb-account-value{font-weight:900;font-size:12px}.tb-account-value.receive{color:#65e9ad}.tb-account-value.pay{color:#ffabb5}.tb-account-status{display:inline-flex;width:max-content;padding:5px 8px;border-radius:999px;font-size:9px;font-weight:900;background:rgba(255,193,74,.10);color:#ffd17e;border:1px solid rgba(255,193,74,.20)}.tb-account-status.done{background:rgba(45,211,139,.10);color:#78efb7;border-color:rgba(45,211,139,.22)}.tb-account-status.overdue{background:rgba(255,83,101,.10);color:#ffadb6;border-color:rgba(255,83,101,.22)}.tb-account-item-actions{display:flex;gap:6px;justify-content:flex-end;flex-wrap:wrap}
+@media(max-width:1050px){.tb-accounts-form{grid-template-columns:repeat(3,1fr)}.tb-accounts-kpis{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:650px){.tb-accounts-form{grid-template-columns:1fr 1fr}.tb-account-item{grid-template-columns:1fr auto}.tb-account-item-actions{grid-column:1/-1;justify-content:flex-start}}
+@media(max-width:460px){.tb-accounts-form,.tb-accounts-kpis{grid-template-columns:1fr}}
+
 </style>
 
   <!-- THE BEST V6 Premium -->
@@ -1735,6 +1747,34 @@
           <div class="tb-dre-kpi"><span>Resultado por venda</span><b id="dreResultPerSale">R$ 0,00</b><small>Resultado líquido médio por venda</small></div>
         </div>
       </div>
+    </div>
+
+
+    <div class="tb-accounts-card">
+      <div class="tb-accounts-head">
+        <div><h3>🗓️ CONTAS A PAGAR E RECEBER</h3><p>Organize vencimentos, acompanhe pendências e dê baixa nas contas pela nuvem.</p></div>
+        <span class="tb-dre-badge">CONTROLE FINANCEIRO</span>
+      </div>
+      <div class="tb-accounts-form">
+        <div class="tb-account-field"><label>Tipo</label><select id="accountType"><option value="payable">A pagar</option><option value="receivable">A receber</option></select></div>
+        <div class="tb-account-field"><label>Descrição</label><input id="accountDescription" maxlength="120" placeholder="Ex.: Fornecedor / venda"></div>
+        <div class="tb-account-field"><label>Categoria</label><input id="accountCategory" maxlength="60" placeholder="Ex.: Mercadoria"></div>
+        <div class="tb-account-field"><label>Valor (R$)</label><input id="accountAmount" type="number" min="0" step="0.01" placeholder="0,00"></div>
+        <div class="tb-account-field"><label>Vencimento</label><input id="accountDueDate" type="date"></div>
+        <div class="tb-account-field"><label>Pagamento</label><select id="accountPaymentMethod"><option>Pix</option><option>Boleto</option><option>Cartão de crédito</option><option>Cartão de débito</option><option>Transferência</option><option>Dinheiro</option><option>Outro</option></select></div>
+        <div class="tb-account-field full"><label>Observações</label><input id="accountNotes" maxlength="240" placeholder="Opcional"></div>
+      </div>
+      <div class="tb-account-actions">
+        <button class="tb-account-btn" type="button" onclick="saveAccountPremium()">+ SALVAR CONTA</button>
+        <button class="tb-account-btn ghost" type="button" onclick="loadAccountsPremium()">↻ ATUALIZAR CONTAS</button>
+      </div>
+      <div class="tb-accounts-kpis">
+        <div class="tb-account-kpi receive"><span>A receber pendente</span><b id="accountsReceivable">R$ 0,00</b></div>
+        <div class="tb-account-kpi pay"><span>A pagar pendente</span><b id="accountsPayable">R$ 0,00</b></div>
+        <div class="tb-account-kpi balance"><span>Saldo previsto</span><b id="accountsForecast">R$ 0,00</b></div>
+        <div class="tb-account-kpi overdue"><span>Vencidos</span><b id="accountsOverdue">R$ 0,00</b></div>
+      </div>
+      <div id="accountsList" class="tb-accounts-list"><div class="v5-empty">Nenhuma conta cadastrada.</div></div>
     </div>
 
 
@@ -2681,6 +2721,90 @@ window.refreshPremiumAccess=async function(){
     await loadMarketplaceDashboard();
   };
 
+
+  /* Contas a pagar e receber */
+  let tbAccountRows=[];
+
+  window.saveAccountPremium=async function(){
+    if(!requirePremium())return;
+    const type=document.getElementById('accountType')?.value||'payable';
+    const description=(document.getElementById('accountDescription')?.value||'').trim();
+    const category=(document.getElementById('accountCategory')?.value||'Outros').trim()||'Outros';
+    const amount=Number(document.getElementById('accountAmount')?.value||0);
+    const due_date=document.getElementById('accountDueDate')?.value||tbLocalDateISO();
+    const payment_method=(document.getElementById('accountPaymentMethod')?.value||'Outro').trim();
+    const notes=(document.getElementById('accountNotes')?.value||'').trim();
+    if(!description){toast('Digite a descrição da conta.');return;}
+    if(!(amount>0)){toast('Digite um valor maior que zero.');return;}
+    const {error}=await premiumClient.from('accounts_payable_receivable').insert({
+      user_id:premiumUser.id,type,description,category,amount,due_date,status:'pending',payment_method,notes:notes||null
+    });
+    if(error){console.error('Erro ao salvar conta:',error);toast('Não foi possível salvar a conta. Confira Data API e RLS.');return;}
+    ['accountDescription','accountCategory','accountAmount','accountNotes'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
+    const due=document.getElementById('accountDueDate');if(due)due.value=tbLocalDateISO();
+    toast('Conta salva na nuvem.');
+    trackV5('financeiro_salvar_conta');
+    await loadAccountsPremium();
+  };
+
+  window.settleAccountPremium=async function(id,type){
+    if(!requirePremium())return;
+    const status=type==='receivable'?'received':'paid';
+    const {error}=await premiumClient.from('accounts_payable_receivable').update({status,paid_at:new Date().toISOString()}).eq('id',id).eq('user_id',premiumUser.id);
+    if(error){console.error(error);toast('Não foi possível dar baixa na conta.');return;}
+    toast(type==='receivable'?'Recebimento confirmado.':'Pagamento confirmado.');
+    await loadAccountsPremium();
+  };
+
+  window.reopenAccountPremium=async function(id){
+    if(!requirePremium())return;
+    const {error}=await premiumClient.from('accounts_payable_receivable').update({status:'pending',paid_at:null}).eq('id',id).eq('user_id',premiumUser.id);
+    if(error){toast('Não foi possível reabrir a conta.');return;}
+    toast('Conta reaberta.');await loadAccountsPremium();
+  };
+
+  window.deleteAccountPremium=async function(id){
+    if(!requirePremium())return;
+    if(!confirm('Excluir esta conta?'))return;
+    const {error}=await premiumClient.from('accounts_payable_receivable').delete().eq('id',id).eq('user_id',premiumUser.id);
+    if(error){toast('Não foi possível excluir a conta.');return;}
+    toast('Conta excluída.');await loadAccountsPremium();
+  };
+
+  window.loadAccountsPremium=async function(){
+    if(!premiumActive||!premiumUser||!premiumClient)return;
+    const due=document.getElementById('accountDueDate');if(due&&!due.value)due.value=tbLocalDateISO();
+    const {data,error}=await premiumClient.from('accounts_payable_receivable')
+      .select('id,type,description,category,amount,due_date,status,payment_method,paid_at,notes,created_at')
+      .eq('user_id',premiumUser.id).order('due_date',{ascending:true}).order('created_at',{ascending:false}).limit(1000);
+    const list=document.getElementById('accountsList');
+    if(error){console.error('Erro accounts:',error);if(list)list.innerHTML='<div class="v5-empty">Não foi possível carregar as contas. Confira Data API e RLS da tabela accounts_payable_receivable.</div>';return;}
+    tbAccountRows=data||[];
+    const today=tbLocalDateISO();
+    const pending=tbAccountRows.filter(x=>x.status==='pending');
+    const receivable=pending.filter(x=>x.type==='receivable').reduce((a,x)=>a+Number(x.amount||0),0);
+    const payable=pending.filter(x=>x.type==='payable').reduce((a,x)=>a+Number(x.amount||0),0);
+    const overdue=pending.filter(x=>x.due_date&&x.due_date<today).reduce((a,x)=>a+Number(x.amount||0),0);
+    const setA=(id,val)=>{const e=document.getElementById(id);if(e)e.textContent=val;};
+    setA('accountsReceivable',brl(receivable));setA('accountsPayable',brl(payable));setA('accountsForecast',brl(receivable-payable));setA('accountsOverdue',brl(overdue));
+    if(!list)return;
+    if(!tbAccountRows.length){list.innerHTML='<div class="v5-empty">Nenhuma conta cadastrada.</div>';return;}
+    list.innerHTML=tbAccountRows.slice(0,50).map(x=>{
+      const done=x.status==='paid'||x.status==='received';
+      const isOverdue=!done&&x.due_date&&x.due_date<today;
+      const statusText=done?(x.type==='receivable'?'RECEBIDO':'PAGO'):(isOverdue?'VENCIDO':'PENDENTE');
+      const statusClass=done?'done':(isOverdue?'overdue':'');
+      const typeLabel=x.type==='receivable'?'A RECEBER':'A PAGAR';
+      const dateLabel=x.due_date?new Date(x.due_date+'T12:00:00').toLocaleDateString('pt-BR'):'-';
+      return `<div class="tb-account-item">
+        <div class="tb-account-main"><strong>${esc(x.description)}</strong><small>${typeLabel} • ${esc(x.category||'Outros')} • Vence ${dateLabel} • ${esc(x.payment_method||'-')}</small></div>
+        <span class="tb-account-value ${x.type==='receivable'?'receive':'pay'}">${brl(x.amount)}</span>
+        <span class="tb-account-status ${statusClass}">${statusText}</span>
+        <div class="tb-account-item-actions">${done?`<button class="tb-account-btn ghost" onclick="reopenAccountPremium('${x.id}')">REABRIR</button>`:`<button class="tb-account-btn success" onclick="settleAccountPremium('${x.id}','${x.type}')">${x.type==='receivable'?'RECEBER':'PAGAR'}</button>`}<button class="tb-account-btn danger" onclick="deleteAccountPremium('${x.id}')">EXCLUIR</button></div>
+      </div>`;
+    }).join('');
+  };
+
   window.loadFinanceiroPremium=async function(){
     if(!premiumActive||!premiumUser||!premiumClient)return;
 
@@ -2886,6 +3010,8 @@ window.refreshPremiumAccess=async function(){
       const points=pts.map(p=>`<circle cx="${p[0]}" cy="${p[1]}" r="4" class="tb-cf-point"><title>Saldo ${p[2].label}: ${brl(p[2].balance)}</title></circle>`).join('');
       chart.innerHTML=`<svg class="tb-cashflow-svg" viewBox="0 0 ${W} ${H}" role="img" aria-label="Fluxo de caixa dos últimos seis meses">${grid}${bars}<path d="${path}" class="tb-cf-balance"/>${points}${labels}</svg>`;
     }
+
+    await loadAccountsPremium();
   };
 
 
