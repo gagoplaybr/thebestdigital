@@ -13,10 +13,10 @@
   <meta charset="UTF-8">
   <!-- PWA -->
   <link rel="manifest" href="/manifest.webmanifest">
-  <meta name="application-name" content="THE BEST Marketplace">
+  <meta name="application-name" content="THE BEST Marketplace Premium">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="apple-mobile-web-app-title" content="THE BEST">
+  <meta name="apple-mobile-web-app-title" content="THE BEST Marketplace">
   <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="192x192" href="/icons/icon-192.png">
   <link rel="icon" type="image/png" sizes="512x512" href="/icons/icon-512.png">
@@ -1806,6 +1806,60 @@ body.tb-user-logged-in #calculadora{
   }
 }
 
+
+/* ===== V8.0.1: BUSCA DE PRODUTOS ===== */
+.tb-product-search{
+  margin-top:14px;
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:8px;
+}
+.tb-product-search-wrap{
+  position:relative;
+}
+.tb-product-search-wrap span{
+  position:absolute;
+  left:13px;
+  top:50%;
+  transform:translateY(-50%);
+  pointer-events:none;
+  font-size:15px;
+  opacity:.8;
+}
+.tb-product-search input{
+  width:100%;
+  border:1px solid rgba(85,215,255,.20);
+  background:#09192c;
+  color:#fff;
+  border-radius:12px;
+  padding:12px 14px 12px 40px;
+  outline:none;
+  font-size:12px;
+}
+.tb-product-search input:focus{
+  border-color:#31c8ff;
+  box-shadow:0 0 0 3px rgba(49,200,255,.08);
+}
+.tb-product-search button{
+  border:1px solid rgba(85,215,255,.20);
+  background:#0d2948;
+  color:#dff7ff;
+  border-radius:12px;
+  padding:10px 14px;
+  font-size:11px;
+  font-weight:900;
+  cursor:pointer;
+}
+.tb-product-search-info{
+  margin-top:7px;
+  color:#7f9ab8;
+  font-size:10px;
+}
+@media(max-width:640px){
+  .tb-product-search{grid-template-columns:1fr}
+  .tb-product-search button{width:100%}
+}
+
 </style>
 
   <!-- THE BEST V6 Premium -->
@@ -1840,7 +1894,7 @@ body.tb-user-logged-in #calculadora{
         </div>
       </div>
 
-      <div class="tb-app-login-version">THE BEST DIGITAL • PROGRAMA PREMIUM</div>
+      <div class="tb-app-login-version">THE BEST DIGITAL • PROGRAMA PREMIUM • V8.0.1</div>
     </section>
 
     <section class="tb-app-login-panel">
@@ -1871,8 +1925,8 @@ body.tb-user-logged-in #calculadora{
 <div class="app-topbar" aria-label="Cabeçalho do aplicativo">
   <img src="/icons/icon-192.png" alt="THE BEST">
   <div>
-    <strong>THE BEST Precificação</strong>
-    <span>Seu painel de vendas</span>
+    <strong>THE BEST Marketplace</strong>
+    <span>Gestão Premium do seu negócio</span>
   </div>
 </div>
 
@@ -2728,6 +2782,19 @@ body.tb-user-logged-in #calculadora{
         <button class="v5-btn ghost" onclick="renderProdutos()">↻ ATUALIZAR LISTA</button>
       </div>
       <p class="premium-sync-note">☁️ Produtos Premium ficam vinculados à conta e podem aparecer em outros aparelhos após o login. O download é gerado em CSV compatível com Excel e ordenado por SKU.</p>
+
+      <div class="tb-product-search">
+        <div class="tb-product-search-wrap">
+          <span>🔎</span>
+          <input id="productSearchInput" type="search"
+                 placeholder="Pesquisar por nome do produto ou SKU..."
+                 autocomplete="off"
+                 oninput="filtrarProdutosPremium()">
+        </div>
+        <button type="button" onclick="limparBuscaProdutos()">LIMPAR BUSCA</button>
+      </div>
+      <div id="productSearchInfo" class="tb-product-search-info">Digite o nome ou SKU para localizar um produto.</div>
+
       <div id="listaProdutosV5" class="v5-list"></div>
     </div>
   </div>
@@ -3752,16 +3819,86 @@ window.refreshPremiumAccess=async function(){
   };
   window.exportPremiumReportCSV=function(){if(!requirePremium())return;if(!tbReportRows.length){toast('Não há vendas neste relatório para exportar.');return;}const rows=[['Data','Produto','SKU','Marketplace','Quantidade','Preço unitário (R$)','Faturamento (R$)','Lucro líquido (R$)','Margem (%)'],...tbReportRows.map(x=>{const r=Number(x.gross_revenue||Number(x.unit_price||0)*Number(x.quantity||1)),p=Number(x.net_profit||0);return [new Date(x.sold_at).toLocaleString('pt-BR'),x.product_name||'',x.sku||'',x.marketplace||'',Number(x.quantity||0),csvMoney(x.unit_price),csvMoney(r),csvMoney(p),(r?p/r*100:0).toFixed(2).replace('.',',')]})];const csv='\ufeff'+rows.map(r=>r.map(csvCell).join(';')).join('\r\n');const blob=new Blob([csv],{type:'text/csv;charset=utf-8;'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='THE_BEST_Relatorio_Vendas_'+new Date().toISOString().slice(0,10)+'.csv';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1500);toast('Relatório CSV exportado.');};
 
+  function renderProdutosPremiumLista(lista){
+    const el=document.getElementById("listaProdutosV5");
+    const info=document.getElementById("productSearchInfo");
+    if(!el)return;
+
+    const termo=(document.getElementById("productSearchInput")?.value||"").trim();
+    if(info){
+      if(termo){
+        info.textContent=`${lista.length} produto${lista.length===1?'':'s'} encontrado${lista.length===1?'':'s'} para "${termo}".`;
+      }else{
+        info.textContent=premiumProducts.length
+          ? `${premiumProducts.length} produto${premiumProducts.length===1?'':'s'} cadastrado${premiumProducts.length===1?'':'s'}. Pesquise por nome ou SKU.`
+          : 'Nenhum produto cadastrado ainda.';
+      }
+    }
+
+    if(!lista.length){
+      el.innerHTML=termo
+        ? '<div class="v5-empty">Nenhum produto encontrado com esse nome ou SKU.</div>'
+        : '<div class="v5-empty">Cadastre seu primeiro produto Premium. Ele ficará vinculado à sua conta.</div>';
+      return;
+    }
+
+    el.innerHTML=lista.map(x=>`<div class="v5-item"><div class="v5-item-top"><div><strong>${esc(x.name)}</strong><small>${x.sku?"SKU: "+esc(x.sku):"Sem SKU"}</small></div><small>${brl(x.sale_price)}</small></div><div class="v5-kpis"><div class="v5-kpi"><span>Custo</span><b>${brl(x.cost)}</b></div><div class="v5-kpi"><span>Venda</span><b>${brl(x.sale_price)}</b></div><div class="v5-kpi"><span>Frete</span><b>${brl(x.shipping)}</b></div></div><div class="v5-item-controls"><button class="v5-mini" onclick="usarProdutoV5('${x.id}')">Usar na calculadora</button><button class="v5-mini danger" onclick="excluirProdutoV5('${x.id}')">Excluir</button></div></div>`).join("");
+  }
+
+  window.filtrarProdutosPremium=function(){
+    const termo=(document.getElementById("productSearchInput")?.value||"").trim().toLowerCase();
+    if(!termo){
+      renderProdutosPremiumLista(premiumProducts);
+      return;
+    }
+
+    const filtrados=premiumProducts.filter(x=>{
+      const nome=String(x.name||"").toLowerCase();
+      const sku=String(x.sku||"").toLowerCase();
+      return nome.includes(termo)||sku.includes(termo);
+    });
+
+    renderProdutosPremiumLista(filtrados);
+  };
+
+  window.limparBuscaProdutos=function(){
+    const input=document.getElementById("productSearchInput");
+    if(input){
+      input.value="";
+      input.focus();
+    }
+    renderProdutosPremiumLista(premiumProducts);
+  };
+
   async function renderProdutos(){
-    const el=document.getElementById("listaProdutosV5"),count=document.getElementById("contadorProdutos"); if(!el)return;
-    if(!premiumActive || !premiumUser || !premiumClient){premiumProducts=[];el.innerHTML="";if(count)count.textContent="🔒";return;}
-    const {data,error}=await premiumClient.from("saved_products").select("id,name,sku,cost,sale_price,shipping,created_at").eq("user_id",premiumUser.id).order("created_at",{ascending:false}).limit(100);
-    if(error){el.innerHTML='<div class="v5-empty">Não foi possível carregar seus produtos.</div>';return;}
-    premiumProducts=data||[];if(count)count.textContent=premiumProducts.length+" "+(premiumProducts.length===1?"item":"itens");
+    const el=document.getElementById("listaProdutosV5"),count=document.getElementById("contadorProdutos");
+    if(!el)return;
+
+    if(!premiumActive || !premiumUser || !premiumClient){
+      premiumProducts=[];
+      el.innerHTML="";
+      if(count)count.textContent="🔒";
+      return;
+    }
+
+    const {data,error}=await premiumClient
+      .from("saved_products")
+      .select("id,name,sku,cost,sale_price,shipping,created_at")
+      .eq("user_id",premiumUser.id)
+      .order("created_at",{ascending:false})
+      .limit(3000);
+
+    if(error){
+      el.innerHTML='<div class="v5-empty">Não foi possível carregar seus produtos.</div>';
+      return;
+    }
+
+    premiumProducts=data||[];
+    if(count)count.textContent=premiumProducts.length+" "+(premiumProducts.length===1?"item":"itens");
+
     saleProductOptions();
     stockProductOptions();
-    if(!premiumProducts.length){el.innerHTML='<div class="v5-empty">Cadastre seu primeiro produto Premium. Ele ficará vinculado à sua conta.</div>';return;}
-    el.innerHTML=premiumProducts.map(x=>`<div class="v5-item"><div class="v5-item-top"><div><strong>${esc(x.name)}</strong><small>${x.sku?"SKU: "+esc(x.sku):"Sem SKU"}</small></div><small>${brl(x.sale_price)}</small></div><div class="v5-kpis"><div class="v5-kpi"><span>Custo</span><b>${brl(x.cost)}</b></div><div class="v5-kpi"><span>Venda</span><b>${brl(x.sale_price)}</b></div><div class="v5-kpi"><span>Frete</span><b>${brl(x.shipping)}</b></div></div><div class="v5-item-controls"><button class="v5-mini" onclick="usarProdutoV5('${x.id}')">Usar na calculadora</button><button class="v5-mini danger" onclick="excluirProdutoV5('${x.id}')">Excluir</button></div></div>`).join("");
+    filtrarProdutosPremium();
   }
 
   /* ===== V6 FINANCEIRO PREMIUM ===== */
