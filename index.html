@@ -1323,6 +1323,119 @@ body.tb-premium-nav-active #meus-produtos{
   }
 }
 
+
+/* ===== V7.1: CAPA DE LOGIN DO PROGRAMA ===== */
+.tb-app-login-cover{
+  display:none;
+  position:fixed;
+  inset:0;
+  z-index:5000;
+  background:
+    radial-gradient(circle at 18% 15%,rgba(0,140,255,.28),transparent 28%),
+    radial-gradient(circle at 85% 78%,rgba(0,205,255,.13),transparent 30%),
+    linear-gradient(145deg,#06101f 0%,#08182e 48%,#071323 100%);
+  color:#fff;
+  overflow:auto;
+}
+@media (display-mode:standalone){
+  .tb-app-login-cover{display:flex;align-items:center;justify-content:center;padding:24px}
+  body.tb-app-authenticated .tb-app-login-cover{display:none}
+}
+.tb-app-login-shell{
+  width:min(980px,100%);
+  display:grid;
+  grid-template-columns:1.05fr .95fr;
+  border:1px solid rgba(77,201,255,.24);
+  background:rgba(5,19,37,.88);
+  border-radius:28px;
+  overflow:hidden;
+  box-shadow:0 35px 120px rgba(0,0,0,.52);
+  backdrop-filter:blur(22px);
+}
+.tb-app-login-brand{
+  position:relative;
+  min-height:560px;
+  padding:42px;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  background:
+    radial-gradient(circle at 65% 30%,rgba(0,172,255,.20),transparent 28%),
+    linear-gradient(160deg,rgba(12,48,85,.96),rgba(5,22,42,.96));
+  border-right:1px solid rgba(255,255,255,.07);
+  overflow:hidden;
+}
+.tb-app-login-brand:after{
+  content:"";
+  position:absolute;
+  width:330px;height:330px;border-radius:50%;
+  background:#007dff;filter:blur(110px);opacity:.18;
+  right:-140px;bottom:-120px;
+}
+.tb-app-login-logo{position:relative;z-index:2}
+.tb-app-login-logo img{width:250px;max-width:78%;height:auto;display:block}
+.tb-app-login-copy{position:relative;z-index:2;max-width:430px}
+.tb-app-login-copy .tag{
+  display:inline-flex;align-items:center;gap:7px;
+  border:1px solid rgba(83,213,255,.28);
+  background:rgba(0,154,255,.09);
+  color:#86e5ff;border-radius:999px;
+  padding:7px 11px;font-size:10px;font-weight:900;letter-spacing:.6px
+}
+.tb-app-login-copy h1{font-size:39px;line-height:1.02;margin:16px 0 12px}
+.tb-app-login-copy h1 span{color:#55d7ff}
+.tb-app-login-copy p{color:#a9bfd7;font-size:13px;line-height:1.65}
+.tb-app-login-points{display:grid;gap:8px;margin-top:20px}
+.tb-app-login-point{display:flex;gap:9px;align-items:center;color:#d9e9f8;font-size:11px}
+.tb-app-login-point i{font-style:normal;width:25px;height:25px;border-radius:8px;display:grid;place-items:center;background:rgba(0,153,255,.11)}
+.tb-app-login-version{position:relative;z-index:2;color:#6886a5;font-size:9px;letter-spacing:.4px}
+
+.tb-app-login-panel{padding:44px 38px;display:flex;flex-direction:column;justify-content:center;background:rgba(5,17,33,.78)}
+.tb-app-login-panel h2{font-size:28px;margin:0}.tb-app-login-panel>p{color:#8fa8c4;font-size:12px;margin:7px 0 22px}
+.tb-app-login-field{margin-bottom:12px}
+.tb-app-login-field label{display:block;color:#9eb6d1;font-size:9px;font-weight:900;letter-spacing:.5px;margin-bottom:5px;text-transform:uppercase}
+.tb-app-login-field input{
+  width:100%;border:1px solid rgba(120,188,255,.22);background:#07182d;color:#fff;
+  border-radius:12px;padding:13px 14px;outline:none;font-size:13px
+}
+.tb-app-login-field input:focus{border-color:#2fc6ff;box-shadow:0 0 0 3px rgba(47,198,255,.08)}
+.tb-app-login-btn{
+  width:100%;border:0;border-radius:13px;padding:13px 14px;
+  background:linear-gradient(90deg,#087cff,#21c8ff);
+  color:#fff;font-weight:900;font-size:12px;cursor:pointer;margin-top:4px;
+  box-shadow:0 12px 30px rgba(0,139,255,.20)
+}
+.tb-app-login-btn:disabled{opacity:.6;cursor:wait}
+.tb-app-login-secondary{
+  width:100%;margin-top:9px;border:1px solid rgba(255,255,255,.10);
+  border-radius:13px;padding:12px;background:rgba(255,255,255,.04);
+  color:#cfe6f8;font-weight:900;font-size:11px;cursor:pointer
+}
+.tb-app-login-status{
+  margin-top:12px;padding:10px 11px;border-radius:11px;background:rgba(255,255,255,.045);
+  color:#9eb5ce;font-size:10px;line-height:1.45;border:1px solid rgba(255,255,255,.06)
+}
+.tb-app-login-status.ok{color:#7af0b8;border-color:rgba(65,223,155,.25);background:rgba(65,223,155,.07)}
+.tb-app-login-status.err{color:#ffabb3;border-color:rgba(255,92,109,.24);background:rgba(255,92,109,.07)}
+.tb-app-login-note{margin-top:16px;color:#6884a2;font-size:9px;line-height:1.55;text-align:center}
+.tb-app-login-loading{display:inline-block;width:10px;height:10px;border:2px solid rgba(255,255,255,.25);border-top-color:#fff;border-radius:50%;animation:tbAppSpin .8s linear infinite;vertical-align:-2px;margin-right:5px}
+@keyframes tbAppSpin{to{transform:rotate(360deg)}}
+@media(max-width:760px){
+  .tb-app-login-cover{padding:12px}
+  .tb-app-login-shell{grid-template-columns:1fr;border-radius:22px}
+  .tb-app-login-brand{min-height:auto;padding:24px;border-right:0;border-bottom:1px solid rgba(255,255,255,.07)}
+  .tb-app-login-logo img{width:190px}
+  .tb-app-login-copy h1{font-size:27px;margin-top:13px}
+  .tb-app-login-points{grid-template-columns:1fr 1fr}
+  .tb-app-login-version{margin-top:22px}
+  .tb-app-login-panel{padding:26px 22px 30px}
+}
+@media(max-width:460px){
+  .tb-app-login-brand{padding:20px}
+  .tb-app-login-points{grid-template-columns:1fr}
+  .tb-app-login-panel{padding:22px 18px 26px}
+}
+
 </style>
 
   <!-- THE BEST V6 Premium -->
@@ -1332,6 +1445,53 @@ body.tb-premium-nav-active #meus-produtos{
 </head>
 
 <body>
+
+<div id="tbAppLoginCover" class="tb-app-login-cover">
+  <div class="tb-app-login-shell">
+    <section class="tb-app-login-brand">
+      <div class="tb-app-login-logo">
+        <img src="logo-the-best-digital.png" alt="THE BEST DIGITAL">
+      </div>
+
+      <div class="tb-app-login-copy">
+        <span class="tag">☁ PREMIUM • NUVEM</span>
+        <h1>Seu negócio em um <span>só lugar.</span></h1>
+        <p>Acesse o THE BEST Marketplace e acompanhe vendas, estoque, metas, financeiro, relatórios e projeções em tempo real.</p>
+
+        <div class="tb-app-login-points">
+          <div class="tb-app-login-point"><i>📊</i><span>Dashboard gerencial</span></div>
+          <div class="tb-app-login-point"><i>📦</i><span>Estoque em nuvem</span></div>
+          <div class="tb-app-login-point"><i>💰</i><span>Financeiro e DRE</span></div>
+          <div class="tb-app-login-point"><i>📅</i><span>Calendário financeiro</span></div>
+        </div>
+      </div>
+
+      <div class="tb-app-login-version">THE BEST DIGITAL • PROGRAMA PREMIUM</div>
+    </section>
+
+    <section class="tb-app-login-panel">
+      <h2>Bem-vindo</h2>
+      <p>Entre com o mesmo e-mail utilizado na compra do THE BEST KIT MARKETPLACE.</p>
+
+      <div class="tb-app-login-field">
+        <label>E-mail</label>
+        <input id="tbAppLoginEmail" type="email" autocomplete="email" placeholder="seuemail@exemplo.com">
+      </div>
+
+      <div class="tb-app-login-field">
+        <label>Senha</label>
+        <input id="tbAppLoginPassword" type="password" autocomplete="current-password" minlength="8" placeholder="Sua senha">
+      </div>
+
+      <button id="tbAppLoginButton" class="tb-app-login-btn" type="button" onclick="tbAppProgramLogin()">ENTRAR NO PROGRAMA</button>
+      <button class="tb-app-login-secondary" type="button" onclick="tbAppProgramMagicLink()">PRIMEIRO ACESSO / RECEBER LINK</button>
+
+      <div id="tbAppLoginStatus" class="tb-app-login-status">Aguardando login.</div>
+      <div class="tb-app-login-note">O programa não armazena sua senha. A autenticação é feita pelo servidor de acesso Premium.</div>
+    </section>
+  </div>
+</div>
+
 
 
 <div class="app-topbar" aria-label="Cabeçalho do aplicativo">
@@ -2601,7 +2761,7 @@ if ("serviceWorker" in navigator) {
   };
   window.theBestPremiumLogout=async function(){
     if(premiumClient) await premiumClient.auth.signOut();
-    premiumUser=null;premiumActive=false;premiumProducts=[];tbUpdatePremiumSidebarState();showPremiumState();renderProdutos();renderSalesHistory();
+    premiumUser=null;premiumActive=false;premiumProducts=[];tbUpdatePremiumSidebarState();tbUpdateInstalledAppLoginState();showPremiumState();renderProdutos();renderSalesHistory();
     const login=document.getElementById("premiumLoginBox"),acc=document.getElementById("premiumAccountBox"); if(login)login.hidden=false;if(acc)acc.hidden=true;
     setPremiumStatus("Aguardando login","");
   };
@@ -2644,6 +2804,82 @@ if ("serviceWorker" in navigator) {
     },{once:true});
   }
 
+
+  /* V7.1: Login exclusivo da versão instalada */
+  function tbIsStandaloneApp(){
+    return window.matchMedia?.('(display-mode: standalone)').matches || window.navigator.standalone===true;
+  }
+
+  function tbSetAppLoginStatus(text,kind=''){
+    const el=document.getElementById('tbAppLoginStatus');
+    if(!el)return;
+    el.textContent=text;
+    el.className='tb-app-login-status'+(kind?' '+kind:'');
+  }
+
+  function tbSyncProgramLoginToPremium(){
+    const e=document.getElementById('tbAppLoginEmail')?.value||'';
+    const p=document.getElementById('tbAppLoginPassword')?.value||'';
+    const pe=document.getElementById('premiumEmail');
+    const pp=document.getElementById('premiumPassword');
+    if(pe)pe.value=e;
+    if(pp)pp.value=p;
+  }
+
+  window.tbAppProgramLogin=async function(){
+    if(!premiumClient){tbSetAppLoginStatus('Conectando ao servidor de acesso...');return;}
+    const email=(document.getElementById('tbAppLoginEmail')?.value||'').trim().toLowerCase();
+    const password=document.getElementById('tbAppLoginPassword')?.value||'';
+    if(!email||!email.includes('@')){tbSetAppLoginStatus('Digite um e-mail válido.','err');return;}
+    if(password.length<8){tbSetAppLoginStatus('Digite sua senha com pelo menos 8 caracteres.','err');return;}
+
+    const btn=document.getElementById('tbAppLoginButton');
+    if(btn){btn.disabled=true;btn.innerHTML='<span class="tb-app-login-loading"></span>ENTRANDO...';}
+    tbSetAppLoginStatus('Validando seu acesso...');
+
+    const {error}=await premiumClient.auth.signInWithPassword({email,password});
+
+    if(btn){btn.disabled=false;btn.textContent='ENTRAR NO PROGRAMA';}
+    if(error){
+      tbSetAppLoginStatus('E-mail ou senha inválidos. Se for o primeiro acesso, use o botão de receber link.','err');
+      return;
+    }
+
+    tbSetAppLoginStatus('Login realizado. Carregando seu painel...','ok');
+    tbSyncProgramLoginToPremium();
+    await refreshPremiumAccess();
+
+    if(premiumActive){
+      document.body.classList.add('tb-app-authenticated');
+      document.getElementById('painel-premium')?.scrollIntoView({block:'start'});
+    }else{
+      tbSetAppLoginStatus('Login reconhecido, mas o acesso Premium ainda não está liberado para este e-mail.','err');
+    }
+  };
+
+  window.tbAppProgramMagicLink=async function(){
+    if(!premiumClient){tbSetAppLoginStatus('Conectando ao servidor de acesso...');return;}
+    const email=(document.getElementById('tbAppLoginEmail')?.value||'').trim().toLowerCase();
+    if(!email||!email.includes('@')){tbSetAppLoginStatus('Digite seu e-mail primeiro.','err');return;}
+    const pe=document.getElementById('premiumEmail');if(pe)pe.value=email;
+    tbSetAppLoginStatus('Enviando link de primeiro acesso...');
+    const redirect=(window.THE_BEST_PREMIUM_CONFIG?.redirectUrl||location.origin+location.pathname);
+    const {error}=await premiumClient.auth.signInWithOtp({email,options:{emailRedirectTo:redirect,shouldCreateUser:true}});
+    if(error){
+      tbSetAppLoginStatus(error.status===429?'Limite temporário de e-mails atingido. Aguarde e tente novamente.':'Não foi possível enviar o link agora.','err');
+      return;
+    }
+    tbSetAppLoginStatus('Link enviado. Abra o e-mail mais recente e toque no link de acesso.','ok');
+  };
+
+  function tbUpdateInstalledAppLoginState(){
+    if(!tbIsStandaloneApp())return;
+    document.body.classList.toggle('tb-app-authenticated',!!premiumActive && !!premiumUser);
+    if(premiumActive && premiumUser){
+      tbSetAppLoginStatus('Acesso Premium liberado.','ok');
+    }
+  }
+
 window.refreshPremiumAccess=async function(){
   if(!premiumClient){showPremiumState();return;}
 
@@ -2663,6 +2899,7 @@ window.refreshPremiumAccess=async function(){
   if(!premiumUser){
     premiumActive=false;
     tbUpdatePremiumSidebarState();
+    tbUpdateInstalledAppLoginState();
     showPremiumState();
 
     if(login)login.hidden=false;
@@ -2695,6 +2932,7 @@ window.refreshPremiumAccess=async function(){
     data.purchase_status==="approved";
 
   tbUpdatePremiumSidebarState();
+  tbUpdateInstalledAppLoginState();
 
   if(st){
     st.textContent=premiumActive
