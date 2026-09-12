@@ -1661,6 +1661,44 @@ body.tb-premium-nav-active #meus-produtos{
   .tb-reports-shell,.tb-finance-shell{padding:10px!important}
 }
 
+
+/* ===== V7.3: MINHA CONTA SOB DEMANDA ===== */
+body.tb-premium-nav-active #area-cliente{
+  display:none!important;
+}
+body.tb-premium-nav-active.tb-show-account #area-cliente{
+  display:block!important;
+}
+
+/* quando Minha Conta estiver aberta, esconde os demais módulos Premium para ficar com cara de tela própria */
+body.tb-premium-nav-active.tb-show-account #painel-premium,
+body.tb-premium-nav-active.tb-show-account #controle-vendas,
+body.tb-premium-nav-active.tb-show-account #controle-estoque,
+body.tb-premium-nav-active.tb-show-account #controle-metas,
+body.tb-premium-nav-active.tb-show-account #relatorios-premium,
+body.tb-premium-nav-active.tb-show-account #financeiro-premium,
+body.tb-premium-nav-active.tb-show-account #meus-produtos{
+  display:none!important;
+}
+
+body.tb-premium-nav-active.tb-show-account #area-cliente{
+  width:auto!important;
+  max-width:none!important;
+  margin-left:244px!important;
+  margin-right:18px!important;
+  padding-top:28px!important;
+}
+
+@media(max-width:900px){
+  body.tb-premium-nav-active.tb-show-account #area-cliente{
+    margin-left:0!important;
+    margin-right:0!important;
+    width:100%!important;
+    max-width:100%!important;
+    padding:14px 8px 90px!important;
+  }
+}
+
 </style>
 
   <!-- THE BEST V6 Premium -->
@@ -2165,6 +2203,10 @@ body.tb-premium-nav-active #meus-produtos{
     </a>
     <a class="tb-side-link" href="#meus-produtos" data-premium-section="meus-produtos" title="Meus produtos">
       <span class="tb-side-ico">📦</span><span class="tb-side-label">MEUS PRODUTOS</span>
+    </a>
+
+    <a class="tb-side-link" href="#area-cliente" data-premium-section="area-cliente" title="Minha conta" onclick="tbOpenMinhaConta(event)">
+      <span class="tb-side-ico">👤</span><span class="tb-side-label">MINHA CONTA</span>
     </a>
 
     <div class="tb-side-sep"></div>
@@ -2990,11 +3032,36 @@ if ("serviceWorker" in navigator) {
   };
   window.theBestPremiumLogout=async function(){
     if(premiumClient) await premiumClient.auth.signOut();
-    premiumUser=null;premiumActive=false;premiumProducts=[];tbUpdatePremiumSidebarState();tbUpdateInstalledAppLoginState();showPremiumState();renderProdutos();renderSalesHistory();
+    premiumUser=null;premiumActive=false;premiumProducts=[];document.body.classList.remove('tb-show-account');tbUpdatePremiumSidebarState();tbUpdateInstalledAppLoginState();showPremiumState();renderProdutos();renderSalesHistory();
     const login=document.getElementById("premiumLoginBox"),acc=document.getElementById("premiumAccountBox"); if(login)login.hidden=false;if(acc)acc.hidden=true;
     setPremiumStatus("Aguardando login","");
   };
 
+
+
+  /* V7.3: Minha Conta */
+  window.tbOpenMinhaConta=function(ev){
+    if(ev)ev.preventDefault();
+    document.body.classList.add('tb-show-account');
+    tbSetPremiumSidebarActive?.('area-cliente');
+    tbCloseMobileMenu?.();
+    setTimeout(()=>{
+      document.getElementById('area-cliente')?.scrollIntoView({behavior:'smooth',block:'start'});
+    },30);
+  };
+
+  window.tbCloseMinhaConta=function(){
+    document.body.classList.remove('tb-show-account');
+  };
+
+  document.addEventListener('click',function(ev){
+    const link=ev.target.closest?.('.tb-side-link[data-premium-section]');
+    if(!link)return;
+    const id=link.dataset.premiumSection;
+    if(id!=='area-cliente'){
+      document.body.classList.remove('tb-show-account');
+    }
+  });
 
   /* V7.2.1: menu mobile definitivo */
   window.tbToggleMobileMenu=function(){
@@ -3046,7 +3113,7 @@ if ("serviceWorker" in navigator) {
       if(visible?.target?.id)tbSetPremiumSidebarActive(visible.target.id);
     },{rootMargin:'-25% 0px -55% 0px',threshold:[0.05,.2,.5]});
     window.addEventListener('DOMContentLoaded',()=>{
-      ['painel-premium','controle-vendas','controle-estoque','controle-metas','relatorios-premium','financeiro-premium','meus-produtos']
+      ['painel-premium','controle-vendas','controle-estoque','controle-metas','relatorios-premium','financeiro-premium','meus-produtos','area-cliente']
         .forEach(id=>{const el=document.getElementById(id);if(el)tbSideObserver.observe(el);});
     },{once:true});
   }
@@ -3218,6 +3285,7 @@ window.refreshPremiumAccess=async function(){
   showPremiumState();
 
   if(premiumActive){
+    document.body.classList.remove('tb-show-account');
     tbUpdatePremiumSidebarState();
     const dash=document.getElementById("painel-premium"),dashLink=document.getElementById("premiumDashboardLink"); if(dash)dash.hidden=false;if(dashLink)dashLink.hidden=false;
     await loadMarketplaceDashboard();
