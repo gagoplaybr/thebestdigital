@@ -2844,10 +2844,18 @@ window.refreshPremiumAccess=async function(){
     return `${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
   }
 
+  function tbCalendarTodayISO(){
+    const d=new Date();
+    const y=d.getFullYear();
+    const m=String(d.getMonth()+1).padStart(2,'0');
+    const day=String(d.getDate()).padStart(2,'0');
+    return `${y}-${m}-${day}`;
+  }
+
   function tbCalendarStatusText(row){
     if(row.status==='paid')return 'PAGO';
     if(row.status==='received')return 'RECEBIDO';
-    const today=tbLocalDateISO();
+    const today=tbCalendarTodayISO();
     return row.due_date<today?'VENCIDO':'PENDENTE';
   }
 
@@ -2886,7 +2894,7 @@ window.refreshPremiumAccess=async function(){
 
     const firstDay=new Date(y,m,1).getDay();
     const daysInMonth=new Date(y,m+1,0).getDate();
-    const todayKey=tbLocalDateISO();
+    const todayKey=tbCalendarTodayISO();
     let cells='';
     for(let i=0;i<firstDay;i++)cells+='<div class="tb-cal-day empty"></div>';
     for(let d=1;d<=daysInMonth;d++){
@@ -2917,6 +2925,21 @@ window.refreshPremiumAccess=async function(){
     }
   }
 
+
+
+  function tbInitFinanceCalendar(){
+    try{
+      renderFinanceCalendar(Array.isArray(tbAccountRows)?tbAccountRows:[]);
+    }catch(err){
+      console.error("Erro ao iniciar calendário financeiro:",err);
+    }
+  }
+
+  if(document.readyState==="loading"){
+    document.addEventListener("DOMContentLoaded",tbInitFinanceCalendar,{once:true});
+  }else{
+    setTimeout(tbInitFinanceCalendar,0);
+  }
 
   /* Contas a pagar e receber */
   let tbAccountRows=[];
@@ -3104,7 +3127,8 @@ window.refreshPremiumAccess=async function(){
     const list=document.getElementById('accountsList');
     if(error){console.error('Erro accounts:',error);if(list)list.innerHTML='<div class="v5-empty">Não foi possível carregar as contas. Confira Data API e RLS da tabela accounts_payable_receivable.</div>';return;}
     tbAccountRows=data||[];
-    const today=tbLocalDateISO();
+    renderFinanceCalendar(tbAccountRows);
+    const today=tbCalendarTodayISO();
     const pending=tbAccountRows.filter(x=>x.status==='pending');
     const receivable=pending.filter(x=>x.type==='receivable').reduce((a,x)=>a+Number(x.amount||0),0);
     const payable=pending.filter(x=>x.type==='payable').reduce((a,x)=>a+Number(x.amount||0),0);
