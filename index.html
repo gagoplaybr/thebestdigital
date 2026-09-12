@@ -1170,6 +1170,134 @@
 .tb-calendar-detail{margin-top:12px;background:#08192d;border:1px solid rgba(255,255,255,.06);border-radius:13px;padding:13px}.tb-calendar-detail h4{font-size:11px;margin:0 0 8px}.tb-cal-detail-list{display:grid;gap:6px}.tb-cal-detail-row{display:grid;grid-template-columns:1fr auto auto;gap:9px;align-items:center;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.055);font-size:10px}.tb-cal-detail-row:last-child{border-bottom:0}.tb-cal-detail-row small{display:block;color:#7894b4;margin-top:2px}.tb-cal-detail-row .receive{color:#55e6a8;font-weight:900}.tb-cal-detail-row .pay{color:#ff9da8;font-weight:900}.tb-cal-status{padding:4px 7px;border-radius:999px;background:rgba(255,193,74,.10);color:#ffd17e;font-size:8px;font-weight:900}.tb-cal-status.done{background:rgba(45,211,139,.10);color:#78efb7}
 @media(max-width:700px){.tb-calendar-summary{grid-template-columns:1fr}.tb-cal-day{min-height:70px;padding:5px}.tb-cal-event{font-size:0;padding:3px;height:6px}.tb-cal-event.receive{background:#38d99b}.tb-cal-event.pay{background:#ff7184}.tb-calendar-week{gap:3px}.tb-calendar-grid{gap:3px}.tb-cal-detail-row{grid-template-columns:1fr auto}.tb-cal-detail-row .tb-cal-status{grid-column:1/-1;width:max-content}}
 
+
+/* ===== V7.0: MENU PREMIUM LATERAL FIXO ===== */
+.tb-premium-sidebar{
+  display:none;
+  position:fixed;
+  left:12px;
+  top:86px;
+  bottom:14px;
+  width:220px;
+  z-index:145;
+  padding:14px 10px;
+  border:1px solid rgba(69,204,255,.24);
+  border-radius:22px;
+  background:
+    radial-gradient(circle at 50% 0%,rgba(0,153,255,.18),transparent 30%),
+    linear-gradient(180deg,rgba(5,24,48,.98),rgba(4,17,34,.985));
+  box-shadow:0 22px 70px rgba(0,0,0,.38), inset 0 0 0 1px rgba(255,255,255,.02);
+  backdrop-filter:blur(18px);
+  overflow:hidden;
+}
+body.tb-premium-nav-active .tb-premium-sidebar{display:flex;flex-direction:column}
+.tb-side-brand{
+  display:flex;align-items:center;gap:10px;
+  padding:7px 8px 15px;
+  margin-bottom:8px;
+  border-bottom:1px solid rgba(255,255,255,.08)
+}
+.tb-side-brand img{width:42px;height:42px;object-fit:contain}
+.tb-side-brand b{display:block;font-size:12px;line-height:1.05;letter-spacing:.5px}
+.tb-side-brand span{display:block;color:#50d3ff;font-size:9px;margin-top:3px;letter-spacing:1.5px}
+.tb-side-menu{display:grid;gap:5px}
+.tb-side-link,.tb-side-button{
+  width:100%;
+  min-height:42px;
+  border:1px solid transparent;
+  border-radius:12px;
+  background:transparent;
+  color:#c7d7ea;
+  text-decoration:none;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:9px 10px;
+  font-size:11px;
+  font-weight:900;
+  cursor:pointer;
+  text-align:left;
+  transition:.18s ease;
+}
+.tb-side-link:hover,.tb-side-button:hover{
+  background:rgba(0,139,255,.10);
+  border-color:rgba(69,204,255,.18);
+  color:#fff;
+  transform:translateX(2px)
+}
+.tb-side-link.active{
+  color:#fff;
+  background:linear-gradient(90deg,rgba(0,105,255,.72),rgba(0,183,255,.32));
+  border-color:rgba(85,215,255,.45);
+  box-shadow:0 8px 24px rgba(0,126,255,.20)
+}
+.tb-side-ico{
+  width:26px;height:26px;flex:0 0 26px;
+  border-radius:8px;
+  display:grid;place-items:center;
+  background:rgba(0,145,255,.09);
+  font-size:15px
+}
+.tb-side-sep{height:1px;background:rgba(255,255,255,.08);margin:8px 5px}
+.tb-side-button.danger{color:#ff9aa5}.tb-side-button.danger .tb-side-ico{background:rgba(255,79,96,.08)}
+.tb-side-bottom{margin-top:auto;padding:12px 8px 3px;border-top:1px solid rgba(255,255,255,.07);text-align:center}
+.tb-side-bottom b{display:block;font-size:10px}.tb-side-bottom span{display:block;color:#7894b4;font-size:8px;margin-top:3px}
+
+/* remove o menu horizontal antigo quando o lateral estiver ativo */
+body.tb-premium-nav-active .premium-account-actions{display:none!important}
+
+/* abre espaço para o menu fixo sem cobrir o sistema */
+body.tb-premium-nav-active #painel-premium,
+body.tb-premium-nav-active #controle-vendas,
+body.tb-premium-nav-active #controle-estoque,
+body.tb-premium-nav-active #controle-metas,
+body.tb-premium-nav-active #relatorios-premium,
+body.tb-premium-nav-active #financeiro-premium,
+body.tb-premium-nav-active #meus-produtos{
+  width:auto;
+  max-width:none;
+  margin-left:244px;
+  margin-right:18px;
+}
+
+/* mantém a Área do Cliente centralizada, mas sem ficar escondida pelo menu */
+body.tb-premium-nav-active #area-cliente{
+  max-width:none;
+  margin-left:244px;
+  margin-right:18px;
+}
+
+/* PWA instalado: o menu também fica lateral */
+@media (display-mode:standalone){
+  body.tb-premium-nav-active{padding-bottom:18px}
+  body.tb-premium-nav-active .tb-premium-sidebar{top:12px;bottom:12px}
+  body.tb-premium-nav-active .app-bottom-nav{display:none!important}
+}
+
+/* telas menores viram trilho lateral compacto */
+@media(max-width:900px){
+  .tb-premium-sidebar{left:6px;top:76px;bottom:8px;width:68px;padding:10px 7px;border-radius:18px}
+  .tb-side-brand{justify-content:center;padding:5px 0 12px}
+  .tb-side-brand img{width:38px;height:38px}
+  .tb-side-brand div,.tb-side-link .tb-side-label,.tb-side-button .tb-side-label,.tb-side-bottom{display:none}
+  .tb-side-link,.tb-side-button{justify-content:center;padding:7px;min-height:44px}
+  .tb-side-ico{width:30px;height:30px;flex-basis:30px;font-size:16px}
+  body.tb-premium-nav-active #painel-premium,
+  body.tb-premium-nav-active #controle-vendas,
+  body.tb-premium-nav-active #controle-estoque,
+  body.tb-premium-nav-active #controle-metas,
+  body.tb-premium-nav-active #relatorios-premium,
+  body.tb-premium-nav-active #financeiro-premium,
+  body.tb-premium-nav-active #meus-produtos,
+  body.tb-premium-nav-active #area-cliente{
+    margin-left:82px;
+    margin-right:8px;
+  }
+}
+@media (display-mode:standalone) and (max-width:900px){
+  .tb-premium-sidebar{top:8px}
+}
+
 </style>
 
   <!-- THE BEST V6 Premium -->
@@ -1594,6 +1722,52 @@
     <div class="client-note">O app não armazena senha ou dados de pagamento. A confirmação Premium é feita pelo e-mail de compra e pelo servidor de acesso.</div>
   </div>
 </section>
+
+
+<nav id="tbPremiumSidebar" class="tb-premium-sidebar" aria-label="Menu Premium">
+  <div class="tb-side-brand">
+    <img src="/icons/icon-192.png" alt="">
+    <div><b>THE BEST</b><span>DIGITAL</span></div>
+  </div>
+
+  <div class="tb-side-menu">
+    <a class="tb-side-link active" href="#painel-premium" data-premium-section="painel-premium" title="Dashboard">
+      <span class="tb-side-ico">📊</span><span class="tb-side-label">DASHBOARD</span>
+    </a>
+    <a class="tb-side-link" href="#controle-vendas" data-premium-section="controle-vendas" title="Vendas">
+      <span class="tb-side-ico">💰</span><span class="tb-side-label">VENDAS</span>
+    </a>
+    <a class="tb-side-link" href="#controle-estoque" data-premium-section="controle-estoque" title="Estoque">
+      <span class="tb-side-ico">📦</span><span class="tb-side-label">ESTOQUE</span>
+    </a>
+    <a class="tb-side-link" href="#controle-metas" data-premium-section="controle-metas" onclick="setTimeout(loadGoalForm,0)" title="Metas">
+      <span class="tb-side-ico">🎯</span><span class="tb-side-label">METAS</span>
+    </a>
+    <a class="tb-side-link" href="#relatorios-premium" data-premium-section="relatorios-premium" onclick="setTimeout(loadPremiumReports,0)" title="Relatórios">
+      <span class="tb-side-ico">📑</span><span class="tb-side-label">RELATÓRIOS</span>
+    </a>
+    <a class="tb-side-link" href="#financeiro-premium" data-premium-section="financeiro-premium" onclick="setTimeout(loadFinanceiroPremium,0)" title="Financeiro">
+      <span class="tb-side-ico">💵</span><span class="tb-side-label">FINANCEIRO</span>
+    </a>
+    <a class="tb-side-link" href="#meus-produtos" data-premium-section="meus-produtos" title="Meus produtos">
+      <span class="tb-side-ico">📦</span><span class="tb-side-label">MEUS PRODUTOS</span>
+    </a>
+
+    <div class="tb-side-sep"></div>
+
+    <button class="tb-side-button" type="button" onclick="refreshPremiumAccess()" title="Atualizar acesso">
+      <span class="tb-side-ico">↻</span><span class="tb-side-label">ATUALIZAR ACESSO</span>
+    </button>
+    <button class="tb-side-button danger" type="button" onclick="theBestPremiumLogout()" title="Sair">
+      <span class="tb-side-ico">↪</span><span class="tb-side-label">SAIR</span>
+    </button>
+  </div>
+
+  <div class="tb-side-bottom">
+    <b>THE BEST DIGITAL</b>
+    <span>Premium • Nuvem</span>
+  </div>
+</nav>
 
 <section id="painel-premium" class="tb-system-dashboard" hidden aria-label="Dashboard THE BEST Marketplace">
   <div class="tb-dash-shell">
@@ -2402,10 +2576,41 @@ if ("serviceWorker" in navigator) {
   };
   window.theBestPremiumLogout=async function(){
     if(premiumClient) await premiumClient.auth.signOut();
-    premiumUser=null;premiumActive=false;premiumProducts=[];showPremiumState();renderProdutos();renderSalesHistory();
+    premiumUser=null;premiumActive=false;premiumProducts=[];tbUpdatePremiumSidebarState();showPremiumState();renderProdutos();renderSalesHistory();
     const login=document.getElementById("premiumLoginBox"),acc=document.getElementById("premiumAccountBox"); if(login)login.hidden=false;if(acc)acc.hidden=true;
     setPremiumStatus("Aguardando login","");
   };
+
+  /* V7.0: comportamento do menu lateral Premium */
+  function tbSetPremiumSidebarActive(sectionId){
+    document.querySelectorAll('.tb-side-link[data-premium-section]').forEach(a=>{
+      a.classList.toggle('active',a.dataset.premiumSection===sectionId);
+    });
+  }
+
+  document.addEventListener('click',function(ev){
+    const link=ev.target.closest?.('.tb-side-link[data-premium-section]');
+    if(!link)return;
+    tbSetPremiumSidebarActive(link.dataset.premiumSection);
+  });
+
+  function tbUpdatePremiumSidebarState(){
+    document.body.classList.toggle('tb-premium-nav-active',!!premiumActive && !!premiumUser);
+  }
+
+  if('IntersectionObserver' in window){
+    const tbSideObserver=new IntersectionObserver(entries=>{
+      const visible=entries
+        .filter(e=>e.isIntersecting)
+        .sort((a,b)=>b.intersectionRatio-a.intersectionRatio)[0];
+      if(visible?.target?.id)tbSetPremiumSidebarActive(visible.target.id);
+    },{rootMargin:'-25% 0px -55% 0px',threshold:[0.05,.2,.5]});
+    window.addEventListener('DOMContentLoaded',()=>{
+      ['painel-premium','controle-vendas','controle-estoque','controle-metas','relatorios-premium','financeiro-premium','meus-produtos']
+        .forEach(id=>{const el=document.getElementById(id);if(el)tbSideObserver.observe(el);});
+    },{once:true});
+  }
+
 window.refreshPremiumAccess=async function(){
   if(!premiumClient){showPremiumState();return;}
 
@@ -2424,6 +2629,7 @@ window.refreshPremiumAccess=async function(){
 
   if(!premiumUser){
     premiumActive=false;
+    tbUpdatePremiumSidebarState();
     showPremiumState();
 
     if(login)login.hidden=false;
@@ -2454,6 +2660,8 @@ window.refreshPremiumAccess=async function(){
     !error &&
     data.premium===true &&
     data.purchase_status==="approved";
+
+  tbUpdatePremiumSidebarState();
 
   if(st){
     st.textContent=premiumActive
@@ -2492,6 +2700,7 @@ window.refreshPremiumAccess=async function(){
   showPremiumState();
 
   if(premiumActive){
+    tbUpdatePremiumSidebarState();
     const dash=document.getElementById("painel-premium"),dashLink=document.getElementById("premiumDashboardLink"); if(dash)dash.hidden=false;if(dashLink)dashLink.hidden=false;
     await loadMarketplaceDashboard();
     await renderProdutos();
