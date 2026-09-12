@@ -1128,6 +1128,24 @@
 @media(max-width:650px){.tb-accounts-form{grid-template-columns:1fr 1fr}.tb-account-item{grid-template-columns:1fr auto}.tb-account-item-actions{grid-column:1/-1;justify-content:flex-start}}
 @media(max-width:460px){.tb-accounts-form,.tb-accounts-kpis{grid-template-columns:1fr}}
 
+
+/* ===== V6.7: PROJEÇÃO FINANCEIRA ===== */
+.tb-proj-card{margin-top:12px;background:#0b1d33;border:1px solid rgba(255,255,255,.07);border-radius:17px;padding:16px}
+.tb-proj-head{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.tb-proj-head h3{font-size:13px;margin:0}.tb-proj-head p{font-size:10px;color:#7f99b7;margin-top:3px}
+.tb-proj-summary{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;margin-top:14px}
+.tb-proj-kpi{background:#08192d;border:1px solid rgba(255,255,255,.06);border-radius:14px;padding:13px}
+.tb-proj-kpi span{display:block;color:#7894b4;font-size:9px;text-transform:uppercase;font-weight:900}
+.tb-proj-kpi b{display:block;font-size:18px;margin-top:5px}.tb-proj-kpi small{display:block;color:#6edaff;font-size:10px;margin-top:4px}
+.tb-proj-kpi.current b{color:#72dcff}.tb-proj-kpi.in b{color:#55e6a8}.tb-proj-kpi.out b{color:#ff9da8}.tb-proj-kpi.projected b{color:#fff}
+.tb-proj-periods{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:12px}
+.tb-proj-period{background:linear-gradient(145deg,#102b4a,#0b1d33);border:1px solid rgba(255,255,255,.07);border-radius:15px;padding:14px}
+.tb-proj-period h4{font-size:12px;margin-bottom:10px}.tb-proj-line{display:flex;justify-content:space-between;gap:12px;font-size:10px;color:#9bb0c8;margin:7px 0}.tb-proj-line b{color:#eaf7ff}
+.tb-proj-balance{margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,.07);display:flex;justify-content:space-between;font-size:11px;font-weight:900}.tb-proj-balance strong{color:#55e6a8}
+.tb-proj-negative strong{color:#ff8f9b}
+@media(max-width:900px){.tb-proj-summary{grid-template-columns:repeat(2,1fr)}.tb-proj-periods{grid-template-columns:1fr}}
+@media(max-width:520px){.tb-proj-summary{grid-template-columns:1fr}}
+
 </style>
 
   <!-- THE BEST V6 Premium -->
@@ -1709,6 +1727,46 @@
       <div class="tb-cashflow-note">Saldo de caixa = entradas de vendas + contas recebidas − despesas cadastradas. Contas recebidas afetam o caixa, mas não duplicam faturamento nem alteram a DRE.</div>
     </div>
 
+
+
+    
+    <div class="tb-proj-card">
+      <div class="tb-proj-head">
+        <div>
+          <h3>🔮 PROJEÇÃO FINANCEIRA</h3>
+          <p>Saldo atual somado às contas a receber e descontado das contas a pagar por vencimento.</p>
+        </div>
+        <span class="tb-dre-badge">7 • 30 • 90 DIAS</span>
+      </div>
+
+      <div class="tb-proj-summary">
+        <div class="tb-proj-kpi current"><span>Caixa atual</span><b id="projCurrentCash">R$ 0,00</b><small>Entradas realizadas menos saídas realizadas</small></div>
+        <div class="tb-proj-kpi in"><span>A receber pendente</span><b id="projPendingIn">R$ 0,00</b><small>Todas as contas pendentes</small></div>
+        <div class="tb-proj-kpi out"><span>A pagar pendente</span><b id="projPendingOut">R$ 0,00</b><small>Todas as contas pendentes</small></div>
+        <div class="tb-proj-kpi projected"><span>Saldo projetado total</span><b id="projTotalBalance">R$ 0,00</b><small>Caixa + receber − pagar</small></div>
+      </div>
+
+      <div class="tb-proj-periods">
+        <div class="tb-proj-period">
+          <h4>📅 Próximos 7 dias</h4>
+          <div class="tb-proj-line"><span>A receber</span><b id="proj7In">R$ 0,00</b></div>
+          <div class="tb-proj-line"><span>A pagar</span><b id="proj7Out">R$ 0,00</b></div>
+          <div class="tb-proj-balance"><span>Saldo projetado</span><strong id="proj7Balance">R$ 0,00</strong></div>
+        </div>
+        <div class="tb-proj-period">
+          <h4>📆 Próximos 30 dias</h4>
+          <div class="tb-proj-line"><span>A receber</span><b id="proj30In">R$ 0,00</b></div>
+          <div class="tb-proj-line"><span>A pagar</span><b id="proj30Out">R$ 0,00</b></div>
+          <div class="tb-proj-balance"><span>Saldo projetado</span><strong id="proj30Balance">R$ 0,00</strong></div>
+        </div>
+        <div class="tb-proj-period">
+          <h4>🗓️ Próximos 90 dias</h4>
+          <div class="tb-proj-line"><span>A receber</span><b id="proj90In">R$ 0,00</b></div>
+          <div class="tb-proj-line"><span>A pagar</span><b id="proj90Out">R$ 0,00</b></div>
+          <div class="tb-proj-balance"><span>Saldo projetado</span><strong id="proj90Balance">R$ 0,00</strong></div>
+        </div>
+      </div>
+    </div>
 
 
     <div class="tb-dre-card">
@@ -2948,7 +3006,7 @@ window.refreshPremiumAccess=async function(){
     const sixStartISO=sixStart.toISOString();
     const sixStartDate=tbLocalDateISO(sixStart);
 
-    const [expenseRes,salesRes,expense6Res,sales6Res,receivable6Res]=await Promise.all([
+    const [expenseRes,salesRes,expense6Res,sales6Res,receivable6Res,pendingAccountsRes]=await Promise.all([
       premiumClient.from('expenses')
         .select('id,description,category,amount,expense_date,payment_method,source_account_id,created_at')
         .eq('user_id',premiumUser.id)
@@ -2981,6 +3039,12 @@ window.refreshPremiumAccess=async function(){
         .eq('status','received')
         .gte('received_at',sixStartISO)
         .order('received_at',{ascending:true})
+        .limit(3000),
+      premiumClient.from('accounts_payable_receivable')
+        .select('id,type,amount,due_date,status')
+        .eq('user_id',premiumUser.id)
+        .eq('status','pending')
+        .order('due_date',{ascending:true})
         .limit(3000)
     ]);
 
@@ -3117,6 +3181,54 @@ window.refreshPremiumAccess=async function(){
     set('cashflowInTotal',brl(cfIn));
     set('cashflowOutTotal',brl(cfOut));
     set('cashflowBalanceTotal',brl(cfBal));
+
+    /* Projeção financeira 7 / 30 / 90 dias */
+    const pendingAccounts=pendingAccountsRes?.error?[]:(pendingAccountsRes?.data||[]);
+    const today=new Date();
+    today.setHours(0,0,0,0);
+
+    function projectionForDays(days){
+      const end=new Date(today);
+      end.setDate(end.getDate()+days);
+      let incoming=0,outgoing=0;
+      pendingAccounts.forEach(a=>{
+        if(!a.due_date)return;
+        const due=new Date(a.due_date+'T12:00:00');
+        if(Number.isNaN(due.getTime()))return;
+        if(due>=today && due<=end){
+          if(a.type==='receivable')incoming+=Number(a.amount||0);
+          if(a.type==='payable')outgoing+=Number(a.amount||0);
+        }
+      });
+      return {incoming,outgoing,balance:cfBal+incoming-outgoing};
+    }
+
+    const allPendingIn=pendingAccounts
+      .filter(a=>a.type==='receivable')
+      .reduce((s,a)=>s+Number(a.amount||0),0);
+    const allPendingOut=pendingAccounts
+      .filter(a=>a.type==='payable')
+      .reduce((s,a)=>s+Number(a.amount||0),0);
+    const projectedTotal=cfBal+allPendingIn-allPendingOut;
+
+    const p7=projectionForDays(7);
+    const p30=projectionForDays(30);
+    const p90=projectionForDays(90);
+
+    set('projCurrentCash',brl(cfBal));
+    set('projPendingIn',brl(allPendingIn));
+    set('projPendingOut',brl(allPendingOut));
+    set('projTotalBalance',brl(projectedTotal));
+    set('proj7In',brl(p7.incoming)); set('proj7Out',brl(p7.outgoing)); set('proj7Balance',brl(p7.balance));
+    set('proj30In',brl(p30.incoming)); set('proj30Out',brl(p30.outgoing)); set('proj30Balance',brl(p30.balance));
+    set('proj90In',brl(p90.incoming)); set('proj90Out',brl(p90.outgoing)); set('proj90Balance',brl(p90.balance));
+
+    ['projTotalBalance','proj7Balance','proj30Balance','proj90Balance'].forEach(id=>{
+      const el=document.getElementById(id);
+      if(!el)return;
+      const val=id==='projTotalBalance'?projectedTotal:id==='proj7Balance'?p7.balance:id==='proj30Balance'?p30.balance:p90.balance;
+      el.style.color=val>=0?'#55e6a8':'#ff8f9b';
+    });
 
     const chart=document.getElementById('cashflowChart');
     if(chart){
