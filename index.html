@@ -1868,7 +1868,7 @@ body.tb-user-logged-in #calculadora{
 
 
 <style id="tb-v811-fixes">
-/* V8.1.4.1: correções da vitrine Premium */
+/* V8.1.5.1: correções da vitrine Premium */
 @media (min-width: 769px){
   .tb-mobile-menu-toggle,
   .tb-menu-toggle,
@@ -1930,6 +1930,34 @@ body.tb-user-logged-in #calculadora{
 }
 </style>
 
+
+<style id="tb-v815-calendar-account-link">
+.tb-account-item.tb-calendar-hit{
+  position:relative;
+  border-color:#22d3ee !important;
+  box-shadow:0 0 0 2px rgba(34,211,238,.22),0 0 28px rgba(14,165,233,.28) !important;
+  animation:tbCalendarPulse 1s ease-in-out 3;
+}
+.tb-account-item.tb-calendar-hit::before{
+  content:"EVENTO DO CALENDÁRIO";
+  position:absolute;
+  right:12px;
+  top:-11px;
+  padding:4px 8px;
+  border-radius:999px;
+  background:#0ea5e9;
+  color:#fff;
+  font-size:10px;
+  font-weight:900;
+  letter-spacing:.04em;
+  z-index:4;
+}
+@keyframes tbCalendarPulse{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-2px)}
+}
+</style>
+
 </head>
 
 <body>
@@ -1958,7 +1986,7 @@ body.tb-user-logged-in #calculadora{
         </div>
       </div>
 
-      <div class="tb-app-login-version">THE BEST DIGITAL • PROGRAMA PREMIUM • V8.1.4</div>
+      <div class="tb-app-login-version">THE BEST DIGITAL • PROGRAMA PREMIUM • V8.1.5</div>
     </section>
 
     <section class="tb-app-login-panel">
@@ -3637,7 +3665,7 @@ window.refreshPremiumAccess=async function(){
   window.limparFormularioProduto=function(){ ["v5ProdutoNome","v5ProdutoSku","v5ProdutoCusto","v5ProdutoVenda","v5ProdutoFrete"].forEach(id=>{const e=document.getElementById(id);if(e)e.value="";}); };
   window.excluirProdutoV5=async function(id){if(!requirePremium())return;const {error}=await premiumClient.from("saved_products").delete().eq("id",id).eq("user_id",premiumUser.id);if(!error){await renderProdutos();toast("Produto excluído.");}};
   window.usarProdutoV5=function(id){ if(!requirePremium())return; const x=premiumProducts.find(i=>String(i.id)===String(id));if(!x)return; document.getElementById("produto").value=x.name;document.getElementById("custo").value=x.cost||"";document.getElementById("venda").value=x.sale_price||"";document.getElementById("frete").value=x.shipping||"";document.getElementById("calculadora").scrollIntoView({behavior:"smooth"});toast("Produto carregado na calculadora."); 
-    /* V8.1.4: depois de carregar o produto, abre a Calculadora automaticamente */
+    /* V8.1.5: depois de carregar o produto, abre a Calculadora automaticamente */
     if(typeof tbShowPremiumModule === "function"){
       tbShowPremiumModule("calculadora",{scroll:true});
     }else{
@@ -4065,6 +4093,31 @@ window.refreshPremiumAccess=async function(){
   window.openFinanceCalendarDay=function(dateKey){
     tbCalendarSelected=dateKey;
     renderFinanceCalendar(tbCalendarRows);
+    setTimeout(function(){ tbPointCalendarAccounts(dateKey); }, 80);
+  };
+
+  window.tbPointCalendarAccounts=function(dateKey){
+    const list=document.getElementById('accountsList');
+    if(!list)return;
+
+    document.querySelectorAll('.tb-account-item.tb-calendar-hit').forEach(el=>{
+      el.classList.remove('tb-calendar-hit');
+    });
+
+    const matches=[...list.querySelectorAll('.tb-account-item')].filter(el=>el.dataset.dueDate===dateKey);
+    if(!matches.length){
+      list.scrollIntoView({behavior:'smooth',block:'center'});
+      return;
+    }
+
+    matches.forEach(el=>el.classList.add('tb-calendar-hit'));
+
+    const first=matches[0];
+    first.scrollIntoView({behavior:'smooth',block:'center'});
+
+    setTimeout(()=>{
+      matches.forEach(el=>el.classList.remove('tb-calendar-hit'));
+    },5000);
   };
 
   function renderFinanceCalendar(rows){
@@ -4099,7 +4152,7 @@ window.refreshPremiumAccess=async function(){
       const dayRows=monthRows.filter(r=>r.due_date===key);
       const preview=dayRows.slice(0,3).map(r=>{
         const done=r.status==='paid'||r.status==='received';
-        return `<span class="tb-cal-event ${r.type==='receivable'?'receive':'pay'} ${done?'done':''}" title="${esc(r.description)} • ${brl(r.amount)}">${r.type==='receivable'?'↑':'↓'} ${esc(r.description)} ${brl(r.amount)}</span>`;
+        return `<span class="tb-cal-event ${r.type==='receivable'?'receive':'pay'} ${done?'done':''}" title="${esc(r.description)} • ${brl(r.amount)}" onclick="event.stopPropagation();openFinanceCalendarDay('${key}')">${r.type==='receivable'?'↑':'↓'} ${esc(r.description)} ${brl(r.amount)}</span>`;
       }).join('');
       const more=dayRows.length>3?`<div class="tb-cal-more">+${dayRows.length-3} lançamento(s)</div>`:'';
       cells+=`<div class="tb-cal-day ${key===todayKey?'today':''} ${key===tbCalendarSelected?'selected':''}" onclick="openFinanceCalendarDay('${key}')"><div class="tb-cal-num">${d}</div><div class="tb-cal-events">${preview}${more}</div></div>`;
@@ -4341,7 +4394,7 @@ window.refreshPremiumAccess=async function(){
       const statusClass=done?'done':(isOverdue?'overdue':'');
       const typeLabel=x.type==='receivable'?'A RECEBER':'A PAGAR';
       const dateLabel=x.due_date?new Date(x.due_date+'T12:00:00').toLocaleDateString('pt-BR'):'-';
-      return `<div class="tb-account-item">
+      return `<div class="tb-account-item" data-account-id="${x.id}" data-due-date="${esc(x.due_date||'')}" data-account-type="${esc(x.type||'')}">
         <div class="tb-account-main"><strong>${esc(x.description)}</strong><small>${typeLabel} • ${esc(x.category||'Outros')} • Vence ${dateLabel} • ${esc(x.payment_method||'-')}</small></div>
         <span class="tb-account-value ${x.type==='receivable'?'receive':'pay'}">${brl(x.amount)}</span>
         <span class="tb-account-status ${statusClass}">${statusText}</span>
