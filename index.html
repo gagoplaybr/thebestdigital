@@ -1699,6 +1699,47 @@ body.tb-premium-nav-active.tb-show-account #area-cliente{
   }
 }
 
+
+/* ===== V7.4: UM MÓDULO POR VEZ ===== */
+body.tb-premium-nav-active.tb-single-module #painel-premium,
+body.tb-premium-nav-active.tb-single-module #controle-vendas,
+body.tb-premium-nav-active.tb-single-module #controle-estoque,
+body.tb-premium-nav-active.tb-single-module #controle-metas,
+body.tb-premium-nav-active.tb-single-module #relatorios-premium,
+body.tb-premium-nav-active.tb-single-module #financeiro-premium,
+body.tb-premium-nav-active.tb-single-module #meus-produtos,
+body.tb-premium-nav-active.tb-single-module #area-cliente{
+  display:none!important;
+}
+
+body.tb-premium-nav-active.tb-single-module #painel-premium.tb-module-visible,
+body.tb-premium-nav-active.tb-single-module #controle-vendas.tb-module-visible,
+body.tb-premium-nav-active.tb-single-module #controle-estoque.tb-module-visible,
+body.tb-premium-nav-active.tb-single-module #controle-metas.tb-module-visible,
+body.tb-premium-nav-active.tb-single-module #relatorios-premium.tb-module-visible,
+body.tb-premium-nav-active.tb-single-module #financeiro-premium.tb-module-visible,
+body.tb-premium-nav-active.tb-single-module #meus-produtos.tb-module-visible,
+body.tb-premium-nav-active.tb-single-module #area-cliente.tb-module-visible{
+  display:block!important;
+}
+
+/* Minha Conta continua com o mesmo recuo do sistema */
+body.tb-premium-nav-active.tb-single-module #area-cliente.tb-module-visible{
+  width:auto!important;
+  max-width:none!important;
+  margin-left:244px!important;
+  margin-right:18px!important;
+}
+
+@media(max-width:900px){
+  body.tb-premium-nav-active.tb-single-module #area-cliente.tb-module-visible{
+    width:100%!important;
+    max-width:100%!important;
+    margin-left:0!important;
+    margin-right:0!important;
+  }
+}
+
 </style>
 
   <!-- THE BEST V6 Premium -->
@@ -3032,12 +3073,77 @@ if ("serviceWorker" in navigator) {
   };
   window.theBestPremiumLogout=async function(){
     if(premiumClient) await premiumClient.auth.signOut();
-    premiumUser=null;premiumActive=false;premiumProducts=[];document.body.classList.remove('tb-show-account');tbUpdatePremiumSidebarState();tbUpdateInstalledAppLoginState();showPremiumState();renderProdutos();renderSalesHistory();
+    premiumUser=null;premiumActive=false;premiumProducts=[];document.body.classList.remove('tb-show-account','tb-single-module');TB_PREMIUM_MODULES.forEach(id=>document.getElementById(id)?.classList.remove('tb-module-visible'));tbUpdatePremiumSidebarState();tbUpdateInstalledAppLoginState();showPremiumState();renderProdutos();renderSalesHistory();
     const login=document.getElementById("premiumLoginBox"),acc=document.getElementById("premiumAccountBox"); if(login)login.hidden=false;if(acc)acc.hidden=true;
     setPremiumStatus("Aguardando login","");
   };
 
 
+
+
+  /* V7.4: navegação Premium mostrando apenas o módulo clicado */
+  const TB_PREMIUM_MODULES=[
+    'painel-premium',
+    'controle-vendas',
+    'controle-estoque',
+    'controle-metas',
+    'relatorios-premium',
+    'financeiro-premium',
+    'meus-produtos',
+    'area-cliente'
+  ];
+
+  window.tbShowPremiumModule=function(sectionId,opts={}){
+    if(!TB_PREMIUM_MODULES.includes(sectionId))sectionId='painel-premium';
+
+    document.body.classList.add('tb-single-module');
+    document.body.classList.toggle('tb-show-account',sectionId==='area-cliente');
+
+    TB_PREMIUM_MODULES.forEach(id=>{
+      const el=document.getElementById(id);
+      if(el)el.classList.toggle('tb-module-visible',id===sectionId);
+    });
+
+    tbSetPremiumSidebarActive?.(sectionId);
+
+    /* Atualiza o conteúdo do módulo ao abrir */
+    if(sectionId==='painel-premium') setTimeout(()=>loadMarketplaceDashboard?.(),0);
+    if(sectionId==='controle-vendas') setTimeout(()=>renderSalesHistory?.(),0);
+    if(sectionId==='controle-estoque') setTimeout(()=>renderStockControl?.(),0);
+    if(sectionId==='controle-metas') setTimeout(()=>loadGoalForm?.(),0);
+    if(sectionId==='relatorios-premium') setTimeout(()=>loadPremiumReports?.(),0);
+    if(sectionId==='financeiro-premium') setTimeout(()=>loadFinanceiroPremium?.(),0);
+    if(sectionId==='meus-produtos') setTimeout(()=>renderProdutos?.(),0);
+
+    if(window.innerWidth<=900)tbCloseMobileMenu?.();
+
+    if(opts.scroll!==false){
+      setTimeout(()=>{
+        document.getElementById(sectionId)?.scrollIntoView({behavior:'smooth',block:'start'});
+      },30);
+    }
+
+    try{history.replaceState(null,'','#'+sectionId);}catch(_){}
+  };
+
+  /* substitui o comportamento anterior do clique do menu */
+  document.addEventListener('click',function(ev){
+    const link=ev.target.closest?.('.tb-side-link[data-premium-section]');
+    if(!link)return;
+    ev.preventDefault();
+    ev.stopImmediatePropagation();
+    tbShowPremiumModule(link.dataset.premiumSection);
+  },true);
+
+  /* Minha Conta usa a mesma navegação modular */
+  window.tbOpenMinhaConta=function(ev){
+    if(ev)ev.preventDefault();
+    tbShowPremiumModule('area-cliente');
+  };
+
+  window.tbCloseMinhaConta=function(){
+    tbShowPremiumModule('painel-premium');
+  };
 
   /* V7.3: Minha Conta */
   window.tbOpenMinhaConta=function(ev){
@@ -3287,6 +3393,7 @@ window.refreshPremiumAccess=async function(){
   if(premiumActive){
     document.body.classList.remove('tb-show-account');
     tbUpdatePremiumSidebarState();
+    setTimeout(()=>tbShowPremiumModule('painel-premium',{scroll:false}),0);
     const dash=document.getElementById("painel-premium"),dashLink=document.getElementById("premiumDashboardLink"); if(dash)dash.hidden=false;if(dashLink)dashLink.hidden=false;
     await loadMarketplaceDashboard();
     await renderProdutos();
