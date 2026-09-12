@@ -1008,7 +1008,7 @@
 .tb-dash-head{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;margin-bottom:18px}
 .tb-dash-head h2{font-size:30px;line-height:1.05}.tb-dash-head h2 span{color:#59d7ff}.tb-dash-head p{color:#8fa7c2;font-size:13px;margin-top:6px}
 .tb-dash-filter{background:#0d2038;border:1px solid rgba(90,205,255,.18);color:#dff5ff;border-radius:12px;padding:10px 12px}
-.tb-kpi-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+.tb-kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(165px,1fr));gap:12px}
 .tb-kpi-card{position:relative;overflow:hidden;background:linear-gradient(145deg,#102b4a,#0b1d33);border:1px solid rgba(255,255,255,.07);border-radius:17px;padding:16px;min-height:105px}
 .tb-kpi-card:after{content:'';position:absolute;width:70px;height:70px;border-radius:50%;background:#0aa9ff;filter:blur(38px);opacity:.15;right:-15px;top:-15px}
 .tb-kpi-label{font-size:10px;color:#7f9ab8;text-transform:uppercase;font-weight:900;letter-spacing:.7px}.tb-kpi-value{display:block;font-size:25px;margin-top:9px;color:#f4fbff}.tb-kpi-note{display:block;font-size:10px;color:#69d8ff;margin-top:4px}
@@ -1506,8 +1506,10 @@
       <button class="tb-dash-refresh" type="button" onclick="loadMarketplaceDashboard()">↻ ATUALIZAR PAINEL</button>
     </div>
     <div class="tb-kpi-grid">
-      <div class="tb-kpi-card"><span class="tb-kpi-label">Faturamento</span><b class="tb-kpi-value" id="tbRevenue">R$ 0,00</b><span class="tb-kpi-note">Período atual</span></div>
-      <div class="tb-kpi-card"><span class="tb-kpi-label">Lucro líquido</span><b class="tb-kpi-value" id="tbProfit">R$ 0,00</b><span class="tb-kpi-note" id="tbMargin">Margem 0%</span></div>
+      <div class="tb-kpi-card"><span class="tb-kpi-label">Faturamento</span><b class="tb-kpi-value" id="tbRevenue">R$ 0,00</b><span class="tb-kpi-note">Vendas registradas</span></div>
+      <div class="tb-kpi-card"><span class="tb-kpi-label">Lucro das vendas</span><b class="tb-kpi-value" id="tbProfit">R$ 0,00</b><span class="tb-kpi-note" id="tbMargin">Margem 0%</span></div>
+      <div class="tb-kpi-card"><span class="tb-kpi-label">Despesas</span><b class="tb-kpi-value" id="tbExpenses">R$ 0,00</b><span class="tb-kpi-note">Despesas cadastradas</span></div>
+      <div class="tb-kpi-card"><span class="tb-kpi-label">Resultado operacional</span><b class="tb-kpi-value" id="tbOperationalResult">R$ 0,00</b><span class="tb-kpi-note" id="tbRealMargin">Margem real 0%</span></div>
       <div class="tb-kpi-card"><span class="tb-kpi-label">Vendas</span><b class="tb-kpi-value" id="tbSales">0</b><span class="tb-kpi-note" id="tbUnits">0 unidades</span></div>
       <div class="tb-kpi-card"><span class="tb-kpi-label">Valor em estoque</span><b class="tb-kpi-value" id="tbStockValue">R$ 0,00</b><span class="tb-kpi-note" id="tbStockUnits">0 unidades</span></div>
       <div class="tb-kpi-card"><span class="tb-kpi-label">Estoque baixo</span><b class="tb-kpi-value" id="tbLowStock">0</b><span class="tb-kpi-note">Produtos em atenção</span></div>
@@ -2420,21 +2422,37 @@ window.refreshPremiumAccess=async function(){
   window.loadMarketplaceDashboard=async function(){
     if(!premiumActive || !premiumUser || !premiumClient)return;
     const uid=premiumUser.id;
-    const [{data:sales,error:salesErr},{data:stock,error:stockErr},{data:goals,error:goalsErr}]=await Promise.all([
+    const [{data:sales,error:salesErr},{data:stock,error:stockErr},{data:goals,error:goalsErr},{data:expenses,error:expensesErr}]=await Promise.all([
       premiumClient.from("sales").select("id,product_name,sku,quantity,unit_price,unit_cost,shipping,marketplace,marketplace_fee,taxes,gross_revenue,net_profit,sold_at").eq("user_id",uid).order("sold_at",{ascending:true}).limit(500),
       premiumClient.from("inventory").select("product_name,sku,quantity,minimum_stock,average_cost").eq("user_id",uid).order("quantity",{ascending:true}).limit(500),
-      premiumClient.from("goals").select("period_month,period_year,revenue_goal,profit_goal,sales_goal").eq("user_id",uid).order("period_year",{ascending:false}).order("period_month",{ascending:false}).limit(12)
+      premiumClient.from("goals").select("period_month,period_year,revenue_goal,profit_goal,sales_goal").eq("user_id",uid).order("period_year",{ascending:false}).order("period_month",{ascending:false}).limit(12),
+      premiumClient.from("expenses").select("amount,expense_date").eq("user_id",uid).limit(1000)
     ]);
-    if(salesErr||stockErr||goalsErr){toast("Não foi possível atualizar todo o dashboard.");}
-    const S=sales||[], I=stock||[], G=goals||[];
+    if(salesErr||stockErr||goalsErr||expensesErr){toast("Não foi possível atualizar todo o dashboard.");}
+    const S=sales||[], I=stock||[], G=goals||[], E=expenses||[];
     const revenue=S.reduce((a,x)=>a+Number(x.gross_revenue||Number(x.unit_price||0)*Number(x.quantity||1)),0);
     const profit=S.reduce((a,x)=>a+Number(x.net_profit||0),0);
+    const expensesTotal=E.reduce((a,x)=>a+Number(x.amount||0),0);
+    const operationalResult=profit-expensesTotal;
+    const realMargin=revenue?operationalResult/revenue*100:0;
     const units=S.reduce((a,x)=>a+Number(x.quantity||0),0);
     const stockUnits=I.reduce((a,x)=>a+Number(x.quantity||0),0);
     const stockValue=I.reduce((a,x)=>a+Number(x.quantity||0)*Number(x.average_cost||0),0);
     const low=I.filter(x=>Number(x.quantity||0)<=Number(x.minimum_stock||0));
     const set=(id,v)=>{const e=document.getElementById(id);if(e)e.textContent=v};
-    set("tbRevenue",brl(revenue));set("tbProfit",brl(profit));set("tbSales",S.length);set("tbUnits",units+" unidades");set("tbStockValue",brl(stockValue));set("tbStockUnits",stockUnits+" unidades");set("tbLowStock",low.length);set("tbMargin","Margem "+(revenue?((profit/revenue)*100).toFixed(1):"0.0").replace(".",",")+"%");
+    set("tbRevenue",brl(revenue));
+    set("tbProfit",brl(profit));
+    set("tbExpenses",brl(expensesTotal));
+    set("tbOperationalResult",brl(operationalResult));
+    set("tbSales",S.length);
+    set("tbUnits",units+" unidades");
+    set("tbStockValue",brl(stockValue));
+    set("tbStockUnits",stockUnits+" unidades");
+    set("tbLowStock",low.length);
+    set("tbMargin","Margem "+(revenue?((profit/revenue)*100).toFixed(1):"0.0").replace(".",",")+"%");
+    set("tbRealMargin","Margem real "+realMargin.toFixed(1).replace(".",",")+"%");
+    const op=document.getElementById("tbOperationalResult");
+    if(op)op.style.color=operationalResult>=0?"#52e6a0":"#ff8d98";
     renderSalesEvolutionChart(S);
     const market={};S.forEach(x=>{const k=(x.marketplace||"Não informado").trim()||"Não informado";market[k]=(market[k]||0)+Number(x.gross_revenue||Number(x.unit_price||0)*Number(x.quantity||1));});
     const mEl=document.getElementById("tbMarketplaces");if(mEl){const arr=Object.entries(market).sort((a,b)=>b[1]-a[1]).slice(0,6);const max=Math.max(1,...arr.map(x=>x[1]));mEl.innerHTML=arr.length?arr.map(([k,v])=>`<div class="tb-market-row"><span>${esc(k)}</span><div class="tb-market-track"><div class="tb-market-fill" style="width:${(v/max)*100}%"></div></div><b>${Math.round(revenue?v/revenue*100:0)}%</b></div>`).join(""):'<div class="tb-empty-chart">Os marketplaces aparecerão aqui.</div>';}
@@ -2541,6 +2559,7 @@ window.refreshPremiumAccess=async function(){
     toast('Despesa salva na nuvem.');
     trackV5('financeiro_salvar_despesa');
     await loadFinanceiroPremium();
+    await loadMarketplaceDashboard();
   };
 
   window.deleteExpensePremium=async function(id){
@@ -2550,6 +2569,7 @@ window.refreshPremiumAccess=async function(){
     if(error){toast('Não foi possível excluir a despesa.');return;}
     toast('Despesa excluída.');
     await loadFinanceiroPremium();
+    await loadMarketplaceDashboard();
   };
 
   window.loadFinanceiroPremium=async function(){
