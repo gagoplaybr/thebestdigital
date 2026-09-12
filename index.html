@@ -1702,6 +1702,7 @@ body.tb-premium-nav-active.tb-show-account #area-cliente{
 
 /* ===== V7.4: UM MÓDULO POR VEZ ===== */
 body.tb-premium-nav-active.tb-single-module #painel-premium,
+body.tb-premium-nav-active.tb-single-module #calculadora,
 body.tb-premium-nav-active.tb-single-module #controle-vendas,
 body.tb-premium-nav-active.tb-single-module #controle-estoque,
 body.tb-premium-nav-active.tb-single-module #controle-metas,
@@ -1713,6 +1714,7 @@ body.tb-premium-nav-active.tb-single-module #area-cliente{
 }
 
 body.tb-premium-nav-active.tb-single-module #painel-premium.tb-module-visible,
+body.tb-premium-nav-active.tb-single-module #calculadora.tb-module-visible,
 body.tb-premium-nav-active.tb-single-module #controle-vendas.tb-module-visible,
 body.tb-premium-nav-active.tb-single-module #controle-estoque.tb-module-visible,
 body.tb-premium-nav-active.tb-single-module #controle-metas.tb-module-visible,
@@ -1768,6 +1770,40 @@ body.tb-user-logged-in #relatorios-premium,
 body.tb-user-logged-in #financeiro-premium,
 body.tb-user-logged-in #meus-produtos{
   scroll-margin-top:18px;
+}
+
+
+/* ===== V7.7: CALCULADORA NO MENU PREMIUM ===== */
+/* visitante continua vendo a calculadora pública normalmente */
+body.tb-user-logged-in.tb-single-module #calculadora{
+  display:none!important;
+}
+
+/* cliente logado só vê quando clicar em CALCULADORA */
+body.tb-user-logged-in.tb-single-module #calculadora.tb-module-visible{
+  display:block!important;
+  width:auto!important;
+  max-width:none!important;
+  margin-left:244px!important;
+  margin-right:18px!important;
+  padding-top:28px!important;
+  padding-bottom:70px!important;
+}
+
+/* evita que a seção comercial da calculadora fique apertada no Premium */
+body.tb-user-logged-in #calculadora .calculator-section,
+body.tb-user-logged-in #calculadora{
+  scroll-margin-top:18px!important;
+}
+
+@media(max-width:900px){
+  body.tb-user-logged-in.tb-single-module #calculadora.tb-module-visible{
+    width:100%!important;
+    max-width:100%!important;
+    margin-left:0!important;
+    margin-right:0!important;
+    padding:14px 8px 90px!important;
+  }
 }
 
 </style>
@@ -2256,6 +2292,9 @@ body.tb-user-logged-in #meus-produtos{
   <div class="tb-side-menu">
     <a class="tb-side-link active" href="#painel-premium" data-premium-section="painel-premium" title="Dashboard">
       <span class="tb-side-ico">📊</span><span class="tb-side-label">DASHBOARD</span>
+    </a>
+    <a class="tb-side-link" href="#calculadora" data-premium-section="calculadora" title="Calculadora">
+      <span class="tb-side-ico">🧮</span><span class="tb-side-label">CALCULADORA</span>
     </a>
     <a class="tb-side-link" href="#controle-vendas" data-premium-section="controle-vendas" title="Vendas">
       <span class="tb-side-ico">💰</span><span class="tb-side-label">VENDAS</span>
@@ -3114,6 +3153,7 @@ if ("serviceWorker" in navigator) {
   /* V7.4: navegação Premium mostrando apenas o módulo clicado */
   const TB_PREMIUM_MODULES=[
     'painel-premium',
+    'calculadora',
     'controle-vendas',
     'controle-estoque',
     'controle-metas',
@@ -3138,6 +3178,7 @@ if ("serviceWorker" in navigator) {
 
     /* Atualiza o conteúdo do módulo ao abrir */
     if(sectionId==='painel-premium') setTimeout(()=>loadMarketplaceDashboard?.(),0);
+    if(sectionId==='calculadora') setTimeout(()=>document.getElementById('calculadora')?.scrollIntoView({behavior:'smooth',block:'start'}),0);
     if(sectionId==='controle-vendas') setTimeout(()=>renderSalesHistory?.(),0);
     if(sectionId==='controle-estoque') setTimeout(()=>renderStockControl?.(),0);
     if(sectionId==='controle-metas') setTimeout(()=>loadGoalForm?.(),0);
@@ -3249,7 +3290,7 @@ if ("serviceWorker" in navigator) {
       if(visible?.target?.id)tbSetPremiumSidebarActive(visible.target.id);
     },{rootMargin:'-25% 0px -55% 0px',threshold:[0.05,.2,.5]});
     window.addEventListener('DOMContentLoaded',()=>{
-      ['painel-premium','controle-vendas','controle-estoque','controle-metas','relatorios-premium','financeiro-premium','meus-produtos','area-cliente']
+      ['painel-premium','calculadora','controle-vendas','controle-estoque','controle-metas','relatorios-premium','financeiro-premium','meus-produtos','area-cliente']
         .forEach(id=>{const el=document.getElementById(id);if(el)tbSideObserver.observe(el);});
     },{once:true});
   }
