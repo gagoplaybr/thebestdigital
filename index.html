@@ -2749,26 +2749,149 @@ window.refreshPremiumAccess=async function(){
 
   window.settleAccountPremium=async function(id,type){
     if(!requirePremium())return;
-    const status=type==='receivable'?'received':'paid';
-    const {error}=await premiumClient.from('accounts_payable_receivable').update({status,paid_at:new Date().toISOString()}).eq('id',id).eq('user_id',premiumUser.id);
-    if(error){console.error(error);toast('Não foi possível dar baixa na conta.');return;}
-    toast(type==='receivable'?'Recebimento confirmado.':'Pagamento confirmado.');
-    await loadAccountsPremium();
+
+    const {data:account,error:accountError}=await premiumClient
+      .from('accounts_payable_receivable')
+      .select('id,type,description,category,amount,due_date,status,payment_method,notes')
+      .eq('id',id)
+      .eq('user_id',premiumUser.id)
+      .maybeSingle();
+
+    if(accountError||!account){console.error(accountError);toast('Não foi possível localizar esta conta.');return;}
+    if(account.status!=='pending'){toast('Esta conta já recebeu baixa.');await loadAccountsPremium();return;}
+
+    const paidAt=new Date().toISOString();
+    const status=account.type==='receivable'?'received':'paid';
+
+    /* Conta a pagar: cria despesa vinculada antes da baixa */
+    if(account.type==='payable'){
+      const {data:existing,error:existingError}=await premiumClient
+        .from('expenses')
+        .select('id')
+        .eq('user_id',premiumUser.id)
+        .eq('source_account_id',account.id)
+        .maybeSingle();
+
+      if(existingError){console.error(existingError);toast('Não foi possível verificar a despesa vinculada.');return;}
+
+      if(!existing){
+        const {error:expenseError}=await premiumClient.from('expenses').insert({
+          user_id:premiumUser.id,
+          description:account.description,
+          category:account.category||'Outros',
+          amount:Number(account.amount||0),
+          expense_date:tbLocalDateISO(new Date()),
+          payment_method:account.payment_method||'Outro',
+          source_account_id:account.id
+        });
+        if(expenseError){
+          console.error('Erro ao criar despesa automática:',expenseError);
+          toast('Não foi possível criar a despesa automática. A conta não foi baixada.');
+          return;
+        }
+      }
+    }
+
+    const {error:updateError}=await premiumClient
+      .from('accounts_payable_receivable')
+      .update({status,paid_at:paidAt})
+      .eq('id',account.id)
+      .eq('user_id',premiumUser.id);
+
+    if(updateError){
+      console.error(updateError);
+      /* desfaz a despesa automática caso a baixa da conta falhe */
+      if(account.type==='payable'){
+        await premiumClient.from('expenses')
+          .delete()
+          .eq('user_id',premiumUser.id)
+          .eq('source_account_id',account.id);
+      }
+      toast('Não foi possível dar baixa na conta.');
+      return;
+    }
+
+    toast(account.type==='receivable'?'Recebimento confirmado.':'Pagamento confirmado e despesa lançada automaticamente.');
+    await Promise.all([loadAccountsPremium(),loadFinanceiroPremium(),loadMarketplaceDashboard()]);
   };
 
   window.reopenAccountPremium=async function(id){
     if(!requirePremium())return;
-    const {error}=await premiumClient.from('accounts_payable_receivable').update({status:'pending',paid_at:null}).eq('id',id).eq('user_id',premiumUser.id);
+
+    const {data:account,error:accountError}=await premiumClient
+      .from('accounts_payable_receivable')
+      .select('id,type,status')
+      .eq('id',id)
+      .eq('user_id',premiumUser.id)
+      .maybeSingle();
+
+    if(accountError||!account){toast('Não foi possível localizar esta conta.');return;}
+
+    /* Se era conta paga, remove primeiro a despesa automática vinculada */
+    if(account.type==='payable'){
+      const {error:expenseError}=await premiumClient
+        .from('expenses')
+        .delete()
+        .eq('user_id',premiumUser.id)
+        .eq('source_account_id',account.id);
+
+      if(expenseError){
+        console.error(expenseError);
+        toast('Não foi possível remover a despesa automática. A conta não foi reaberta.');
+        return;
+      }
+    }
+
+    const {error}=await premiumClient
+      .from('accounts_payable_receivable')
+      .update({status:'pending',paid_at:null})
+      .eq('id',account.id)
+      .eq('user_id',premiumUser.id);
+
     if(error){toast('Não foi possível reabrir a conta.');return;}
-    toast('Conta reaberta.');await loadAccountsPremium();
+
+    toast(account.type==='payable'?'Conta reaberta e despesa automática removida.':'Conta reaberta.');
+    await Promise.all([loadAccountsPremium(),loadFinanceiroPremium(),loadMarketplaceDashboard()]);
   };
 
   window.deleteAccountPremium=async function(id){
     if(!requirePremium())return;
     if(!confirm('Excluir esta conta?'))return;
-    const {error}=await premiumClient.from('accounts_payable_receivable').delete().eq('id',id).eq('user_id',premiumUser.id);
+
+    const {data:account,error:accountError}=await premiumClient
+      .from('accounts_payable_receivable')
+      .select('id,type,status')
+      .eq('id',id)
+      .eq('user_id',premiumUser.id)
+      .maybeSingle();
+
+    if(accountError||!account){toast('Não foi possível localizar esta conta.');return;}
+
+    /* Evita deixar despesa órfã se uma conta paga for excluída */
+    if(account.type==='payable'){
+      const {error:expenseError}=await premiumClient
+        .from('expenses')
+        .delete()
+        .eq('user_id',premiumUser.id)
+        .eq('source_account_id',account.id);
+
+      if(expenseError){
+        console.error(expenseError);
+        toast('Não foi possível remover a despesa vinculada. A conta não foi excluída.');
+        return;
+      }
+    }
+
+    const {error}=await premiumClient
+      .from('accounts_payable_receivable')
+      .delete()
+      .eq('id',account.id)
+      .eq('user_id',premiumUser.id);
+
     if(error){toast('Não foi possível excluir a conta.');return;}
-    toast('Conta excluída.');await loadAccountsPremium();
+
+    toast('Conta excluída.');
+    await Promise.all([loadAccountsPremium(),loadFinanceiroPremium(),loadMarketplaceDashboard()]);
   };
 
   window.loadAccountsPremium=async function(){
@@ -2823,7 +2946,7 @@ window.refreshPremiumAccess=async function(){
 
     const [expenseRes,salesRes,expense6Res,sales6Res]=await Promise.all([
       premiumClient.from('expenses')
-        .select('id,description,category,amount,expense_date,payment_method,created_at')
+        .select('id,description,category,amount,expense_date,payment_method,source_account_id,created_at')
         .eq('user_id',premiumUser.id)
         .gte('expense_date',startDate)
         .order('expense_date',{ascending:false})
@@ -2934,9 +3057,11 @@ window.refreshPremiumAccess=async function(){
     const list=document.getElementById('financeExpenseList');
     if(list)list.innerHTML=tbExpenseRows.length?tbExpenseRows.slice(0,20).map(x=>`
       <div class="tb-expense-item">
-        <div><strong>${esc(x.description)}</strong><small>${esc(x.category||'Outros')} • ${x.expense_date?new Date(x.expense_date+'T12:00:00').toLocaleDateString('pt-BR'):'-'} • ${esc(x.payment_method||'-')}</small></div>
+        <div><strong>${esc(x.description)}</strong><small>${esc(x.category||'Outros')} • ${x.expense_date?new Date(x.expense_date+'T12:00:00').toLocaleDateString('pt-BR'):'-'} • ${esc(x.payment_method||'-')}${x.source_account_id?' • CONTA PAGA':''}</small></div>
         <span class="tb-expense-value">${brl(x.amount)}</span>
-        <button class="tb-expense-delete" type="button" onclick="deleteExpensePremium('${x.id}')">EXCLUIR</button>
+        ${x.source_account_id
+          ? `<span style="font-size:9px;font-weight:900;color:#8ee8ff;border:1px solid rgba(69,204,255,.24);background:rgba(0,153,255,.10);padding:7px 9px;border-radius:9px">AUTOMÁTICA</span>`
+          : `<button class="tb-expense-delete" type="button" onclick="deleteExpensePremium('${x.id}')">EXCLUIR</button>`}
       </div>`).join(''):'<div class="v5-empty">Nenhuma despesa cadastrada nos últimos 30 dias.</div>';
 
 
