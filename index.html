@@ -1706,7 +1706,7 @@
       <div class="tb-cashflow-chart">
         <div id="cashflowChart"></div>
       </div>
-      <div class="tb-cashflow-note">Saldo de caixa = entradas de vendas − despesas cadastradas. Resultado operacional continua sendo calculado separadamente.</div>
+      <div class="tb-cashflow-note">Saldo de caixa = entradas de vendas + contas recebidas − despesas cadastradas. Contas recebidas afetam o caixa, mas não duplicam faturamento nem alteram a DRE.</div>
     </div>
 
 
@@ -2760,7 +2760,7 @@ window.refreshPremiumAccess=async function(){
     if(accountError||!account){console.error(accountError);toast('Não foi possível localizar esta conta.');return;}
     if(account.status!=='pending'){toast('Esta conta já recebeu baixa.');await loadAccountsPremium();return;}
 
-    const paidAt=new Date().toISOString();
+    const movementAt=new Date().toISOString();
     const status=account.type==='receivable'?'received':'paid';
 
     /* Conta a pagar: cria despesa vinculada antes da baixa */
@@ -2792,9 +2792,13 @@ window.refreshPremiumAccess=async function(){
       }
     }
 
+    const settlementPatch=account.type==='receivable'
+      ? {status:'received',received_at:movementAt,paid_at:null}
+      : {status:'paid',paid_at:movementAt,received_at:null};
+
     const {error:updateError}=await premiumClient
       .from('accounts_payable_receivable')
-      .update({status,paid_at:paidAt})
+      .update(settlementPatch)
       .eq('id',account.id)
       .eq('user_id',premiumUser.id);
 
@@ -2811,7 +2815,7 @@ window.refreshPremiumAccess=async function(){
       return;
     }
 
-    toast(account.type==='receivable'?'Recebimento confirmado.':'Pagamento confirmado e despesa lançada automaticamente.');
+    toast(account.type==='receivable'?'Recebimento confirmado e entrada registrada no caixa.':'Pagamento confirmado e despesa lançada automaticamente.');
     await Promise.all([loadAccountsPremium(),loadFinanceiroPremium(),loadMarketplaceDashboard()]);
   };
 
@@ -2844,7 +2848,7 @@ window.refreshPremiumAccess=async function(){
 
     const {error}=await premiumClient
       .from('accounts_payable_receivable')
-      .update({status:'pending',paid_at:null})
+      .update({status:'pending',paid_at:null,received_at:null})
       .eq('id',account.id)
       .eq('user_id',premiumUser.id);
 
@@ -2898,7 +2902,7 @@ window.refreshPremiumAccess=async function(){
     if(!premiumActive||!premiumUser||!premiumClient)return;
     const due=document.getElementById('accountDueDate');if(due&&!due.value)due.value=tbLocalDateISO();
     const {data,error}=await premiumClient.from('accounts_payable_receivable')
-      .select('id,type,description,category,amount,due_date,status,payment_method,paid_at,notes,created_at')
+      .select('id,type,description,category,amount,due_date,status,payment_method,paid_at,received_at,notes,created_at')
       .eq('user_id',premiumUser.id).order('due_date',{ascending:true}).order('created_at',{ascending:false}).limit(1000);
     const list=document.getElementById('accountsList');
     if(error){console.error('Erro accounts:',error);if(list)list.innerHTML='<div class="v5-empty">Não foi possível carregar as contas. Confira Data API e RLS da tabela accounts_payable_receivable.</div>';return;}
@@ -2944,7 +2948,7 @@ window.refreshPremiumAccess=async function(){
     const sixStartISO=sixStart.toISOString();
     const sixStartDate=tbLocalDateISO(sixStart);
 
-    const [expenseRes,salesRes,expense6Res,sales6Res]=await Promise.all([
+    const [expenseRes,salesRes,expense6Res,sales6Res,receivable6Res]=await Promise.all([
       premiumClient.from('expenses')
         .select('id,description,category,amount,expense_date,payment_method,source_account_id,created_at')
         .eq('user_id',premiumUser.id)
@@ -2969,7 +2973,15 @@ window.refreshPremiumAccess=async function(){
         .eq('user_id',premiumUser.id)
         .gte('sold_at',sixStartISO)
         .order('sold_at',{ascending:true})
-        .limit(5000)
+        .limit(5000),
+      premiumClient.from('accounts_payable_receivable')
+        .select('amount,received_at,status,type')
+        .eq('user_id',premiumUser.id)
+        .eq('type','receivable')
+        .eq('status','received')
+        .gte('received_at',sixStartISO)
+        .order('received_at',{ascending:true})
+        .limit(3000)
     ]);
 
     if(expenseRes.error){
@@ -3068,6 +3080,7 @@ window.refreshPremiumAccess=async function(){
     /* Fluxo de caixa dos últimos 6 meses */
     const expense6=expense6Res?.error?[]:(expense6Res?.data||[]);
     const sales6=sales6Res?.error?[]:(sales6Res?.data||[]);
+    const receivable6=receivable6Res?.error?[]:(receivable6Res?.data||[]);
     const months=[];
     const base=new Date();
     for(let i=5;i>=0;i--){
@@ -3083,6 +3096,12 @@ window.refreshPremiumAccess=async function(){
       const d=new Date(s.sold_at);
       const key=`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}`;
       if(map[key])map[key].incoming+=Number(s.gross_revenue||0);
+    });
+    receivable6.forEach(r=>{
+      const d=new Date(r.received_at);
+      if(Number.isNaN(d.getTime()))return;
+      const key=`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}`;
+      if(map[key])map[key].incoming+=Number(r.amount||0);
     });
     expense6.forEach(e=>{
       const d=new Date((e.expense_date||'')+'T12:00:00');
