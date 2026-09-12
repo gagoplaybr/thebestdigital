@@ -1868,7 +1868,7 @@ body.tb-user-logged-in #calculadora{
 
 
 <style id="tb-v811-fixes">
-/* V8.1.1.1: correções da vitrine Premium */
+/* V8.1.2.1: correções da vitrine Premium */
 @media (min-width: 769px){
   .tb-mobile-menu-toggle,
   .tb-menu-toggle,
@@ -1895,6 +1895,11 @@ body.tb-user-logged-in #calculadora{
 }
 </style>
 
+<style id="tb-v812-plan-style">
+.tb-plan-visual-v812{width:min(100%,980px);margin:24px auto 28px;border-radius:20px;overflow:hidden;border:1px solid rgba(56,189,248,.42);box-shadow:0 22px 60px rgba(0,0,0,.34),0 0 35px rgba(14,165,233,.10);background:#071426}
+.tb-plan-visual-v812 img{display:block;width:100%;height:auto}
+@media(max-width:768px){.tb-plan-visual-v812{border-radius:14px;margin:18px auto 22px}}
+</style>
 </head>
 
 <body>
@@ -1923,7 +1928,7 @@ body.tb-user-logged-in #calculadora{
         </div>
       </div>
 
-      <div class="tb-app-login-version">THE BEST DIGITAL • PROGRAMA PREMIUM • V8.1.1</div>
+      <div class="tb-app-login-version">THE BEST DIGITAL • PROGRAMA PREMIUM • V8.1.2</div>
     </section>
 
     <section class="tb-app-login-panel">
@@ -2848,9 +2853,13 @@ body.tb-user-logged-in #calculadora{
     <h2>THE BEST MARKETPLACE PREMIUM</h2>
 
     <p>
-      Um pacote de ferramentas para ajudar você a controlar
-      custos, preços, margens e resultados das suas vendas.
+      Gestão inteligente para vendedores de marketplace, com vendas, estoque,
+      financeiro, relatórios, metas e precificação em um só lugar.
     </p>
+
+    <div class="tb-plan-visual-v812">
+      <img src="plano-premium-mensal.png" alt="THE BEST Marketplace Premium, plano mensal de R$ 19,90">
+    </div>
 
     <div class="price">
       R$ 19,90/mês <small>assinatura mensal</small>
@@ -3605,7 +3614,7 @@ window.refreshPremiumAccess=async function(){
   window.limparFormularioProduto=function(){ ["v5ProdutoNome","v5ProdutoSku","v5ProdutoCusto","v5ProdutoVenda","v5ProdutoFrete"].forEach(id=>{const e=document.getElementById(id);if(e)e.value="";}); };
   window.excluirProdutoV5=async function(id){if(!requirePremium())return;const {error}=await premiumClient.from("saved_products").delete().eq("id",id).eq("user_id",premiumUser.id);if(!error){await renderProdutos();toast("Produto excluído.");}};
   window.usarProdutoV5=function(id){ if(!requirePremium())return; const x=premiumProducts.find(i=>String(i.id)===String(id));if(!x)return; document.getElementById("produto").value=x.name;document.getElementById("custo").value=x.cost||"";document.getElementById("venda").value=x.sale_price||"";document.getElementById("frete").value=x.shipping||"";document.getElementById("calculadora").scrollIntoView({behavior:"smooth"});toast("Produto carregado na calculadora."); 
-    /* V8.1.1: depois de carregar o produto, abre a Calculadora automaticamente */
+    /* V8.1.2: depois de carregar o produto, abre a Calculadora automaticamente */
     if(typeof tbShowPremiumModule === "function"){
       tbShowPremiumModule("calculadora",{scroll:true});
     }else{

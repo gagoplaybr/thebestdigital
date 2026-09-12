@@ -1,4 +1,4 @@
-const CACHE_NAME = "the-best-marketplace-v8-1-1-site-premium";
+const CACHE_NAME = "the-best-marketplace-v8-1-2-plano-premium";
 const APP_SHELL = [
   "/",
   "/index.html",
