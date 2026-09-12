@@ -1740,6 +1740,13 @@ body.tb-premium-nav-active.tb-single-module #area-cliente.tb-module-visible{
   }
 }
 
+
+/* ===== V7.5: OFERTA SOMENTE PARA VISITANTES ===== */
+body.tb-user-logged-in #kit,
+body.tb-user-logged-in #apresentacao-kit{
+  display:none!important;
+}
+
 </style>
 
   <!-- THE BEST V6 Premium -->
@@ -3073,7 +3080,7 @@ if ("serviceWorker" in navigator) {
   };
   window.theBestPremiumLogout=async function(){
     if(premiumClient) await premiumClient.auth.signOut();
-    premiumUser=null;premiumActive=false;premiumProducts=[];document.body.classList.remove('tb-show-account','tb-single-module');TB_PREMIUM_MODULES.forEach(id=>document.getElementById(id)?.classList.remove('tb-module-visible'));tbUpdatePremiumSidebarState();tbUpdateInstalledAppLoginState();showPremiumState();renderProdutos();renderSalesHistory();
+    premiumUser=null;premiumActive=false;premiumProducts=[];document.body.classList.remove('tb-show-account','tb-single-module');TB_PREMIUM_MODULES.forEach(id=>document.getElementById(id)?.classList.remove('tb-module-visible'));tbUpdateCommercialOfferVisibility();tbUpdatePremiumSidebarState();tbUpdateInstalledAppLoginState();showPremiumState();renderProdutos();renderSalesHistory();
     const login=document.getElementById("premiumLoginBox"),acc=document.getElementById("premiumAccountBox"); if(login)login.hidden=false;if(acc)acc.hidden=true;
     setPremiumStatus("Aguardando login","");
   };
@@ -3300,6 +3307,12 @@ if ("serviceWorker" in navigator) {
     }
   }
 
+
+  /* V7.5: controla oferta comercial conforme login */
+  function tbUpdateCommercialOfferVisibility(){
+    document.body.classList.toggle('tb-user-logged-in',!!premiumUser);
+  }
+
 window.refreshPremiumAccess=async function(){
   if(!premiumClient){showPremiumState();return;}
 
@@ -3317,6 +3330,7 @@ window.refreshPremiumAccess=async function(){
   const infoProduct=document.getElementById("premiumInfoProduct");
 
   if(!premiumUser){
+    tbUpdateCommercialOfferVisibility();
     premiumActive=false;
     tbUpdatePremiumSidebarState();
     tbUpdateInstalledAppLoginState();
@@ -3329,6 +3343,8 @@ window.refreshPremiumAccess=async function(){
     renderProdutos();
     return;
   }
+
+  tbUpdateCommercialOfferVisibility();
 
   if(login)login.hidden=true;
   if(acc)acc.hidden=false;
