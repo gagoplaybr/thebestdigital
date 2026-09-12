@@ -1958,9 +1958,130 @@ body.tb-user-logged-in #calculadora{
 }
 </style>
 
+
+<style id="tb-erp-roadmap-style">
+.tb-erp-roadmap-card{
+  position:relative; overflow:hidden; margin:26px 0 8px; padding:26px;
+  border:1px solid rgba(43,146,255,.38); border-radius:22px;
+  background:linear-gradient(135deg,rgba(5,15,31,.98),rgba(8,29,57,.96));
+  box-shadow:0 18px 55px rgba(0,0,0,.28), inset 0 1px 0 rgba(255,255,255,.04);
+}
+.tb-erp-roadmap-glow{
+  position:absolute; width:260px; height:260px; right:-90px; top:-120px;
+  border-radius:50%; background:rgba(0,123,255,.16); filter:blur(18px); pointer-events:none;
+}
+.tb-erp-roadmap-top{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;position:relative}
+.tb-erp-roadmap-kicker{font-size:12px;font-weight:900;letter-spacing:1.3px;color:#69b7ff}
+.tb-erp-roadmap-status{
+  font-size:11px;font-weight:900;letter-spacing:.8px;padding:7px 11px;border-radius:999px;
+  color:#ffd978;background:rgba(255,184,0,.1);border:1px solid rgba(255,196,48,.32)
+}
+.tb-erp-roadmap-card h3{position:relative;margin:14px 0 9px;font-size:clamp(24px,4vw,38px);line-height:1.05;color:#fff}
+.tb-erp-roadmap-card h3 span{color:#35a7ff;text-shadow:0 0 24px rgba(53,167,255,.3)}
+.tb-erp-roadmap-lead{position:relative;max-width:850px;color:#cbd8e8;line-height:1.65;margin:0 0 19px}
+.tb-erp-roadmap-phase{
+  position:relative;display:flex;align-items:center;gap:14px;padding:15px 17px;margin:0 0 16px;
+  border-radius:16px;background:rgba(15,77,139,.22);border:1px solid rgba(58,155,255,.25)
+}
+.tb-erp-roadmap-phase-icon{
+  flex:0 0 46px;width:46px;height:46px;border-radius:13px;display:grid;place-items:center;
+  font-size:15px;font-weight:1000;color:#061426;background:linear-gradient(145deg,#ffe34e,#ffb300);
+  box-shadow:0 7px 22px rgba(255,190,0,.15)
+}
+.tb-erp-roadmap-phase strong{display:block;color:#fff;font-size:14px;letter-spacing:.25px}
+.tb-erp-roadmap-phase small{display:block;color:#9fb3ca;margin-top:4px}
+.tb-erp-roadmap-info{
+  position:relative;padding:16px 18px;border-radius:16px;background:rgba(0,181,121,.07);
+  border:1px solid rgba(38,213,154,.22)
+}
+.tb-erp-roadmap-info strong{color:#72e6bd}
+.tb-erp-roadmap-info p{color:#c9d7e6;line-height:1.6;margin:7px 0 0}
+.tb-erp-roadmap-footer{
+  position:relative;display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:15px;color:#93a8bf;font-size:12px
+}
+@media(max-width:720px){
+ .tb-erp-roadmap-card{padding:20px 16px;border-radius:18px}
+ .tb-erp-roadmap-footer{grid-template-columns:1fr}
+}
+</style>
+
+
+<style id="tb-mobile-presentation-only">
+/* V8.2.0: celular/tablet = somente apresentação pública.
+   Área Premium/ERP continua disponível apenas em computador/programa desktop. */
+#tbMobileDesktopNotice{display:none}
+
+@media (max-width:1024px) and (pointer:coarse){
+  /* nunca mostra a interface do programa no celular */
+  .tb-app-login-cover,
+  .tb-premium-sidebar,
+  #area-cliente,
+  #painel-premium,
+  #controle-vendas,
+  #controle-estoque,
+  #controle-metas,
+  #relatorios-premium,
+  #financeiro-premium,
+  #meus-produtos,
+  .app-home,
+  .app-bottom-nav,
+  .app-topbar,
+  a[href="#area-cliente"],
+  button[data-premium-account],
+  [data-premium-section]{
+    display:none!important;
+  }
+
+  /* mesmo que exista sessão salva, no celular sempre mantém a apresentação pública */
+  body.tb-user-logged-in .hero,
+  body.tb-user-logged-in .seo-content,
+  body.tb-user-logged-in .problems,
+  body.tb-user-logged-in .dashboard-section,
+  body.tb-user-logged-in #apresentacao-kit,
+  body.tb-user-logged-in #kit{
+    display:block!important;
+  }
+
+  /* calculadora pública continua utilizável como parte do site */
+  body.tb-user-logged-in.tb-single-module #calculadora{
+    display:block!important;
+    width:100%!important;
+    max-width:100%!important;
+    margin-left:0!important;
+    margin-right:0!important;
+  }
+
+  body{
+    padding-left:0!important;
+    padding-right:0!important;
+    padding-bottom:0!important;
+  }
+
+  #tbMobileDesktopNotice{
+    display:block;
+    margin:10px 12px 0;
+    padding:12px 14px;
+    border-radius:14px;
+    border:1px solid rgba(68,171,255,.28);
+    background:linear-gradient(135deg,rgba(5,25,50,.97),rgba(8,42,77,.94));
+    color:#dbeafe;
+    font-size:12px;
+    line-height:1.5;
+    text-align:center;
+    box-shadow:0 10px 28px rgba(0,0,0,.18);
+  }
+  #tbMobileDesktopNotice strong{color:#62c2ff}
+}
+</style>
+
 </head>
 
 <body>
+<div id="tbMobileDesktopNotice" role="note">
+  <strong>💻 Área Premium no computador</strong><br>
+  No celular você pode conhecer a plataforma e assinar normalmente. A Área Premium e a futura versão ERP foram pensadas para uso em computador.
+</div>
+
 
 <div id="tbMobileMenuBackdrop" onclick="tbCloseMobileMenu()"></div>
 <button id="tbMobileMenuToggle" type="button" onclick="tbToggleMobileMenu()" aria-label="Abrir menu">☰ <span>MENU</span></button>
@@ -2519,6 +2640,31 @@ body.tb-user-logged-in #calculadora{
       <div class="tb-mini-card"><h3>⚠️ ALERTAS DE ESTOQUE</h3><div id="tbStockAlerts"></div></div>
     </div>
   </div>
+
+<div class="tb-erp-roadmap-card" aria-label="Próxima evolução do THE BEST MARKETPLACE">
+  <div class="tb-erp-roadmap-glow"></div>
+  <div class="tb-erp-roadmap-top">
+    <span class="tb-erp-roadmap-kicker">🚀 PRÓXIMA EVOLUÇÃO</span>
+    <span class="tb-erp-roadmap-status">EM DESENVOLVIMENTO</span>
+  </div>
+  <h3>THE BEST MARKETPLACE <span>ERP</span></h3>
+  <p class="tb-erp-roadmap-lead">O THE BEST MARKETPLACE PREMIUM continuará evoluindo. Estamos planejando uma nova modalidade ERP, com integração direta aos marketplaces.</p>
+  <div class="tb-erp-roadmap-phase">
+    <div class="tb-erp-roadmap-phase-icon">ML</div>
+    <div>
+      <strong>FASE 1 • MERCADO LIVRE</strong>
+      <small>Primeira integração planejada para a evolução ERP.</small>
+    </div>
+  </div>
+  <div class="tb-erp-roadmap-info">
+    <strong>✓ Migração totalmente opcional</strong>
+    <p>O assinante poderá continuar utilizando seu plano atual normalmente. Para quem optar pelos novos recursos do ERP, haverá ajuste no valor da assinatura, informado antes da disponibilização da nova modalidade.</p>
+  </div>
+  <div class="tb-erp-roadmap-footer">
+    <span>🔒 Seu plano atual não será alterado automaticamente.</span>
+    <span>Novas integrações e funcionalidades poderão ser adicionadas progressivamente.</span>
+  </div>
+</div>
 </section>
 
 
@@ -4734,6 +4880,43 @@ document.addEventListener('DOMContentLoaded', function(){
     });
   }
 });
+</script>
+
+
+<script id="tb-mobile-presentation-js">
+(function(){
+  function tbIsMobilePresentation(){
+    const coarse = window.matchMedia && window.matchMedia('(pointer: coarse)').matches;
+    const small = window.matchMedia && window.matchMedia('(max-width: 1024px)').matches;
+    const uaMobile = /Android|iPhone|iPod|Mobile|IEMobile|Opera Mini/i.test(navigator.userAgent || '');
+    return uaMobile || (coarse && small);
+  }
+
+  function tbApplyMobilePresentation(){
+    const mobile = tbIsMobilePresentation();
+    document.body.classList.toggle('tb-mobile-presentation', mobile);
+
+    if(mobile){
+      /* remove classes visuais do sistema sem encerrar a sessão do cliente */
+      document.body.classList.remove('tb-premium-nav-active','tb-single-module','tb-show-account','tb-app-authenticated');
+
+      /* garante que os módulos exclusivos nunca apareçam no telefone */
+      ['area-cliente','painel-premium','controle-vendas','controle-estoque','controle-metas',
+       'relatorios-premium','financeiro-premium','meus-produtos'].forEach(function(id){
+        const el=document.getElementById(id);
+        if(el) el.classList.remove('tb-module-visible');
+      });
+    }
+  }
+
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', tbApplyMobilePresentation);
+  }else{
+    tbApplyMobilePresentation();
+  }
+  window.addEventListener('resize', tbApplyMobilePresentation);
+  window.addEventListener('orientationchange', tbApplyMobilePresentation);
+})();
 </script>
 
 </body>
