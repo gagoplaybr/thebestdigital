@@ -1046,6 +1046,10 @@
 /* ===== V4: METAS PREMIUM ===== */
 .tb-goals-section{max-width:1360px;margin:0 auto;padding:18px 22px 64px}.tb-goals-section[hidden]{display:none!important}.tb-goals-shell{background:linear-gradient(145deg,#0b1f38,#08182c);border:1px solid rgba(70,190,255,.20);border-radius:24px;padding:22px;box-shadow:0 22px 70px rgba(0,0,0,.22)}.tb-goals-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}.tb-goals-field label{display:block;color:#9fb7d2;font-size:10px;font-weight:900;margin:0 0 5px;text-transform:uppercase}.tb-goals-field input,.tb-goals-field select{width:100%;border:1px solid rgba(120,190,255,.16);background:#07182b;color:#fff;border-radius:11px;padding:12px;outline:none;font:inherit}.tb-goals-preview{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:16px}.tb-goal-preview-card{background:#08192d;border:1px solid rgba(255,255,255,.06);border-radius:15px;padding:14px}.tb-goal-preview-card span{display:block;color:#7894b4;font-size:9px;text-transform:uppercase;font-weight:900}.tb-goal-preview-card b{display:block;font-size:18px;margin:5px 0}.tb-goal-preview-card small{color:#69d8ff}.tb-goals-current{margin-top:18px;padding-top:16px;border-top:1px solid rgba(255,255,255,.07)}@media(max-width:900px){.tb-goals-grid{grid-template-columns:repeat(2,1fr)}.tb-goals-preview{grid-template-columns:1fr}}@media(max-width:560px){.tb-goals-section{padding:14px 14px 90px}.tb-goals-shell{padding:15px}.tb-goals-grid{grid-template-columns:1fr}}
 
+
+/* ===== V5: RELATÓRIOS PREMIUM ===== */
+.tb-reports-section{max-width:1360px;margin:0 auto;padding:18px 22px 70px}.tb-reports-section[hidden]{display:none!important}.tb-reports-shell{background:linear-gradient(145deg,#0b1f38,#08182c);border:1px solid rgba(70,190,255,.20);border-radius:24px;padding:22px;box-shadow:0 22px 70px rgba(0,0,0,.22)}.tb-reports-filters{display:grid;grid-template-columns:1fr 1fr 1.2fr auto;gap:10px;align-items:end}.tb-reports-field label{display:block;color:#9fb7d2;font-size:10px;font-weight:900;margin:0 0 5px;text-transform:uppercase}.tb-reports-field input,.tb-reports-field select{width:100%;border:1px solid rgba(120,190,255,.16);background:#07182b;color:#fff;border-radius:11px;padding:12px;outline:none;font:inherit}.tb-report-kpis{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;margin-top:16px}.tb-report-kpi{background:linear-gradient(145deg,#102b4a,#0b1d33);border:1px solid rgba(255,255,255,.07);border-radius:15px;padding:14px}.tb-report-kpi span{display:block;color:#7894b4;font-size:9px;text-transform:uppercase;font-weight:900}.tb-report-kpi b{display:block;font-size:18px;margin-top:5px}.tb-report-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}.tb-report-card{background:#0b1d33;border:1px solid rgba(255,255,255,.07);border-radius:17px;padding:16px;min-height:190px}.tb-report-card h3{font-size:13px;margin-bottom:14px}.tb-report-table-wrap{margin-top:12px;overflow:auto;border:1px solid rgba(255,255,255,.07);border-radius:15px}.tb-report-table{width:100%;border-collapse:collapse;min-width:850px;background:#08192d}.tb-report-table th,.tb-report-table td{padding:11px 12px;text-align:left;border-bottom:1px solid rgba(255,255,255,.055);font-size:11px}.tb-report-table th{color:#86a2c2;text-transform:uppercase;font-size:9px;letter-spacing:.04em;background:#071426}.tb-report-table td{color:#e8f4ff}.tb-report-positive{color:#57e6a4!important;font-weight:900}.tb-report-negative{color:#ff9aa3!important;font-weight:900}.tb-report-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.tb-report-btn{border:0;border-radius:11px;padding:11px 14px;font-weight:900;font-size:11px;cursor:pointer;color:white;background:linear-gradient(90deg,#087cff,#00b8ff)}.tb-report-btn.ghost{background:#0d2948;border:1px solid rgba(85,215,255,.22)}@media(max-width:1000px){.tb-report-kpis{grid-template-columns:repeat(3,1fr)}.tb-report-grid{grid-template-columns:1fr}}@media(max-width:700px){.tb-reports-section{padding:14px 14px 90px}.tb-reports-shell{padding:15px}.tb-reports-filters{grid-template-columns:1fr 1fr}.tb-report-kpis{grid-template-columns:1fr 1fr}}
+
 </style>
 
   <!-- THE BEST V6 Premium -->
@@ -1440,6 +1444,7 @@
         <a id="premiumSalesLink" href="#controle-vendas" hidden>💰 VENDAS</a>
         <a id="premiumStockLink" href="#controle-estoque" hidden>📦 ESTOQUE</a>
         <a id="premiumGoalsLink" href="#controle-metas" onclick="setTimeout(loadGoalForm,0)" hidden>🎯 METAS</a>
+        <a id="premiumReportsLink" href="#relatorios-premium" onclick="setTimeout(loadPremiumReports,0)" hidden>📑 RELATÓRIOS</a>
         <a id="premiumProductsLink" href="#meus-produtos" hidden>MEUS PRODUTOS</a>
         <button type="button" onclick="refreshPremiumAccess()">ATUALIZAR ACESSO</button>
         <button type="button" class="danger" onclick="theBestPremiumLogout()">SAIR</button>
@@ -1567,6 +1572,28 @@
   </div>
 </section>
 
+
+
+<section id="relatorios-premium" class="tb-reports-section" hidden aria-label="Relatórios Premium">
+  <div class="tb-reports-shell">
+    <div class="tb-sales-head">
+      <div><h2>📑 Relatórios <span>Premium</span></h2><p>Analise faturamento, lucro, margem, ticket médio, canais e produtos em qualquer período.</p></div>
+      <span class="tb-sales-badge">PREMIUM • NUVEM</span>
+    </div>
+    <div class="tb-reports-filters">
+      <div class="tb-reports-field"><label>Data inicial</label><input id="reportStart" type="date"></div>
+      <div class="tb-reports-field"><label>Data final</label><input id="reportEnd" type="date"></div>
+      <div class="tb-reports-field"><label>Marketplace</label><select id="reportMarketplace"><option value="">Todos os marketplaces</option><option>Mercado Livre</option><option>Shopee</option><option>Amazon</option><option>Shein</option><option>TikTok Shop</option><option>Site próprio</option><option>Outro</option></select></div>
+      <button class="tb-report-btn" type="button" onclick="loadPremiumReports()">APLICAR FILTRO</button>
+    </div>
+    <div class="tb-report-actions"><button class="tb-report-btn ghost" type="button" onclick="setReportPeriod(30)">30 DIAS</button><button class="tb-report-btn ghost" type="button" onclick="setReportPeriod(90)">90 DIAS</button><button class="tb-report-btn ghost" type="button" onclick="setReportPeriod(365)">12 MESES</button><button class="tb-report-btn" type="button" onclick="exportPremiumReportCSV()">📥 EXPORTAR CSV</button></div>
+    <div class="tb-report-kpis">
+      <div class="tb-report-kpi"><span>Faturamento</span><b id="reportRevenue">R$ 0,00</b></div><div class="tb-report-kpi"><span>Lucro líquido</span><b id="reportProfit">R$ 0,00</b></div><div class="tb-report-kpi"><span>Margem</span><b id="reportMargin">0%</b></div><div class="tb-report-kpi"><span>Vendas</span><b id="reportSales">0</b></div><div class="tb-report-kpi"><span>Unidades</span><b id="reportUnits">0</b></div><div class="tb-report-kpi"><span>Ticket médio</span><b id="reportTicket">R$ 0,00</b></div>
+    </div>
+    <div class="tb-report-grid"><div class="tb-report-card"><h3>🏆 PRODUTOS MAIS VENDIDOS</h3><div id="reportTopProducts"><div class="tb-empty-chart">Sem dados no período.</div></div></div><div class="tb-report-card"><h3>🛒 FATURAMENTO POR MARKETPLACE</h3><div id="reportMarketplaces"><div class="tb-empty-chart">Sem dados no período.</div></div></div></div>
+    <div class="tb-sales-history"><h3>Detalhamento das vendas</h3><div class="tb-report-table-wrap"><table class="tb-report-table"><thead><tr><th>Data</th><th>Produto</th><th>SKU</th><th>Canal</th><th>Qtd.</th><th>Faturamento</th><th>Lucro</th><th>Margem</th></tr></thead><tbody id="reportSalesBody"><tr><td colspan="8">Nenhuma venda no período.</td></tr></tbody></table></div></div>
+  </div>
+</section>
 
 <section id="controle-metas" class="tb-goals-section" hidden aria-label="Metas mensais Premium">
   <div class="tb-goals-shell">
@@ -1965,6 +1992,8 @@ if ("serviceWorker" in navigator) {
     const stockLink=document.getElementById("premiumStockLink");
     const goalsSection=document.getElementById("controle-metas");
     const goalsLink=document.getElementById("premiumGoalsLink");
+    const reportsSection=document.getElementById("relatorios-premium");
+    const reportsLink=document.getElementById("premiumReportsLink");
     if(productsSection) productsSection.hidden=!premiumActive;
     if(productsLink) productsLink.hidden=!premiumActive;
     if(salesSection) salesSection.hidden=!premiumActive;
@@ -1973,6 +2002,8 @@ if ("serviceWorker" in navigator) {
     if(stockLink) stockLink.hidden=!premiumActive;
     if(goalsSection) goalsSection.hidden=!premiumActive;
     if(goalsLink) goalsLink.hidden=!premiumActive;
+    if(reportsSection) reportsSection.hidden=!premiumActive;
+    if(reportsLink) reportsLink.hidden=!premiumActive;
     const count=document.getElementById("contadorProdutos");
     if(count&&!premiumActive) count.textContent="🔒";
   }
@@ -2122,6 +2153,7 @@ window.refreshPremiumAccess=async function(){
     await renderSalesHistory();
     await renderStockControl();
     await loadGoalForm();
+    await loadPremiumReports();
     trackV5("premium_liberado");
   }else{
     const dash=document.getElementById("painel-premium"),dashLink=document.getElementById("premiumDashboardLink"); if(dash)dash.hidden=true;if(dashLink)dashLink.hidden=true;
@@ -2327,6 +2359,27 @@ window.refreshPremiumAccess=async function(){
     const products={};S.forEach(x=>{const k=x.product_name||"Produto";products[k]=(products[k]||0)+Number(x.quantity||1)});const top=Object.entries(products).sort((a,b)=>b[1]-a[1]).slice(0,5);const topEl=document.getElementById("tbTopProducts");if(topEl)topEl.innerHTML=top.length?top.map(([n,q],i)=>`<div class="tb-stock-alert"><span>${i+1}. ${esc(n)}</span><b>${q} un.</b></div>`).join(""):'<div class="tb-empty-chart">O ranking aparece após registrar vendas.</div>';
     const alertEl=document.getElementById("tbStockAlerts");if(alertEl)alertEl.innerHTML=low.length?low.slice(0,6).map(x=>`<div class="tb-stock-alert"><span>${esc(x.product_name)}</span><b class="tb-stock-low">${Number(x.quantity||0)} un.</b></div>`).join(""):'<div class="tb-empty-chart">Nenhum alerta de estoque baixo.</div>';
   };
+
+
+  let tbReportRows=[];
+  function reportDateValue(v,end=false){if(!v)return null;const d=new Date(v+'T'+(end?'23:59:59':'00:00:00'));return isNaN(d)?null:d;}
+  window.setReportPeriod=function(days){const end=new Date(),start=new Date();start.setDate(end.getDate()-days+1);const iso=d=>d.toISOString().slice(0,10);const a=document.getElementById('reportStart'),b=document.getElementById('reportEnd');if(a)a.value=iso(start);if(b)b.value=iso(end);loadPremiumReports();};
+  window.loadPremiumReports=async function(){
+    if(!premiumActive||!premiumUser||!premiumClient)return;
+    const startEl=document.getElementById('reportStart'),endEl=document.getElementById('reportEnd'),marketEl=document.getElementById('reportMarketplace');
+    if(startEl&&!startEl.value){const d=new Date();d.setDate(d.getDate()-29);startEl.value=d.toISOString().slice(0,10);}
+    if(endEl&&!endEl.value)endEl.value=new Date().toISOString().slice(0,10);
+    const start=reportDateValue(startEl?.value),end=reportDateValue(endEl?.value,true),market=(marketEl?.value||'').trim();
+    let q=premiumClient.from('sales').select('id,product_name,sku,quantity,unit_price,unit_cost,shipping,marketplace,marketplace_fee,taxes,gross_revenue,net_profit,sold_at').eq('user_id',premiumUser.id).order('sold_at',{ascending:false}).limit(1000);
+    if(start)q=q.gte('sold_at',start.toISOString());if(end)q=q.lte('sold_at',end.toISOString());if(market)q=q.eq('marketplace',market);
+    const {data,error}=await q;if(error){toast('Não foi possível carregar o relatório.');return;}tbReportRows=data||[];
+    const S=tbReportRows,revenue=S.reduce((a,x)=>a+Number(x.gross_revenue||Number(x.unit_price||0)*Number(x.quantity||1)),0),profit=S.reduce((a,x)=>a+Number(x.net_profit||0),0),units=S.reduce((a,x)=>a+Number(x.quantity||0),0),margin=revenue?profit/revenue*100:0,ticket=S.length?revenue/S.length:0;
+    const set=(id,v)=>{const e=document.getElementById(id);if(e)e.textContent=v};set('reportRevenue',brl(revenue));set('reportProfit',brl(profit));set('reportMargin',margin.toFixed(1).replace('.',',')+'%');set('reportSales',S.length);set('reportUnits',units);set('reportTicket',brl(ticket));
+    const prod={};S.forEach(x=>{const k=x.product_name||'Produto';if(!prod[k])prod[k]={q:0,r:0,p:0};prod[k].q+=Number(x.quantity||0);prod[k].r+=Number(x.gross_revenue||0);prod[k].p+=Number(x.net_profit||0)});const top=Object.entries(prod).sort((a,b)=>b[1].q-a[1].q).slice(0,8);const pe=document.getElementById('reportTopProducts');if(pe)pe.innerHTML=top.length?top.map(([n,v],i)=>`<div class="tb-stock-alert"><span>${i+1}. ${esc(n)} <small style="display:block;color:#7894b4">${brl(v.r)} faturados</small></span><b>${v.q} un.</b></div>`).join(''):'<div class="tb-empty-chart">Sem dados no período.</div>';
+    const mk={};S.forEach(x=>{const k=x.marketplace||'Não informado';mk[k]=(mk[k]||0)+Number(x.gross_revenue||0)});const ma=Object.entries(mk).sort((a,b)=>b[1]-a[1]);const me=document.getElementById('reportMarketplaces');if(me)me.innerHTML=ma.length?ma.map(([k,v])=>`<div class="tb-market-row"><span>${esc(k)}</span><div class="tb-market-track"><div class="tb-market-fill" style="width:${revenue?v/revenue*100:0}%"></div></div><b>${revenue?Math.round(v/revenue*100):0}%</b></div>`).join(''):'<div class="tb-empty-chart">Sem dados no período.</div>';
+    const body=document.getElementById('reportSalesBody');if(body)body.innerHTML=S.length?S.map(x=>{const r=Number(x.gross_revenue||Number(x.unit_price||0)*Number(x.quantity||1)),p=Number(x.net_profit||0),m=r?p/r*100:0;return `<tr><td>${new Date(x.sold_at).toLocaleString('pt-BR')}</td><td>${esc(x.product_name||'')}</td><td>${esc(x.sku||'')}</td><td>${esc(x.marketplace||'')}</td><td>${Number(x.quantity||0)}</td><td>${brl(r)}</td><td class="${p>=0?'tb-report-positive':'tb-report-negative'}">${brl(p)}</td><td>${m.toFixed(1).replace('.',',')}%</td></tr>`}).join(''):'<tr><td colspan="8">Nenhuma venda no período.</td></tr>';
+  };
+  window.exportPremiumReportCSV=function(){if(!requirePremium())return;if(!tbReportRows.length){toast('Não há vendas neste relatório para exportar.');return;}const rows=[['Data','Produto','SKU','Marketplace','Quantidade','Preço unitário (R$)','Faturamento (R$)','Lucro líquido (R$)','Margem (%)'],...tbReportRows.map(x=>{const r=Number(x.gross_revenue||Number(x.unit_price||0)*Number(x.quantity||1)),p=Number(x.net_profit||0);return [new Date(x.sold_at).toLocaleString('pt-BR'),x.product_name||'',x.sku||'',x.marketplace||'',Number(x.quantity||0),csvMoney(x.unit_price),csvMoney(r),csvMoney(p),(r?p/r*100:0).toFixed(2).replace('.',',')]})];const csv='\ufeff'+rows.map(r=>r.map(csvCell).join(';')).join('\r\n');const blob=new Blob([csv],{type:'text/csv;charset=utf-8;'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='THE_BEST_Relatorio_Vendas_'+new Date().toISOString().slice(0,10)+'.csv';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1500);toast('Relatório CSV exportado.');};
 
   async function renderProdutos(){
     const el=document.getElementById("listaProdutosV5"),count=document.getElementById("contadorProdutos"); if(!el)return;
