@@ -1868,7 +1868,7 @@ body.tb-user-logged-in #calculadora{
 
 
 <style id="tb-v811-fixes">
-/* V8.3.3.1: correções da vitrine Premium */
+/* V8.3.4.1: correções da vitrine Premium */
 @media (min-width: 769px){
   .tb-mobile-menu-toggle,
   .tb-menu-toggle,
@@ -2007,7 +2007,7 @@ body.tb-user-logged-in #calculadora{
 
 
 <style id="tb-mobile-presentation-only">
-/* V8.3.3: celular/tablet = somente apresentação pública.
+/* V8.3.4: celular/tablet = somente apresentação pública.
    Área Premium/ERP continua disponível apenas em computador/programa desktop. */
 #tbMobileDesktopNotice{display:none}
 
@@ -2076,7 +2076,7 @@ body.tb-user-logged-in #calculadora{
 
 
 <style id="tb-program-desktop-v830">
-/* V8.3.3 • experiência de programa para desktop instalado */
+/* V8.3.4 • experiência de programa para desktop instalado */
 @media (display-mode:standalone) and (min-width:1025px){
   .tb-app-login-cover{
     display:flex!important;
@@ -2249,7 +2249,7 @@ body.tb-user-logged-in #calculadora{
 
 
 <style id="tb-desktop-exe-mode-v831">
-/* V8.3.3 • modo exclusivo do executável Windows via ?app=desktop */
+/* V8.3.4 • modo exclusivo do executável Windows via ?app=desktop */
 body.tb-desktop-program{
   min-width:1025px;
   background:#06111f;
@@ -2298,7 +2298,7 @@ body.tb-desktop-program.tb-app-authenticated .app-bottom-nav{
 
 
 <style id="tb-desktop-compact-v832">
-/* V8.3.3 • Desktop Compact: login proporcional, sem scroll horizontal */
+/* V8.3.4 • Desktop Compact: login proporcional, sem scroll horizontal */
 @media (min-width:1025px){
   body.tb-desktop-program{
     overflow:hidden!important;
@@ -2821,6 +2821,83 @@ body.tb-desktop-program.tb-app-authenticated .app-bottom-nav{
 }
 </style>
 
+
+<style id="tb-desktop-scroll-v834">
+/* V8.3.4 • libera rolagem do sistema após login no EXE */
+@media (min-width:1025px){
+  body.tb-desktop-program.tb-app-authenticated{
+    overflow-y:auto!important;
+    overflow-x:hidden!important;
+    height:auto!important;
+    min-height:100vh!important;
+  }
+
+  body.tb-desktop-program.tb-app-authenticated .tb-app-login-cover{
+    display:none!important;
+  }
+
+  body.tb-desktop-program.tb-app-authenticated main,
+  body.tb-desktop-program.tb-app-authenticated .premium-main,
+  body.tb-desktop-program.tb-app-authenticated .tb-premium-main,
+  body.tb-desktop-program.tb-app-authenticated .premium-content,
+  body.tb-desktop-program.tb-app-authenticated .tb-premium-content{
+    overflow:visible!important;
+    height:auto!important;
+    max-height:none!important;
+  }
+
+  body.tb-desktop-program.tb-app-authenticated .tb-premium-sidebar{
+    position:fixed!important;
+    top:12px!important;
+    bottom:12px!important;
+    overflow-y:auto!important;
+  }
+
+  body.tb-desktop-program.tb-app-authenticated .tb-premium-layout,
+  body.tb-desktop-program.tb-app-authenticated .tb-premium-shell{
+    min-height:100vh!important;
+    height:auto!important;
+    overflow:visible!important;
+  }
+
+  body.tb-desktop-program.tb-app-authenticated #financeiro,
+  body.tb-desktop-program.tb-app-authenticated #dashboard,
+  body.tb-desktop-program.tb-app-authenticated #vendas,
+  body.tb-desktop-program.tb-app-authenticated #estoque,
+  body.tb-desktop-program.tb-app-authenticated #metas,
+  body.tb-desktop-program.tb-app-authenticated #relatorios,
+  body.tb-desktop-program.tb-app-authenticated #meus-produtos,
+  body.tb-desktop-program.tb-app-authenticated #minha-conta{
+    height:auto!important;
+    max-height:none!important;
+    overflow:visible!important;
+  }
+
+  html:has(body.tb-desktop-program.tb-app-authenticated){
+    overflow-y:auto!important;
+    overflow-x:hidden!important;
+    height:auto!important;
+    min-height:100%!important;
+  }
+
+  /* barra de rolagem discreta no programa */
+  body.tb-desktop-program.tb-app-authenticated::-webkit-scrollbar{
+    width:10px;
+  }
+  body.tb-desktop-program.tb-app-authenticated::-webkit-scrollbar-track{
+    background:#06111f;
+  }
+  body.tb-desktop-program.tb-app-authenticated::-webkit-scrollbar-thumb{
+    background:#18466b;
+    border-radius:10px;
+    border:2px solid #06111f;
+  }
+  body.tb-desktop-program.tb-app-authenticated::-webkit-scrollbar-thumb:hover{
+    background:#1f6496;
+  }
+}
+</style>
+
 </head>
 
 <body>
@@ -2852,7 +2929,7 @@ body.tb-desktop-program.tb-app-authenticated .app-bottom-nav{
       </div>
       <div class="tb-program-title-right">
         <span>DESKTOP</span>
-        <span>V8.3.3</span>
+        <span>V8.3.4</span>
       </div>
     </div>
 
@@ -2884,7 +2961,7 @@ body.tb-desktop-program.tb-app-authenticated .app-bottom-nav{
           <small>Integração inicial planejada: Mercado Livre</small>
         </div>
 
-        <div class="tb-program-version">THE BEST DIGITAL • PROGRAMA PREMIUM • V8.3.3</div>
+        <div class="tb-program-version">THE BEST DIGITAL • PROGRAMA PREMIUM • V8.3.4</div>
       </section>
 
       <section class="tb-program-login-panel">
@@ -4596,7 +4673,7 @@ window.refreshPremiumAccess=async function(){
   window.limparFormularioProduto=function(){ ["v5ProdutoNome","v5ProdutoSku","v5ProdutoCusto","v5ProdutoVenda","v5ProdutoFrete"].forEach(id=>{const e=document.getElementById(id);if(e)e.value="";}); };
   window.excluirProdutoV5=async function(id){if(!requirePremium())return;const {error}=await premiumClient.from("saved_products").delete().eq("id",id).eq("user_id",premiumUser.id);if(!error){await renderProdutos();toast("Produto excluído.");}};
   window.usarProdutoV5=function(id){ if(!requirePremium())return; const x=premiumProducts.find(i=>String(i.id)===String(id));if(!x)return; document.getElementById("produto").value=x.name;document.getElementById("custo").value=x.cost||"";document.getElementById("venda").value=x.sale_price||"";document.getElementById("frete").value=x.shipping||"";document.getElementById("calculadora").scrollIntoView({behavior:"smooth"});toast("Produto carregado na calculadora."); 
-    /* V8.3.3: depois de carregar o produto, abre a Calculadora automaticamente */
+    /* V8.3.4: depois de carregar o produto, abre a Calculadora automaticamente */
     if(typeof tbShowPremiumModule === "function"){
       tbShowPremiumModule("calculadora",{scroll:true});
     }else{
