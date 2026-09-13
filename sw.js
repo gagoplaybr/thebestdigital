@@ -1,4 +1,4 @@
-const CACHE_NAME = "the-best-marketplace-v8-3-0-programa-desktop";
+const CACHE_NAME = "the-best-marketplace-v8-3-1-modo-desktop";
 const APP_SHELL = [
   "/",
   "/index.html",

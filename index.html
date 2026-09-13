@@ -1868,7 +1868,7 @@ body.tb-user-logged-in #calculadora{
 
 
 <style id="tb-v811-fixes">
-/* V8.3.0.1: correções da vitrine Premium */
+/* V8.3.1.1: correções da vitrine Premium */
 @media (min-width: 769px){
   .tb-mobile-menu-toggle,
   .tb-menu-toggle,
@@ -2007,7 +2007,7 @@ body.tb-user-logged-in #calculadora{
 
 
 <style id="tb-mobile-presentation-only">
-/* V8.3.0: celular/tablet = somente apresentação pública.
+/* V8.3.1: celular/tablet = somente apresentação pública.
    Área Premium/ERP continua disponível apenas em computador/programa desktop. */
 #tbMobileDesktopNotice{display:none}
 
@@ -2076,7 +2076,7 @@ body.tb-user-logged-in #calculadora{
 
 
 <style id="tb-program-desktop-v830">
-/* V8.3.0 • experiência de programa para desktop instalado */
+/* V8.3.1 • experiência de programa para desktop instalado */
 @media (display-mode:standalone) and (min-width:1025px){
   .tb-app-login-cover{
     display:flex!important;
@@ -2247,9 +2247,67 @@ body.tb-user-logged-in #calculadora{
 }
 </style>
 
+
+<style id="tb-desktop-exe-mode-v831">
+/* V8.3.1 • modo exclusivo do executável Windows via ?app=desktop */
+body.tb-desktop-program{
+  min-width:1025px;
+  background:#06111f;
+}
+body.tb-desktop-program .tb-app-login-cover{
+  display:flex!important;
+  align-items:center;
+  justify-content:center;
+  padding:24px;
+}
+body.tb-desktop-program.tb-app-authenticated .tb-app-login-cover{
+  display:none!important;
+}
+
+/* Dentro do EXE, nunca mostrar a vitrine pública do site */
+body.tb-desktop-program .app-home,
+body.tb-desktop-program > header,
+body.tb-desktop-program .hero,
+body.tb-desktop-program .seo-content,
+body.tb-desktop-program .problems,
+body.tb-desktop-program .dashboard-section,
+body.tb-desktop-program #kit,
+body.tb-desktop-program #apresentacao-kit,
+body.tb-desktop-program #tbMobileDesktopNotice,
+body.tb-desktop-program #tbMobileMenuToggle,
+body.tb-desktop-program #tbMobileMenuBackdrop,
+body.tb-desktop-program .install-app-wrap{
+  display:none!important;
+}
+body.tb-desktop-program .app-topbar{
+  display:none!important;
+}
+
+/* Após autenticar, abrir o sistema no formato desktop */
+body.tb-desktop-program.tb-app-authenticated{
+  padding-top:0!important;
+}
+body.tb-desktop-program.tb-app-authenticated .tb-premium-sidebar{
+  top:12px!important;
+  bottom:12px!important;
+}
+body.tb-desktop-program.tb-app-authenticated .app-bottom-nav{
+  display:none!important;
+}
+</style>
+
 </head>
 
 <body>
+<script>
+(function(){
+  try{
+    if(new URLSearchParams(window.location.search).get('app')==='desktop'){
+      document.body.classList.add('tb-desktop-program');
+    }
+  }catch(e){}
+})();
+</script>
 <div id="tbMobileDesktopNotice" role="note">
   <strong>💻 Área Premium no computador</strong><br>
   No celular você pode conhecer a plataforma e assinar normalmente. A Área Premium e a futura versão ERP foram pensadas para uso em computador.
@@ -2269,7 +2327,7 @@ body.tb-user-logged-in #calculadora{
       </div>
       <div class="tb-program-title-right">
         <span>DESKTOP</span>
-        <span>V8.3.0</span>
+        <span>V8.3.1</span>
       </div>
     </div>
 
@@ -2301,7 +2359,7 @@ body.tb-user-logged-in #calculadora{
           <small>Integração inicial planejada: Mercado Livre</small>
         </div>
 
-        <div class="tb-program-version">THE BEST DIGITAL • PROGRAMA PREMIUM • V8.3.0</div>
+        <div class="tb-program-version">THE BEST DIGITAL • PROGRAMA PREMIUM • V8.3.1</div>
       </section>
 
       <section class="tb-program-login-panel">
@@ -3807,7 +3865,8 @@ if ("serviceWorker" in navigator) {
 
   /* V7.1: Login exclusivo da versão instalada */
   function tbIsStandaloneApp(){
-    return window.matchMedia?.('(display-mode: standalone)').matches || window.navigator.standalone===true;
+    const desktopProgram = new URLSearchParams(window.location.search).get('app') === 'desktop';
+    return desktopProgram || window.matchMedia?.('(display-mode: standalone)').matches || window.navigator.standalone===true;
   }
 
   function tbSetAppLoginStatus(text,kind=''){
@@ -4012,7 +4071,7 @@ window.refreshPremiumAccess=async function(){
   window.limparFormularioProduto=function(){ ["v5ProdutoNome","v5ProdutoSku","v5ProdutoCusto","v5ProdutoVenda","v5ProdutoFrete"].forEach(id=>{const e=document.getElementById(id);if(e)e.value="";}); };
   window.excluirProdutoV5=async function(id){if(!requirePremium())return;const {error}=await premiumClient.from("saved_products").delete().eq("id",id).eq("user_id",premiumUser.id);if(!error){await renderProdutos();toast("Produto excluído.");}};
   window.usarProdutoV5=function(id){ if(!requirePremium())return; const x=premiumProducts.find(i=>String(i.id)===String(id));if(!x)return; document.getElementById("produto").value=x.name;document.getElementById("custo").value=x.cost||"";document.getElementById("venda").value=x.sale_price||"";document.getElementById("frete").value=x.shipping||"";document.getElementById("calculadora").scrollIntoView({behavior:"smooth"});toast("Produto carregado na calculadora."); 
-    /* V8.3.0: depois de carregar o produto, abre a Calculadora automaticamente */
+    /* V8.3.1: depois de carregar o produto, abre a Calculadora automaticamente */
     if(typeof tbShowPremiumModule === "function"){
       tbShowPremiumModule("calculadora",{scroll:true});
     }else{
