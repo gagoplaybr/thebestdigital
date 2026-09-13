@@ -1868,7 +1868,7 @@ body.tb-user-logged-in #calculadora{
 
 
 <style id="tb-v811-fixes">
-/* V8.3.2.1: correções da vitrine Premium */
+/* V8.3.3.1: correções da vitrine Premium */
 @media (min-width: 769px){
   .tb-mobile-menu-toggle,
   .tb-menu-toggle,
@@ -2007,7 +2007,7 @@ body.tb-user-logged-in #calculadora{
 
 
 <style id="tb-mobile-presentation-only">
-/* V8.3.2: celular/tablet = somente apresentação pública.
+/* V8.3.3: celular/tablet = somente apresentação pública.
    Área Premium/ERP continua disponível apenas em computador/programa desktop. */
 #tbMobileDesktopNotice{display:none}
 
@@ -2076,7 +2076,7 @@ body.tb-user-logged-in #calculadora{
 
 
 <style id="tb-program-desktop-v830">
-/* V8.3.2 • experiência de programa para desktop instalado */
+/* V8.3.3 • experiência de programa para desktop instalado */
 @media (display-mode:standalone) and (min-width:1025px){
   .tb-app-login-cover{
     display:flex!important;
@@ -2249,7 +2249,7 @@ body.tb-user-logged-in #calculadora{
 
 
 <style id="tb-desktop-exe-mode-v831">
-/* V8.3.2 • modo exclusivo do executável Windows via ?app=desktop */
+/* V8.3.3 • modo exclusivo do executável Windows via ?app=desktop */
 body.tb-desktop-program{
   min-width:1025px;
   background:#06111f;
@@ -2298,7 +2298,7 @@ body.tb-desktop-program.tb-app-authenticated .app-bottom-nav{
 
 
 <style id="tb-desktop-compact-v832">
-/* V8.3.2 • Desktop Compact: login proporcional, sem scroll horizontal */
+/* V8.3.3 • Desktop Compact: login proporcional, sem scroll horizontal */
 @media (min-width:1025px){
   body.tb-desktop-program{
     overflow:hidden!important;
@@ -2507,6 +2507,320 @@ body.tb-desktop-program.tb-app-authenticated .app-bottom-nav{
 }
 </style>
 
+
+<style id="tb-desktop-exe-full-v833">
+@media (min-width:1025px){
+  body.tb-desktop-program .tb-app-login-cover{
+    position:fixed!important;
+    inset:0!important;
+    z-index:999999!important;
+    display:flex!important;
+    align-items:center!important;
+    justify-content:center!important;
+    padding:20px!important;
+    overflow:auto!important;
+    box-sizing:border-box!important;
+    background:
+      radial-gradient(circle at 15% 20%,rgba(0,130,255,.18),transparent 30%),
+      radial-gradient(circle at 88% 82%,rgba(0,211,255,.10),transparent 27%),
+      linear-gradient(145deg,#030914 0%,#061426 50%,#04101f 100%)!important;
+  }
+
+  body.tb-desktop-program.tb-app-authenticated .tb-app-login-cover{
+    display:none!important;
+  }
+
+  body.tb-desktop-program .tb-program-window{
+    width:min(1040px,calc(100vw - 40px))!important;
+    max-width:1040px!important;
+    height:auto!important;
+    min-height:0!important;
+    max-height:calc(100vh - 40px)!important;
+    margin:auto!important;
+    border-radius:20px!important;
+    overflow:hidden!important;
+    border:1px solid rgba(91,187,255,.22)!important;
+    background:#071424!important;
+    box-shadow:0 30px 90px rgba(0,0,0,.55)!important;
+    box-sizing:border-box!important;
+  }
+
+  body.tb-desktop-program .tb-program-titlebar{
+    height:40px!important;
+    display:flex!important;
+    align-items:center!important;
+    justify-content:space-between!important;
+    padding:0 14px!important;
+    border-bottom:1px solid rgba(255,255,255,.07)!important;
+    background:linear-gradient(180deg,rgba(15,32,52,.98),rgba(8,23,39,.98))!important;
+    color:#9eb3c9!important;
+    font-size:10px!important;
+    letter-spacing:.6px!important;
+    box-sizing:border-box!important;
+  }
+
+  body.tb-desktop-program .tb-program-title-left,
+  body.tb-desktop-program .tb-program-title-right{
+    display:flex!important;
+    align-items:center!important;
+    gap:8px!important;
+  }
+
+  body.tb-desktop-program .tb-program-title-left strong{
+    color:#e8f5ff!important;
+    font-size:10px!important;
+  }
+
+  body.tb-desktop-program .tb-program-title-right span{
+    padding:4px 7px!important;
+    border-radius:6px!important;
+    background:rgba(255,255,255,.04)!important;
+  }
+
+  body.tb-desktop-program .tb-program-appdot{
+    width:8px!important;height:8px!important;border-radius:50%!important;
+    background:#2fc4ff!important;box-shadow:0 0 12px rgba(47,196,255,.85)!important;
+  }
+
+  body.tb-desktop-program .tb-program-grid{
+    display:grid!important;
+    grid-template-columns:minmax(0,1.05fr) minmax(330px,.95fr)!important;
+    min-height:0!important;
+    height:min(560px,calc(100vh - 80px))!important;
+  }
+
+  body.tb-desktop-program .tb-program-brand{
+    position:relative!important;
+    display:flex!important;
+    flex-direction:column!important;
+    padding:24px 30px 20px!important;
+    overflow:hidden!important;
+    min-width:0!important;
+    background:
+      linear-gradient(rgba(8,24,43,.90),rgba(6,20,37,.97)),
+      radial-gradient(circle at 72% 26%,rgba(0,130,255,.25),transparent 31%)!important;
+    box-sizing:border-box!important;
+  }
+
+  body.tb-desktop-program .tb-program-brand:before{
+    content:""!important;
+    position:absolute!important;inset:0!important;
+    background-image:
+      linear-gradient(rgba(51,171,255,.035) 1px,transparent 1px),
+      linear-gradient(90deg,rgba(51,171,255,.035) 1px,transparent 1px)!important;
+    background-size:34px 34px!important;
+    pointer-events:none!important;
+  }
+
+  body.tb-desktop-program .tb-program-brand-top,
+  body.tb-desktop-program .tb-program-copy,
+  body.tb-desktop-program .tb-program-feature-grid,
+  body.tb-desktop-program .tb-program-roadmap-mini,
+  body.tb-desktop-program .tb-program-version{
+    position:relative!important;z-index:1!important;
+  }
+
+  body.tb-desktop-program .tb-program-brand-top{
+    display:flex!important;
+    justify-content:space-between!important;
+    align-items:center!important;
+    gap:12px!important;
+  }
+
+  body.tb-desktop-program .tb-program-logo-wrap{
+    width:150px!important;
+    max-width:150px!important;
+    overflow:hidden!important;
+  }
+
+  body.tb-desktop-program .tb-program-logo-wrap img{
+    display:block!important;
+    width:150px!important;
+    max-width:150px!important;
+    height:auto!important;
+    max-height:50px!important;
+    object-fit:contain!important;
+    object-position:left center!important;
+  }
+
+  body.tb-desktop-program .tb-program-cloud-status{
+    display:inline-flex!important;align-items:center!important;gap:7px!important;
+    padding:6px 8px!important;border:1px solid rgba(63,200,255,.18)!important;border-radius:999px!important;
+    color:#8fdcff!important;background:rgba(18,109,165,.10)!important;
+    font-size:8px!important;font-weight:800!important;letter-spacing:.7px!important;
+    white-space:nowrap!important;
+  }
+
+  body.tb-desktop-program .tb-program-cloud-status b{
+    width:6px!important;height:6px!important;border-radius:50%!important;
+    background:#38e19f!important;box-shadow:0 0 10px rgba(56,225,159,.7)!important;
+  }
+
+  body.tb-desktop-program .tb-program-copy{
+    margin-top:22px!important;
+    max-width:520px!important;
+  }
+
+  body.tb-desktop-program .tb-program-eyebrow{
+    color:#52bfff!important;font-weight:900!important;font-size:8px!important;
+    letter-spacing:1.2px!important;margin-bottom:8px!important;
+  }
+
+  body.tb-desktop-program .tb-program-copy h1{
+    margin:0!important;color:#fff!important;
+    font-size:clamp(26px,2.6vw,38px)!important;
+    line-height:1.04!important;letter-spacing:-1px!important;
+  }
+
+  body.tb-desktop-program .tb-program-copy h1 span{
+    color:#32b9ff!important;text-shadow:0 0 24px rgba(50,185,255,.22)!important;
+  }
+
+  body.tb-desktop-program .tb-program-copy p{
+    margin:10px 0 0!important;color:#a8bdd2!important;
+    line-height:1.5!important;font-size:11px!important;max-width:500px!important;
+  }
+
+  body.tb-desktop-program .tb-program-feature-grid{
+    display:grid!important;grid-template-columns:1fr 1fr!important;gap:8px!important;margin-top:16px!important;
+  }
+
+  body.tb-desktop-program .tb-program-feature-grid>div{
+    display:flex!important;align-items:center!important;gap:9px!important;
+    padding:8px 9px!important;border-radius:10px!important;
+    border:1px solid rgba(75,177,255,.13)!important;background:rgba(9,33,57,.64)!important;
+  }
+
+  body.tb-desktop-program .tb-program-feature-grid i{
+    width:30px!important;height:30px!important;border-radius:9px!important;
+    display:grid!important;place-items:center!important;font-style:normal!important;
+    background:linear-gradient(145deg,rgba(25,131,225,.22),rgba(27,189,255,.09))!important;
+    font-size:13px!important;
+  }
+
+  body.tb-desktop-program .tb-program-feature-grid b{
+    display:block!important;color:#e9f6ff!important;font-size:9px!important;
+  }
+
+  body.tb-desktop-program .tb-program-feature-grid small{
+    display:block!important;color:#7895b0!important;font-size:7px!important;margin-top:2px!important;
+  }
+
+  body.tb-desktop-program .tb-program-roadmap-mini{
+    margin-top:10px!important;padding:8px 10px!important;border-radius:10px!important;
+    border:1px solid rgba(255,193,60,.16)!important;
+    background:linear-gradient(135deg,rgba(255,188,28,.055),rgba(13,44,74,.4))!important;
+  }
+
+  body.tb-desktop-program .tb-program-roadmap-mini span{
+    display:block!important;color:#e8bc54!important;font-size:7px!important;font-weight:900!important;letter-spacing:.8px!important;
+  }
+
+  body.tb-desktop-program .tb-program-roadmap-mini strong{
+    display:block!important;color:#fff!important;font-size:9px!important;margin-top:3px!important;
+  }
+
+  body.tb-desktop-program .tb-program-roadmap-mini small{
+    display:block!important;color:#8fa8c0!important;font-size:7px!important;margin-top:2px!important;
+  }
+
+  body.tb-desktop-program .tb-program-version{
+    margin-top:auto!important;color:#5d7994!important;font-size:7px!important;
+    letter-spacing:.8px!important;padding-top:10px!important;
+  }
+
+  body.tb-desktop-program .tb-program-login-panel{
+    display:flex!important;flex-direction:column!important;justify-content:center!important;
+    padding:28px 30px!important;min-width:0!important;overflow:auto!important;
+    background:linear-gradient(180deg,#0b1c30 0%,#081726 100%)!important;
+    border-left:1px solid rgba(255,255,255,.06)!important;
+    box-sizing:border-box!important;
+  }
+
+  body.tb-desktop-program .tb-program-login-badge{
+    align-self:flex-start!important;padding:5px 8px!important;border-radius:7px!important;
+    background:rgba(24,148,255,.10)!important;border:1px solid rgba(54,174,255,.22)!important;
+    color:#5fc7ff!important;font-size:7px!important;font-weight:900!important;letter-spacing:1px!important;
+  }
+
+  body.tb-desktop-program .tb-program-login-panel h2{
+    margin:10px 0 5px!important;color:#fff!important;font-size:22px!important;letter-spacing:-.4px!important;
+  }
+
+  body.tb-desktop-program .tb-program-login-sub{
+    margin:0 0 16px!important;color:#8ea8c0!important;line-height:1.5!important;font-size:10px!important;
+  }
+
+  body.tb-desktop-program .tb-app-login-field{
+    margin:0 0 10px!important;
+  }
+
+  body.tb-desktop-program .tb-app-login-field label{
+    display:block!important;color:#adc1d5!important;font-size:9px!important;font-weight:800!important;margin:0 0 6px!important;
+  }
+
+  body.tb-desktop-program .tb-program-input-wrap{
+    height:42px!important;display:flex!important;align-items:center!important;gap:9px!important;
+    padding:0 11px!important;border-radius:10px!important;
+    background:#061321!important;border:1px solid rgba(107,176,230,.18)!important;
+    box-sizing:border-box!important;
+  }
+
+  body.tb-desktop-program .tb-program-input-wrap input{
+    flex:1!important;min-width:0!important;height:100%!important;
+    border:0!important;outline:0!important;background:transparent!important;color:#fff!important;
+    padding:0!important;box-shadow:none!important;font-size:12px!important;
+  }
+
+  body.tb-desktop-program .tb-app-login-btn{
+    width:100%!important;height:42px!important;margin-top:4px!important;border:0!important;border-radius:10px!important;
+    background:linear-gradient(135deg,#087cff,#00b9ff)!important;color:#fff!important;
+    font-weight:950!important;font-size:10px!important;letter-spacing:.6px!important;
+    box-shadow:0 12px 24px rgba(0,118,255,.20)!important;
+  }
+
+  body.tb-desktop-program .tb-app-login-secondary{
+    width:100%!important;height:38px!important;margin-top:8px!important;border-radius:10px!important;
+    border:1px solid rgba(93,174,231,.17)!important;background:rgba(8,31,53,.72)!important;
+    color:#9fc8e5!important;font-size:9px!important;font-weight:850!important;
+  }
+
+  body.tb-desktop-program .tb-app-login-status{
+    margin-top:9px!important;padding:7px 9px!important;border-radius:9px!important;
+    background:rgba(255,255,255,.035)!important;color:#8ea7be!important;font-size:9px!important;text-align:center!important;
+  }
+
+  body.tb-desktop-program .tb-program-security{
+    display:flex!important;gap:8px!important;align-items:flex-start!important;
+    margin-top:9px!important;padding:8px!important;border-radius:9px!important;
+    border:1px solid rgba(74,183,255,.10)!important;background:rgba(7,25,43,.55)!important;
+  }
+
+  body.tb-desktop-program .tb-program-security p{
+    margin:0!important;color:#6f8aa4!important;font-size:8px!important;line-height:1.45!important;
+  }
+
+  body.tb-desktop-program .tb-program-login-foot{
+    text-align:center!important;margin-top:9px!important;color:#4f6d89!important;font-size:7px!important;letter-spacing:.8px!important;
+  }
+}
+
+@media (min-width:1025px) and (max-height:680px){
+  body.tb-desktop-program .tb-program-grid{
+    height:calc(100vh - 70px)!important;
+  }
+  body.tb-desktop-program .tb-program-copy{
+    margin-top:14px!important;
+  }
+  body.tb-desktop-program .tb-program-feature-grid{
+    margin-top:10px!important;
+  }
+  body.tb-desktop-program .tb-program-roadmap-mini{
+    display:none!important;
+  }
+}
+</style>
+
 </head>
 
 <body>
@@ -2538,7 +2852,7 @@ body.tb-desktop-program.tb-app-authenticated .app-bottom-nav{
       </div>
       <div class="tb-program-title-right">
         <span>DESKTOP</span>
-        <span>V8.3.2</span>
+        <span>V8.3.3</span>
       </div>
     </div>
 
@@ -2570,7 +2884,7 @@ body.tb-desktop-program.tb-app-authenticated .app-bottom-nav{
           <small>Integração inicial planejada: Mercado Livre</small>
         </div>
 
-        <div class="tb-program-version">THE BEST DIGITAL • PROGRAMA PREMIUM • V8.3.2</div>
+        <div class="tb-program-version">THE BEST DIGITAL • PROGRAMA PREMIUM • V8.3.3</div>
       </section>
 
       <section class="tb-program-login-panel">
@@ -4282,7 +4596,7 @@ window.refreshPremiumAccess=async function(){
   window.limparFormularioProduto=function(){ ["v5ProdutoNome","v5ProdutoSku","v5ProdutoCusto","v5ProdutoVenda","v5ProdutoFrete"].forEach(id=>{const e=document.getElementById(id);if(e)e.value="";}); };
   window.excluirProdutoV5=async function(id){if(!requirePremium())return;const {error}=await premiumClient.from("saved_products").delete().eq("id",id).eq("user_id",premiumUser.id);if(!error){await renderProdutos();toast("Produto excluído.");}};
   window.usarProdutoV5=function(id){ if(!requirePremium())return; const x=premiumProducts.find(i=>String(i.id)===String(id));if(!x)return; document.getElementById("produto").value=x.name;document.getElementById("custo").value=x.cost||"";document.getElementById("venda").value=x.sale_price||"";document.getElementById("frete").value=x.shipping||"";document.getElementById("calculadora").scrollIntoView({behavior:"smooth"});toast("Produto carregado na calculadora."); 
-    /* V8.3.2: depois de carregar o produto, abre a Calculadora automaticamente */
+    /* V8.3.3: depois de carregar o produto, abre a Calculadora automaticamente */
     if(typeof tbShowPremiumModule === "function"){
       tbShowPremiumModule("calculadora",{scroll:true});
     }else{
