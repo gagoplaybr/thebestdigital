@@ -1868,7 +1868,7 @@ body.tb-user-logged-in #calculadora{
 
 
 <style id="tb-v811-fixes">
-/* V8.4.0.1: correções da vitrine Premium */
+/* V8.4.1.1: correções da vitrine Premium */
 @media (min-width: 769px){
   .tb-mobile-menu-toggle,
   .tb-menu-toggle,
@@ -2007,7 +2007,7 @@ body.tb-user-logged-in #calculadora{
 
 
 <style id="tb-mobile-presentation-only">
-/* V8.4.0: celular/tablet = somente apresentação pública.
+/* V8.4.1: celular/tablet = somente apresentação pública.
    Área Premium/ERP continua disponível apenas em computador/programa desktop. */
 #tbMobileDesktopNotice{display:none}
 
@@ -2076,7 +2076,7 @@ body.tb-user-logged-in #calculadora{
 
 
 <style id="tb-program-desktop-v830">
-/* V8.4.0 • experiência de programa para desktop instalado */
+/* V8.4.1 • experiência de programa para desktop instalado */
 @media (display-mode:standalone) and (min-width:1025px){
   .tb-app-login-cover{
     display:flex!important;
@@ -2249,7 +2249,7 @@ body.tb-user-logged-in #calculadora{
 
 
 <style id="tb-desktop-exe-mode-v831">
-/* V8.4.0 • modo exclusivo do executável Windows via ?app=desktop */
+/* V8.4.1 • modo exclusivo do executável Windows via ?app=desktop */
 body.tb-desktop-program{
   min-width:1025px;
   background:#06111f;
@@ -2298,7 +2298,7 @@ body.tb-desktop-program.tb-app-authenticated .app-bottom-nav{
 
 
 <style id="tb-desktop-compact-v832">
-/* V8.4.0 • Desktop Compact: login proporcional, sem scroll horizontal */
+/* V8.4.1 • Desktop Compact: login proporcional, sem scroll horizontal */
 @media (min-width:1025px){
   body.tb-desktop-program{
     overflow:hidden!important;
@@ -2823,7 +2823,7 @@ body.tb-desktop-program.tb-app-authenticated .app-bottom-nav{
 
 
 <style id="tb-desktop-scroll-v834">
-/* V8.4.0 • libera rolagem do sistema após login no EXE */
+/* V8.4.1 • libera rolagem do sistema após login no EXE */
 @media (min-width:1025px){
   body.tb-desktop-program.tb-app-authenticated{
     overflow-y:auto!important;
@@ -2996,6 +2996,279 @@ body.tb-desktop-program.tb-app-authenticated .app-bottom-nav{
 }
 </style>
 
+
+<style id="tb-products-v841-edit-fullpage">
+#tbCancelProductEditButton[hidden],#tbClearProductButton[hidden]{display:none!important}
+.tb-product-form-card.tb-editing-product{
+  border-color:rgba(255,193,61,.34);
+  box-shadow:0 0 0 1px rgba(255,193,61,.05) inset;
+}
+.tb-product-form-card.tb-editing-product .tb-product-form-title b{color:#ffd36e}
+.tb-product-editing-note{color:#e7bb52!important}
+
+.tb-product-row-actions .edit-product{
+  background:rgba(255,187,52,.10)!important;
+  border-color:rgba(255,187,52,.2)!important;
+  color:#ffd873!important;
+}
+
+.tb-product-detail-page{
+  position:fixed;
+  inset:0;
+  z-index:999997;
+  background:
+    radial-gradient(circle at 12% 12%,rgba(0,137,255,.09),transparent 28%),
+    linear-gradient(145deg,#06111f,#081b2f 58%,#061522);
+  overflow-y:auto;
+  overflow-x:hidden;
+}
+.tb-product-detail-page[hidden]{display:none!important}
+.tb-product-detail-page-topbar{
+  position:sticky;
+  top:0;
+  z-index:5;
+  height:58px;
+  display:grid;
+  grid-template-columns:auto 1fr auto;
+  align-items:center;
+  gap:14px;
+  padding:0 24px;
+  border-bottom:1px solid rgba(92,194,255,.13);
+  background:rgba(5,18,32,.95);
+  backdrop-filter:blur(14px);
+}
+.tb-product-back,.tb-product-detail-edit-top{
+  border:1px solid rgba(82,190,255,.17);
+  background:#0b2943;
+  color:#d7efff;
+  border-radius:10px;
+  padding:9px 12px;
+  font-size:9px;
+  font-weight:900;
+  cursor:pointer;
+}
+.tb-product-detail-edit-top{
+  background:linear-gradient(135deg,rgba(250,172,34,.16),rgba(12,46,76,.8));
+  color:#ffd873;
+  border-color:rgba(250,172,34,.24);
+}
+.tb-product-detail-brand{
+  text-align:center;
+  color:#6b89a5;
+  font-size:8px;
+  letter-spacing:1px;
+  font-weight:900;
+}
+.tb-product-detail-page-content{
+  width:min(1380px,calc(100vw - 48px));
+  margin:0 auto;
+  padding:28px 0 50px;
+}
+.tb-product-hero{
+  display:grid;
+  grid-template-columns:minmax(360px,.88fr) minmax(430px,1.12fr);
+  gap:24px;
+  align-items:start;
+}
+.tb-product-visual-card,.tb-product-info-card,.tb-product-description-card,.tb-product-spec-card{
+  border:1px solid rgba(83,190,255,.14);
+  border-radius:18px;
+  background:linear-gradient(145deg,rgba(11,31,52,.92),rgba(7,22,37,.95));
+  box-shadow:0 22px 60px rgba(0,0,0,.16);
+}
+.tb-product-visual-card{padding:18px}
+.tb-product-main-view{
+  width:100%;
+  aspect-ratio:1/1;
+  border-radius:16px;
+  overflow:hidden;
+  display:grid;
+  place-items:center;
+  background:
+    linear-gradient(135deg,rgba(0,131,255,.045),rgba(255,255,255,.015)),
+    #061321;
+  border:1px solid rgba(100,199,255,.13);
+}
+.tb-product-main-view img{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  display:block;
+}
+.tb-product-main-view.no-photo{
+  font-size:72px;
+  color:#446b8b;
+}
+.tb-product-detail-gallery{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:8px;
+  margin-top:10px;
+}
+.tb-product-detail-gallery button{
+  padding:0;
+  border:1px solid rgba(80,185,255,.13);
+  border-radius:10px;
+  overflow:hidden;
+  background:#061321;
+  aspect-ratio:1/1;
+  cursor:pointer;
+}
+.tb-product-detail-gallery button.active{
+  border-color:#24bfff;
+  box-shadow:0 0 0 2px rgba(36,191,255,.13);
+}
+.tb-product-detail-gallery img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
+.tb-product-info-card{padding:24px}
+.tb-product-info-eyebrow{
+  color:#52c8ff;
+  font-size:8px;
+  font-weight:900;
+  letter-spacing:1.2px;
+}
+.tb-product-info-card h1{
+  margin:8px 0 7px;
+  font-size:clamp(28px,3vw,44px);
+  line-height:1.05;
+  color:#f3fbff;
+  letter-spacing:-1px;
+}
+.tb-product-info-codes{
+  display:flex;
+  flex-wrap:wrap;
+  gap:7px;
+  margin-bottom:18px;
+}
+.tb-product-info-codes span{
+  padding:7px 9px;
+  border-radius:8px;
+  background:#071827;
+  border:1px solid rgba(255,255,255,.055);
+  color:#8fb0ca;
+  font-size:9px;
+}
+.tb-product-price-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:9px;
+  margin-top:16px;
+}
+.tb-product-price-card{
+  padding:13px;
+  border-radius:12px;
+  background:#061625;
+  border:1px solid rgba(255,255,255,.055);
+}
+.tb-product-price-card span{
+  display:block;
+  color:#6988a4;
+  font-size:7px;
+  font-weight:900;
+  text-transform:uppercase;
+}
+.tb-product-price-card b{
+  display:block;
+  color:#e9f8ff;
+  font-size:16px;
+  margin-top:4px;
+}
+.tb-product-description-card,.tb-product-spec-card{
+  margin-top:16px;
+  padding:18px;
+}
+.tb-product-section-title{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  margin-bottom:12px;
+}
+.tb-product-section-title h3{
+  margin:0;
+  color:#e9f8ff;
+  font-size:13px;
+}
+.tb-product-description-card p{
+  margin:0;
+  color:#b9cee0;
+  font-size:11px;
+  line-height:1.7;
+  white-space:pre-wrap;
+}
+.tb-product-spec-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:9px;
+}
+.tb-product-spec{
+  padding:12px;
+  border-radius:11px;
+  background:#061625;
+  border:1px solid rgba(255,255,255,.05);
+}
+.tb-product-spec span{
+  display:block;
+  color:#6c8aa6;
+  font-size:7px;
+  font-weight:900;
+  text-transform:uppercase;
+}
+.tb-product-spec b{
+  display:block;
+  color:#e2f3ff;
+  font-size:10px;
+  margin-top:4px;
+  word-break:break-word;
+}
+.tb-product-page-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-top:18px;
+}
+.tb-product-page-actions button{
+  border:0;
+  border-radius:11px;
+  padding:11px 14px;
+  font-size:9px;
+  font-weight:900;
+  cursor:pointer;
+  color:#fff;
+  background:linear-gradient(90deg,#087cff,#00b8ff);
+}
+.tb-product-page-actions button.secondary{
+  background:#0c2943;
+  border:1px solid rgba(77,190,255,.16);
+  color:#c6eaff;
+}
+.tb-product-page-actions button.edit{
+  background:linear-gradient(90deg,#be7c16,#f5ae32);
+  color:#08111c;
+}
+.tb-product-page-actions button.danger{
+  background:rgba(191,50,65,.12);
+  border:1px solid rgba(255,87,102,.17);
+  color:#ff98a1;
+}
+
+@media(max-width:1050px){
+  .tb-product-hero{grid-template-columns:1fr}
+  .tb-product-visual-card{max-width:680px}
+}
+@media(max-width:720px){
+  .tb-product-detail-page-topbar{grid-template-columns:1fr auto;padding:0 12px}
+  .tb-product-detail-brand{display:none}
+  .tb-product-detail-page-content{width:calc(100vw - 24px);padding-top:16px}
+  .tb-product-price-grid,.tb-product-spec-grid{grid-template-columns:1fr 1fr}
+  .tb-product-info-card h1{font-size:27px}
+}
+</style>
+
 </head>
 
 <body>
@@ -3027,7 +3300,7 @@ body.tb-desktop-program.tb-app-authenticated .app-bottom-nav{
       </div>
       <div class="tb-program-title-right">
         <span>DESKTOP</span>
-        <span>V8.4.0</span>
+        <span>V8.4.1</span>
       </div>
     </div>
 
@@ -3059,7 +3332,7 @@ body.tb-desktop-program.tb-app-authenticated .app-bottom-nav{
           <small>Integração inicial planejada: Mercado Livre</small>
         </div>
 
-        <div class="tb-program-version">THE BEST DIGITAL • PROGRAMA PREMIUM • V8.4.0</div>
+        <div class="tb-program-version">THE BEST DIGITAL • PROGRAMA PREMIUM • V8.4.1</div>
       </section>
 
       <section class="tb-program-login-panel">
@@ -3970,7 +4243,10 @@ body.tb-desktop-program.tb-app-authenticated .app-bottom-nav{
     <div id="premiumProductsPanel" class="premium-products-wrap">
       <div class="tb-product-form-card">
         <div class="tb-product-form-title">
-          <div><b>Novo produto</b><span>Preencha os dados principais do item.</span></div>
+          <div>
+            <b id="tbProductFormTitle">Novo produto</b>
+            <span id="tbProductFormSubtitle">Preencha os dados principais do item.</span>
+          </div>
           <span class="tb-product-cloud">☁ NUVEM</span>
         </div>
 
@@ -4010,7 +4286,8 @@ body.tb-desktop-program.tb-app-authenticated .app-bottom-nav{
 
         <div class="v5-actions">
           <button id="tbSaveProductButton" class="v5-btn" onclick="salvarProdutoV5()">+ SALVAR PRODUTO</button>
-          <button class="v5-btn ghost" onclick="limparFormularioProduto()">LIMPAR CAMPOS</button>
+          <button id="tbCancelProductEditButton" class="v5-btn ghost" onclick="limparFormularioProduto()" hidden>CANCELAR EDIÇÃO</button>
+          <button id="tbClearProductButton" class="v5-btn ghost" onclick="limparFormularioProduto()">LIMPAR CAMPOS</button>
         </div>
       </div>
 
@@ -4037,11 +4314,13 @@ body.tb-desktop-program.tb-app-authenticated .app-bottom-nav{
   </div>
 </section>
 
-<div id="tbProductDetailModal" class="tb-product-modal" hidden onclick="tbCloseProductDetail(event)">
-  <div class="tb-product-modal-card" role="dialog" aria-modal="true" aria-labelledby="tbProductDetailTitle" onclick="event.stopPropagation()">
-    <button type="button" class="tb-product-modal-close" onclick="tbCloseProductDetail()">×</button>
-    <div id="tbProductDetailContent"></div>
+<div id="tbProductDetailPage" class="tb-product-detail-page" hidden>
+  <div class="tb-product-detail-page-topbar">
+    <button type="button" class="tb-product-back" onclick="tbCloseProductDetail()">← VOLTAR AOS PRODUTOS</button>
+    <div class="tb-product-detail-brand">THE BEST MARKETPLACE PREMIUM • PRODUTO</div>
+    <button type="button" class="tb-product-detail-edit-top" id="tbProductDetailEditTop">✏ EDITAR PRODUTO</button>
   </div>
+  <div id="tbProductDetailContent" class="tb-product-detail-page-content"></div>
 </div>
 
 <div id="tbProductHoverPreview" class="tb-product-hover-preview" hidden>
@@ -4810,12 +5089,19 @@ window.refreshPremiumAccess=async function(){
   function requirePremium(){
     if(!premiumActive || !premiumUser || !premiumClient){toast("Recurso exclusivo para clientes do THE BEST KIT.");document.getElementById("area-cliente")?.scrollIntoView({behavior:"smooth"});return false;} return true;
   }
-  let tbProductFiles=[];
+  let tbProductPhotoItems=[];
   let tbProductMainIndex=0;
   let tbProductSaving=false;
+  let tbEditingProductId=null;
+  let tbProductRemovedStoragePaths=[];
 
   function tbProductDigits(value,max){
     return String(value||"").replace(/\D/g,"").slice(0,max||99);
+  }
+
+  function tbStoragePathFromPublicUrl(url){
+    const prefix="/storage/v1/object/public/product-images/";
+    try{return decodeURIComponent(new URL(url).pathname.split(prefix)[1]||"");}catch(_){return "";}
   }
 
   window.tbProductPhotosChanged=function(event){
@@ -4823,16 +5109,30 @@ window.refreshPremiumAccess=async function(){
     if(!files.length)return;
     const valid=files.filter(f=>/^image\/(jpeg|png|webp)$/i.test(f.type));
     if(valid.length!==files.length)toast("Use somente imagens JPG, PNG ou WebP.");
-    tbProductFiles=valid.slice(0,5);
-    if(valid.length>5)toast("O limite é de 5 fotos por produto.");
-    tbProductMainIndex=0;
+
+    const slots=Math.max(0,5-tbProductPhotoItems.length);
+    const accepted=valid.slice(0,slots);
+    if(valid.length>slots)toast("O limite é de 5 fotos por produto.");
+
+    accepted.forEach(file=>{
+      tbProductPhotoItems.push({type:"file",file,previewUrl:URL.createObjectURL(file)});
+    });
+
+    if(tbProductPhotoItems.length===accepted.length && accepted.length)tbProductMainIndex=0;
+    const input=document.getElementById("v5ProdutoFotos");if(input)input.value="";
     tbRenderProductPhotoPreview();
   };
 
   window.tbRemoveProductPhoto=function(index){
-    tbProductFiles.splice(Number(index),1);
-    if(tbProductMainIndex>=tbProductFiles.length)tbProductMainIndex=Math.max(0,tbProductFiles.length-1);
-    const input=document.getElementById("v5ProdutoFotos"); if(input)input.value="";
+    index=Number(index);
+    const item=tbProductPhotoItems[index];
+    if(!item)return;
+    if(item.type==="existing" && item.path)tbProductRemovedStoragePaths.push(item.path);
+    if(item.type==="file" && item.previewUrl)URL.revokeObjectURL(item.previewUrl);
+    tbProductPhotoItems.splice(index,1);
+    if(tbProductMainIndex===index)tbProductMainIndex=0;
+    else if(tbProductMainIndex>index)tbProductMainIndex--;
+    if(tbProductMainIndex>=tbProductPhotoItems.length)tbProductMainIndex=Math.max(0,tbProductPhotoItems.length-1);
     tbRenderProductPhotoPreview();
   };
 
@@ -4844,17 +5144,16 @@ window.refreshPremiumAccess=async function(){
   function tbRenderProductPhotoPreview(){
     const wrap=document.getElementById("tbProductPhotoPreview");
     const count=document.getElementById("tbProductPhotoCount");
-    if(count)count.textContent=`${tbProductFiles.length} / 5`;
+    if(count)count.textContent=`${tbProductPhotoItems.length} / 5`;
     if(!wrap)return;
-    if(!tbProductFiles.length){
+    if(!tbProductPhotoItems.length){
       wrap.innerHTML='<div class="tb-product-photo-empty">Nenhuma foto selecionada.</div>';
       return;
     }
-    wrap.innerHTML=tbProductFiles.map((file,i)=>{
-      const url=URL.createObjectURL(file);
-      setTimeout(()=>URL.revokeObjectURL(url),15000);
+    wrap.innerHTML=tbProductPhotoItems.map((item,i)=>{
+      const url=item.type==="file"?item.previewUrl:item.url;
       return `<div class="tb-product-photo-card">
-        <img src="${url}" alt="Foto ${i+1}">
+        <img src="${esc(url)}" alt="Foto ${i+1}">
         <button type="button" class="remove" onclick="tbRemoveProductPhoto(${i})" title="Remover">×</button>
         <div class="tb-photo-actions">
           <button type="button" class="${i===tbProductMainIndex?'primary':''}" onclick="tbSetMainProductPhoto(${i})">${i===tbProductMainIndex?'★ PRINCIPAL':'DEFINIR PRINCIPAL'}</button>
@@ -4875,25 +5174,79 @@ window.refreshPremiumAccess=async function(){
     const ctx=canvas.getContext("2d");
     ctx.drawImage(bitmap,0,0,w,h);
     bitmap.close?.();
-    const blob=await new Promise((resolve,reject)=>canvas.toBlob(b=>b?resolve(b):reject(new Error("Falha ao processar imagem.")),"image/webp",0.84));
-    return blob;
+    return await new Promise((resolve,reject)=>canvas.toBlob(
+      b=>b?resolve(b):reject(new Error("Falha ao processar imagem.")),
+      "image/webp",0.84
+    ));
   }
 
-  async function tbUploadProductPhotos(){
-    if(!tbProductFiles.length)return {urls:[],paths:[]};
+  async function tbUploadNewProductPhotos(){
+    const newItems=tbProductPhotoItems.filter(x=>x.type==="file");
+    if(!newItems.length)return [];
     const folder=`${premiumUser.id}/${crypto.randomUUID()}`;
-    const urls=[],paths=[];
-    for(let i=0;i<tbProductFiles.length;i++){
-      const blob=await tbCompressProductImage(tbProductFiles[i]);
+    const uploaded=[];
+    for(let i=0;i<newItems.length;i++){
+      const blob=await tbCompressProductImage(newItems[i].file);
       const path=`${folder}/${String(i+1).padStart(2,"0")}.webp`;
-      const {error}=await premiumClient.storage.from("product-images").upload(path,blob,{contentType:"image/webp",upsert:false,cacheControl:"3600"});
+      const {error}=await premiumClient.storage.from("product-images").upload(
+        path,blob,{contentType:"image/webp",upsert:false,cacheControl:"3600"}
+      );
       if(error)throw new Error(error.message||"Falha no upload da foto.");
       const {data}=premiumClient.storage.from("product-images").getPublicUrl(path);
-      urls.push(data.publicUrl);
-      paths.push(path);
+      uploaded.push({item:newItems[i],url:data.publicUrl,path});
     }
-    return {urls,paths};
+    return uploaded;
   }
+
+  window.editarProdutoV5=function(id){
+    const p=premiumProducts.find(x=>String(x.id)===String(id));
+    if(!p)return;
+    tbCloseProductDetail();
+    tbEditingProductId=p.id;
+    tbProductRemovedStoragePaths=[];
+
+    const set=(id,val)=>{const e=document.getElementById(id);if(e)e.value=val??"";};
+    set("v5ProdutoNome",p.name);
+    set("v5ProdutoSku",p.sku);
+    set("v5ProdutoEan",p.ean);
+    set("v5ProdutoNcm",p.ncm);
+    set("v5ProdutoDescricao",p.description);
+    set("v5ProdutoCusto",p.cost);
+    set("v5ProdutoVenda",p.sale_price);
+    set("v5ProdutoFrete",p.shipping);
+    set("v5ProdutoPeso",p.weight_kg);
+    set("v5ProdutoComprimento",p.length_cm);
+    set("v5ProdutoLargura",p.width_cm);
+    set("v5ProdutoAltura",p.height_cm);
+
+    const urls=Array.isArray(p.image_urls)?p.image_urls.filter(Boolean):[];
+    tbProductPhotoItems=urls.map(url=>({
+      type:"existing",
+      url,
+      path:tbStoragePathFromPublicUrl(url)
+    }));
+    const main=p.main_image_url;
+    const mainIdx=urls.findIndex(u=>u===main);
+    tbProductMainIndex=mainIdx>=0?mainIdx:0;
+    tbRenderProductPhotoPreview();
+
+    const title=document.getElementById("tbProductFormTitle");
+    const sub=document.getElementById("tbProductFormSubtitle");
+    const btn=document.getElementById("tbSaveProductButton");
+    const cancel=document.getElementById("tbCancelProductEditButton");
+    const clear=document.getElementById("tbClearProductButton");
+    const card=document.querySelector(".tb-product-form-card");
+    if(title)title.textContent="Editando produto";
+    if(sub){sub.textContent=`Atualize os dados, fotos e informações de ${p.name}.`;sub.classList.add("tb-product-editing-note");}
+    if(btn)btn.textContent="✓ SALVAR ALTERAÇÕES";
+    if(cancel)cancel.hidden=false;
+    if(clear)clear.hidden=true;
+    card?.classList.add("tb-editing-product");
+
+    document.getElementById("meus-produtos")?.scrollIntoView({behavior:"smooth",block:"start"});
+    setTimeout(()=>document.getElementById("v5ProdutoNome")?.focus(),350);
+    toast("Produto carregado para edição.");
+  };
 
   window.salvarProdutoV5=async function(){
     if(!requirePremium()||tbProductSaving)return;
@@ -4907,12 +5260,21 @@ window.refreshPremiumAccess=async function(){
 
     tbProductSaving=true;
     const btn=document.getElementById("tbSaveProductButton");
-    if(btn){btn.disabled=true;btn.textContent="SALVANDO PRODUTO...";}
+    const editing=!!tbEditingProductId;
+    if(btn){btn.disabled=true;btn.textContent=editing?"SALVANDO ALTERAÇÕES...":"SALVANDO PRODUTO...";}
 
-    let uploadedPaths=[];
+    let newlyUploaded=[];
     try{
-      const photoResult=await tbUploadProductPhotos();
-      uploadedPaths=photoResult.paths;
+      newlyUploaded=await tbUploadNewProductPhotos();
+
+      const finalItems=tbProductPhotoItems.map(item=>{
+        if(item.type==="existing")return {url:item.url,path:item.path};
+        const found=newlyUploaded.find(x=>x.item===item);
+        return found?{url:found.url,path:found.path}:null;
+      }).filter(Boolean);
+
+      const urls=finalItems.map(x=>x.url);
+      const mainUrl=urls[tbProductMainIndex]||urls[0]||null;
 
       const payload={
         user_id:premiumUser.id,
@@ -4928,26 +5290,40 @@ window.refreshPremiumAccess=async function(){
         width_cm:num("v5ProdutoLargura"),
         height_cm:num("v5ProdutoAltura"),
         weight_kg:num("v5ProdutoPeso"),
-        image_urls:photoResult.urls,
-        main_image_url:photoResult.urls[tbProductMainIndex]||photoResult.urls[0]||null
+        image_urls:urls,
+        main_image_url:mainUrl
       };
 
-      const {error}=await premiumClient.from("saved_products").insert(payload);
+      let error;
+      if(editing){
+        ({error}=await premiumClient.from("saved_products")
+          .update(payload)
+          .eq("id",tbEditingProductId)
+          .eq("user_id",premiumUser.id));
+      }else{
+        ({error}=await premiumClient.from("saved_products").insert(payload));
+      }
       if(error)throw new Error(error.message||"Não foi possível salvar o produto.");
 
+      if(editing && tbProductRemovedStoragePaths.length){
+        try{await premiumClient.storage.from("product-images").remove(tbProductRemovedStoragePaths);}catch(_){}
+      }
+
+      const message=editing?"Produto atualizado com sucesso.":"Produto completo salvo na nuvem.";
       limparFormularioProduto();
       await renderProdutos();
-      toast("Produto completo salvo na nuvem.");
-      trackV5("salvar_produto_premium_completo");
+      toast(message);
+      trackV5(editing?"editar_produto_premium":"salvar_produto_premium_completo");
     }catch(err){
-      console.error("Erro ao salvar produto completo:",err);
-      if(uploadedPaths.length){
-        try{await premiumClient.storage.from("product-images").remove(uploadedPaths);}catch(_){}
-      }
-      toast("Não foi possível salvar. Verifique se a atualização do banco e o bucket de fotos já foram aplicados.");
+      console.error("Erro ao salvar produto:",err);
+      const paths=newlyUploaded.map(x=>x.path).filter(Boolean);
+      if(paths.length){try{await premiumClient.storage.from("product-images").remove(paths);}catch(_){}}
+      toast("Não foi possível salvar o produto.");
     }finally{
       tbProductSaving=false;
-      if(btn){btn.disabled=false;btn.textContent="+ SALVAR PRODUTO";}
+      if(btn && tbEditingProductId)btn.textContent="✓ SALVAR ALTERAÇÕES";
+      else if(btn)btn.textContent="+ SALVAR PRODUTO";
+      if(btn)btn.disabled=false;
     }
   };
 
@@ -4956,7 +5332,25 @@ window.refreshPremiumAccess=async function(){
       const e=document.getElementById(id); if(e)e.value="";
     });
     const input=document.getElementById("v5ProdutoFotos"); if(input)input.value="";
-    tbProductFiles=[];tbProductMainIndex=0;tbRenderProductPhotoPreview();
+    tbProductPhotoItems.forEach(item=>{if(item.type==="file"&&item.previewUrl)URL.revokeObjectURL(item.previewUrl);});
+    tbProductPhotoItems=[];
+    tbProductMainIndex=0;
+    tbProductRemovedStoragePaths=[];
+    tbEditingProductId=null;
+    tbRenderProductPhotoPreview();
+
+    const title=document.getElementById("tbProductFormTitle");
+    const sub=document.getElementById("tbProductFormSubtitle");
+    const btn=document.getElementById("tbSaveProductButton");
+    const cancel=document.getElementById("tbCancelProductEditButton");
+    const clear=document.getElementById("tbClearProductButton");
+    const card=document.querySelector(".tb-product-form-card");
+    if(title)title.textContent="Novo produto";
+    if(sub){sub.textContent="Preencha os dados principais do item.";sub.classList.remove("tb-product-editing-note");}
+    if(btn){btn.textContent="+ SALVAR PRODUTO";btn.disabled=false;}
+    if(cancel)cancel.hidden=true;
+    if(clear)clear.hidden=false;
+    card?.classList.remove("tb-editing-product");
   };
 
   window.excluirProdutoV5=async function(id){
@@ -4966,17 +5360,16 @@ window.refreshPremiumAccess=async function(){
     const {error}=await premiumClient.from("saved_products").delete().eq("id",id).eq("user_id",premiumUser.id);
     if(error){toast("Não foi possível excluir o produto.");return;}
     if(Array.isArray(p?.image_urls) && p.image_urls.length){
-      const prefix=`/storage/v1/object/public/product-images/`;
-      const paths=p.image_urls.map(u=>{
-        try{return decodeURIComponent(new URL(u).pathname.split(prefix)[1]||"");}catch(_){return "";}
-      }).filter(Boolean);
+      const paths=p.image_urls.map(tbStoragePathFromPublicUrl).filter(Boolean);
       if(paths.length){try{await premiumClient.storage.from("product-images").remove(paths);}catch(_){}}
     }
+    tbCloseProductDetail();
     await renderProdutos();
     toast("Produto excluído.");
   };
+
   window.usarProdutoV5=function(id){ if(!requirePremium())return; const x=premiumProducts.find(i=>String(i.id)===String(id));if(!x)return; document.getElementById("produto").value=x.name;document.getElementById("custo").value=x.cost||"";document.getElementById("venda").value=x.sale_price||"";document.getElementById("frete").value=x.shipping||"";document.getElementById("calculadora").scrollIntoView({behavior:"smooth"});toast("Produto carregado na calculadora."); 
-    /* V8.4.0: depois de carregar o produto, abre a Calculadora automaticamente */
+    /* V8.4.1: depois de carregar o produto, abre a Calculadora automaticamente */
     if(typeof tbShowPremiumModule === "function"){
       tbShowPremiumModule("calculadora",{scroll:true});
     }else{
@@ -5265,53 +5658,95 @@ window.refreshPremiumAccess=async function(){
     const box=document.getElementById("tbProductHoverPreview");if(box)box.hidden=true;
   };
 
+  window.tbChangeProductMainView=function(url,button){
+    const img=document.getElementById("tbProductFullMainImage");
+    if(img)img.src=url;
+    document.querySelectorAll(".tb-product-detail-gallery button").forEach(b=>b.classList.remove("active"));
+    button?.classList.add("active");
+  };
+
   window.tbOpenProductDetail=function(id){
     const p=premiumProducts.find(x=>String(x.id)===String(id));
     if(!p)return;
     tbHideProductHover();
-    const modal=document.getElementById("tbProductDetailModal");
+
+    const page=document.getElementById("tbProductDetailPage");
     const c=document.getElementById("tbProductDetailContent");
-    if(!modal||!c)return;
+    const editTop=document.getElementById("tbProductDetailEditTop");
+    if(!page||!c)return;
+
     const imgs=Array.isArray(p.image_urls)?p.image_urls.filter(Boolean):[];
     const main=tbProductPhoto(p);
     const dim=[p.length_cm,p.width_cm,p.height_cm].some(v=>Number(v)>0)
       ? `${Number(p.length_cm||0).toLocaleString("pt-BR")} × ${Number(p.width_cm||0).toLocaleString("pt-BR")} × ${Number(p.height_cm||0).toLocaleString("pt-BR")} cm`
       : "Não informado";
-    const created=p.created_at?new Date(p.created_at).toLocaleDateString("pt-BR"):"-";
+    const created=p.created_at?new Date(p.created_at).toLocaleDateString("pt-BR"):"Não informado";
+    const photoCount=imgs.length;
+
     c.innerHTML=`
-      <div class="tb-product-detail-head">
-        <div class="tb-product-detail-main-photo ${main?'':'no-photo'}">${main?`<img src="${esc(main)}" alt="${esc(p.name)}">`:'📦'}</div>
-        <div>
-          <h2 id="tbProductDetailTitle">${esc(p.name)}</h2>
-          <p>${p.sku?`SKU ${esc(p.sku)}`:"Sem SKU"} ${p.ean?` • EAN ${esc(p.ean)}`:""} ${p.ncm?` • NCM ${esc(p.ncm)}`:""}</p>
+      <div class="tb-product-hero">
+        <div class="tb-product-visual-card">
+          <div class="tb-product-main-view ${main?'':'no-photo'}">
+            ${main?`<img id="tbProductFullMainImage" src="${esc(main)}" alt="${esc(p.name)}">`:'📦'}
+          </div>
+          ${imgs.length?`<div class="tb-product-detail-gallery">
+            ${imgs.map((u,i)=>`<button type="button" class="${u===main||(!main&&i===0)?'active':''}" onclick="tbChangeProductMainView('${esc(u)}',this)"><img src="${esc(u)}" alt="Foto ${i+1} de ${esc(p.name)}"></button>`).join("")}
+          </div>`:""}
         </div>
-      </div>
-      <div class="tb-product-detail-grid">
-        <div class="tb-product-detail-field"><span>SKU</span><b>${esc(p.sku||"Não informado")}</b></div>
-        <div class="tb-product-detail-field"><span>EAN / GTIN</span><b>${esc(p.ean||"Não informado")}</b></div>
-        <div class="tb-product-detail-field"><span>NCM</span><b>${esc(p.ncm||"Não informado")}</b></div>
-        <div class="tb-product-detail-field"><span>Cadastrado em</span><b>${created}</b></div>
-        <div class="tb-product-detail-field"><span>Custo</span><b>${brl(p.cost)}</b></div>
-        <div class="tb-product-detail-field"><span>Preço de venda</span><b>${brl(p.sale_price)}</b></div>
-        <div class="tb-product-detail-field"><span>Frete</span><b>${brl(p.shipping)}</b></div>
-        <div class="tb-product-detail-field"><span>Peso</span><b>${Number(p.weight_kg||0)>0?Number(p.weight_kg).toLocaleString("pt-BR",{maximumFractionDigits:3})+" kg":"Não informado"}</b></div>
-        <div class="tb-product-detail-field" style="grid-column:span 2"><span>Dimensões (C × L × A)</span><b>${dim}</b></div>
-        <div class="tb-product-detail-field" style="grid-column:span 2"><span>Fotos</span><b>${imgs.length} de 5</b></div>
-      </div>
-      <div class="tb-product-detail-description"><span>Descrição</span><p>${esc(p.description||"Nenhuma descrição cadastrada.")}</p></div>
-      ${imgs.length?`<div class="tb-product-gallery">${imgs.map(u=>`<img src="${esc(u)}" class="${u===main?'main':''}" alt="Foto do produto" onclick="this.closest('.tb-product-modal-card').querySelector('.tb-product-detail-main-photo img').src=this.src">`).join("")}</div>`:""}
-      <div class="tb-product-detail-actions">
-        <button type="button" onclick="usarProdutoV5('${p.id}');tbCloseProductDetail()">USAR NA CALCULADORA</button>
-        <button type="button" class="ghost" onclick="tbCloseProductDetail()">FECHAR</button>
+
+        <div>
+          <div class="tb-product-info-card">
+            <div class="tb-product-info-eyebrow">FICHA COMPLETA DO PRODUTO</div>
+            <h1>${esc(p.name)}</h1>
+            <div class="tb-product-info-codes">
+              <span>SKU: <b>${esc(p.sku||"NÃO INFORMADO")}</b></span>
+              <span>EAN: <b>${esc(p.ean||"NÃO INFORMADO")}</b></span>
+              <span>NCM: <b>${esc(p.ncm||"NÃO INFORMADO")}</b></span>
+            </div>
+
+            <div class="tb-product-price-grid">
+              <div class="tb-product-price-card"><span>Custo</span><b>${brl(p.cost)}</b></div>
+              <div class="tb-product-price-card"><span>Preço de venda</span><b>${brl(p.sale_price)}</b></div>
+              <div class="tb-product-price-card"><span>Frete</span><b>${brl(p.shipping)}</b></div>
+            </div>
+
+            <div class="tb-product-page-actions">
+              <button type="button" onclick="usarProdutoV5('${p.id}');tbCloseProductDetail()">USAR NA CALCULADORA</button>
+              <button type="button" class="edit" onclick="editarProdutoV5('${p.id}')">✏ EDITAR PRODUTO</button>
+              <button type="button" class="danger" onclick="excluirProdutoV5('${p.id}')">EXCLUIR PRODUTO</button>
+            </div>
+          </div>
+
+          <div class="tb-product-description-card">
+            <div class="tb-product-section-title"><h3>Descrição do produto</h3></div>
+            <p>${esc(p.description||"Nenhuma descrição cadastrada.")}</p>
+          </div>
+
+          <div class="tb-product-spec-card">
+            <div class="tb-product-section-title"><h3>Especificações e logística</h3><span style="color:#6888a4;font-size:8px">${photoCount} foto${photoCount===1?'':'s'}</span></div>
+            <div class="tb-product-spec-grid">
+              <div class="tb-product-spec"><span>SKU</span><b>${esc(p.sku||"Não informado")}</b></div>
+              <div class="tb-product-spec"><span>EAN / GTIN</span><b>${esc(p.ean||"Não informado")}</b></div>
+              <div class="tb-product-spec"><span>NCM</span><b>${esc(p.ncm||"Não informado")}</b></div>
+              <div class="tb-product-spec"><span>Peso</span><b>${Number(p.weight_kg||0)>0?Number(p.weight_kg).toLocaleString("pt-BR",{maximumFractionDigits:3})+" kg":"Não informado"}</b></div>
+              <div class="tb-product-spec"><span>Dimensões C × L × A</span><b>${dim}</b></div>
+              <div class="tb-product-spec"><span>Cadastrado em</span><b>${created}</b></div>
+            </div>
+          </div>
+        </div>
       </div>`;
-    modal.hidden=false;
+
+    if(editTop)editTop.onclick=()=>editarProdutoV5(p.id);
+    page.hidden=false;
+    document.documentElement.style.overflow="hidden";
     document.body.style.overflow="hidden";
+    page.scrollTop=0;
   };
 
-  window.tbCloseProductDetail=function(event){
-    if(event && event.target!==event.currentTarget)return;
-    const modal=document.getElementById("tbProductDetailModal");
-    if(modal)modal.hidden=true;
+  window.tbCloseProductDetail=function(){
+    const page=document.getElementById("tbProductDetailPage");
+    if(page)page.hidden=true;
+    document.documentElement.style.overflow="";
     document.body.style.overflow="";
   };
 
@@ -5354,6 +5789,7 @@ window.refreshPremiumAccess=async function(){
           <div class="tb-product-cell"><span>Venda</span><b>${brl(x.sale_price)}</b></div>
           <div class="tb-product-cell tb-hide-mid"><span>Peso</span><b>${Number(x.weight_kg||0)>0?Number(x.weight_kg).toLocaleString("pt-BR",{maximumFractionDigits:3})+" kg":"-"}</b></div>
           <div class="tb-product-row-actions">
+            <button class="v5-mini edit-product" onclick="editarProdutoV5('${x.id}')">EDITAR</button>
             <button class="v5-mini" onclick="usarProdutoV5('${x.id}')">CALCULADORA</button>
             <button class="v5-mini danger" onclick="excluirProdutoV5('${x.id}')">EXCLUIR</button>
           </div>

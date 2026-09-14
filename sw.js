@@ -1,4 +1,4 @@
-const CACHE_NAME = "the-best-marketplace-v8-4-0-catalogo-produtos";
+const CACHE_NAME = "the-best-marketplace-v8-4-1-editar-produto-tela-cheia";
 const APP_SHELL = [
   "/",
   "/index.html",
