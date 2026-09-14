@@ -1868,7 +1868,7 @@ body.tb-user-logged-in #calculadora{
 
 
 <style id="tb-v811-fixes">
-/* V8.3.4.1: correções da vitrine Premium */
+/* V8.4.0.1: correções da vitrine Premium */
 @media (min-width: 769px){
   .tb-mobile-menu-toggle,
   .tb-menu-toggle,
@@ -2007,7 +2007,7 @@ body.tb-user-logged-in #calculadora{
 
 
 <style id="tb-mobile-presentation-only">
-/* V8.3.4: celular/tablet = somente apresentação pública.
+/* V8.4.0: celular/tablet = somente apresentação pública.
    Área Premium/ERP continua disponível apenas em computador/programa desktop. */
 #tbMobileDesktopNotice{display:none}
 
@@ -2076,7 +2076,7 @@ body.tb-user-logged-in #calculadora{
 
 
 <style id="tb-program-desktop-v830">
-/* V8.3.4 • experiência de programa para desktop instalado */
+/* V8.4.0 • experiência de programa para desktop instalado */
 @media (display-mode:standalone) and (min-width:1025px){
   .tb-app-login-cover{
     display:flex!important;
@@ -2249,7 +2249,7 @@ body.tb-user-logged-in #calculadora{
 
 
 <style id="tb-desktop-exe-mode-v831">
-/* V8.3.4 • modo exclusivo do executável Windows via ?app=desktop */
+/* V8.4.0 • modo exclusivo do executável Windows via ?app=desktop */
 body.tb-desktop-program{
   min-width:1025px;
   background:#06111f;
@@ -2298,7 +2298,7 @@ body.tb-desktop-program.tb-app-authenticated .app-bottom-nav{
 
 
 <style id="tb-desktop-compact-v832">
-/* V8.3.4 • Desktop Compact: login proporcional, sem scroll horizontal */
+/* V8.4.0 • Desktop Compact: login proporcional, sem scroll horizontal */
 @media (min-width:1025px){
   body.tb-desktop-program{
     overflow:hidden!important;
@@ -2823,7 +2823,7 @@ body.tb-desktop-program.tb-app-authenticated .app-bottom-nav{
 
 
 <style id="tb-desktop-scroll-v834">
-/* V8.3.4 • libera rolagem do sistema após login no EXE */
+/* V8.4.0 • libera rolagem do sistema após login no EXE */
 @media (min-width:1025px){
   body.tb-desktop-program.tb-app-authenticated{
     overflow-y:auto!important;
@@ -2898,6 +2898,104 @@ body.tb-desktop-program.tb-app-authenticated .app-bottom-nav{
 }
 </style>
 
+
+<style id="tb-products-v840">
+.tb-product-catalog{overflow:visible}
+.tb-product-form-card{padding:16px;border:1px solid rgba(64,188,255,.16);border-radius:18px;background:rgba(4,22,39,.38)}
+.tb-product-form-title{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px}
+.tb-product-form-title b{display:block;color:#edf8ff;font-size:13px}
+.tb-product-form-title span{display:block;color:#7896b4;font-size:9px;margin-top:2px}
+.tb-product-cloud{padding:6px 9px!important;border:1px solid rgba(76,205,255,.18);border-radius:999px;color:#58ccff!important;background:rgba(0,143,255,.08);font-weight:900;letter-spacing:.5px}
+.tb-product-form-grid{grid-template-columns:repeat(4,minmax(0,1fr))!important}
+.tb-product-form-grid .full{grid-column:1/-1}
+.tb-product-form-grid textarea{width:100%;resize:vertical;min-height:92px;border:1px solid rgba(255,255,255,.1);background:#09192c;color:#fff;border-radius:11px;padding:11px;outline:none;font:inherit}
+.tb-product-form-grid input:focus,.tb-product-form-grid textarea:focus{border-color:rgba(54,191,255,.55);box-shadow:0 0 0 3px rgba(0,148,255,.07)}
+
+.tb-product-photo-box{margin-top:14px;padding:14px;border-radius:15px;border:1px solid rgba(73,180,255,.14);background:#08192b}
+.tb-product-photo-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.tb-product-photo-head b{display:block;font-size:11px;color:#e8f6ff}
+.tb-product-photo-head span{display:block;font-size:9px;color:#7896b4;margin-top:2px}
+#tbProductPhotoCount{padding:5px 8px;border-radius:999px;background:rgba(33,160,255,.09);color:#62cfff;font-size:9px;font-weight:900;white-space:nowrap}
+.tb-product-upload{margin-top:11px;display:flex;align-items:center;gap:9px;padding:11px 13px;border:1px dashed rgba(73,198,255,.28);border-radius:12px;background:rgba(0,132,255,.04);cursor:pointer}
+.tb-product-upload:hover{background:rgba(0,132,255,.08)}
+.tb-product-upload input{display:none}
+.tb-product-upload>span{font-size:18px}
+.tb-product-upload b{font-size:9px;color:#bdeaff}
+.tb-product-upload small{font-size:8px;color:#6f8ca8}
+.tb-product-photo-preview{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:9px;margin-top:11px}
+.tb-product-photo-empty{grid-column:1/-1;text-align:center;color:#617d98;font-size:9px;padding:9px}
+.tb-product-photo-card{position:relative;border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,.09);background:#04111e;aspect-ratio:1/1}
+.tb-product-photo-card img{width:100%;height:100%;object-fit:cover;display:block}
+.tb-product-photo-card .tb-photo-actions{position:absolute;left:5px;right:5px;bottom:5px;display:flex;gap:4px}
+.tb-product-photo-card button{flex:1;border:0;border-radius:7px;padding:5px 4px;background:rgba(3,14,26,.88);color:#d7efff;font-size:7px;font-weight:900;cursor:pointer}
+.tb-product-photo-card button.primary{background:#087cff;color:#fff}
+.tb-product-photo-card .remove{position:absolute;right:5px;top:5px;width:22px;height:22px;border-radius:50%;padding:0;background:rgba(4,13,23,.9);color:#ff99a3}
+
+.tb-product-toolbar{display:flex;align-items:end;justify-content:space-between;gap:12px;margin-top:18px}
+.tb-product-toolbar .tb-product-search{flex:1;margin:0}
+.tb-product-toolbar-actions{display:flex;gap:7px;padding-bottom:1px}
+
+.tb-product-list{gap:8px!important}
+.tb-product-list .v5-item{padding:10px!important}
+.tb-product-row{display:grid;grid-template-columns:58px minmax(180px,1.6fr) minmax(120px,.75fr) repeat(3,minmax(90px,.55fr)) auto;align-items:center;gap:10px}
+.tb-product-thumb{width:52px;height:52px;border-radius:11px;overflow:hidden;border:1px solid rgba(87,194,255,.18);background:linear-gradient(145deg,#0b2138,#061321);display:grid;place-items:center;cursor:pointer}
+.tb-product-thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.tb-product-thumb.no-photo{color:#4f708e;font-size:18px}
+.tb-product-main a{display:block;color:#eff9ff;text-decoration:none;font-size:11px;font-weight:900;line-height:1.25}
+.tb-product-main a:hover{color:#54c8ff}
+.tb-product-main small{display:block;color:#7190ad;font-size:8px;margin-top:4px}
+.tb-product-code a{color:#78d6ff;text-decoration:none;font-size:9px;font-weight:900}
+.tb-product-code a:hover{text-decoration:underline}
+.tb-product-cell span{display:block;color:#6f8ba6;font-size:7px;text-transform:uppercase;font-weight:900;letter-spacing:.4px}
+.tb-product-cell b{display:block;color:#e4f5ff;font-size:9px;margin-top:2px}
+.tb-product-row-actions{display:flex;gap:5px;justify-content:flex-end}
+.tb-product-row-actions .v5-mini{white-space:nowrap;padding:6px 7px!important;font-size:8px!important}
+
+.tb-product-hover-preview{position:fixed;z-index:999999;width:270px;height:270px;border-radius:16px;overflow:hidden;border:1px solid rgba(80,201,255,.3);background:#04111e;box-shadow:0 22px 70px rgba(0,0,0,.55);pointer-events:none}
+.tb-product-hover-preview img{width:100%;height:100%;object-fit:contain;background:#071523}
+
+.tb-product-modal{position:fixed;inset:0;z-index:999998;display:flex;align-items:center;justify-content:center;padding:24px;background:rgba(1,8,16,.78);backdrop-filter:blur(8px)}
+.tb-product-modal[hidden]{display:none!important}
+.tb-product-modal-card{position:relative;width:min(980px,96vw);max-height:90vh;overflow:auto;border-radius:22px;border:1px solid rgba(74,195,255,.22);background:linear-gradient(145deg,#0b2037,#071522);box-shadow:0 35px 110px rgba(0,0,0,.58);padding:22px}
+.tb-product-modal-close{position:absolute;right:14px;top:12px;width:34px;height:34px;border-radius:50%;border:1px solid rgba(255,255,255,.09);background:#0b2137;color:#d7efff;font-size:20px;cursor:pointer;z-index:2}
+.tb-product-detail-head{display:grid;grid-template-columns:110px 1fr;gap:16px;align-items:center;padding-right:42px}
+.tb-product-detail-main-photo{width:110px;height:110px;border-radius:16px;overflow:hidden;border:1px solid rgba(79,198,255,.2);background:#061321;display:grid;place-items:center}
+.tb-product-detail-main-photo img{width:100%;height:100%;object-fit:cover}
+.tb-product-detail-main-photo.no-photo{font-size:34px;color:#517491}
+.tb-product-detail-head h2{font-size:22px;color:#f4fbff;margin:0}
+.tb-product-detail-head p{font-size:10px;color:#7694b0;margin:5px 0 0}
+.tb-product-detail-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;margin-top:18px}
+.tb-product-detail-field{padding:10px 11px;border-radius:11px;background:#061625;border:1px solid rgba(255,255,255,.055)}
+.tb-product-detail-field span{display:block;color:#6e8ba6;font-size:7px;text-transform:uppercase;font-weight:900}
+.tb-product-detail-field b{display:block;color:#e5f6ff;font-size:10px;margin-top:3px;word-break:break-word}
+.tb-product-detail-description{margin-top:12px;padding:13px;border-radius:12px;background:#061625;border:1px solid rgba(255,255,255,.055)}
+.tb-product-detail-description span{display:block;color:#6e8ba6;font-size:7px;text-transform:uppercase;font-weight:900;margin-bottom:5px}
+.tb-product-detail-description p{margin:0;color:#c2d5e6;font-size:10px;line-height:1.55;white-space:pre-wrap}
+.tb-product-gallery{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:14px}
+.tb-product-gallery img{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:11px;border:1px solid rgba(81,192,255,.16);background:#061321;cursor:pointer}
+.tb-product-gallery img.main{outline:2px solid #16b6ff}
+.tb-product-detail-actions{display:flex;gap:8px;margin-top:15px}
+.tb-product-detail-actions button{border:0;border-radius:10px;padding:10px 12px;font-size:9px;font-weight:900;cursor:pointer;color:white;background:linear-gradient(90deg,#087cff,#00b8ff)}
+.tb-product-detail-actions .ghost{background:#0c2943;border:1px solid rgba(77,190,255,.16);color:#c6eaff}
+
+@media(max-width:1200px){
+  .tb-product-form-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  .tb-product-row{grid-template-columns:52px minmax(150px,1fr) minmax(100px,.55fr) repeat(2,minmax(80px,.5fr)) auto}
+  .tb-product-row .tb-hide-mid{display:none}
+}
+@media(max-width:800px){
+  .tb-product-form-grid{grid-template-columns:1fr!important}
+  .tb-product-form-grid .full{grid-column:1}
+  .tb-product-photo-preview{grid-template-columns:repeat(2,1fr)}
+  .tb-product-row{grid-template-columns:48px 1fr auto}
+  .tb-product-code,.tb-product-cell{display:none}
+  .tb-product-detail-grid{grid-template-columns:repeat(2,1fr)}
+  .tb-product-detail-head{grid-template-columns:80px 1fr}
+  .tb-product-detail-main-photo{width:80px;height:80px}
+  .tb-product-gallery{grid-template-columns:repeat(3,1fr)}
+}
+</style>
+
 </head>
 
 <body>
@@ -2929,7 +3027,7 @@ body.tb-desktop-program.tb-app-authenticated .app-bottom-nav{
       </div>
       <div class="tb-program-title-right">
         <span>DESKTOP</span>
-        <span>V8.3.4</span>
+        <span>V8.4.0</span>
       </div>
     </div>
 
@@ -2961,7 +3059,7 @@ body.tb-desktop-program.tb-app-authenticated .app-bottom-nav{
           <small>Integração inicial planejada: Mercado Livre</small>
         </div>
 
-        <div class="tb-program-version">THE BEST DIGITAL • PROGRAMA PREMIUM • V8.3.4</div>
+        <div class="tb-program-version">THE BEST DIGITAL • PROGRAMA PREMIUM • V8.4.0</div>
       </section>
 
       <section class="tb-program-login-panel">
@@ -3858,47 +3956,97 @@ body.tb-desktop-program.tb-app-authenticated .app-bottom-nav{
   </div>
 </section>
 
+
 <section id="meus-produtos" class="premium-products-section" hidden aria-label="Meus produtos Premium">
-  <div class="app-v5-panel">
-    <div class="app-v5-head" style="margin-bottom:12px;">
-      <div><h2 style="font-size:17px;">Meus produtos <span class="premium-pill">CLIENTE PREMIUM</span></h2><p>Cadastro, salvamento e reutilização exclusivos para compradores do THE BEST MARKETPLACE PREMIUM.</p></div>
+  <div class="app-v5-panel tb-product-catalog">
+    <div class="app-v5-head" style="margin-bottom:14px;">
+      <div>
+        <h2 style="font-size:18px;">📦 Catálogo de Produtos <span class="premium-pill">CLIENTE PREMIUM</span></h2>
+        <p>Cadastro completo com SKU, EAN, NCM, descrição, medidas, peso e até 5 fotos por produto.</p>
+      </div>
       <span class="app-v5-badge" id="contadorProdutos">🔒</span>
     </div>
+
     <div id="premiumProductsPanel" class="premium-products-wrap">
-      <div class="v5-form-grid">
-        <div class="full"><label>Nome do produto</label><input id="v5ProdutoNome" type="text" placeholder="Ex.: Fone Bluetooth"></div>
-        <div><label>SKU</label><input id="v5ProdutoSku" type="text" placeholder="SKU-001"></div>
-        <div><label>Custo (R$)</label><input id="v5ProdutoCusto" type="number" step="0.01" placeholder="0,00"></div>
-        <div><label>Preço de venda (R$)</label><input id="v5ProdutoVenda" type="number" step="0.01" placeholder="0,00"></div>
-        <div><label>Frete (R$)</label><input id="v5ProdutoFrete" type="number" step="0.01" placeholder="0,00"></div>
-      </div>
-      <div class="v5-actions">
-        <button class="v5-btn" onclick="salvarProdutoV5()">+ SALVAR PRODUTO</button>
-        <button class="v5-btn ghost" onclick="limparFormularioProduto()">LIMPAR CAMPOS</button>
-      </div>
-      <div class="v5-actions" style="margin-top:9px;">
-        <button class="v5-btn" onclick="baixarProdutosCSV()">📥 BAIXAR LISTA DE PRODUTOS</button>
-        <button class="v5-btn ghost" onclick="renderProdutos()">↻ ATUALIZAR LISTA</button>
-      </div>
-      <p class="premium-sync-note">☁️ Produtos Premium ficam vinculados à conta e podem aparecer em outros aparelhos após o login. O download é gerado em CSV compatível com Excel e ordenado por SKU.</p>
-
-      <div class="tb-product-search">
-        <div class="tb-product-search-wrap">
-          <span>🔎</span>
-          <input id="productSearchInput" type="search"
-                 placeholder="Pesquisar por nome do produto ou SKU..."
-                 autocomplete="off"
-                 oninput="filtrarProdutosPremium()">
+      <div class="tb-product-form-card">
+        <div class="tb-product-form-title">
+          <div><b>Novo produto</b><span>Preencha os dados principais do item.</span></div>
+          <span class="tb-product-cloud">☁ NUVEM</span>
         </div>
-        <button type="button" onclick="limparBuscaProdutos()">LIMPAR BUSCA</button>
-      </div>
-      <div id="productSearchInfo" class="tb-product-search-info">Digite o nome ou SKU para localizar um produto.</div>
 
-      <div id="listaProdutosV5" class="v5-list"></div>
+        <div class="v5-form-grid tb-product-form-grid">
+          <div class="full"><label>Nome / título do produto *</label><input id="v5ProdutoNome" type="text" placeholder="Ex.: Fone Bluetooth Premium"></div>
+          <div><label>SKU</label><input id="v5ProdutoSku" type="text" placeholder="SKU-001"></div>
+          <div><label>EAN / GTIN</label><input id="v5ProdutoEan" type="text" inputmode="numeric" maxlength="14" placeholder="7891234567890"></div>
+          <div><label>NCM</label><input id="v5ProdutoNcm" type="text" inputmode="numeric" maxlength="8" placeholder="85183000"></div>
+          <div><label>Custo (R$)</label><input id="v5ProdutoCusto" type="number" min="0" step="0.01" placeholder="0,00"></div>
+          <div><label>Preço de venda (R$)</label><input id="v5ProdutoVenda" type="number" min="0" step="0.01" placeholder="0,00"></div>
+          <div><label>Frete (R$)</label><input id="v5ProdutoFrete" type="number" min="0" step="0.01" placeholder="0,00"></div>
+          <div><label>Peso (kg)</label><input id="v5ProdutoPeso" type="number" min="0" step="0.001" placeholder="0,000"></div>
+          <div><label>Comprimento (cm)</label><input id="v5ProdutoComprimento" type="number" min="0" step="0.1" placeholder="0,0"></div>
+          <div><label>Largura (cm)</label><input id="v5ProdutoLargura" type="number" min="0" step="0.1" placeholder="0,0"></div>
+          <div><label>Altura (cm)</label><input id="v5ProdutoAltura" type="number" min="0" step="0.1" placeholder="0,0"></div>
+          <div class="full">
+            <label>Descrição do produto</label>
+            <textarea id="v5ProdutoDescricao" rows="4" placeholder="Descreva características, material, conteúdo da embalagem, compatibilidade e outras informações importantes."></textarea>
+          </div>
+        </div>
+
+        <div class="tb-product-photo-box">
+          <div class="tb-product-photo-head">
+            <div><b>Fotos do produto</b><span>Envie até 5 imagens. Escolha uma como foto principal.</span></div>
+            <span id="tbProductPhotoCount">0 / 5</span>
+          </div>
+          <label class="tb-product-upload">
+            <input id="v5ProdutoFotos" type="file" accept="image/jpeg,image/png,image/webp" multiple onchange="tbProductPhotosChanged(event)">
+            <span>📷</span>
+            <b>SELECIONAR FOTOS</b>
+            <small>JPG, PNG ou WebP • até 5 imagens</small>
+          </label>
+          <div id="tbProductPhotoPreview" class="tb-product-photo-preview">
+            <div class="tb-product-photo-empty">Nenhuma foto selecionada.</div>
+          </div>
+        </div>
+
+        <div class="v5-actions">
+          <button id="tbSaveProductButton" class="v5-btn" onclick="salvarProdutoV5()">+ SALVAR PRODUTO</button>
+          <button class="v5-btn ghost" onclick="limparFormularioProduto()">LIMPAR CAMPOS</button>
+        </div>
+      </div>
+
+      <div class="tb-product-toolbar">
+        <div class="tb-product-search">
+          <div class="tb-product-search-wrap">
+            <span>🔎</span>
+            <input id="productSearchInput" type="search"
+                   placeholder="Pesquisar por título, SKU, EAN ou NCM..."
+                   autocomplete="off"
+                   oninput="filtrarProdutosPremium()">
+          </div>
+          <button type="button" onclick="limparBuscaProdutos()">LIMPAR BUSCA</button>
+        </div>
+        <div class="tb-product-toolbar-actions">
+          <button class="v5-mini" onclick="baixarProdutosCSV()">📥 CSV</button>
+          <button class="v5-mini" onclick="renderProdutos()">↻ ATUALIZAR</button>
+        </div>
+      </div>
+
+      <div id="productSearchInfo" class="tb-product-search-info">Pesquise por título, SKU, EAN ou NCM.</div>
+      <div id="listaProdutosV5" class="v5-list tb-product-list"></div>
     </div>
   </div>
-
 </section>
+
+<div id="tbProductDetailModal" class="tb-product-modal" hidden onclick="tbCloseProductDetail(event)">
+  <div class="tb-product-modal-card" role="dialog" aria-modal="true" aria-labelledby="tbProductDetailTitle" onclick="event.stopPropagation()">
+    <button type="button" class="tb-product-modal-close" onclick="tbCloseProductDetail()">×</button>
+    <div id="tbProductDetailContent"></div>
+  </div>
+</div>
+
+<div id="tbProductHoverPreview" class="tb-product-hover-preview" hidden>
+  <img id="tbProductHoverImage" alt="Prévia do produto">
+</div>
 
 
 <section class="offer" id="kit">
@@ -4662,18 +4810,173 @@ window.refreshPremiumAccess=async function(){
   function requirePremium(){
     if(!premiumActive || !premiumUser || !premiumClient){toast("Recurso exclusivo para clientes do THE BEST KIT.");document.getElementById("area-cliente")?.scrollIntoView({behavior:"smooth"});return false;} return true;
   }
-  window.salvarProdutoV5=async function(){
-    if(!requirePremium())return;
-    const nome=(document.getElementById("v5ProdutoNome").value||"").trim(); if(!nome){toast("Digite o nome do produto.");return;}
-    const payload={user_id:premiumUser.id,name:nome,sku:(document.getElementById("v5ProdutoSku").value||"").trim(),cost:num("v5ProdutoCusto"),sale_price:num("v5ProdutoVenda"),shipping:num("v5ProdutoFrete")};
-    const {error}=await premiumClient.from("saved_products").insert(payload);
-    if(error){toast("Não foi possível salvar o produto.");return;}
-    limparFormularioProduto();await renderProdutos();toast("Produto Premium salvo na nuvem.");trackV5("salvar_produto_premium");
+  let tbProductFiles=[];
+  let tbProductMainIndex=0;
+  let tbProductSaving=false;
+
+  function tbProductDigits(value,max){
+    return String(value||"").replace(/\D/g,"").slice(0,max||99);
+  }
+
+  window.tbProductPhotosChanged=function(event){
+    const files=Array.from(event?.target?.files||[]);
+    if(!files.length)return;
+    const valid=files.filter(f=>/^image\/(jpeg|png|webp)$/i.test(f.type));
+    if(valid.length!==files.length)toast("Use somente imagens JPG, PNG ou WebP.");
+    tbProductFiles=valid.slice(0,5);
+    if(valid.length>5)toast("O limite é de 5 fotos por produto.");
+    tbProductMainIndex=0;
+    tbRenderProductPhotoPreview();
   };
-  window.limparFormularioProduto=function(){ ["v5ProdutoNome","v5ProdutoSku","v5ProdutoCusto","v5ProdutoVenda","v5ProdutoFrete"].forEach(id=>{const e=document.getElementById(id);if(e)e.value="";}); };
-  window.excluirProdutoV5=async function(id){if(!requirePremium())return;const {error}=await premiumClient.from("saved_products").delete().eq("id",id).eq("user_id",premiumUser.id);if(!error){await renderProdutos();toast("Produto excluído.");}};
+
+  window.tbRemoveProductPhoto=function(index){
+    tbProductFiles.splice(Number(index),1);
+    if(tbProductMainIndex>=tbProductFiles.length)tbProductMainIndex=Math.max(0,tbProductFiles.length-1);
+    const input=document.getElementById("v5ProdutoFotos"); if(input)input.value="";
+    tbRenderProductPhotoPreview();
+  };
+
+  window.tbSetMainProductPhoto=function(index){
+    tbProductMainIndex=Number(index)||0;
+    tbRenderProductPhotoPreview();
+  };
+
+  function tbRenderProductPhotoPreview(){
+    const wrap=document.getElementById("tbProductPhotoPreview");
+    const count=document.getElementById("tbProductPhotoCount");
+    if(count)count.textContent=`${tbProductFiles.length} / 5`;
+    if(!wrap)return;
+    if(!tbProductFiles.length){
+      wrap.innerHTML='<div class="tb-product-photo-empty">Nenhuma foto selecionada.</div>';
+      return;
+    }
+    wrap.innerHTML=tbProductFiles.map((file,i)=>{
+      const url=URL.createObjectURL(file);
+      setTimeout(()=>URL.revokeObjectURL(url),15000);
+      return `<div class="tb-product-photo-card">
+        <img src="${url}" alt="Foto ${i+1}">
+        <button type="button" class="remove" onclick="tbRemoveProductPhoto(${i})" title="Remover">×</button>
+        <div class="tb-photo-actions">
+          <button type="button" class="${i===tbProductMainIndex?'primary':''}" onclick="tbSetMainProductPhoto(${i})">${i===tbProductMainIndex?'★ PRINCIPAL':'DEFINIR PRINCIPAL'}</button>
+        </div>
+      </div>`;
+    }).join("");
+  }
+
+  async function tbCompressProductImage(file){
+    if(file.size>15*1024*1024)throw new Error("Imagem muito grande.");
+    const bitmap=await createImageBitmap(file);
+    const max=1600;
+    const scale=Math.min(1,max/Math.max(bitmap.width,bitmap.height));
+    const w=Math.max(1,Math.round(bitmap.width*scale));
+    const h=Math.max(1,Math.round(bitmap.height*scale));
+    const canvas=document.createElement("canvas");
+    canvas.width=w; canvas.height=h;
+    const ctx=canvas.getContext("2d");
+    ctx.drawImage(bitmap,0,0,w,h);
+    bitmap.close?.();
+    const blob=await new Promise((resolve,reject)=>canvas.toBlob(b=>b?resolve(b):reject(new Error("Falha ao processar imagem.")),"image/webp",0.84));
+    return blob;
+  }
+
+  async function tbUploadProductPhotos(){
+    if(!tbProductFiles.length)return {urls:[],paths:[]};
+    const folder=`${premiumUser.id}/${crypto.randomUUID()}`;
+    const urls=[],paths=[];
+    for(let i=0;i<tbProductFiles.length;i++){
+      const blob=await tbCompressProductImage(tbProductFiles[i]);
+      const path=`${folder}/${String(i+1).padStart(2,"0")}.webp`;
+      const {error}=await premiumClient.storage.from("product-images").upload(path,blob,{contentType:"image/webp",upsert:false,cacheControl:"3600"});
+      if(error)throw new Error(error.message||"Falha no upload da foto.");
+      const {data}=premiumClient.storage.from("product-images").getPublicUrl(path);
+      urls.push(data.publicUrl);
+      paths.push(path);
+    }
+    return {urls,paths};
+  }
+
+  window.salvarProdutoV5=async function(){
+    if(!requirePremium()||tbProductSaving)return;
+    const nome=(document.getElementById("v5ProdutoNome")?.value||"").trim();
+    if(!nome){toast("Digite o nome do produto.");return;}
+
+    const ean=tbProductDigits(document.getElementById("v5ProdutoEan")?.value,14);
+    const ncm=tbProductDigits(document.getElementById("v5ProdutoNcm")?.value,8);
+    if(ean && ![8,12,13,14].includes(ean.length)){toast("Confira o EAN/GTIN. Use 8, 12, 13 ou 14 dígitos.");return;}
+    if(ncm && ncm.length!==8){toast("O NCM deve ter 8 dígitos.");return;}
+
+    tbProductSaving=true;
+    const btn=document.getElementById("tbSaveProductButton");
+    if(btn){btn.disabled=true;btn.textContent="SALVANDO PRODUTO...";}
+
+    let uploadedPaths=[];
+    try{
+      const photoResult=await tbUploadProductPhotos();
+      uploadedPaths=photoResult.paths;
+
+      const payload={
+        user_id:premiumUser.id,
+        name:nome,
+        sku:(document.getElementById("v5ProdutoSku")?.value||"").trim(),
+        ean:ean||null,
+        ncm:ncm||null,
+        description:(document.getElementById("v5ProdutoDescricao")?.value||"").trim()||null,
+        cost:num("v5ProdutoCusto"),
+        sale_price:num("v5ProdutoVenda"),
+        shipping:num("v5ProdutoFrete"),
+        length_cm:num("v5ProdutoComprimento"),
+        width_cm:num("v5ProdutoLargura"),
+        height_cm:num("v5ProdutoAltura"),
+        weight_kg:num("v5ProdutoPeso"),
+        image_urls:photoResult.urls,
+        main_image_url:photoResult.urls[tbProductMainIndex]||photoResult.urls[0]||null
+      };
+
+      const {error}=await premiumClient.from("saved_products").insert(payload);
+      if(error)throw new Error(error.message||"Não foi possível salvar o produto.");
+
+      limparFormularioProduto();
+      await renderProdutos();
+      toast("Produto completo salvo na nuvem.");
+      trackV5("salvar_produto_premium_completo");
+    }catch(err){
+      console.error("Erro ao salvar produto completo:",err);
+      if(uploadedPaths.length){
+        try{await premiumClient.storage.from("product-images").remove(uploadedPaths);}catch(_){}
+      }
+      toast("Não foi possível salvar. Verifique se a atualização do banco e o bucket de fotos já foram aplicados.");
+    }finally{
+      tbProductSaving=false;
+      if(btn){btn.disabled=false;btn.textContent="+ SALVAR PRODUTO";}
+    }
+  };
+
+  window.limparFormularioProduto=function(){
+    ["v5ProdutoNome","v5ProdutoSku","v5ProdutoEan","v5ProdutoNcm","v5ProdutoCusto","v5ProdutoVenda","v5ProdutoFrete","v5ProdutoPeso","v5ProdutoComprimento","v5ProdutoLargura","v5ProdutoAltura","v5ProdutoDescricao"].forEach(id=>{
+      const e=document.getElementById(id); if(e)e.value="";
+    });
+    const input=document.getElementById("v5ProdutoFotos"); if(input)input.value="";
+    tbProductFiles=[];tbProductMainIndex=0;tbRenderProductPhotoPreview();
+  };
+
+  window.excluirProdutoV5=async function(id){
+    if(!requirePremium())return;
+    const p=premiumProducts.find(x=>String(x.id)===String(id));
+    if(!confirm(`Excluir ${p?.name||"este produto"}?`))return;
+    const {error}=await premiumClient.from("saved_products").delete().eq("id",id).eq("user_id",premiumUser.id);
+    if(error){toast("Não foi possível excluir o produto.");return;}
+    if(Array.isArray(p?.image_urls) && p.image_urls.length){
+      const prefix=`/storage/v1/object/public/product-images/`;
+      const paths=p.image_urls.map(u=>{
+        try{return decodeURIComponent(new URL(u).pathname.split(prefix)[1]||"");}catch(_){return "";}
+      }).filter(Boolean);
+      if(paths.length){try{await premiumClient.storage.from("product-images").remove(paths);}catch(_){}}
+    }
+    await renderProdutos();
+    toast("Produto excluído.");
+  };
   window.usarProdutoV5=function(id){ if(!requirePremium())return; const x=premiumProducts.find(i=>String(i.id)===String(id));if(!x)return; document.getElementById("produto").value=x.name;document.getElementById("custo").value=x.cost||"";document.getElementById("venda").value=x.sale_price||"";document.getElementById("frete").value=x.shipping||"";document.getElementById("calculadora").scrollIntoView({behavior:"smooth"});toast("Produto carregado na calculadora."); 
-    /* V8.3.4: depois de carregar o produto, abre a Calculadora automaticamente */
+    /* V8.4.0: depois de carregar o produto, abre a Calculadora automaticamente */
     if(typeof tbShowPremiumModule === "function"){
       tbShowPremiumModule("calculadora",{scroll:true});
     }else{
@@ -4701,7 +5004,7 @@ window.refreshPremiumAccess=async function(){
     for(let inicio=0;;inicio+=lote){
       const fim=inicio+lote-1;
       const {data,error}=await premiumClient.from("saved_products")
-        .select("sku,name,cost,shipping,sale_price")
+        .select("sku,name,ean,ncm,description,cost,shipping,sale_price,length_cm,width_cm,height_cm,weight_kg")
         .eq("user_id",premiumUser.id)
         .order("sku",{ascending:true})
         .range(inicio,fim);
@@ -4712,8 +5015,8 @@ window.refreshPremiumAccess=async function(){
     if(!todos.length){toast("Você ainda não possui produtos cadastrados.");return;}
     todos.sort((a,b)=>String(a.sku||"").localeCompare(String(b.sku||""),"pt-BR",{numeric:true,sensitivity:"base"}) || String(a.name||"").localeCompare(String(b.name||""),"pt-BR",{sensitivity:"base"}));
     const linhas=[
-      ["SKU","Nome do produto","Custo (R$)","Frete (R$)","Preço de venda (R$)"],
-      ...todos.map(x=>[x.sku||"",x.name||"",csvMoney(x.cost),csvMoney(x.shipping),csvMoney(x.sale_price)])
+      ["SKU","Nome do produto","EAN","NCM","Descrição","Custo (R$)","Frete (R$)","Preço de venda (R$)","Comprimento (cm)","Largura (cm)","Altura (cm)","Peso (kg)"],
+      ...todos.map(x=>[x.sku||"",x.name||"",x.ean||"",x.ncm||"",x.description||"",csvMoney(x.cost),csvMoney(x.shipping),csvMoney(x.sale_price),x.length_cm||"",x.width_cm||"",x.height_cm||"",x.weight_kg||""])
     ];
     const csv='\ufeff'+linhas.map(l=>l.map(csvCell).join(';')).join('\r\n');
     const blob=new Blob([csv],{type:'text/csv;charset=utf-8;'});
@@ -4933,6 +5236,85 @@ window.refreshPremiumAccess=async function(){
   };
   window.exportPremiumReportCSV=function(){if(!requirePremium())return;if(!tbReportRows.length){toast('Não há vendas neste relatório para exportar.');return;}const rows=[['Data','Produto','SKU','Marketplace','Quantidade','Preço unitário (R$)','Faturamento (R$)','Lucro líquido (R$)','Margem (%)'],...tbReportRows.map(x=>{const r=Number(x.gross_revenue||Number(x.unit_price||0)*Number(x.quantity||1)),p=Number(x.net_profit||0);return [new Date(x.sold_at).toLocaleString('pt-BR'),x.product_name||'',x.sku||'',x.marketplace||'',Number(x.quantity||0),csvMoney(x.unit_price),csvMoney(r),csvMoney(p),(r?p/r*100:0).toFixed(2).replace('.',',')]})];const csv='\ufeff'+rows.map(r=>r.map(csvCell).join(';')).join('\r\n');const blob=new Blob([csv],{type:'text/csv;charset=utf-8;'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='THE_BEST_Relatorio_Vendas_'+new Date().toISOString().slice(0,10)+'.csv';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1500);toast('Relatório CSV exportado.');};
 
+  function tbProductPhoto(x){
+    const urls=Array.isArray(x?.image_urls)?x.image_urls:[];
+    return x?.main_image_url||urls[0]||"";
+  }
+
+  window.tbShowProductHover=function(event,id){
+    const p=premiumProducts.find(x=>String(x.id)===String(id));
+    const url=tbProductPhoto(p);
+    if(!url)return;
+    const box=document.getElementById("tbProductHoverPreview"),img=document.getElementById("tbProductHoverImage");
+    if(!box||!img)return;
+    img.src=url;box.hidden=false;tbMoveProductHover(event);
+  };
+
+  window.tbMoveProductHover=function(event){
+    const box=document.getElementById("tbProductHoverPreview");
+    if(!box||box.hidden)return;
+    const pad=18,w=270,h=270;
+    let x=(event?.clientX||0)+18,y=(event?.clientY||0)+18;
+    if(x+w>window.innerWidth-pad)x=(event?.clientX||0)-w-18;
+    if(y+h>window.innerHeight-pad)y=(event?.clientY||0)-h-18;
+    box.style.left=Math.max(pad,x)+"px";
+    box.style.top=Math.max(pad,y)+"px";
+  };
+
+  window.tbHideProductHover=function(){
+    const box=document.getElementById("tbProductHoverPreview");if(box)box.hidden=true;
+  };
+
+  window.tbOpenProductDetail=function(id){
+    const p=premiumProducts.find(x=>String(x.id)===String(id));
+    if(!p)return;
+    tbHideProductHover();
+    const modal=document.getElementById("tbProductDetailModal");
+    const c=document.getElementById("tbProductDetailContent");
+    if(!modal||!c)return;
+    const imgs=Array.isArray(p.image_urls)?p.image_urls.filter(Boolean):[];
+    const main=tbProductPhoto(p);
+    const dim=[p.length_cm,p.width_cm,p.height_cm].some(v=>Number(v)>0)
+      ? `${Number(p.length_cm||0).toLocaleString("pt-BR")} × ${Number(p.width_cm||0).toLocaleString("pt-BR")} × ${Number(p.height_cm||0).toLocaleString("pt-BR")} cm`
+      : "Não informado";
+    const created=p.created_at?new Date(p.created_at).toLocaleDateString("pt-BR"):"-";
+    c.innerHTML=`
+      <div class="tb-product-detail-head">
+        <div class="tb-product-detail-main-photo ${main?'':'no-photo'}">${main?`<img src="${esc(main)}" alt="${esc(p.name)}">`:'📦'}</div>
+        <div>
+          <h2 id="tbProductDetailTitle">${esc(p.name)}</h2>
+          <p>${p.sku?`SKU ${esc(p.sku)}`:"Sem SKU"} ${p.ean?` • EAN ${esc(p.ean)}`:""} ${p.ncm?` • NCM ${esc(p.ncm)}`:""}</p>
+        </div>
+      </div>
+      <div class="tb-product-detail-grid">
+        <div class="tb-product-detail-field"><span>SKU</span><b>${esc(p.sku||"Não informado")}</b></div>
+        <div class="tb-product-detail-field"><span>EAN / GTIN</span><b>${esc(p.ean||"Não informado")}</b></div>
+        <div class="tb-product-detail-field"><span>NCM</span><b>${esc(p.ncm||"Não informado")}</b></div>
+        <div class="tb-product-detail-field"><span>Cadastrado em</span><b>${created}</b></div>
+        <div class="tb-product-detail-field"><span>Custo</span><b>${brl(p.cost)}</b></div>
+        <div class="tb-product-detail-field"><span>Preço de venda</span><b>${brl(p.sale_price)}</b></div>
+        <div class="tb-product-detail-field"><span>Frete</span><b>${brl(p.shipping)}</b></div>
+        <div class="tb-product-detail-field"><span>Peso</span><b>${Number(p.weight_kg||0)>0?Number(p.weight_kg).toLocaleString("pt-BR",{maximumFractionDigits:3})+" kg":"Não informado"}</b></div>
+        <div class="tb-product-detail-field" style="grid-column:span 2"><span>Dimensões (C × L × A)</span><b>${dim}</b></div>
+        <div class="tb-product-detail-field" style="grid-column:span 2"><span>Fotos</span><b>${imgs.length} de 5</b></div>
+      </div>
+      <div class="tb-product-detail-description"><span>Descrição</span><p>${esc(p.description||"Nenhuma descrição cadastrada.")}</p></div>
+      ${imgs.length?`<div class="tb-product-gallery">${imgs.map(u=>`<img src="${esc(u)}" class="${u===main?'main':''}" alt="Foto do produto" onclick="this.closest('.tb-product-modal-card').querySelector('.tb-product-detail-main-photo img').src=this.src">`).join("")}</div>`:""}
+      <div class="tb-product-detail-actions">
+        <button type="button" onclick="usarProdutoV5('${p.id}');tbCloseProductDetail()">USAR NA CALCULADORA</button>
+        <button type="button" class="ghost" onclick="tbCloseProductDetail()">FECHAR</button>
+      </div>`;
+    modal.hidden=false;
+    document.body.style.overflow="hidden";
+  };
+
+  window.tbCloseProductDetail=function(event){
+    if(event && event.target!==event.currentTarget)return;
+    const modal=document.getElementById("tbProductDetailModal");
+    if(modal)modal.hidden=true;
+    document.body.style.overflow="";
+  };
+
   function renderProdutosPremiumLista(lista){
     const el=document.getElementById("listaProdutosV5");
     const info=document.getElementById("productSearchInfo");
@@ -4940,47 +5322,58 @@ window.refreshPremiumAccess=async function(){
 
     const termo=(document.getElementById("productSearchInput")?.value||"").trim();
     if(info){
-      if(termo){
-        info.textContent=`${lista.length} produto${lista.length===1?'':'s'} encontrado${lista.length===1?'':'s'} para "${termo}".`;
-      }else{
-        info.textContent=premiumProducts.length
-          ? `${premiumProducts.length} produto${premiumProducts.length===1?'':'s'} cadastrado${premiumProducts.length===1?'':'s'}. Pesquise por nome ou SKU.`
-          : 'Nenhum produto cadastrado ainda.';
-      }
+      info.textContent=termo
+        ? `${lista.length} produto${lista.length===1?'':'s'} encontrado${lista.length===1?'':'s'} para "${termo}".`
+        : (premiumProducts.length?`${premiumProducts.length} produto${premiumProducts.length===1?'':'s'} cadastrado${premiumProducts.length===1?'':'s'}.`:"Nenhum produto cadastrado ainda.");
     }
 
     if(!lista.length){
       el.innerHTML=termo
-        ? '<div class="v5-empty">Nenhum produto encontrado com esse nome ou SKU.</div>'
-        : '<div class="v5-empty">Cadastre seu primeiro produto Premium. Ele ficará vinculado à sua conta.</div>';
+        ? '<div class="v5-empty">Nenhum produto encontrado.</div>'
+        : '<div class="v5-empty">Cadastre seu primeiro produto completo.</div>';
       return;
     }
 
-    el.innerHTML=lista.map(x=>`<div class="v5-item"><div class="v5-item-top"><div><strong>${esc(x.name)}</strong><small>${x.sku?"SKU: "+esc(x.sku):"Sem SKU"}</small></div><small>${brl(x.sale_price)}</small></div><div class="v5-kpis"><div class="v5-kpi"><span>Custo</span><b>${brl(x.cost)}</b></div><div class="v5-kpi"><span>Venda</span><b>${brl(x.sale_price)}</b></div><div class="v5-kpi"><span>Frete</span><b>${brl(x.shipping)}</b></div></div><div class="v5-item-controls"><button class="v5-mini" onclick="usarProdutoV5('${x.id}')">Usar na calculadora</button><button class="v5-mini danger" onclick="excluirProdutoV5('${x.id}')">Excluir</button></div></div>`).join("");
+    el.innerHTML=lista.map(x=>{
+      const photo=tbProductPhoto(x);
+      return `<div class="v5-item">
+        <div class="tb-product-row">
+          <div class="tb-product-thumb ${photo?'':'no-photo'}"
+               ${photo?`onmouseenter="tbShowProductHover(event,'${x.id}')" onmousemove="tbMoveProductHover(event)" onmouseleave="tbHideProductHover()"`:""}
+               onclick="tbOpenProductDetail('${x.id}')">
+            ${photo?`<img src="${esc(photo)}" alt="${esc(x.name)}">`:"📦"}
+          </div>
+          <div class="tb-product-main">
+            <a href="javascript:void(0)" onclick="tbOpenProductDetail('${x.id}')">${esc(x.name)}</a>
+            <small>${x.ean?`EAN ${esc(x.ean)}`:"EAN não informado"}${x.ncm?` • NCM ${esc(x.ncm)}`:""}</small>
+          </div>
+          <div class="tb-product-code">
+            <a href="javascript:void(0)" onclick="tbOpenProductDetail('${x.id}')">${esc(x.sku||"SEM SKU")}</a>
+          </div>
+          <div class="tb-product-cell"><span>Custo</span><b>${brl(x.cost)}</b></div>
+          <div class="tb-product-cell"><span>Venda</span><b>${brl(x.sale_price)}</b></div>
+          <div class="tb-product-cell tb-hide-mid"><span>Peso</span><b>${Number(x.weight_kg||0)>0?Number(x.weight_kg).toLocaleString("pt-BR",{maximumFractionDigits:3})+" kg":"-"}</b></div>
+          <div class="tb-product-row-actions">
+            <button class="v5-mini" onclick="usarProdutoV5('${x.id}')">CALCULADORA</button>
+            <button class="v5-mini danger" onclick="excluirProdutoV5('${x.id}')">EXCLUIR</button>
+          </div>
+        </div>
+      </div>`;
+    }).join("");
   }
 
   window.filtrarProdutosPremium=function(){
     const termo=(document.getElementById("productSearchInput")?.value||"").trim().toLowerCase();
-    if(!termo){
-      renderProdutosPremiumLista(premiumProducts);
-      return;
-    }
-
-    const filtrados=premiumProducts.filter(x=>{
-      const nome=String(x.name||"").toLowerCase();
-      const sku=String(x.sku||"").toLowerCase();
-      return nome.includes(termo)||sku.includes(termo);
-    });
-
+    if(!termo){renderProdutosPremiumLista(premiumProducts);return;}
+    const filtrados=premiumProducts.filter(x=>
+      [x.name,x.sku,x.ean,x.ncm].some(v=>String(v||"").toLowerCase().includes(termo))
+    );
     renderProdutosPremiumLista(filtrados);
   };
 
   window.limparBuscaProdutos=function(){
     const input=document.getElementById("productSearchInput");
-    if(input){
-      input.value="";
-      input.focus();
-    }
+    if(input){input.value="";input.focus();}
     renderProdutosPremiumLista(premiumProducts);
   };
 
@@ -4989,27 +5382,24 @@ window.refreshPremiumAccess=async function(){
     if(!el)return;
 
     if(!premiumActive || !premiumUser || !premiumClient){
-      premiumProducts=[];
-      el.innerHTML="";
-      if(count)count.textContent="🔒";
-      return;
+      premiumProducts=[];el.innerHTML="";if(count)count.textContent="🔒";return;
     }
 
     const {data,error}=await premiumClient
       .from("saved_products")
-      .select("id,name,sku,cost,sale_price,shipping,created_at")
+      .select("id,name,sku,ean,ncm,description,cost,sale_price,shipping,length_cm,width_cm,height_cm,weight_kg,image_urls,main_image_url,created_at")
       .eq("user_id",premiumUser.id)
       .order("created_at",{ascending:false})
       .limit(3000);
 
     if(error){
-      el.innerHTML='<div class="v5-empty">Não foi possível carregar seus produtos.</div>';
+      console.error("Erro ao carregar catálogo:",error);
+      el.innerHTML='<div class="v5-empty">Não foi possível carregar seus produtos. Aplique a atualização do catálogo no Supabase.</div>';
       return;
     }
 
     premiumProducts=data||[];
     if(count)count.textContent=premiumProducts.length+" "+(premiumProducts.length===1?"item":"itens");
-
     saleProductOptions();
     stockProductOptions();
     filtrarProdutosPremium();
