@@ -1868,7 +1868,7 @@ body.tb-user-logged-in #calculadora{
 
 
 <style id="tb-v811-fixes">
-/* V8.4.2.1: correções da vitrine Premium */
+/* V8.4.3.1: correções da vitrine Premium */
 @media (min-width: 769px){
   .tb-mobile-menu-toggle,
   .tb-menu-toggle,
@@ -2007,7 +2007,7 @@ body.tb-user-logged-in #calculadora{
 
 
 <style id="tb-mobile-presentation-only">
-/* V8.4.2: celular/tablet = somente apresentação pública.
+/* V8.4.3: celular/tablet = somente apresentação pública.
    Área Premium/ERP continua disponível apenas em computador/programa desktop. */
 #tbMobileDesktopNotice{display:none}
 
@@ -2076,7 +2076,7 @@ body.tb-user-logged-in #calculadora{
 
 
 <style id="tb-program-desktop-v830">
-/* V8.4.2 • experiência de programa para desktop instalado */
+/* V8.4.3 • experiência de programa para desktop instalado */
 @media (display-mode:standalone) and (min-width:1025px){
   .tb-app-login-cover{
     display:flex!important;
@@ -2249,7 +2249,7 @@ body.tb-user-logged-in #calculadora{
 
 
 <style id="tb-desktop-exe-mode-v831">
-/* V8.4.2 • modo exclusivo do executável Windows via ?app=desktop */
+/* V8.4.3 • modo exclusivo do executável Windows via ?app=desktop */
 body.tb-desktop-program{
   min-width:1025px;
   background:#06111f;
@@ -2298,7 +2298,7 @@ body.tb-desktop-program.tb-app-authenticated .app-bottom-nav{
 
 
 <style id="tb-desktop-compact-v832">
-/* V8.4.2 • Desktop Compact: login proporcional, sem scroll horizontal */
+/* V8.4.3 • Desktop Compact: login proporcional, sem scroll horizontal */
 @media (min-width:1025px){
   body.tb-desktop-program{
     overflow:hidden!important;
@@ -2823,7 +2823,7 @@ body.tb-desktop-program.tb-app-authenticated .app-bottom-nav{
 
 
 <style id="tb-desktop-scroll-v834">
-/* V8.4.2 • libera rolagem do sistema após login no EXE */
+/* V8.4.3 • libera rolagem do sistema após login no EXE */
 @media (min-width:1025px){
   body.tb-desktop-program.tb-app-authenticated{
     overflow-y:auto!important;
@@ -3271,7 +3271,7 @@ body.tb-desktop-program.tb-app-authenticated .app-bottom-nav{
 
 
 <style id="tb-v842-theme-light-font-mobile">
-/* V8.4.2 • tema um pouco mais claro + fontes maiores + limpeza mobile */
+/* V8.4.3 • tema um pouco mais claro + fontes maiores + limpeza mobile */
 
 /* -------- PALETA GERAL UM POUCO MAIS CLARA -------- */
 :root{
@@ -3461,6 +3461,39 @@ body.tb-desktop-program .tb-program-input-wrap{
 }
 </style>
 
+
+<style id="tb-v843-premium-logo">
+/* V8.4.3 • identidade Premium na barra lateral */
+.tb-premium-sidebar img,
+.tb-premium-sidebar .brand img,
+.tb-premium-sidebar .logo img,
+.tb-sidebar-brand img{
+  object-fit:contain!important;
+}
+.tb-sidebar-premium-logo{
+  width:48px!important;
+  height:48px!important;
+  min-width:48px!important;
+  border-radius:10px!important;
+  object-fit:cover!important;
+  box-shadow:0 0 18px rgba(0,174,255,.20)!important;
+}
+</style>
+<script>
+document.addEventListener('DOMContentLoaded', function(){
+  const sidebar = document.querySelector('.tb-premium-sidebar');
+  if(!sidebar) return;
+
+  const imgs = sidebar.querySelectorAll('img');
+  if(imgs.length){
+    const img = imgs[0];
+    img.src = 'logo-marketplace-premium.webp';
+    img.alt = 'THE BEST DIGITAL Marketplace Premium';
+    img.classList.add('tb-sidebar-premium-logo');
+  }
+});
+</script>
+
 </head>
 
 <body>
@@ -3492,7 +3525,7 @@ body.tb-desktop-program .tb-program-input-wrap{
       </div>
       <div class="tb-program-title-right">
         <span>DESKTOP</span>
-        <span>V8.4.2</span>
+        <span>V8.4.3</span>
       </div>
     </div>
 
@@ -3524,7 +3557,7 @@ body.tb-desktop-program .tb-program-input-wrap{
           <small>Integração inicial planejada: Mercado Livre</small>
         </div>
 
-        <div class="tb-program-version">THE BEST DIGITAL • PROGRAMA PREMIUM • V8.4.2</div>
+        <div class="tb-program-version">THE BEST DIGITAL • PROGRAMA PREMIUM • V8.4.3</div>
       </section>
 
       <section class="tb-program-login-panel">
@@ -5561,7 +5594,7 @@ window.refreshPremiumAccess=async function(){
   };
 
   window.usarProdutoV5=function(id){ if(!requirePremium())return; const x=premiumProducts.find(i=>String(i.id)===String(id));if(!x)return; document.getElementById("produto").value=x.name;document.getElementById("custo").value=x.cost||"";document.getElementById("venda").value=x.sale_price||"";document.getElementById("frete").value=x.shipping||"";document.getElementById("calculadora").scrollIntoView({behavior:"smooth"});toast("Produto carregado na calculadora."); 
-    /* V8.4.2: depois de carregar o produto, abre a Calculadora automaticamente */
+    /* V8.4.3: depois de carregar o produto, abre a Calculadora automaticamente */
     if(typeof tbShowPremiumModule === "function"){
       tbShowPremiumModule("calculadora",{scroll:true});
     }else{

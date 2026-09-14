@@ -1,4 +1,4 @@
-const CACHE_NAME = "the-best-marketplace-v8-4-2-tema-claro-fontes-mobile";
+const CACHE_NAME = "the-best-marketplace-v8-4-3-logo-premium";
 const APP_SHELL = [
   "/",
   "/index.html",
