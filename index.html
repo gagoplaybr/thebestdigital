@@ -1709,6 +1709,7 @@ body.tb-premium-nav-active.tb-single-module #controle-metas,
 body.tb-premium-nav-active.tb-single-module #relatorios-premium,
 body.tb-premium-nav-active.tb-single-module #financeiro-premium,
 body.tb-premium-nav-active.tb-single-module #meus-produtos,
+body.tb-premium-nav-active.tb-single-module #pedidos-erp-teste,
 body.tb-premium-nav-active.tb-single-module #area-cliente{
   display:none!important;
 }
@@ -1721,6 +1722,7 @@ body.tb-premium-nav-active.tb-single-module #controle-metas.tb-module-visible,
 body.tb-premium-nav-active.tb-single-module #relatorios-premium.tb-module-visible,
 body.tb-premium-nav-active.tb-single-module #financeiro-premium.tb-module-visible,
 body.tb-premium-nav-active.tb-single-module #meus-produtos.tb-module-visible,
+body.tb-premium-nav-active.tb-single-module #pedidos-erp-teste.tb-module-visible,
 body.tb-premium-nav-active.tb-single-module #area-cliente.tb-module-visible{
   display:block!important;
 }
@@ -2023,6 +2025,7 @@ body.tb-user-logged-in #calculadora{
   #relatorios-premium,
   #financeiro-premium,
   #meus-produtos,
+  #pedidos-erp-teste,
   .app-home,
   .app-bottom-nav,
   .app-topbar,
@@ -4014,35 +4017,35 @@ document.addEventListener('DOMContentLoaded', function(){
   </div>
 
   <div class="tb-side-menu">
-    <a class="tb-side-link active" href="#painel-premium" data-premium-section="painel-premium" title="Dashboard">
+    <a class="tb-side-link active" href="#painel-premium" data-premium-section="painel-premium" data-tb-category="visao" title="Dashboard">
       <span class="tb-side-ico">📊</span><span class="tb-side-label">DASHBOARD</span>
     </a>
-    <a class="tb-side-link" href="#calculadora" data-premium-section="calculadora" title="Calculadora">
+    <a class="tb-side-link" href="#calculadora" data-premium-section="calculadora" data-tb-category="operacao" title="Calculadora">
       <span class="tb-side-ico">🧮</span><span class="tb-side-label">CALCULADORA</span>
     </a>
-    <a class="tb-side-link" href="#controle-vendas" data-premium-section="controle-vendas" title="Vendas">
+    <a class="tb-side-link" href="#controle-vendas" data-premium-section="controle-vendas" data-tb-category="operacao" title="Vendas">
       <span class="tb-side-ico">💰</span><span class="tb-side-label">VENDAS</span>
     </a>
-    <a class="tb-side-link" href="#controle-estoque" data-premium-section="controle-estoque" title="Estoque">
+    <a class="tb-side-link" href="#controle-estoque" data-premium-section="controle-estoque" data-tb-category="operacao" title="Estoque">
       <span class="tb-side-ico">📦</span><span class="tb-side-label">ESTOQUE</span>
     </a>
-    <a class="tb-side-link" href="#controle-metas" data-premium-section="controle-metas" onclick="setTimeout(loadGoalForm,0)" title="Metas">
+    <a class="tb-side-link" href="#controle-metas" data-premium-section="controle-metas" data-tb-category="operacao" onclick="setTimeout(loadGoalForm,0)" title="Metas">
       <span class="tb-side-ico">🎯</span><span class="tb-side-label">METAS</span>
     </a>
-    <a class="tb-side-link" href="#relatorios-premium" data-premium-section="relatorios-premium" onclick="setTimeout(loadPremiumReports,0)" title="Relatórios">
+    <a class="tb-side-link" href="#relatorios-premium" data-premium-section="relatorios-premium" data-tb-category="operacao" onclick="setTimeout(loadPremiumReports,0)" title="Relatórios">
       <span class="tb-side-ico">📑</span><span class="tb-side-label">RELATÓRIOS</span>
     </a>
-    <a class="tb-side-link" href="#financeiro-premium" data-premium-section="financeiro-premium" onclick="setTimeout(loadFinanceiroPremium,0)" title="Financeiro">
+    <a class="tb-side-link" href="#financeiro-premium" data-premium-section="financeiro-premium" data-tb-category="financeiro" onclick="setTimeout(loadFinanceiroPremium,0)" title="Financeiro">
       <span class="tb-side-ico">💵</span><span class="tb-side-label">FINANCEIRO</span>
     </a>
-    <a class="tb-side-link" href="#meus-produtos" data-premium-section="meus-produtos" title="Meus produtos">
+    <a class="tb-side-link" href="#meus-produtos" data-premium-section="meus-produtos" data-tb-category="operacao" title="Meus produtos">
       <span class="tb-side-ico">📦</span><span class="tb-side-label">MEUS PRODUTOS</span>
     </a>
-    <a class="tb-side-link" href="#pedidos-erp-teste" data-premium-section="pedidos-erp-teste" title="Pedidos ERP • Modo teste">
+    <a class="tb-side-link" href="#pedidos-erp-teste" data-premium-section="pedidos-erp-teste" data-tb-category="erp" title="Pedidos ERP • Modo teste">
       <span class="tb-side-ico">🧪</span><span class="tb-side-label">PEDIDOS ERP</span>
     </a>
 
-    <a class="tb-side-link" href="#area-cliente" data-premium-section="area-cliente" title="Minha conta" onclick="tbOpenMinhaConta(event)">
+    <a class="tb-side-link" href="#area-cliente" data-premium-section="area-cliente" data-tb-category="conta" title="Minha conta" onclick="tbOpenMinhaConta(event)">
       <span class="tb-side-ico">👤</span><span class="tb-side-label">MINHA CONTA</span>
     </a>
 
@@ -4060,6 +4063,14 @@ document.addEventListener('DOMContentLoaded', function(){
     <b>THE BEST DIGITAL</b>
     <span>Premium • Nuvem</span>
   </div>
+</nav>
+
+<nav id="tbPremiumTopTabs" class="tb-premium-top-tabs" aria-label="Áreas do sistema">
+  <button type="button" class="tb-top-tab active" data-tb-topcat="visao">VISÃO GERAL</button>
+  <button type="button" class="tb-top-tab" data-tb-topcat="operacao">OPERAÇÃO</button>
+  <button type="button" class="tb-top-tab" data-tb-topcat="financeiro">FINANCEIRO</button>
+  <button type="button" class="tb-top-tab" data-tb-topcat="erp">ERP <span>TESTE</span></button>
+  <button type="button" class="tb-top-tab" data-tb-topcat="conta">CONTA</button>
 </nav>
 
 <section id="painel-premium" class="tb-system-dashboard" hidden aria-label="Dashboard THE BEST Marketplace">
@@ -6879,6 +6890,68 @@ document.addEventListener('DOMContentLoaded', function(){
   }
   window.addEventListener('resize', tbApplyMobilePresentation);
   window.addEventListener('orientationchange', tbApplyMobilePresentation);
+})();
+</script>
+
+
+<style id="tb-v851-layered-nav">
+/* V8.5.1: navegação em camadas */
+.tb-premium-top-tabs{display:none}
+body.tb-premium-nav-active .tb-premium-top-tabs{display:flex;position:fixed;z-index:10020;left:218px;right:0;top:0;height:58px;align-items:center;gap:8px;padding:0 20px;background:rgba(5,24,41,.96);backdrop-filter:blur(14px);border-bottom:1px solid rgba(74,190,255,.16);box-shadow:0 8px 24px rgba(0,0,0,.14)}
+.tb-top-tab{appearance:none;border:1px solid transparent;background:transparent;color:#8fa9c0;font:800 11px/1 system-ui;letter-spacing:.35px;padding:11px 15px;border-radius:11px;cursor:pointer;transition:.18s ease}
+.tb-top-tab:hover{color:#e8f8ff;background:rgba(255,255,255,.04)}
+.tb-top-tab.active{color:#fff;background:linear-gradient(180deg,rgba(0,151,255,.20),rgba(0,117,196,.10));border-color:rgba(74,195,255,.34);box-shadow:inset 0 -2px 0 #22b8ff}
+.tb-top-tab span{font-size:8px;color:#ffcc73;margin-left:4px}
+body.tb-premium-nav-active .tb-premium-sidebar{padding-top:68px}
+body.tb-premium-nav-active .tb-side-menu .tb-side-link{display:none}
+body.tb-premium-nav-active .tb-side-menu .tb-side-link.tb-cat-visible{display:flex}
+body.tb-premium-nav-active.tb-single-module #painel-premium.tb-module-visible,
+body.tb-premium-nav-active.tb-single-module #calculadora.tb-module-visible,
+body.tb-premium-nav-active.tb-single-module #controle-vendas.tb-module-visible,
+body.tb-premium-nav-active.tb-single-module #controle-estoque.tb-module-visible,
+body.tb-premium-nav-active.tb-single-module #controle-metas.tb-module-visible,
+body.tb-premium-nav-active.tb-single-module #relatorios-premium.tb-module-visible,
+body.tb-premium-nav-active.tb-single-module #financeiro-premium.tb-module-visible,
+body.tb-premium-nav-active.tb-single-module #meus-produtos.tb-module-visible,
+body.tb-premium-nav-active.tb-single-module #pedidos-erp-teste.tb-module-visible,
+body.tb-premium-nav-active.tb-single-module #area-cliente.tb-module-visible{padding-top:82px!important}
+body.tb-premium-nav-active #pedidos-erp-teste.tb-module-visible{display:block!important;margin-left:218px!important;width:auto!important;max-width:none!important;padding-left:24px!important;padding-right:24px!important}
+@media(max-width:900px){body.tb-premium-nav-active .tb-premium-top-tabs{display:none!important}body.tb-premium-nav-active .tb-premium-sidebar{padding-top:0}body.tb-premium-nav-active #pedidos-erp-teste.tb-module-visible{margin-left:0!important;width:100%!important;padding:14px 8px 90px!important}}
+</style>
+<script id="tb-v851-layered-nav-js">
+(function(){
+ const first={visao:'painel-premium',operacao:'calculadora',financeiro:'financeiro-premium',erp:'pedidos-erp-teste',conta:'area-cliente'};
+ function setCategory(cat,openFirst){
+   document.querySelectorAll('.tb-top-tab').forEach(b=>b.classList.toggle('active',b.dataset.tbTopcat===cat));
+   document.querySelectorAll('.tb-side-link[data-tb-category]').forEach(a=>a.classList.toggle('tb-cat-visible',a.dataset.tbCategory===cat));
+   try{localStorage.setItem('tb_nav_category_v851',cat)}catch(_){}
+   if(openFirst && first[cat] && window.tbShowPremiumModule) window.tbShowPremiumModule(first[cat]);
+ }
+ window.tbSetPremiumCategory=setCategory;
+ document.addEventListener('click',function(e){
+   const b=e.target.closest?.('.tb-top-tab[data-tb-topcat]');
+   if(!b)return;
+   e.preventDefault(); setCategory(b.dataset.tbTopcat,true);
+ });
+ document.addEventListener('click',function(e){
+   const a=e.target.closest?.('.tb-side-link[data-tb-category]');
+   if(a)setCategory(a.dataset.tbCategory,false);
+ },true);
+ const old=window.tbShowPremiumModule;
+ if(typeof old==='function'){
+   window.tbShowPremiumModule=function(id,opts){
+     const a=document.querySelector('.tb-side-link[data-premium-section="'+id+'"]');
+     if(a?.dataset.tbCategory)setCategory(a.dataset.tbCategory,false);
+     return old(id,opts);
+   }
+ }
+ function init(){
+   const hash=(location.hash||'').slice(1);
+   const a=document.querySelector('.tb-side-link[data-premium-section="'+hash+'"]');
+   const cat=a?.dataset.tbCategory || 'visao';
+   setCategory(cat,false);
+ }
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
 })();
 </script>
 
