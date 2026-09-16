@@ -4138,13 +4138,14 @@ document.addEventListener('DOMContentLoaded', function(){
 </div>
 </section>
 
-<style id="tb-v850-erp-simulator">
+<style id="tb-v854-erp-simulator">
 .tb-erp-test-section{max-width:1400px;margin:0 auto;padding:28px 20px 80px;color:#edf8ff}
 .tb-erp-test-shell{background:linear-gradient(145deg,#0d2740,#091a2c);border:1px solid rgba(70,195,255,.22);border-radius:22px;padding:22px;box-shadow:0 20px 55px rgba(0,0,0,.22)}
 .tb-erp-test-head{display:flex;justify-content:space-between;gap:16px;align-items:flex-start;margin-bottom:18px}.tb-erp-test-head h2{margin:0;font-size:28px}.tb-erp-test-head h2 span{color:#42c9ff}.tb-erp-test-head p{margin:5px 0 0;color:#9fb7cc;font-size:12px}.tb-test-badge{padding:8px 11px;border-radius:999px;background:#492d08;border:1px solid #c9871e;color:#ffd27c;font-size:10px;font-weight:900}
 .tb-erp-warning{padding:12px 14px;border-radius:12px;background:rgba(255,179,0,.08);border:1px solid rgba(255,179,0,.2);color:#ffdca0;font-size:11px;margin-bottom:16px}.tb-erp-grid{display:grid;grid-template-columns:1.05fr 1.6fr;gap:14px}.tb-erp-card{background:#0b2035;border:1px solid rgba(99,198,255,.13);border-radius:16px;padding:16px}.tb-erp-card h3{margin:0 0 12px;font-size:14px;color:#dff5ff}.tb-erp-fields{display:grid;grid-template-columns:1fr 1fr;gap:9px}.tb-erp-field label{display:block;font-size:9px;color:#8faec6;margin-bottom:4px;font-weight:800}.tb-erp-field input,.tb-erp-field select{width:100%;box-sizing:border-box;background:#071827;color:#eaf8ff;border:1px solid rgba(100,200,255,.16);border-radius:9px;padding:9px;font-size:11px}.tb-erp-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}.tb-erp-btn{border:0;border-radius:10px;padding:10px 12px;font-size:10px;font-weight:900;cursor:pointer;background:linear-gradient(90deg,#087cff,#00b8ff);color:white}.tb-erp-btn.secondary{background:#173a58;border:1px solid rgba(90,200,255,.16)}.tb-erp-btn.danger{background:#5a1c29}.tb-erp-btn.warn{background:#62420b}.tb-order-card{border:1px solid rgba(88,198,255,.14);border-radius:13px;padding:13px;background:#081b2d;margin-bottom:9px}.tb-order-top{display:flex;justify-content:space-between;gap:10px}.tb-order-top b{font-size:12px}.tb-order-status{font-size:9px;font-weight:900;color:#67dbff}.tb-order-meta{margin-top:7px;color:#9eb8cd;font-size:10px;line-height:1.65}.tb-order-flow{display:flex;gap:5px;flex-wrap:wrap;margin-top:9px}.tb-order-flow span{font-size:8px;padding:5px 7px;border-radius:999px;background:#102d47;color:#8faec6}.tb-order-flow span.on{background:#0b6385;color:#dffaff}.tb-empty-orders{text-align:center;padding:35px 10px;color:#7897b0;font-size:11px}.tb-label-preview{width:240px;max-width:100%;aspect-ratio:2/3;background:white;color:#111;margin:12px auto 0;padding:12px;box-sizing:border-box;border-radius:5px;font-family:Arial,sans-serif}.tb-label-preview small{display:block}.tb-label-barcode{height:48px;margin:12px 0;background:repeating-linear-gradient(90deg,#111 0 2px,#fff 2px 4px,#111 4px 5px,#fff 5px 8px)}
 .tb-order-flow span.return-on{background:#6b4b0a;color:#ffe2a0;border:1px solid rgba(255,190,70,.28)}.tb-order-flow span.final-state{background:#173a58;color:#dffaff;border:1px solid rgba(90,200,255,.2)}.tb-erp-btn.return{background:linear-gradient(90deg,#7a4d08,#b8790b)}.tb-flow-locked{display:inline-flex;align-items:center;padding:9px 11px;border-radius:9px;background:#10283d;color:#86a5bd;font-size:9px;font-weight:900}.tb-flow-note{align-self:center;color:#7897b0;font-size:9px}.tb-order-history{margin-top:12px;border-top:1px solid rgba(90,200,255,.1);padding-top:10px}.tb-order-history summary{cursor:pointer;color:#9fc4dc;font-size:9px;font-weight:900}.tb-order-history p{margin:7px 0 0;padding:7px 9px;border-radius:8px;background:#071827;color:#9eb8cd;font-size:9px;line-height:1.45}.tb-order-history p b{color:#dff5ff}.tb-order-history p span{float:right;color:#67dbff;font-weight:800}
-@media(max-width:850px){.tb-erp-grid{grid-template-columns:1fr}.tb-erp-fields{grid-template-columns:1fr}.tb-erp-test-head{flex-direction:column}}
+.tb-test-stock-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:0 0 14px}.tb-stock-kpi{background:#071827;border:1px solid rgba(99,198,255,.14);border-radius:12px;padding:12px}.tb-stock-kpi small{display:block;color:#82a6bf;font-size:8px;font-weight:900;margin-bottom:5px}.tb-stock-kpi strong{font-size:20px;color:#eaf8ff}.tb-stock-kpi.warn strong{color:#ffd27c}.tb-stock-kpi.danger strong{color:#ff8f9e}.tb-stock-log{max-height:160px;overflow:auto;margin-top:10px}.tb-stock-log p{margin:5px 0;padding:7px 8px;background:#071827;border-radius:8px;color:#9eb8cd;font-size:9px}.tb-stock-log b{color:#dff5ff}.tb-stock-reset{margin-top:8px}
+@media(max-width:850px){.tb-test-stock-grid{grid-template-columns:1fr 1fr}.tb-erp-grid{grid-template-columns:1fr}.tb-erp-fields{grid-template-columns:1fr}.tb-erp-test-head{flex-direction:column}}
 @media print{body *{visibility:hidden!important}.tb-label-preview,.tb-label-preview *{visibility:visible!important}.tb-label-preview{position:absolute;left:0;top:0;width:100mm;height:150mm;margin:0;border-radius:0}}
 </style>
 <section id="pedidos-erp-teste" class="tb-erp-test-section" hidden aria-label="Pedidos ERP modo teste">
@@ -4163,18 +4164,30 @@ document.addEventListener('DOMContentLoaded', function(){
     </div><div class="tb-erp-actions"><button class="tb-erp-btn" onclick="tbErpCreateTestOrder()">+ RECEBER PEDIDO TESTE</button><button class="tb-erp-btn secondary" onclick="tbErpResetTests()">LIMPAR TESTES</button></div></div>
     <div class="tb-erp-card" style="margin-top:14px"><h3>🖨️ Etiqueta de teste</h3><div class="tb-erp-fields"><div class="tb-erp-field"><label>FORMATO</label><select id="tbLabelFormat"><option value="100x150">Térmica 100 × 150 mm</option><option value="100x100">Térmica 100 × 100 mm</option><option value="a4">A4</option></select></div><div class="tb-erp-field"><label>CÓPIAS</label><input id="tbLabelCopies" type="number" min="1" value="1"></div></div><div class="tb-label-preview" id="tbLabelPreview"><b>THE BEST • TESTE</b><small>Etiqueta interna de simulação</small><hr><b id="tbLabelProduct">Produto Teste</b><small id="tbLabelSku">SKU: TESTE-001</small><div class="tb-label-barcode"></div><small id="tbLabelOrder">Pedido: ML-TESTE-0001</small><small>SEM VALIDADE PARA ENVIO</small></div><div class="tb-erp-actions"><button class="tb-erp-btn secondary" onclick="tbErpPreviewLabel()">ATUALIZAR ETIQUETA</button><button class="tb-erp-btn" onclick="window.print()">IMPRIMIR TESTE</button></div></div>
    </div>
+   <div class="tb-erp-card" style="margin-bottom:14px"><h3>📦 Estoque ERP • Simulação</h3>
+    <div class="tb-test-stock-grid"><div class="tb-stock-kpi"><small>SKU TESTE-001 • DISPONÍVEL</small><strong id="tbStockAvailable">10</strong></div><div class="tb-stock-kpi"><small>RESERVADO / PROCESSADO</small><strong id="tbStockProcessed">0</strong></div><div class="tb-stock-kpi warn"><small>AGUARDANDO RETORNO</small><strong id="tbStockReturn">0</strong></div><div class="tb-stock-kpi danger"><small>GARANTIA / AVARIA</small><strong id="tbStockWarranty">0</strong></div></div>
+    <div style="color:#7897b0;font-size:9px">Estoque fictício inicial: 10 unidades. Movimentações abaixo são isoladas e não alteram o Estoque Premium real.</div><div id="tbStockLog" class="tb-stock-log"></div>
+    <button class="tb-erp-btn secondary tb-stock-reset" onclick="tbErpResetStock()">REINICIAR ESTOQUE TESTE</button>
+   </div>
    <div class="tb-erp-card"><h3>📥 Pedidos recebidos</h3><div id="tbErpTestOrders"></div></div>
   </div>
  </div>
 </section>
-<script id="tb-v853-erp-simulator-js">
+<script id="tb-v854-erp-stock-simulator-js">
 (function(){
  const KEY='tb_erp_test_orders_v850';
+ const STOCK_KEY='tb_erp_test_stock_v854';
  const steps=['RECEBIDO','PAGO','FATURAMENTO','ETIQUETA','ENVIADO','ENTREGUE'];
+ function getStock(){try{return JSON.parse(localStorage.getItem(STOCK_KEY)||'null')||{available:10,processed:0,returning:0,warranty:0,log:[]}}catch(e){return{available:10,processed:0,returning:0,warranty:0,log:[]}}}
+ function saveStock(st){localStorage.setItem(STOCK_KEY,JSON.stringify(st));renderStock()}
+ function stockMove(text,delta={}){const st=getStock();for(const k of ['available','processed','returning','warranty'])st[k]=Math.max(0,(st[k]||0)+(delta[k]||0));st.log=st.log||[];st.log.unshift({at:stamp(),text});saveStock(st)}
+ function renderStock(){const st=getStock(),ids={available:'tbStockAvailable',processed:'tbStockProcessed',returning:'tbStockReturn',warranty:'tbStockWarranty'};for(const [k,id] of Object.entries(ids)){const el=document.getElementById(id);if(el)el.textContent=st[k]||0}const log=document.getElementById('tbStockLog');if(log)log.innerHTML=(st.log||[]).length?(st.log||[]).map(x=>`<p><b>${esc(x.at)}</b> • ${esc(x.text)}</p>`).join(''):'<p>Nenhuma movimentação de estoque simulada ainda.</p>'}
+
  const terminal=['CANCELADO','DEVOLVIDO → ESTOQUE','DEVOLVIDO → GARANTIA/AVARIA'];
  function get(){try{return JSON.parse(localStorage.getItem(KEY)||'[]').map(migrate)}catch(e){return[]}}
  function migrate(o){
    if(!Array.isArray(o.history)) o.history=[{at:new Date().toISOString(),text:'Pedido carregado no simulador',status:o.status||'RECEBIDO'}];
+   if(typeof o.stockDebited!=='boolean') o.stockDebited=false; if(typeof o.stockRestored!=='boolean') o.stockRestored=false;
    return o;
  }
  function save(v){localStorage.setItem(KEY,JSON.stringify(v));render()}
@@ -4201,6 +4214,7 @@ document.addEventListener('DOMContentLoaded', function(){
  }
  function historyHtml(o){return `<details class="tb-order-history"><summary>🕘 HISTÓRICO (${(o.history||[]).length})</summary><div>${(o.history||[]).map(h=>`<p><b>${esc(h.display||new Date(h.at).toLocaleString('pt-BR'))}</b> • ${esc(h.text)} <span>${esc(h.status||'')}</span></p>`).join('')}</div></details>`}
  function render(){
+   renderStock();
    const box=document.getElementById('tbErpTestOrders');if(!box)return;const a=get();
    if(!a.length){box.innerHTML='<div class="tb-empty-orders">Nenhum pedido de teste recebido ainda.</div>';return}
    box.innerHTML=a.map((o,i)=>`<div class="tb-order-card"><div class="tb-order-top"><b>${esc(o.market)} • #${esc(o.id)}</b><span class="tb-order-status">${esc(o.status)}</span></div><div class="tb-order-meta">${esc(o.product)} • SKU ${esc(o.sku)}<br>${o.qty} un. • R$ ${Number(o.price).toFixed(2).replace('.',',')} cada</div><div class="tb-order-flow">${flowHtml(o)}</div><div class="tb-erp-actions">${actionsHtml(o,i)}</div>${historyHtml(o)}</div>`).join('')
@@ -4208,24 +4222,32 @@ document.addEventListener('DOMContentLoaded', function(){
  window.tbErpCreateTestOrder=function(){
    const a=get(),id=document.getElementById('tbTestOrderId').value.trim();if(!id)return alert('Informe o número do pedido teste.');
    if(a.some(x=>x.id===id))return alert('Esse pedido teste já foi recebido. Duplicidade bloqueada.');
-   const o={market:document.getElementById('tbTestMarket').value,id,product:document.getElementById('tbTestProduct').value.trim()||'Produto Teste',sku:document.getElementById('tbTestSku').value.trim()||'TESTE-001',qty:Math.max(1,Number(document.getElementById('tbTestQty').value)||1),price:Math.max(0,Number(document.getElementById('tbTestPrice').value)||0),status:'RECEBIDO',history:[]};
+   const o={market:document.getElementById('tbTestMarket').value,id,product:document.getElementById('tbTestProduct').value.trim()||'Produto Teste',sku:document.getElementById('tbTestSku').value.trim()||'TESTE-001',qty:Math.max(1,Number(document.getElementById('tbTestQty').value)||1),price:Math.max(0,Number(document.getElementById('tbTestPrice').value)||0),status:'RECEBIDO',history:[],stockDebited:false,stockRestored:false};
    addHistory(o,'Pedido recebido pelo simulador','RECEBIDO');a.unshift(o);save(a);tbErpPreviewLabel()
  }
  window.tbErpAdvance=function(i){
    const a=get(),o=a[i];if(!o||!isNormal(o.status)||o.status==='ENTREGUE')return alert('Este pedido não pode avançar neste estado.');
-   const n=steps.indexOf(o.status),next=steps[n+1];o.status=next;addHistory(o,'Status avançado para '+next,next);save(a)
+   const n=steps.indexOf(o.status),next=steps[n+1];
+   if(next==='PAGO'&&!o.stockDebited){const st=getStock();if(st.available<o.qty)return alert('Estoque teste insuficiente para processar este pedido.');stockMove('Pedido #'+o.id+' pago: -'+o.qty+' un. do disponível',{available:-o.qty,processed:o.qty});o.stockDebited=true;addHistory(o,'Estoque teste baixado em '+o.qty+' unidade(s)','ESTOQUE -'+o.qty)}
+   o.status=next;addHistory(o,'Status avançado para '+next,next);save(a)
  }
  window.tbErpCancel=function(i){
    const a=get(),o=a[i];if(!o)return;
    if(!isNormal(o.status)||o.status==='ENTREGUE')return alert('Cancelamento bloqueado neste estado.');
    const previous=o.status;if(!confirm('Simular cancelamento do pedido #'+o.id+' no estágio '+previous+'?'))return;
    o.status='CANCELADO';addHistory(o,'Pedido cancelado a partir do estágio '+previous,'CANCELADO');
+   if(o.stockDebited&&!o.stockRestored){
+     if(['PAGO','FATURAMENTO','ETIQUETA'].includes(previous)){stockMove('Cancelamento #'+o.id+': +'+o.qty+' un. devolvida ao disponível',{available:o.qty,processed:-o.qty});o.stockRestored=true;addHistory(o,'Estoque teste restaurado após cancelamento','ESTOQUE +'+o.qty)}
+     else if(previous==='ENVIADO'){stockMove('Cancelamento #'+o.id+' após envio: '+o.qty+' un. aguardando retorno',{processed:-o.qty,returning:o.qty});addHistory(o,'Produto enviado: estoque não restaurado. Aguardando retorno físico','AGUARDANDO RETORNO')}
+   }
    if(['FATURAMENTO','ETIQUETA','ENVIADO'].includes(previous)) addHistory(o,'ATENÇÃO DE TESTE: revisar impacto fiscal/logístico antes da integração real','REVISÃO NECESSÁRIA');
    save(a)
  }
  window.tbErpRequestReturn=function(i){
    const a=get(),o=a[i];if(!o||o.status!=='ENTREGUE')return alert('A devolução só pode ser iniciada neste teste após a entrega.');
-   o.status='DEVOLUÇÃO SOLICITADA';addHistory(o,'Devolução solicitada. Aguardando retorno físico do produto',o.status);save(a)
+   o.status='DEVOLUÇÃO SOLICITADA';
+   if(o.stockDebited){stockMove('Devolução #'+o.id+' solicitada: '+o.qty+' un. aguardando retorno',{processed:-o.qty,returning:o.qty});addHistory(o,'Item transferido para aguardando retorno no estoque teste','AGUARDANDO RETORNO')}
+   addHistory(o,'Devolução solicitada. Aguardando retorno físico do produto',o.status);save(a)
  }
  window.tbErpReceiveReturn=function(i){
    const a=get(),o=a[i];if(!o||o.status!=='DEVOLUÇÃO SOLICITADA')return;
@@ -4234,13 +4256,16 @@ document.addEventListener('DOMContentLoaded', function(){
  window.tbErpFinishReturn=function(i,d){
    const a=get(),o=a[i];if(!o||o.status!=='DEVOLUÇÃO RECEBIDA')return;
    o.status='DEVOLVIDO → '+d;
+   if(d==='ESTOQUE'){stockMove('Devolução #'+o.id+' aprovada: +'+o.qty+' un. ao estoque disponível',{returning:-o.qty,available:o.qty});o.stockRestored=true}
+   else {stockMove('Devolução #'+o.id+' com avaria: '+o.qty+' un. enviada para garantia/avaria',{returning:-o.qty,warranty:o.qty})}
    addHistory(o,d==='ESTOQUE'?'Produto aprovado na inspeção. Destino simulado: voltar ao estoque':'Produto com avaria/defeito. Destino simulado: garantia/avaria',o.status);
-   addHistory(o,'Movimentação é apenas simulada. Nenhum estoque real foi alterado','MODO TESTE');save(a)
+   addHistory(o,'Movimentação registrada somente no estoque ERP de teste. Estoque Premium real permanece intacto','MODO TESTE');save(a)
  }
  window.tbErpReturn=function(i,d){alert('Fluxo atualizado: primeiro solicite e receba a devolução antes de definir o destino.')}
  window.tbErpResetTests=function(){if(confirm('Apagar todos os pedidos fictícios deste navegador?')){localStorage.removeItem(KEY);render()}}
+ window.tbErpResetStock=function(){if(confirm('Reiniciar o estoque fictício para 10 unidades e zerar garantia/retornos?')){localStorage.removeItem(STOCK_KEY);renderStock()}}
  window.tbErpPreviewLabel=function(){document.getElementById('tbLabelProduct').textContent=document.getElementById('tbTestProduct').value||'Produto Teste';document.getElementById('tbLabelSku').textContent='SKU: '+(document.getElementById('tbTestSku').value||'TESTE-001');document.getElementById('tbLabelOrder').textContent='Pedido: '+(document.getElementById('tbTestOrderId').value||'ML-TESTE-0001')}
- window.renderTbErpTestOrders=render;document.addEventListener('DOMContentLoaded',render);
+ window.renderTbErpTestOrders=render;document.addEventListener('DOMContentLoaded',()=>{render();renderStock()});
 })();
 </script>
 
