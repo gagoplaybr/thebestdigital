@@ -4038,6 +4038,9 @@ document.addEventListener('DOMContentLoaded', function(){
     <a class="tb-side-link" href="#meus-produtos" data-premium-section="meus-produtos" title="Meus produtos">
       <span class="tb-side-ico">📦</span><span class="tb-side-label">MEUS PRODUTOS</span>
     </a>
+    <a class="tb-side-link" href="#pedidos-erp-teste" data-premium-section="pedidos-erp-teste" title="Pedidos ERP • Modo teste">
+      <span class="tb-side-ico">🧪</span><span class="tb-side-label">PEDIDOS ERP</span>
+    </a>
 
     <a class="tb-side-link" href="#area-cliente" data-premium-section="area-cliente" title="Minha conta" onclick="tbOpenMinhaConta(event)">
       <span class="tb-side-ico">👤</span><span class="tb-side-label">MINHA CONTA</span>
@@ -4124,6 +4127,51 @@ document.addEventListener('DOMContentLoaded', function(){
 </div>
 </section>
 
+<style id="tb-v850-erp-simulator">
+.tb-erp-test-section{max-width:1400px;margin:0 auto;padding:28px 20px 80px;color:#edf8ff}
+.tb-erp-test-shell{background:linear-gradient(145deg,#0d2740,#091a2c);border:1px solid rgba(70,195,255,.22);border-radius:22px;padding:22px;box-shadow:0 20px 55px rgba(0,0,0,.22)}
+.tb-erp-test-head{display:flex;justify-content:space-between;gap:16px;align-items:flex-start;margin-bottom:18px}.tb-erp-test-head h2{margin:0;font-size:28px}.tb-erp-test-head h2 span{color:#42c9ff}.tb-erp-test-head p{margin:5px 0 0;color:#9fb7cc;font-size:12px}.tb-test-badge{padding:8px 11px;border-radius:999px;background:#492d08;border:1px solid #c9871e;color:#ffd27c;font-size:10px;font-weight:900}
+.tb-erp-warning{padding:12px 14px;border-radius:12px;background:rgba(255,179,0,.08);border:1px solid rgba(255,179,0,.2);color:#ffdca0;font-size:11px;margin-bottom:16px}.tb-erp-grid{display:grid;grid-template-columns:1.05fr 1.6fr;gap:14px}.tb-erp-card{background:#0b2035;border:1px solid rgba(99,198,255,.13);border-radius:16px;padding:16px}.tb-erp-card h3{margin:0 0 12px;font-size:14px;color:#dff5ff}.tb-erp-fields{display:grid;grid-template-columns:1fr 1fr;gap:9px}.tb-erp-field label{display:block;font-size:9px;color:#8faec6;margin-bottom:4px;font-weight:800}.tb-erp-field input,.tb-erp-field select{width:100%;box-sizing:border-box;background:#071827;color:#eaf8ff;border:1px solid rgba(100,200,255,.16);border-radius:9px;padding:9px;font-size:11px}.tb-erp-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}.tb-erp-btn{border:0;border-radius:10px;padding:10px 12px;font-size:10px;font-weight:900;cursor:pointer;background:linear-gradient(90deg,#087cff,#00b8ff);color:white}.tb-erp-btn.secondary{background:#173a58;border:1px solid rgba(90,200,255,.16)}.tb-erp-btn.danger{background:#5a1c29}.tb-erp-btn.warn{background:#62420b}.tb-order-card{border:1px solid rgba(88,198,255,.14);border-radius:13px;padding:13px;background:#081b2d;margin-bottom:9px}.tb-order-top{display:flex;justify-content:space-between;gap:10px}.tb-order-top b{font-size:12px}.tb-order-status{font-size:9px;font-weight:900;color:#67dbff}.tb-order-meta{margin-top:7px;color:#9eb8cd;font-size:10px;line-height:1.65}.tb-order-flow{display:flex;gap:5px;flex-wrap:wrap;margin-top:9px}.tb-order-flow span{font-size:8px;padding:5px 7px;border-radius:999px;background:#102d47;color:#8faec6}.tb-order-flow span.on{background:#0b6385;color:#dffaff}.tb-empty-orders{text-align:center;padding:35px 10px;color:#7897b0;font-size:11px}.tb-label-preview{width:240px;max-width:100%;aspect-ratio:2/3;background:white;color:#111;margin:12px auto 0;padding:12px;box-sizing:border-box;border-radius:5px;font-family:Arial,sans-serif}.tb-label-preview small{display:block}.tb-label-barcode{height:48px;margin:12px 0;background:repeating-linear-gradient(90deg,#111 0 2px,#fff 2px 4px,#111 4px 5px,#fff 5px 8px)}
+@media(max-width:850px){.tb-erp-grid{grid-template-columns:1fr}.tb-erp-fields{grid-template-columns:1fr}.tb-erp-test-head{flex-direction:column}}
+@media print{body *{visibility:hidden!important}.tb-label-preview,.tb-label-preview *{visibility:visible!important}.tb-label-preview{position:absolute;left:0;top:0;width:100mm;height:150mm;margin:0;border-radius:0}}
+</style>
+<section id="pedidos-erp-teste" class="tb-erp-test-section" hidden aria-label="Pedidos ERP modo teste">
+ <div class="tb-erp-test-shell">
+  <div class="tb-erp-test-head"><div><h2>🧪 Pedidos <span>ERP</span></h2><p>Simulador interno da futura integração com marketplaces.</p></div><span class="tb-test-badge">MODO TESTE • SEM DADOS REAIS</span></div>
+  <div class="tb-erp-warning"><b>Ambiente isolado.</b> Estes pedidos ficam somente neste navegador e não alteram Vendas, Estoque, Financeiro, Supabase ou Mercado Livre.</div>
+  <div class="tb-erp-grid">
+   <div>
+    <div class="tb-erp-card"><h3>📦 Simular novo pedido</h3><div class="tb-erp-fields">
+     <div class="tb-erp-field"><label>MARKETPLACE</label><select id="tbTestMarket"><option>Mercado Livre</option></select></div>
+     <div class="tb-erp-field"><label>Nº PEDIDO</label><input id="tbTestOrderId" value="ML-TESTE-0001"></div>
+     <div class="tb-erp-field"><label>PRODUTO</label><input id="tbTestProduct" value="Produto Teste"></div>
+     <div class="tb-erp-field"><label>SKU</label><input id="tbTestSku" value="TESTE-001"></div>
+     <div class="tb-erp-field"><label>QUANTIDADE</label><input id="tbTestQty" type="number" min="1" value="1"></div>
+     <div class="tb-erp-field"><label>VALOR UNITÁRIO</label><input id="tbTestPrice" type="number" min="0" step="0.01" value="79.90"></div>
+    </div><div class="tb-erp-actions"><button class="tb-erp-btn" onclick="tbErpCreateTestOrder()">+ RECEBER PEDIDO TESTE</button><button class="tb-erp-btn secondary" onclick="tbErpResetTests()">LIMPAR TESTES</button></div></div>
+    <div class="tb-erp-card" style="margin-top:14px"><h3>🖨️ Etiqueta de teste</h3><div class="tb-erp-fields"><div class="tb-erp-field"><label>FORMATO</label><select id="tbLabelFormat"><option value="100x150">Térmica 100 × 150 mm</option><option value="100x100">Térmica 100 × 100 mm</option><option value="a4">A4</option></select></div><div class="tb-erp-field"><label>CÓPIAS</label><input id="tbLabelCopies" type="number" min="1" value="1"></div></div><div class="tb-label-preview" id="tbLabelPreview"><b>THE BEST • TESTE</b><small>Etiqueta interna de simulação</small><hr><b id="tbLabelProduct">Produto Teste</b><small id="tbLabelSku">SKU: TESTE-001</small><div class="tb-label-barcode"></div><small id="tbLabelOrder">Pedido: ML-TESTE-0001</small><small>SEM VALIDADE PARA ENVIO</small></div><div class="tb-erp-actions"><button class="tb-erp-btn secondary" onclick="tbErpPreviewLabel()">ATUALIZAR ETIQUETA</button><button class="tb-erp-btn" onclick="window.print()">IMPRIMIR TESTE</button></div></div>
+   </div>
+   <div class="tb-erp-card"><h3>📥 Pedidos recebidos</h3><div id="tbErpTestOrders"></div></div>
+  </div>
+ </div>
+</section>
+<script id="tb-v850-erp-simulator-js">
+(function(){
+ const KEY='tb_erp_test_orders_v850';
+ const steps=['RECEBIDO','PAGO','FATURAMENTO','ETIQUETA','ENVIADO','ENTREGUE'];
+ function get(){try{return JSON.parse(localStorage.getItem(KEY)||'[]')}catch(e){return[]}}
+ function save(v){localStorage.setItem(KEY,JSON.stringify(v));render()}
+ function esc(v){return String(v??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
+ function render(){const box=document.getElementById('tbErpTestOrders');if(!box)return;const a=get();if(!a.length){box.innerHTML='<div class="tb-empty-orders">Nenhum pedido de teste recebido ainda.</div>';return}box.innerHTML=a.map((o,i)=>`<div class="tb-order-card"><div class="tb-order-top"><b>${esc(o.market)} • #${esc(o.id)}</b><span class="tb-order-status">${esc(o.status)}</span></div><div class="tb-order-meta">${esc(o.product)} • SKU ${esc(o.sku)}<br>${o.qty} un. • R$ ${Number(o.price).toFixed(2).replace('.',',')} cada</div><div class="tb-order-flow">${steps.map(x=>`<span class="${steps.indexOf(x)<=steps.indexOf(o.status)?'on':''}">${x}</span>`).join('')}</div><div class="tb-erp-actions"><button class="tb-erp-btn secondary" onclick="tbErpAdvance(${i})">AVANÇAR STATUS</button><button class="tb-erp-btn warn" onclick="tbErpCancel(${i})">CANCELAR</button><button class="tb-erp-btn secondary" onclick="tbErpReturn(${i},'ESTOQUE')">DEVOLUÇÃO → ESTOQUE</button><button class="tb-erp-btn danger" onclick="tbErpReturn(${i},'GARANTIA/AVARIA')">DEVOLUÇÃO → GARANTIA</button></div></div>`).join('')}
+ window.tbErpCreateTestOrder=function(){const a=get(),id=document.getElementById('tbTestOrderId').value.trim();if(!id)return alert('Informe o número do pedido teste.');if(a.some(x=>x.id===id))return alert('Esse pedido teste já foi recebido. Duplicidade bloqueada.');a.unshift({market:document.getElementById('tbTestMarket').value,id,product:document.getElementById('tbTestProduct').value.trim()||'Produto Teste',sku:document.getElementById('tbTestSku').value.trim()||'TESTE-001',qty:Math.max(1,Number(document.getElementById('tbTestQty').value)||1),price:Math.max(0,Number(document.getElementById('tbTestPrice').value)||0),status:'RECEBIDO'});save(a);tbErpPreviewLabel()}
+ window.tbErpAdvance=function(i){const a=get(),o=a[i];if(!o)return;if(['CANCELADO','DEVOLVIDO → ESTOQUE','DEVOLVIDO → GARANTIA/AVARIA'].includes(o.status))return alert('Esse fluxo já foi encerrado.');let n=steps.indexOf(o.status);o.status=steps[Math.min(n+1,steps.length-1)];save(a)}
+ window.tbErpCancel=function(i){const a=get();if(a[i]){a[i].status='CANCELADO';save(a)}}
+ window.tbErpReturn=function(i,d){const a=get();if(a[i]){a[i].status='DEVOLVIDO → '+d;save(a)}}
+ window.tbErpResetTests=function(){if(confirm('Apagar todos os pedidos fictícios deste navegador?')){localStorage.removeItem(KEY);render()}}
+ window.tbErpPreviewLabel=function(){document.getElementById('tbLabelProduct').textContent=document.getElementById('tbTestProduct').value||'Produto Teste';document.getElementById('tbLabelSku').textContent='SKU: '+(document.getElementById('tbTestSku').value||'TESTE-001');document.getElementById('tbLabelOrder').textContent='Pedido: '+(document.getElementById('tbTestOrderId').value||'ML-TESTE-0001')}
+ window.renderTbErpTestOrders=render;document.addEventListener('DOMContentLoaded',render);
+})();
+</script>
 
 <section id="controle-vendas" class="tb-sales-section" hidden aria-label="Controle de vendas Premium">
   <div class="tb-sales-shell">
@@ -4981,6 +5029,7 @@ if ("serviceWorker" in navigator) {
     'relatorios-premium',
     'financeiro-premium',
     'meus-produtos',
+    'pedidos-erp-teste',
     'area-cliente'
   ];
 
@@ -5006,6 +5055,7 @@ if ("serviceWorker" in navigator) {
     if(sectionId==='relatorios-premium') setTimeout(()=>loadPremiumReports?.(),0);
     if(sectionId==='financeiro-premium') setTimeout(()=>loadFinanceiroPremium?.(),0);
     if(sectionId==='meus-produtos') setTimeout(()=>renderProdutos?.(),0);
+    if(sectionId==='pedidos-erp-teste') setTimeout(()=>renderTbErpTestOrders?.(),0);
 
     if(window.innerWidth<=900)tbCloseMobileMenu?.();
 
