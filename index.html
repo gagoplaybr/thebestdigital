@@ -4138,6 +4138,7 @@ document.addEventListener('DOMContentLoaded', function(){
 </div>
 </section>
 
+<!-- V8.5.6: ERP teste conectado ao catálogo Premium, mantendo operações isoladas -->
 <style id="tb-v855-erp-simulator">
 .tb-erp-test-section{max-width:1400px;margin:0 auto;padding:28px 20px 80px;color:#edf8ff}
 .tb-erp-test-shell{background:linear-gradient(145deg,#0d2740,#091a2c);border:1px solid rgba(70,195,255,.22);border-radius:22px;padding:22px;box-shadow:0 20px 55px rgba(0,0,0,.22)}
@@ -4163,7 +4164,7 @@ document.addEventListener('DOMContentLoaded', function(){
     <div class="tb-erp-card"><h3>📦 Simular novo pedido</h3><div class="tb-erp-fields">
      <div class="tb-erp-field"><label>MARKETPLACE</label><select id="tbTestMarket"><option>Mercado Livre</option></select></div>
      <div class="tb-erp-field"><label>Nº PEDIDO</label><input id="tbTestOrderId" value="ML-TESTE-0001"></div>
-     <div class="tb-erp-field"><label>PRODUTO</label><input id="tbTestProduct" value="Produto Teste"></div>
+     <div class="tb-erp-field"><label>PRODUTO DO MEU CATÁLOGO</label><select id="tbTestProduct" onchange="tbErpTestProductChanged()"><option value="">Carregando produtos...</option></select></div>
      <div class="tb-erp-field"><label>SKU</label><input id="tbTestSku" value="TESTE-001"></div>
      <div class="tb-erp-field"><label>QUANTIDADE</label><input id="tbTestQty" type="number" min="1" value="1"></div>
      <div class="tb-erp-field"><label>VALOR UNITÁRIO</label><input id="tbTestPrice" type="number" min="0" step="0.01" value="79.90"></div>
@@ -4171,7 +4172,7 @@ document.addEventListener('DOMContentLoaded', function(){
     <div class="tb-erp-card" style="margin-top:14px"><h3>🖨️ Etiqueta de teste</h3><div class="tb-erp-fields"><div class="tb-erp-field"><label>FORMATO</label><select id="tbLabelFormat"><option value="100x150">Térmica 100 × 150 mm</option><option value="100x100">Térmica 100 × 100 mm</option><option value="a4">A4</option></select></div><div class="tb-erp-field"><label>CÓPIAS</label><input id="tbLabelCopies" type="number" min="1" value="1"></div></div><div class="tb-label-preview" id="tbLabelPreview"><b>THE BEST • TESTE</b><small>Etiqueta interna de simulação</small><hr><b id="tbLabelProduct">Produto Teste</b><small id="tbLabelSku">SKU: TESTE-001</small><div class="tb-label-barcode"></div><small id="tbLabelOrder">Pedido: ML-TESTE-0001</small><small>SEM VALIDADE PARA ENVIO</small></div><div class="tb-erp-actions"><button class="tb-erp-btn secondary" onclick="tbErpPreviewLabel()">ATUALIZAR ETIQUETA</button><button class="tb-erp-btn" onclick="window.print()">IMPRIMIR TESTE</button></div></div>
    </div>
    <div class="tb-erp-card" style="margin-bottom:14px"><h3>📦 Estoque ERP • Simulação</h3>
-    <div class="tb-test-stock-grid"><div class="tb-stock-kpi"><small>SKU TESTE-001 • DISPONÍVEL</small><strong id="tbStockAvailable">10</strong></div><div class="tb-stock-kpi"><small>RESERVADO / PROCESSADO</small><strong id="tbStockProcessed">0</strong></div><div class="tb-stock-kpi warn"><small>AGUARDANDO RETORNO</small><strong id="tbStockReturn">0</strong></div><div class="tb-stock-kpi danger"><small>GARANTIA / AVARIA</small><strong id="tbStockWarranty">0</strong></div></div>
+    <div class="tb-test-stock-grid"><div class="tb-stock-kpi"><small id="tbStockSkuLabel">PRODUTO SELECIONADO • DISPONÍVEL</small><strong id="tbStockAvailable">10</strong></div><div class="tb-stock-kpi"><small>RESERVADO / PROCESSADO</small><strong id="tbStockProcessed">0</strong></div><div class="tb-stock-kpi warn"><small>AGUARDANDO RETORNO</small><strong id="tbStockReturn">0</strong></div><div class="tb-stock-kpi danger"><small>GARANTIA / AVARIA</small><strong id="tbStockWarranty">0</strong></div></div>
     <div style="color:#7897b0;font-size:9px">Estoque fictício inicial: 10 unidades. Movimentações abaixo são isoladas e não alteram o Estoque Premium real.</div><div id="tbStockLog" class="tb-stock-log"></div>
     <button class="tb-erp-btn secondary tb-stock-reset" onclick="tbErpResetStock()">REINICIAR ESTOQUE TESTE</button>
    </div>
@@ -4228,7 +4229,8 @@ document.addEventListener('DOMContentLoaded', function(){
  window.tbErpCreateTestOrder=function(){
    const a=get(),id=document.getElementById('tbTestOrderId').value.trim();if(!id)return alert('Informe o número do pedido teste.');
    if(a.some(x=>x.id===id))return alert('Esse pedido teste já foi recebido. Duplicidade bloqueada.');
-   const o={market:document.getElementById('tbTestMarket').value,id,product:document.getElementById('tbTestProduct').value.trim()||'Produto Teste',sku:document.getElementById('tbTestSku').value.trim()||'TESTE-001',qty:Math.max(1,Number(document.getElementById('tbTestQty').value)||1),price:Math.max(0,Number(document.getElementById('tbTestPrice').value)||0),status:'RECEBIDO',history:[],stockDebited:false,stockRestored:false};
+   const selectedProduct=(typeof premiumProducts!=='undefined'?premiumProducts:[]).find(p=>String(p.id)===String(productSel.value));
+    const o={market:document.getElementById('tbTestMarket').value,id,product:selectedProduct?.name||productSel.options[productSel.selectedIndex]?.text||'Produto Teste',productId:selectedProduct?.id||productSel.value,sku:document.getElementById('tbTestSku').value.trim()||'SEM-SKU',qty:Math.max(1,Number(document.getElementById('tbTestQty').value)||1),price:Math.max(0,Number(document.getElementById('tbTestPrice').value)||0),status:'RECEBIDO',history:[],stockDebited:false,stockRestored:false};
    addHistory(o,'Pedido recebido pelo simulador','RECEBIDO');a.unshift(o);save(a);tbErpPreviewLabel()
  }
  window.tbErpAdvance=function(i){
@@ -6212,6 +6214,7 @@ window.refreshPremiumAccess=async function(){
     }
 
     premiumProducts=data||[];
+    if(typeof window.tbErpRefreshProductOptions==='function') window.tbErpRefreshProductOptions();
     if(count)count.textContent=premiumProducts.length+" "+(premiumProducts.length===1?"item":"itens");
     saleProductOptions();
     stockProductOptions();
