@@ -4252,7 +4252,7 @@ document.addEventListener('DOMContentLoaded', function(){
      if(a.some(x=>x.id===id))return alert('Esse pedido teste já foi recebido. Duplicidade bloqueada.');
      const productSel=document.getElementById('tbTestProduct');
      if(!productSel)return alert('Não foi possível carregar o seletor de produto. Atualize a página e tente novamente.');
-     const products=(typeof premiumProducts!=='undefined'&&Array.isArray(premiumProducts))?premiumProducts:[];
+     const products=Array.isArray(window.TB_PREMIUM_PRODUCTS)?window.TB_PREMIUM_PRODUCTS:[];
      const selectedProduct=products.find(p=>String(p.id)===String(productSel.value));
      const isFallback=!selectedProduct;
      const o={market:document.getElementById('tbTestMarket')?.value||'Mercado Livre',id,product:selectedProduct?.name||'Produto Teste',productId:selectedProduct?.id||null,sku:(document.getElementById('tbTestSku')?.value||'').trim()||(isFallback?'TESTE-001':'SEM-SKU'),qty:Math.max(1,Number(document.getElementById('tbTestQty')?.value)||1),price:Math.max(0,Number(document.getElementById('tbTestPrice')?.value)||0),status:'RECEBIDO',history:[],stockDebited:false,stockRestored:false};
