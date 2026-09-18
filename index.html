@@ -4230,6 +4230,7 @@ document.addEventListener('DOMContentLoaded', function(){
    const sel=document.getElementById('tbTestProduct');if(!sel)return;
    const previous=sel.value;
    const products=(typeof premiumProducts!=='undefined'&&Array.isArray(premiumProducts))?premiumProducts:[];
+   console.log("ERP TESTE - produtos encontrados:", products.length, products);
    sel.innerHTML='';
    const fallback=document.createElement('option');fallback.value='__TEST__';fallback.textContent='Produto Teste • TESTE-001';sel.appendChild(fallback);
    products.forEach(p=>{const op=document.createElement('option');op.value=String(p.id);op.textContent=(p.name||'Produto sem nome')+(p.sku?' • '+p.sku:'');sel.appendChild(op)});
