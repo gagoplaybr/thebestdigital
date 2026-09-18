@@ -1,4 +1,4 @@
-const CACHE_NAME = "the-best-marketplace-v8-5-5-erp-layout-cycle-test";
+const CACHE_NAME = "the-best-marketplace-v8-5-7-erp-catalog-fallback-fix";
 const APP_SHELL = [
   "/",
   "/index.html",

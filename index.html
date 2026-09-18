@@ -4226,12 +4226,37 @@ document.addEventListener('DOMContentLoaded', function(){
    if(!a.length){box.innerHTML='<div class="tb-empty-orders">Nenhum pedido de teste recebido ainda.</div>';return}
    box.innerHTML=a.map((o,i)=>`<div class="tb-order-card"><div class="tb-order-top"><b>${esc(o.market)} • #${esc(o.id)}</b><span class="tb-order-status">${esc(o.status)}</span></div><div class="tb-order-meta">${esc(o.product)} • SKU ${esc(o.sku)}<br>${o.qty} un. • R$ ${Number(o.price).toFixed(2).replace('.',',')} cada</div><div class="tb-order-flow">${flowHtml(o)}</div><div class="tb-erp-actions">${actionsHtml(o,i)}</div>${historyHtml(o)}</div>`).join('')
  }
+ window.tbErpRefreshProductOptions=function(){
+   const sel=document.getElementById('tbTestProduct');if(!sel)return;
+   const previous=sel.value;
+   const products=(typeof premiumProducts!=='undefined'&&Array.isArray(premiumProducts))?premiumProducts:[];
+   sel.innerHTML='';
+   const fallback=document.createElement('option');fallback.value='__TEST__';fallback.textContent='Produto Teste • TESTE-001';sel.appendChild(fallback);
+   products.forEach(p=>{const op=document.createElement('option');op.value=String(p.id);op.textContent=(p.name||'Produto sem nome')+(p.sku?' • '+p.sku:'');sel.appendChild(op)});
+   if([...sel.options].some(o=>o.value===previous))sel.value=previous;else sel.value='__TEST__';
+   tbErpTestProductChanged();
+ };
+ window.tbErpTestProductChanged=function(){
+   const sel=document.getElementById('tbTestProduct');if(!sel)return;
+   const products=(typeof premiumProducts!=='undefined'&&Array.isArray(premiumProducts))?premiumProducts:[];
+   const p=products.find(x=>String(x.id)===String(sel.value));
+   const sku=document.getElementById('tbTestSku'),price=document.getElementById('tbTestPrice'),label=document.getElementById('tbStockSkuLabel');
+   if(p){if(sku)sku.value=p.sku||'SEM-SKU';if(price)price.value=Number(p.sale_price||0).toFixed(2);if(label)label.textContent=(p.sku||'PRODUTO')+' • DISPONÍVEL'}
+   else {if(sku)sku.value='TESTE-001';if(!price||!price.value){}else price.value='79.90';if(label)label.textContent='SKU TESTE-001 • DISPONÍVEL'}
+   tbErpPreviewLabel();
+ };
  window.tbErpCreateTestOrder=function(){
-   const a=get(),id=document.getElementById('tbTestOrderId').value.trim();if(!id)return alert('Informe o número do pedido teste.');
-   if(a.some(x=>x.id===id))return alert('Esse pedido teste já foi recebido. Duplicidade bloqueada.');
-   const selectedProduct=(typeof premiumProducts!=='undefined'?premiumProducts:[]).find(p=>String(p.id)===String(productSel.value));
-    const o={market:document.getElementById('tbTestMarket').value,id,product:selectedProduct?.name||productSel.options[productSel.selectedIndex]?.text||'Produto Teste',productId:selectedProduct?.id||productSel.value,sku:document.getElementById('tbTestSku').value.trim()||'SEM-SKU',qty:Math.max(1,Number(document.getElementById('tbTestQty').value)||1),price:Math.max(0,Number(document.getElementById('tbTestPrice').value)||0),status:'RECEBIDO',history:[],stockDebited:false,stockRestored:false};
-   addHistory(o,'Pedido recebido pelo simulador','RECEBIDO');a.unshift(o);save(a);tbErpPreviewLabel()
+   try{
+     const a=get(),id=(document.getElementById('tbTestOrderId')?.value||'').trim();if(!id)return alert('Informe o número do pedido teste.');
+     if(a.some(x=>x.id===id))return alert('Esse pedido teste já foi recebido. Duplicidade bloqueada.');
+     const productSel=document.getElementById('tbTestProduct');
+     if(!productSel)return alert('Não foi possível carregar o seletor de produto. Atualize a página e tente novamente.');
+     const products=(typeof premiumProducts!=='undefined'&&Array.isArray(premiumProducts))?premiumProducts:[];
+     const selectedProduct=products.find(p=>String(p.id)===String(productSel.value));
+     const isFallback=!selectedProduct;
+     const o={market:document.getElementById('tbTestMarket')?.value||'Mercado Livre',id,product:selectedProduct?.name||'Produto Teste',productId:selectedProduct?.id||null,sku:(document.getElementById('tbTestSku')?.value||'').trim()||(isFallback?'TESTE-001':'SEM-SKU'),qty:Math.max(1,Number(document.getElementById('tbTestQty')?.value)||1),price:Math.max(0,Number(document.getElementById('tbTestPrice')?.value)||0),status:'RECEBIDO',history:[],stockDebited:false,stockRestored:false};
+     addHistory(o,'Pedido recebido pelo simulador','RECEBIDO');a.unshift(o);save(a);tbErpPreviewLabel();
+   }catch(err){console.error('Erro ao criar pedido teste:',err);alert('Não foi possível receber o pedido teste. O simulador foi mantido seguro e nenhum dado real foi alterado.');}
  }
  window.tbErpAdvance=function(i){
    const a=get(),o=a[i];if(!o||!isNormal(o.status)||o.status==='ENTREGUE')return alert('Este pedido não pode avançar neste estado.');
@@ -4272,8 +4297,8 @@ document.addEventListener('DOMContentLoaded', function(){
  window.tbErpReturn=function(i,d){alert('Fluxo atualizado: primeiro solicite e receba a devolução antes de definir o destino.')}
  window.tbErpResetTests=function(){if(confirm('Apagar todos os pedidos fictícios deste navegador?')){localStorage.removeItem(KEY);render()}}
  window.tbErpResetStock=function(){if(confirm('Reiniciar o estoque fictício para 10 unidades e zerar garantia/retornos?')){localStorage.removeItem(STOCK_KEY);renderStock()}}
- window.tbErpPreviewLabel=function(){document.getElementById('tbLabelProduct').textContent=document.getElementById('tbTestProduct').value||'Produto Teste';document.getElementById('tbLabelSku').textContent='SKU: '+(document.getElementById('tbTestSku').value||'TESTE-001');document.getElementById('tbLabelOrder').textContent='Pedido: '+(document.getElementById('tbTestOrderId').value||'ML-TESTE-0001')}
- window.renderTbErpTestOrders=render;document.addEventListener('DOMContentLoaded',()=>{render();renderStock()});
+ window.tbErpPreviewLabel=function(){const sel=document.getElementById('tbTestProduct');const products=(typeof premiumProducts!=='undefined'&&Array.isArray(premiumProducts))?premiumProducts:[];const p=products.find(x=>String(x.id)===String(sel?.value));document.getElementById('tbLabelProduct').textContent=p?.name||'Produto Teste';document.getElementById('tbLabelSku').textContent='SKU: '+(document.getElementById('tbTestSku')?.value||'TESTE-001');document.getElementById('tbLabelOrder').textContent='Pedido: '+(document.getElementById('tbTestOrderId')?.value||'ML-TESTE-0001')}
+ window.renderTbErpTestOrders=render;document.addEventListener('DOMContentLoaded',()=>{render();renderStock();tbErpRefreshProductOptions();setTimeout(()=>tbErpRefreshProductOptions(),1200)});
 })();
 </script>
 
