@@ -6233,6 +6233,9 @@ window.refreshPremiumAccess=async function(){
       .order("created_at",{ascending:false})
       .limit(3000);
 
+    console.log("CATÁLOGO - usuário:", premiumUser?.id);
+console.log("CATÁLOGO - resultado Supabase:", data, "ERRO:", error);
+
     if(error){
       console.error("Erro ao carregar catálogo:",error);
       el.innerHTML='<div class="v5-empty">Não foi possível carregar seus produtos. Aplique a atualização do catálogo no Supabase.</div>';
