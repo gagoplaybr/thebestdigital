@@ -4229,7 +4229,7 @@ document.addEventListener('DOMContentLoaded', function(){
  window.tbErpRefreshProductOptions=function(){
    const sel=document.getElementById('tbTestProduct');if(!sel)return;
    const previous=sel.value;
-   const products=(typeof premiumProducts!=='undefined'&&Array.isArray(premiumProducts))?premiumProducts:[];
+   const products=Array.isArray(window.TB_PREMIUM_PRODUCTS)?window.TB_PREMIUM_PRODUCTS:[];
    console.log("ERP TESTE - produtos encontrados:", products.length, products);
    sel.innerHTML='';
    const fallback=document.createElement('option');fallback.value='__TEST__';fallback.textContent='Produto Teste • TESTE-001';sel.appendChild(fallback);
@@ -4239,7 +4239,7 @@ document.addEventListener('DOMContentLoaded', function(){
  };
  window.tbErpTestProductChanged=function(){
    const sel=document.getElementById('tbTestProduct');if(!sel)return;
-   const products=(typeof premiumProducts!=='undefined'&&Array.isArray(premiumProducts))?premiumProducts:[];
+   const products=Array.isArray(window.TB_PREMIUM_PRODUCTS)?window.TB_PREMIUM_PRODUCTS:[];
    const p=products.find(x=>String(x.id)===String(sel.value));
    const sku=document.getElementById('tbTestSku'),price=document.getElementById('tbTestPrice'),label=document.getElementById('tbStockSkuLabel');
    if(p){if(sku)sku.value=p.sku||'SEM-SKU';if(price)price.value=Number(p.sale_price||0).toFixed(2);if(label)label.textContent=(p.sku||'PRODUTO')+' • DISPONÍVEL'}
@@ -6243,6 +6243,7 @@ console.log("CATÁLOGO - resultado Supabase:", data, "ERRO:", error);
     }
 
     premiumProducts=data||[];
+window.TB_PREMIUM_PRODUCTS=premiumProducts;
     if(typeof window.tbErpRefreshProductOptions==='function') window.tbErpRefreshProductOptions();
     if(count)count.textContent=premiumProducts.length+" "+(premiumProducts.length===1?"item":"itens");
     saleProductOptions();
