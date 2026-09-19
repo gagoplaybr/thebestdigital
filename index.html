@@ -5173,9 +5173,30 @@ setTimeout(()=>{
 
   const updatedOrder=updatedOrders[newIndex];
 
-  if(updatedOrder.status === 'PAGO'){
-    tbErpAdvance(newIndex,true);
+ if(updatedOrder.status === 'PAGO'){
+  const advancedToBilling=tbErpAdvance(newIndex,true);
+
+  if(advancedToBilling){
+    setTimeout(()=>{
+      if(tbProcessingMode !== 'AUTO')return;
+
+      const latestOrders=get();
+
+      const latestIndex=latestOrders.findIndex(o =>
+        String(o.id) === String(orderId)
+      );
+
+      if(latestIndex < 0)return;
+
+      const latestOrder=latestOrders[latestIndex];
+
+      if(latestOrder.status === 'FATURAMENTO'){
+        tbErpAdvance(latestIndex,true);
+      }
+
+    },2000);
   }
+}
 
 },2000);
 
