@@ -5190,6 +5190,32 @@ window.tbErpAdvance=function(i,automatic=false){
 
   processNext();
 }
+  window.tbErpConfirmDelivery=function(orderId){
+
+  const orders=get();
+
+  const index=orders.findIndex(o =>
+    String(o.id) === String(orderId)
+  );
+
+  if(index < 0){
+    alert('Pedido não encontrado.');
+    return;
+  }
+
+  const order=orders[index];
+
+  if(order.status !== 'ENVIADO'){
+    alert('A entrega só pode ser confirmada para pedidos enviados.');
+    return;
+  }
+
+  const advanced=tbErpAdvance(index,true);
+
+  if(!advanced)return;
+
+  render();
+};
  window.tbErpCancel=function(i){
    const a=get(),o=a[i];if(!o)return;
    if(!isNormal(o.status)||o.status==='ENTREGUE')return alert('Cancelamento bloqueado neste estado.');
