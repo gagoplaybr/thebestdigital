@@ -4869,7 +4869,10 @@ document.querySelectorAll('.tb-order-tab').forEach(tab=>{
    if(o.status==='DEVOLUÇÃO RECEBIDA') return `<button class="tb-erp-btn secondary" onclick="tbErpFinishReturn(${i},'ESTOQUE')">✓ APROVADO → ESTOQUE</button><button class="tb-erp-btn danger" onclick="tbErpFinishReturn(${i},'GARANTIA/AVARIA')">⚠ AVARIA → GARANTIA</button>`;
    if(isNormal(o.status)){
      const canAdvance=o.status!=='ENTREGUE';
-     return `${canAdvance?`<button class="tb-erp-btn secondary" onclick="tbErpAdvance(${i})">AVANÇAR STATUS</button>`:''}<button class="tb-erp-btn warn" onclick="tbErpCancel(${i})">CANCELAR</button>`;
+     return `${canAdvance && tbProcessingMode==='MANUAL'
+  ? `<button class="tb-erp-btn secondary" onclick="tbErpAdvance(${i})">AVANÇAR STATUS</button>`
+  : ''
+}<button class="tb-erp-btn warn" onclick="tbErpCancel(${i})">CANCELAR</button>`;
    }
    return '<span class="tb-flow-locked">🔒 ESTADO BLOQUEADO</span>';
  }
