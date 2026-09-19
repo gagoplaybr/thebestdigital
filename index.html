@@ -5156,7 +5156,29 @@ window.tbErpAdvance=function(i,automatic=false){
   if(!isNormal(order.status))return;
   if(order.status === 'ENTREGUE')return;
 
-  tbErpAdvance(i,true);
+  const advanced=tbErpAdvance(i,true);
+
+if(!advanced)return;
+
+setTimeout(()=>{
+  if(tbProcessingMode !== 'AUTO')return;
+
+  const updatedOrders=get();
+
+  const newIndex=updatedOrders.findIndex(o =>
+    String(o.id) === String(orderId)
+  );
+
+  if(newIndex < 0)return;
+
+  const updatedOrder=updatedOrders[newIndex];
+
+  if(updatedOrder.status === 'PAGO'){
+    tbErpAdvance(newIndex,true);
+  }
+
+},2000);
+
 }
  window.tbErpCancel=function(i){
    const a=get(),o=a[i];if(!o)return;
