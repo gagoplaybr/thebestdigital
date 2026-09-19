@@ -4613,7 +4613,55 @@ if(term){
 
 }
    if(!a.length){box.innerHTML='<div class="tb-empty-orders">Nenhum pedido de teste recebido ainda.</div>';return}
-   box.innerHTML=a.map((o,i)=>`<div class="tb-order-card"><div class="tb-order-top"><b>${esc(o.market)} • #${esc(o.id)}</b><span class="tb-order-status">${esc(o.status)}</span></div><div class="tb-order-meta">${esc(o.product)} • SKU ${esc(o.sku)}<br>${o.qty} un. • R$ ${Number(o.price).toFixed(2).replace('.',',')} cada</div><div class="tb-order-flow">${flowHtml(o)}</div><div class="tb-erp-actions">${actionsHtml(o,i)}</div>${historyHtml(o)}</div>`).join('')
+   box.innerHTML=a.map((o,i)=>{
+  const mainImage=getProductMainImageBySku(o.sku);
+
+  const photoHtml=mainImage
+    ? `<div class="tb-order-product-photo">
+         <img src="${esc(mainImage)}" alt="${esc(o.product)}">
+         <div class="tb-order-photo-zoom">
+           <img src="${esc(mainImage)}" alt="${esc(o.product)}">
+           <span>${esc(o.product)}</span>
+         </div>
+       </div>`
+    : `<div class="tb-order-product-photo tb-no-photo">📦</div>`;
+
+  return `
+    <div class="tb-order-card">
+
+      <div class="tb-order-top">
+        <b>${esc(o.market)} • #${esc(o.id)}</b>
+        <span class="tb-order-status">${esc(o.status)}</span>
+      </div>
+
+      <div class="tb-order-product-line">
+
+        ${photoHtml}
+
+        <div class="tb-order-meta">
+          <b>${esc(o.product)}</b>
+          <span>SKU ${esc(o.sku)}</span>
+          <small>
+            ${o.qty} un. •
+            R$ ${Number(o.price).toFixed(2).replace('.',',')} cada
+          </small>
+        </div>
+
+      </div>
+
+      <div class="tb-order-flow">
+        ${flowHtml(o)}
+      </div>
+
+      <div class="tb-erp-actions">
+        ${actionsHtml(o,i)}
+      </div>
+
+      ${historyHtml(o)}
+
+    </div>
+  `;
+}).join('');
  }
  window.tbErpRefreshProductOptions=function(){
    const sel=document.getElementById('tbTestProduct');if(!sel)return;
