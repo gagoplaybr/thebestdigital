@@ -4952,7 +4952,11 @@ if(term){
 
 }
    if(!a.length){box.innerHTML='<div class="tb-empty-orders">Nenhum pedido de teste recebido ainda.</div>';return}
-   box.innerHTML=a.map((o,i)=>{
+   box.innerHTML=a.map((o)=>{
+  const allOrders=get();
+  const i=allOrders.findIndex(item =>
+    String(item.id) === String(o.id)
+  );
   const mainImage=getProductMainImageBySku(o.sku);
 
   const photoHtml=mainImage
