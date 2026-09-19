@@ -5036,13 +5036,95 @@ if(term){
      addHistory(o,'Pedido recebido pelo simulador','RECEBIDO');a.unshift(o);save(a);tbErpPreviewLabel();
    }catch(err){console.error('Erro ao criar pedido teste:',err);alert('Não foi possível receber o pedido teste. O simulador foi mantido seguro e nenhum dado real foi alterado.');}
  }
- window.tbErpAdvance=function(i){
-   const a=get(),o=a[i];if(!o||!isNormal(o.status)||o.status==='ENTREGUE')return alert('Este pedido não pode avançar neste estado.');
-   const n=steps.indexOf(o.status),next=steps[n+1];
-   if(next==='PAGO'&&!o.stockDebited){const st=getSkuStock(o.sku);if(st.available<o.qty)return alert('Estoque teste insuficiente para processar este pedido.');stockMove(o.sku,'Pedido #'+o.id+' pago: -'+o.qty+' un. do disponível',{available:-o.qty,processed:o.qty});o.stockDebited=true;addHistory(o,'Estoque teste baixado em '+o.qty+' unidade(s)','ESTOQUE -'+o.qty)}
-   if(next==='ENTREGUE'&&!o.stockCompleted){const st=getSkuStock(o.sku);st.processed=Math.max(0,(st.processed||0)-o.qty);saveStock(o.sku,st);o.stockCompleted=true;addHistory(o,'Venda concluída: '+o.qty+' un. removida do reservado/processado.','ESTOQUE FINALIZADO');}
-   o.status=next;addHistory(o,'Status avançado para '+next,next);save(a)
- }
+window.tbErpAdvance=function(i,automatic=false){
+  const a=get();
+  const o=a[i];
+
+  if(!o || !isNormal(o.status) || o.status==='ENTREGUE'){
+    if(!automatic){
+      alert('Este pedido não pode avançar neste estado.');
+    }
+    return false;
+  }
+
+  const n=steps.indexOf(o.status);
+  const next=steps[n+1];
+
+  if(!next)return false;
+
+  /* PAGAMENTO CONFIRMADO */
+  if(next==='PAGO' && !o.stockDebited){
+
+    const st=getSkuStock(o.sku);
+
+    if(st.available<o.qty){
+      if(!automatic){
+        alert('Estoque teste insuficiente para processar este pedido.');
+      }
+
+      addHistory(
+        o,
+        'Processamento aguardando estoque disponível.',
+        'PENDÊNCIA DE ESTOQUE'
+      );
+
+      save(a);
+      return false;
+    }
+
+    stockMove(
+      o.sku,
+      'Pedido #'+o.id+' pago: -'+o.qty+' un. do disponível',
+      {
+        available:-o.qty,
+        processed:o.qty
+      }
+    );
+
+    o.stockDebited=true;
+
+    addHistory(
+      o,
+      'Pagamento confirmado e estoque baixado em '+o.qty+' unidade(s).',
+      'PAGO'
+    );
+  }
+
+  /* VENDA ENTREGUE */
+  if(next==='ENTREGUE' && !o.stockCompleted){
+
+    const st=getSkuStock(o.sku);
+
+    st.processed=Math.max(
+      0,
+      (st.processed||0)-o.qty
+    );
+
+    saveStock(o.sku,st);
+
+    o.stockCompleted=true;
+
+    addHistory(
+      o,
+      'Venda concluída: '+o.qty+' un. removida do reservado/processado.',
+      'ESTOQUE FINALIZADO'
+    );
+  }
+
+  o.status=next;
+
+  addHistory(
+    o,
+    automatic
+      ? 'Confirmação automática recebida: '+next
+      : 'Status avançado para '+next,
+    next
+  );
+
+  save(a);
+
+  return true;
+}
  window.tbErpCancel=function(i){
    const a=get(),o=a[i];if(!o)return;
    if(!isNormal(o.status)||o.status==='ENTREGUE')return alert('Cancelamento bloqueado neste estado.');
