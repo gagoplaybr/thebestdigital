@@ -4539,6 +4539,20 @@ document.querySelectorAll('.tb-order-tab').forEach(tab=>{
    }
    return '<span class="tb-flow-locked">🔒 ESTADO BLOQUEADO</span>';
  }
+
+  function getProductMainImageBySku(sku){
+  const products=Array.isArray(window.TB_PREMIUM_PRODUCTS)
+    ? window.TB_PREMIUM_PRODUCTS
+    : [];
+
+  const product=products.find(p=>
+    String(p.sku || '').trim().toLowerCase() ===
+    String(sku || '').trim().toLowerCase()
+  );
+
+  return product?.main_image_url || '';
+}
+  
  function historyHtml(o){return `<details class="tb-order-history"><summary>🕘 HISTÓRICO (${(o.history||[]).length})</summary><div>${(o.history||[]).map(h=>`<p><b>${esc(h.display||new Date(h.at).toLocaleString('pt-BR'))}</b> • ${esc(h.text)} <span>${esc(h.status||'')}</span></p>`).join('')}</div></details>`}
  function render(){
    renderStock();
