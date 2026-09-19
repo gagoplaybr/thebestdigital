@@ -4426,6 +4426,24 @@ if(tbErpOrderSearch){
     render();
   });
 }
+  let tbErpStatusFilter = 'TODOS';
+
+document.querySelectorAll('.tb-order-tab').forEach(tab=>{
+  tab.addEventListener('click', ()=>{
+
+    document.querySelectorAll('.tb-order-tab').forEach(t=>{
+      t.classList.remove('active');
+    });
+
+    tab.classList.add('active');
+
+    tbErpStatusFilter = tab.textContent
+      .trim()
+      .toUpperCase();
+
+    render();
+  });
+});
  function esc(v){return String(v??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
  function stamp(){return new Date().toLocaleString('pt-BR',{dateStyle:'short',timeStyle:'short'})}
  function addHistory(o,text,status){o.history=o.history||[];o.history.unshift({at:new Date().toISOString(),display:stamp(),text,status:status||o.status})}
