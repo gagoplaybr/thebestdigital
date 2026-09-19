@@ -1861,7 +1861,81 @@ body.tb-user-logged-in #calculadora{
   .tb-product-search{grid-template-columns:1fr}
   .tb-product-search button{width:100%}
 }
+/* ===== ERP • PEDIDOS COMPACTOS ===== */
 
+#tbErpTestOrders{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+
+.tb-order-card{
+  margin:0;
+  padding:12px 14px;
+  border-radius:8px;
+  border:1px solid rgba(68,137,187,.22);
+  background:#0b263b;
+  box-shadow:none;
+  transition:.18s ease;
+}
+
+.tb-order-card:hover{
+  border-color:#188fc9;
+  background:#0d2c44;
+}
+
+.tb-order-top{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  padding-bottom:8px;
+  margin-bottom:8px;
+  border-bottom:1px solid rgba(100,160,200,.14);
+}
+
+.tb-order-top b{
+  font-size:12px;
+  letter-spacing:.2px;
+}
+
+.tb-order-status{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-width:90px;
+  padding:5px 9px;
+  border-radius:5px;
+  font-size:9px;
+  font-weight:900;
+  letter-spacing:.4px;
+}
+
+.tb-order-card p{
+  margin:4px 0;
+  font-size:11px;
+  line-height:1.4;
+}
+
+.tb-order-card button{
+  min-height:30px;
+  padding:6px 10px;
+  font-size:10px;
+}
+
+.tb-order-history{
+  margin-top:8px;
+  font-size:10px;
+}
+
+.tb-order-history summary{
+  cursor:pointer;
+  opacity:.75;
+}
+
+.tb-order-history[open] summary{
+  margin-bottom:8px;
+}
 </style>
 
   <!-- THE BEST V6 Premium -->
