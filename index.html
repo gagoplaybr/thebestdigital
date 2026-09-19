@@ -4183,12 +4183,98 @@ document.addEventListener('DOMContentLoaded', function(){
 <script id="tb-v855-erp-stock-simulator-js">
 (function(){
  const KEY='tb_erp_test_orders_v850';
- const STOCK_KEY='tb_erp_test_stock_v854';
+ const STOCK_KEY='tb_erp_test_stock_by_sku_v900';
  const steps=['RECEBIDO','PAGO','FATURAMENTO','ETIQUETA','ENVIADO','ENTREGUE'];
- function getStock(){try{return JSON.parse(localStorage.getItem(STOCK_KEY)||'null')||{available:10,processed:0,returning:0,warranty:0,log:[]}}catch(e){return{available:10,processed:0,returning:0,warranty:0,log:[]}}}
- function saveStock(st){localStorage.setItem(STOCK_KEY,JSON.stringify(st));renderStock()}
- function stockMove(text,delta={}){const st=getStock();for(const k of ['available','processed','returning','warranty'])st[k]=Math.max(0,(st[k]||0)+(delta[k]||0));st.log=st.log||[];st.log.unshift({at:stamp(),text});saveStock(st)}
- function renderStock(){const st=getStock(),ids={available:'tbStockAvailable',processed:'tbStockProcessed',returning:'tbStockReturn',warranty:'tbStockWarranty'};for(const [k,id] of Object.entries(ids)){const el=document.getElementById(id);if(el)el.textContent=st[k]||0}const log=document.getElementById('tbStockLog');if(log)log.innerHTML=(st.log||[]).length?(st.log||[]).map(x=>`<p><b>${esc(x.at)}</b> • ${esc(x.text)}</p>`).join(''):'<p>Nenhuma movimentação de estoque simulada ainda.</p>'}
+ function getStock(){
+  try{
+    const data=JSON.parse(localStorage.getItem(STOCK_KEY)||'null');
+    return (data && typeof data==='object') ? data : {};
+  }catch(e){
+    return {};
+  }
+}
+  function getSkuStock(sku){
+  const all=getStock();
+  const key=String(sku||'SEM-SKU');
+
+  if(!all[key]){
+    all[key]={
+      available:10,
+      processed:0,
+      returning:0,
+      warranty:0,
+      log:[]
+    };
+    localStorage.setItem(STOCK_KEY,JSON.stringify(all));
+  }
+
+  return all[key];
+}
+ function saveStock(sku,st){
+  const all=getStock();
+  const key=String(sku||'SEM-SKU');
+
+  all[key]=st;
+
+  localStorage.setItem(
+    STOCK_KEY,
+    JSON.stringify(all)
+  );
+
+  renderStock(sku);
+}
+ function stockMove(sku,text,delta){
+  const st=getSkuStock(sku);
+
+  for(const k of ['available','processed','returning','warranty']){
+    st[k]=Math.max(0,(st[k]||0)+(delta[k]||0));
+  }
+
+  st.log=st.log||[];
+  st.log.unshift({
+    at:stamp(),
+    text:text
+  });
+
+  saveStock(sku,st);
+}
+ function renderStock(sku){
+  if(!sku){
+    const sel=document.getElementById('tbTestProduct');
+    if(sel){
+      const products=Array.isArray(window.TB_PREMIUM_PRODUCTS)
+        ? window.TB_PREMIUM_PRODUCTS
+        : [];
+
+      const p=products.find(x=>String(x.id)===String(sel.value));
+      sku=p?.sku || sel.value || 'SEM-SKU';
+    }else{
+      sku='SEM-SKU';
+    }
+  }
+
+  const st=getSkuStock(sku);
+
+  const ids={
+    available:'tbStockAvailable',
+    processed:'tbStockProcessed',
+    returning:'tbStockReturn',
+    warranty:'tbStockWarranty'
+  };
+
+  for(const [k,id] of Object.entries(ids)){
+    const el=document.getElementById(id);
+    if(el) el.textContent=st[k]||0;
+  }
+
+  const log=document.getElementById('tbStockLog');
+
+  if(log){
+    log.innerHTML=(st.log||[])
+      .map(x=>'<div><b>'+esc(x.at)+'</b> • '+esc(x.text)+'</div>')
+      .join('');
+  }
+}
 
  const terminal=['CANCELADO','DEVOLVIDO → ESTOQUE','DEVOLVIDO → GARANTIA/AVARIA'];
  function get(){try{return JSON.parse(localStorage.getItem(KEY)||'[]').map(migrate)}catch(e){return[]}}
@@ -4262,8 +4348,8 @@ document.addEventListener('DOMContentLoaded', function(){
  window.tbErpAdvance=function(i){
    const a=get(),o=a[i];if(!o||!isNormal(o.status)||o.status==='ENTREGUE')return alert('Este pedido não pode avançar neste estado.');
    const n=steps.indexOf(o.status),next=steps[n+1];
-   if(next==='PAGO'&&!o.stockDebited){const st=getStock();if(st.available<o.qty)return alert('Estoque teste insuficiente para processar este pedido.');stockMove('Pedido #'+o.id+' pago: -'+o.qty+' un. do disponível',{available:-o.qty,processed:o.qty});o.stockDebited=true;addHistory(o,'Estoque teste baixado em '+o.qty+' unidade(s)','ESTOQUE -'+o.qty)}
-   if(next==='ENTREGUE'&&!o.stockCompleted){const st=getStock();st.processed=Math.max(0,(st.processed||0)-o.qty);saveStock(st);o.stockCompleted=true;addHistory(o,'Venda concluída: '+o.qty+' un. removida do reservado/processado.','ESTOQUE FINALIZADO');}
+   if(next==='PAGO'&&!o.stockDebited){const st=getSkuStock(o.sku);if(st.available<o.qty)return alert('Estoque teste insuficiente para processar este pedido.');stockMove(o.sku,'Pedido #'+o.id+' pago: -'+o.qty+' un. do disponível',{available:-o.qty,processed:o.qty});o.stockDebited=true;addHistory(o,'Estoque teste baixado em '+o.qty+' unidade(s)','ESTOQUE -'+o.qty)}
+   if(next==='ENTREGUE'&&!o.stockCompleted){const st=getSkuStock(o.sku);st.processed=Math.max(0,(st.processed||0)-o.qty);saveStock(o.sku,st);o.stockCompleted=true;addHistory(o,'Venda concluída: '+o.qty+' un. removida do reservado/processado.','ESTOQUE FINALIZADO');}
    o.status=next;addHistory(o,'Status avançado para '+next,next);save(a)
  }
  window.tbErpCancel=function(i){
@@ -4272,8 +4358,8 @@ document.addEventListener('DOMContentLoaded', function(){
    const previous=o.status;if(!confirm('Simular cancelamento do pedido #'+o.id+' no estágio '+previous+'?'))return;
    o.status='CANCELADO';addHistory(o,'Pedido cancelado a partir do estágio '+previous,'CANCELADO');
    if(o.stockDebited&&!o.stockRestored){
-     if(['PAGO','FATURAMENTO','ETIQUETA'].includes(previous)){stockMove('Cancelamento #'+o.id+': +'+o.qty+' un. devolvida ao disponível',{available:o.qty,processed:-o.qty});o.stockRestored=true;addHistory(o,'Estoque teste restaurado após cancelamento','ESTOQUE +'+o.qty)}
-     else if(previous==='ENVIADO'){stockMove('Cancelamento #'+o.id+' após envio: '+o.qty+' un. aguardando retorno',{processed:-o.qty,returning:o.qty});addHistory(o,'Produto enviado: estoque não restaurado. Aguardando retorno físico','AGUARDANDO RETORNO')}
+     if(['PAGO','FATURAMENTO','ETIQUETA'].includes(previous)){stockMove(o.sku,'Cancelamento #'+o.id+': +'+o.qty+' un. devolvida ao disponível',{available:o.qty,processed:-o.qty});o.stockRestored=true;addHistory(o,'Estoque teste restaurado após cancelamento','ESTOQUE +'+o.qty)}
+     else if(previous==='ENVIADO'){stockMove(o.sku,'Cancelamento #'+o.id+' após envio: '+o.qty+' un. aguardando retorno',{processed:-o.qty,returning:o.qty});addHistory(o,'Produto enviado: estoque não restaurado. Aguardando retorno físico','AGUARDANDO RETORNO')}
    }
    if(['FATURAMENTO','ETIQUETA','ENVIADO'].includes(previous)) addHistory(o,'ATENÇÃO DE TESTE: revisar impacto fiscal/logístico antes da integração real','REVISÃO NECESSÁRIA');
    save(a)
@@ -4281,7 +4367,7 @@ document.addEventListener('DOMContentLoaded', function(){
  window.tbErpRequestReturn=function(i){
    const a=get(),o=a[i];if(!o||o.status!=='ENTREGUE')return alert('A devolução só pode ser iniciada neste teste após a entrega.');
    o.status='DEVOLUÇÃO SOLICITADA';
-   if(o.stockDebited){stockMove('Devolução #'+o.id+' solicitada: '+o.qty+' un. aguardando retorno',{processed:-o.qty,returning:o.qty});addHistory(o,'Item transferido para aguardando retorno no estoque teste','AGUARDANDO RETORNO')}
+   if(o.stockDebited){stockMove(o.sku,'Devolução #'+o.id+' solicitada: '+o.qty+' un. aguardando retorno',{processed:-o.qty,returning:o.qty});addHistory(o,'Item transferido para aguardando retorno no estoque teste','AGUARDANDO RETORNO')}
    addHistory(o,'Devolução solicitada. Aguardando retorno físico do produto',o.status);save(a)
  }
  window.tbErpReceiveReturn=function(i){
@@ -4291,8 +4377,8 @@ document.addEventListener('DOMContentLoaded', function(){
  window.tbErpFinishReturn=function(i,d){
    const a=get(),o=a[i];if(!o||o.status!=='DEVOLUÇÃO RECEBIDA')return;
    o.status='DEVOLVIDO → '+d;
-   if(d==='ESTOQUE'){stockMove('Devolução #'+o.id+' aprovada: +'+o.qty+' un. ao estoque disponível',{returning:-o.qty,available:o.qty});o.stockRestored=true}
-   else {stockMove('Devolução #'+o.id+' com avaria: '+o.qty+' un. enviada para garantia/avaria',{returning:-o.qty,warranty:o.qty})}
+   if(d==='ESTOQUE'){stockMove(o.sku,'Devolução #'+o.id+' aprovada: +'+o.qty+' un. ao estoque disponível',{returning:-o.qty,available:o.qty});o.stockRestored=true}
+   else {stockMove(o.sku,'Devolução #'+o.id+' com avaria: '+o.qty+' un. enviada para garantia/avaria',{returning:-o.qty,warranty:o.qty})}
    addHistory(o,d==='ESTOQUE'?'Produto aprovado na inspeção. Destino simulado: voltar ao estoque':'Produto com avaria/defeito. Destino simulado: garantia/avaria',o.status);
    addHistory(o,'Movimentação registrada somente no estoque ERP de teste. Estoque Premium real permanece intacto','MODO TESTE');save(a)
  }
