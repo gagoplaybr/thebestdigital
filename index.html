@@ -5190,9 +5190,36 @@ setTimeout(()=>{
 
       const latestOrder=latestOrders[latestIndex];
 
-      if(latestOrder.status === 'FATURAMENTO'){
-        tbErpAdvance(latestIndex,true);
+    if(latestOrder.status === 'FATURAMENTO'){
+
+  const advancedToLabel=
+    tbErpAdvance(latestIndex,true);
+
+  if(advancedToLabel){
+
+    setTimeout(()=>{
+      if(tbProcessingMode !== 'AUTO')return;
+
+      const shippingOrders=get();
+
+      const shippingIndex=
+        shippingOrders.findIndex(o =>
+          String(o.id) === String(orderId)
+        );
+
+      if(shippingIndex < 0)return;
+
+      const shippingOrder=
+        shippingOrders[shippingIndex];
+
+      if(shippingOrder.status === 'ETIQUETA'){
+        tbErpAdvance(shippingIndex,true);
       }
+
+    },2000);
+
+  }
+}
 
     },2000);
   }
