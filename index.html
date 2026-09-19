@@ -1936,6 +1936,100 @@ body.tb-user-logged-in #calculadora{
 .tb-order-history[open] summary{
   margin-bottom:8px;
 }
+    /* ===== FOTO DO PRODUTO NO PEDIDO ===== */
+
+.tb-order-product-line{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin:8px 0 10px;
+}
+
+.tb-order-product-photo{
+  position:relative;
+  width:52px;
+  height:52px;
+  min-width:52px;
+  border-radius:7px;
+  border:1px solid rgba(70,150,205,.30);
+  background:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:zoom-in;
+  z-index:5;
+}
+
+.tb-order-product-photo > img{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  border-radius:6px;
+}
+
+.tb-order-meta{
+  display:flex;
+  flex-direction:column;
+  gap:3px;
+  min-width:0;
+}
+
+.tb-order-meta b{
+  font-size:12px;
+}
+
+.tb-order-meta span{
+  font-size:10px;
+  opacity:.75;
+}
+
+.tb-order-meta small{
+  font-size:10px;
+  opacity:.8;
+}
+
+/* Foto grande flutuante */
+
+.tb-order-photo-zoom{
+  display:none;
+  position:absolute;
+  left:62px;
+  top:-20px;
+  width:300px;
+  padding:10px;
+  background:#fff;
+  border:1px solid #cfdce5;
+  border-radius:10px;
+  box-shadow:0 15px 40px rgba(0,0,0,.35);
+  z-index:9999;
+}
+
+.tb-order-photo-zoom img{
+  display:block;
+  width:100%;
+  height:260px;
+  object-fit:contain;
+  background:#fff;
+  border-radius:7px;
+}
+
+.tb-order-photo-zoom span{
+  display:block;
+  margin-top:8px;
+  color:#172b3a;
+  font-size:11px;
+  font-weight:800;
+  text-align:center;
+}
+
+.tb-order-product-photo:hover .tb-order-photo-zoom{
+  display:block;
+}
+
+.tb-order-product-photo.tb-no-photo{
+  font-size:22px;
+  cursor:default;
+}
 </style>
 
   <!-- THE BEST V6 Premium -->
