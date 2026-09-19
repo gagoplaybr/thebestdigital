@@ -5043,6 +5043,11 @@ if(term){
      const isFallback=!selectedProduct;
      const o={market:document.getElementById('tbTestMarket')?.value||'Mercado Livre',id,product:selectedProduct?.name||'Produto Teste',productId:selectedProduct?.id||null,sku:(document.getElementById('tbTestSku')?.value||'').trim()||(isFallback?'TESTE-001':'SEM-SKU'),qty:Math.max(1,Number(document.getElementById('tbTestQty')?.value)||1),price:Math.max(0,Number(document.getElementById('tbTestPrice')?.value)||0),status:'RECEBIDO',history:[],stockDebited:false,stockRestored:false};
      addHistory(o,'Pedido recebido pelo simulador','RECEBIDO');a.unshift(o);save(a);tbErpPreviewLabel();
+     if(tbProcessingMode === 'AUTO'){
+  setTimeout(()=>{
+    tbErpAutoProcess(o.id);
+  },1000);
+}
    }catch(err){console.error('Erro ao criar pedido teste:',err);alert('Não foi possível receber o pedido teste. O simulador foi mantido seguro e nenhum dado real foi alterado.');}
  }
 window.tbErpAdvance=function(i,automatic=false){
@@ -5133,6 +5138,25 @@ window.tbErpAdvance=function(i,automatic=false){
   save(a);
 
   return true;
+}
+  function tbErpAutoProcess(orderId){
+
+  if(tbProcessingMode !== 'AUTO')return;
+
+  const orders=get();
+
+  const i=orders.findIndex(o =>
+    String(o.id) === String(orderId)
+  );
+
+  if(i < 0)return;
+
+  const order=orders[i];
+
+  if(!isNormal(order.status))return;
+  if(order.status === 'ENTREGUE')return;
+
+  tbErpAdvance(i,true);
 }
  window.tbErpCancel=function(i){
    const a=get(),o=a[i];if(!o)return;
