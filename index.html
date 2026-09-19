@@ -4160,6 +4160,38 @@ document.addEventListener('DOMContentLoaded', function(){
   <div class="tb-erp-test-head"><div><h2>🧪 Pedidos <span>ERP</span></h2><p>Simulador interno da futura integração com marketplaces.</p></div><span class="tb-test-badge">MODO TESTE • SEM DADOS REAIS</span></div>
   <div class="tb-erp-warning"><b>Ambiente isolado.</b> Estes pedidos ficam somente neste navegador e não alteram Vendas, Estoque, Financeiro, Supabase ou Mercado Livre. As regras fiscais e logísticas reais serão validadas depois na API oficial.</div>
   <div class="tb-erp-grid">
+    <div class="tb-erp-card tb-erp-orders-main">
+    <div class="tb-erp-orders-header">
+        <div>
+            <h3>📥 Pedidos</h3>
+            <small>Gerencie os pedidos recebidos e acompanhe o processamento.</small>
+        </div>
+    </div>
+<div class="tb-erp-order-toolbar">
+
+  <div class="tb-erp-order-tabs">
+    <button type="button" class="tb-order-tab active">Todos</button>
+    <button type="button" class="tb-order-tab">Recebidos</button>
+    <button type="button" class="tb-order-tab">Pagos</button>
+    <button type="button" class="tb-order-tab">Faturamento</button>
+    <button type="button" class="tb-order-tab">Etiqueta</button>
+    <button type="button" class="tb-order-tab">Enviados</button>
+    <button type="button" class="tb-order-tab">Entregues</button>
+    <button type="button" class="tb-order-tab">Devoluções</button>
+  </div>
+
+  <div class="tb-erp-order-search">
+    <input
+      type="search"
+      id="tbErpOrderSearch"
+      placeholder="🔎 Buscar pedido, produto ou SKU..."
+      autocomplete="off"
+    >
+  </div>
+
+</div>
+    <div id="tbErpTestOrders"></div>
+</div>
    <div>
     <div class="tb-erp-card"><h3>📦 Simular novo pedido</h3><div class="tb-erp-fields">
      <div class="tb-erp-field"><label>MARKETPLACE</label><select id="tbTestMarket"><option>Mercado Livre</option></select></div>
