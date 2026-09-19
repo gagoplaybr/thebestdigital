@@ -4489,6 +4489,41 @@ if(term){
            marketplace.includes(term);
   });
 }
+   if(tbErpStatusFilter !== 'TODOS'){
+
+  a=a.filter(o=>{
+    const status=String(o.status || '').toUpperCase();
+
+    switch(tbErpStatusFilter){
+
+      case 'RECEBIDOS':
+        return status === 'RECEBIDO';
+
+      case 'PAGOS':
+        return status === 'PAGO';
+
+      case 'FATURAMENTO':
+        return status === 'FATURAMENTO';
+
+      case 'ETIQUETA':
+        return status === 'ETIQUETA';
+
+      case 'ENVIADOS':
+        return status === 'ENVIADO';
+
+      case 'ENTREGUES':
+        return status === 'ENTREGUE';
+
+      case 'DEVOLUÇÕES':
+        return status.includes('DEVOLUÇÃO') ||
+               status.includes('DEVOLVIDO');
+
+      default:
+        return true;
+    }
+  });
+
+}
    if(!a.length){box.innerHTML='<div class="tb-empty-orders">Nenhum pedido de teste recebido ainda.</div>';return}
    box.innerHTML=a.map((o,i)=>`<div class="tb-order-card"><div class="tb-order-top"><b>${esc(o.market)} • #${esc(o.id)}</b><span class="tb-order-status">${esc(o.status)}</span></div><div class="tb-order-meta">${esc(o.product)} • SKU ${esc(o.sku)}<br>${o.qty} un. • R$ ${Number(o.price).toFixed(2).replace('.',',')} cada</div><div class="tb-order-flow">${flowHtml(o)}</div><div class="tb-erp-actions">${actionsHtml(o,i)}</div>${historyHtml(o)}</div>`).join('')
  }
