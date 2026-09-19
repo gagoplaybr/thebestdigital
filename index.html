@@ -4564,12 +4564,37 @@ document.addEventListener('DOMContentLoaded', function(){
   <div class="tb-erp-warning"><b>Ambiente isolado.</b> Estes pedidos ficam somente neste navegador e não alteram Vendas, Estoque, Financeiro, Supabase ou Mercado Livre. As regras fiscais e logísticas reais serão validadas depois na API oficial.</div>
   <div class="tb-erp-grid">
     <div class="tb-erp-card tb-erp-orders-main">
-    <div class="tb-erp-orders-header">
-        <div>
-            <h3>📥 Pedidos</h3>
-            <small>Gerencie os pedidos recebidos e acompanhe o processamento.</small>
-        </div>
+   <div class="tb-erp-orders-header">
+
+  <div>
+    <h3>📥 Pedidos</h3>
+    <small>Gerencie os pedidos recebidos e acompanhe o processamento.</small>
+  </div>
+
+  <div class="tb-processing-mode">
+    <span>⚙️ PROCESSAMENTO</span>
+
+    <div class="tb-processing-switch">
+
+      <button
+        type="button"
+        id="tbProcessingAuto"
+        class="active"
+        onclick="tbSetProcessingMode('AUTO')">
+        AUTOMÁTICO
+      </button>
+
+      <button
+        type="button"
+        id="tbProcessingManual"
+        onclick="tbSetProcessingMode('MANUAL')">
+        MANUAL
+      </button>
+
     </div>
+  </div>
+
+</div>
 <div class="tb-erp-order-toolbar">
 
   <div class="tb-erp-order-tabs">
