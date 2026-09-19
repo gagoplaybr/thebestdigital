@@ -4443,7 +4443,27 @@ document.addEventListener('DOMContentLoaded', function(){
  function historyHtml(o){return `<details class="tb-order-history"><summary>🕘 HISTÓRICO (${(o.history||[]).length})</summary><div>${(o.history||[]).map(h=>`<p><b>${esc(h.display||new Date(h.at).toLocaleString('pt-BR'))}</b> • ${esc(h.text)} <span>${esc(h.status||'')}</span></p>`).join('')}</div></details>`}
  function render(){
    renderStock();
-   const box=document.getElementById('tbErpTestOrders');if(!box)return;const a=get();
+   const box=document.getElementById('tbErpTestOrders');
+if(!box)return;
+
+let a=get();
+
+const search=document.getElementById('tbErpOrderSearch');
+const term=String(search?.value || '').trim().toLowerCase();
+
+if(term){
+  a=a.filter(o=>{
+    const pedido=String(o.id || '').toLowerCase();
+    const produto=String(o.product || o.productName || o.name || '').toLowerCase();
+    const sku=String(o.sku || '').toLowerCase();
+    const marketplace=String(o.market || '').toLowerCase();
+
+    return pedido.includes(term) ||
+           produto.includes(term) ||
+           sku.includes(term) ||
+           marketplace.includes(term);
+  });
+}
    if(!a.length){box.innerHTML='<div class="tb-empty-orders">Nenhum pedido de teste recebido ainda.</div>';return}
    box.innerHTML=a.map((o,i)=>`<div class="tb-order-card"><div class="tb-order-top"><b>${esc(o.market)} • #${esc(o.id)}</b><span class="tb-order-status">${esc(o.status)}</span></div><div class="tb-order-meta">${esc(o.product)} • SKU ${esc(o.sku)}<br>${o.qty} un. • R$ ${Number(o.price).toFixed(2).replace('.',',')} cada</div><div class="tb-order-flow">${flowHtml(o)}</div><div class="tb-erp-actions">${actionsHtml(o,i)}</div>${historyHtml(o)}</div>`).join('')
  }
