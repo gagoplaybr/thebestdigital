@@ -4155,6 +4155,108 @@ document.addEventListener('DOMContentLoaded', function(){
 @media(max-width:850px){.tb-test-stock-grid{grid-template-columns:1fr 1fr}.tb-erp-grid{grid-template-columns:1fr;grid-template-areas:"stock" "orders" "tools"}.tb-erp-grid>div:first-child{grid-template-columns:1fr}.tb-erp-fields{grid-template-columns:1fr}.tb-erp-test-head{flex-direction:column}}
 @media print{body *{visibility:hidden!important}.tb-label-preview,.tb-label-preview *{visibility:visible!important}.tb-label-preview{position:absolute;left:0;top:0;width:100mm;height:150mm;margin:0;border-radius:0}}
 </style>
+  /* ===== THE BEST ERP • CENTRAL DE PEDIDOS ===== */
+
+.tb-erp-orders-main{
+  grid-column:1 / -1;
+}
+
+.tb-erp-orders-header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+  margin-bottom:14px;
+}
+
+.tb-erp-orders-header h3{
+  margin:0 0 4px;
+  font-size:17px;
+}
+
+.tb-erp-orders-header small{
+  color:#7f9bb3;
+  font-size:11px;
+}
+
+.tb-erp-order-toolbar{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px;
+  padding:10px 0 14px;
+  margin-bottom:4px;
+  border-bottom:1px solid rgba(83,160,214,.18);
+}
+
+.tb-erp-order-tabs{
+  display:flex;
+  align-items:center;
+  gap:5px;
+  flex-wrap:wrap;
+}
+
+.tb-order-tab{
+  border:1px solid rgba(73,148,203,.20);
+  background:#0d2940;
+  color:#91a9bd;
+  border-radius:6px;
+  padding:8px 11px;
+  font-size:10px;
+  font-weight:800;
+  cursor:pointer;
+  transition:.18s ease;
+}
+
+.tb-order-tab:hover{
+  background:#123b59;
+  color:#fff;
+  border-color:#238fd1;
+}
+
+.tb-order-tab.active{
+  background:#087fc1;
+  color:#fff;
+  border-color:#16a9f5;
+  box-shadow:0 0 0 1px rgba(22,169,245,.12);
+}
+
+.tb-erp-order-search{
+  min-width:280px;
+}
+
+#tbErpOrderSearch{
+  width:100%;
+  height:36px;
+  border:1px solid #285474;
+  border-radius:7px;
+  background:#0b2438;
+  color:#fff;
+  padding:0 12px;
+  outline:none;
+  font-size:11px;
+}
+
+#tbErpOrderSearch::placeholder{
+  color:#7892a8;
+}
+
+#tbErpOrderSearch:focus{
+  border-color:#13a8f4;
+  box-shadow:0 0 0 2px rgba(19,168,244,.10);
+}
+
+@media(max-width:1000px){
+  .tb-erp-order-toolbar{
+    flex-direction:column;
+    align-items:stretch;
+  }
+
+  .tb-erp-order-search{
+    min-width:0;
+    width:100%;
+  }
+}
 <section id="pedidos-erp-teste" class="tb-erp-test-section" hidden aria-label="Pedidos ERP modo teste">
  <div class="tb-erp-test-shell">
   <div class="tb-erp-test-head"><div><h2>🧪 Pedidos <span>ERP</span></h2><p>Simulador interno da futura integração com marketplaces.</p></div><span class="tb-test-badge">MODO TESTE • SEM DADOS REAIS</span></div>
