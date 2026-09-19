@@ -5139,94 +5139,56 @@ window.tbErpAdvance=function(i,automatic=false){
 
   return true;
 }
-  function tbErpAutoProcess(orderId){
+ function tbErpAutoProcess(orderId){
 
   if(tbProcessingMode !== 'AUTO')return;
 
-  const orders=get();
+  function processNext(){
 
-  const i=orders.findIndex(o =>
-    String(o.id) === String(orderId)
-  );
+    if(tbProcessingMode !== 'AUTO')return;
 
-  if(i < 0)return;
+    const orders=get();
 
-  const order=orders[i];
+    const index=orders.findIndex(o =>
+      String(o.id) === String(orderId)
+    );
 
-  if(!isNormal(order.status))return;
-  if(order.status === 'ENTREGUE')return;
+    if(index < 0)return;
 
-  const advanced=tbErpAdvance(i,true);
+    const order=orders[index];
 
-if(!advanced)return;
+    if(!isNormal(order.status))return;
 
-setTimeout(()=>{
-  if(tbProcessingMode !== 'AUTO')return;
+    /* ENTREGA NÃO É AUTOMÁTICA */
+    if(order.status === 'ENVIADO')return;
+    if(order.status === 'ENTREGUE')return;
 
-  const updatedOrders=get();
+    const advanced=tbErpAdvance(index,true);
 
-  const newIndex=updatedOrders.findIndex(o =>
-    String(o.id) === String(orderId)
-  );
+    if(!advanced)return;
 
-  if(newIndex < 0)return;
+    const updatedOrders=get();
 
-  const updatedOrder=updatedOrders[newIndex];
+    const updatedIndex=updatedOrders.findIndex(o =>
+      String(o.id) === String(orderId)
+    );
 
- if(updatedOrder.status === 'PAGO'){
-  const advancedToBilling=tbErpAdvance(newIndex,true);
+    if(updatedIndex < 0)return;
 
-  if(advancedToBilling){
-    setTimeout(()=>{
-      if(tbProcessingMode !== 'AUTO')return;
+    const updatedOrder=updatedOrders[updatedIndex];
 
-      const latestOrders=get();
-
-      const latestIndex=latestOrders.findIndex(o =>
-        String(o.id) === String(orderId)
-      );
-
-      if(latestIndex < 0)return;
-
-      const latestOrder=latestOrders[latestIndex];
-
-    if(latestOrder.status === 'FATURAMENTO'){
-
-  const advancedToLabel=
-    tbErpAdvance(latestIndex,true);
-
-  if(advancedToLabel){
-
-    setTimeout(()=>{
-      if(tbProcessingMode !== 'AUTO')return;
-
-      const shippingOrders=get();
-
-      const shippingIndex=
-        shippingOrders.findIndex(o =>
-          String(o.id) === String(orderId)
-        );
-
-      if(shippingIndex < 0)return;
-
-      const shippingOrder=
-        shippingOrders[shippingIndex];
-
-      if(shippingOrder.status === 'ETIQUETA'){
-        tbErpAdvance(shippingIndex,true);
-      }
-
-    },2000);
+    /* Continua automaticamente até ENVIADO */
+    if(
+      updatedOrder.status === 'PAGO' ||
+      updatedOrder.status === 'FATURAMENTO' ||
+      updatedOrder.status === 'ETIQUETA'
+    ){
+      setTimeout(processNext,2000);
+    }
 
   }
-}
 
-    },2000);
-  }
-}
-
-},2000);
-
+  processNext();
 }
  window.tbErpCancel=function(i){
    const a=get(),o=a[i];if(!o)return;
