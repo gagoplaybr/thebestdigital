@@ -4234,7 +4234,7 @@ document.addEventListener('DOMContentLoaded', function(){
    sel.innerHTML='';
    const fallback=document.createElement('option');fallback.value='__TEST__';fallback.textContent='Produto Teste • TESTE-001';sel.appendChild(fallback);
    products.forEach(p=>{const op=document.createElement('option');op.value=String(p.id);op.textContent=(p.name||'Produto sem nome')+(p.sku?' • '+p.sku:'');sel.appendChild(op)});
-   if([...sel.options].some(o=>o.value===previous))sel.value=previous;else sel.value='__TEST__';
+   if(previous!=='__TEST__'&&[...sel.options].some(o=>o.value===previous)){sel.value=previous;}else if(products.length){sel.value=String(products[0].id);}else{sel.value='__TEST__';}
    tbErpTestProductChanged();
  };
  window.tbErpTestProductChanged=function(){
