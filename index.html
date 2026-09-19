@@ -4263,7 +4263,7 @@ document.addEventListener('DOMContentLoaded', function(){
    const a=get(),o=a[i];if(!o||!isNormal(o.status)||o.status==='ENTREGUE')return alert('Este pedido não pode avançar neste estado.');
    const n=steps.indexOf(o.status),next=steps[n+1];
    if(next==='PAGO'&&!o.stockDebited){const st=getStock();if(st.available<o.qty)return alert('Estoque teste insuficiente para processar este pedido.');stockMove('Pedido #'+o.id+' pago: -'+o.qty+' un. do disponível',{available:-o.qty,processed:o.qty});o.stockDebited=true;addHistory(o,'Estoque teste baixado em '+o.qty+' unidade(s)','ESTOQUE -'+o.qty)}
-   if(next==='ENTREGUE'&&!o.stockCompleted){const st=getStock();st.processed=Math.max(0,(st.processed||0)-o.qty);setStock(st);o.stockCompleted=true;addHistory(o,'Venda concluída: '+o.qty+' un. removida do reservado/processado.','ESTOQUE FINALIZADO');}
+   if(next==='ENTREGUE'&&!o.stockCompleted){const st=getStock();st.processed=Math.max(0,(st.processed||0)-o.qty);saveStock(st);o.stockCompleted=true;addHistory(o,'Venda concluída: '+o.qty+' un. removida do reservado/processado.','ESTOQUE FINALIZADO');}
    o.status=next;addHistory(o,'Status avançado para '+next,next);save(a)
  }
  window.tbErpCancel=function(i){
