@@ -2079,6 +2079,55 @@ body.tb-user-logged-in #calculadora{
   font-size:9px !important;
   margin:4px 0 !important;
 }
+    /* ===== PROCESSAMENTO AUTOMÁTICO / MANUAL ===== */
+
+.tb-processing-mode{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.tb-processing-mode > span{
+  font-size:9px;
+  font-weight:800;
+  color:#7895aa;
+  letter-spacing:.5px;
+}
+
+.tb-processing-switch{
+  display:flex;
+  padding:3px;
+  gap:3px;
+  background:#071b2b;
+  border:1px solid #214760;
+  border-radius:8px;
+}
+
+.tb-processing-switch button{
+  border:0;
+  background:transparent;
+  color:#718da2;
+  padding:7px 11px;
+  border-radius:6px;
+  font-size:9px;
+  font-weight:900;
+  cursor:pointer;
+  transition:.2s ease;
+}
+
+.tb-processing-switch button:hover{
+  color:#fff;
+  background:#10344d;
+}
+
+/* BOTÃO SELECIONADO */
+.tb-processing-switch button.active{
+  background:#0787c9;
+  color:#fff;
+  box-shadow:
+    0 0 0 1px #19b5ff,
+    0 3px 10px rgba(0,153,220,.25);
+}
 </style>
 
   <!-- THE BEST V6 Premium -->
