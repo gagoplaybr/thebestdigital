@@ -4751,6 +4751,40 @@ if(tbErpOrderSearch){
     render();
   });
 }
+  const TB_PROCESSING_MODE_KEY='tb_erp_processing_mode';
+
+let tbProcessingMode=
+  localStorage.getItem(TB_PROCESSING_MODE_KEY) || 'AUTO';
+
+window.tbSetProcessingMode=function(mode){
+  tbProcessingMode=mode==='MANUAL' ? 'MANUAL' : 'AUTO';
+
+  localStorage.setItem(
+    TB_PROCESSING_MODE_KEY,
+    tbProcessingMode
+  );
+
+  const auto=document.getElementById('tbProcessingAuto');
+  const manual=document.getElementById('tbProcessingManual');
+
+  if(auto){
+    auto.classList.toggle(
+      'active',
+      tbProcessingMode==='AUTO'
+    );
+  }
+
+  if(manual){
+    manual.classList.toggle(
+      'active',
+      tbProcessingMode==='MANUAL'
+    );
+  }
+};
+
+setTimeout(()=>{
+  tbSetProcessingMode(tbProcessingMode);
+},0);
   let tbErpStatusFilter = 'TODOS';
 
 document.querySelectorAll('.tb-order-tab').forEach(tab=>{
