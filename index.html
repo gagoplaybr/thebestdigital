@@ -2199,7 +2199,54 @@ box-shadow:0 4px 18px rgba(0,0,0,.18) !important;
     height:100%;
     padding-left:8px;
 }
+/* ===== PESQUISA BARRA SUPERIOR ===== */
 
+.tb-top-search{
+    margin-left:auto;
+    width:230px;
+    height:44px;
+    flex-shrink:0;
+
+    display:flex;
+    align-items:center;
+    gap:10px;
+
+    padding:0 14px;
+
+    background:rgba(255,255,255,.10);
+    border:1px solid rgba(255,255,255,.10);
+    border-radius:10px;
+}
+
+.tb-top-search-icon{
+    font-size:17px;
+    line-height:1;
+    flex-shrink:0;
+}
+
+.tb-top-search input{
+    width:100%;
+    min-width:0;
+    height:100%;
+
+    border:0;
+    outline:none;
+    background:transparent;
+
+    color:#ffffff;
+    font-size:12px;
+    font-weight:600;
+}
+
+.tb-top-search input::placeholder{
+    color:#b9cee0;
+    opacity:1;
+}
+
+.tb-top-search:focus-within{
+    background:rgba(255,255,255,.14);
+    border-color:rgba(56,189,248,.55);
+}
 .tb-top-menu .tb-top-tab,
 .tb-top-extra{
     display:flex;
