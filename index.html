@@ -2859,6 +2859,38 @@ body.tb-premium-nav-active #painel-premium .tb-bars-live{
         grid-template-columns:1fr !important;
     }
 }
+    /* ===== KPI PREMIUM • DISTRIBUIÇÃO 4 + 3 ===== */
+
+/* Primeira linha: 4 cards */
+body.tb-premium-nav-active #painel-premium .tb-kpi-grid{
+    display:grid !important;
+    grid-template-columns:repeat(12, minmax(0,1fr)) !important;
+    gap:16px !important;
+}
+
+/* Cards 1 a 4 ocupam 3 colunas cada */
+body.tb-premium-nav-active #painel-premium .tb-kpi-card:nth-child(-n+4){
+    grid-column:span 3 !important;
+}
+
+/* Cards 5 a 7 ocupam 4 colunas cada */
+body.tb-premium-nav-active #painel-premium .tb-kpi-card:nth-child(n+5){
+    grid-column:span 4 !important;
+}
+
+/* Tablet */
+@media(max-width:1100px){
+    body.tb-premium-nav-active #painel-premium .tb-kpi-card{
+        grid-column:span 6 !important;
+    }
+}
+
+/* Celular */
+@media(max-width:650px){
+    body.tb-premium-nav-active #painel-premium .tb-kpi-card{
+        grid-column:1 / -1 !important;
+    }
+}
 </style>
 
   <!-- THE BEST V6 Premium -->
