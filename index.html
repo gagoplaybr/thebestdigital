@@ -2891,6 +2891,79 @@ body.tb-premium-nav-active #painel-premium .tb-kpi-card:nth-child(n+5){
         grid-column:1 / -1 !important;
     }
 }
+    /* ===== MARKETPLACES • VISUAL PREMIUM ===== */
+
+body.tb-premium-nav-active #painel-premium .tb-market-list{
+    display:flex !important;
+    flex-direction:column !important;
+    gap:12px !important;
+    margin-top:20px !important;
+}
+
+body.tb-premium-nav-active #painel-premium .tb-market-row{
+    display:grid !important;
+    grid-template-columns:150px 1fr 48px !important;
+    align-items:center !important;
+    gap:14px !important;
+
+    padding:14px 16px !important;
+
+    background:#f8fafc !important;
+    border:1px solid #e3eaf0 !important;
+    border-radius:12px !important;
+}
+
+body.tb-premium-nav-active #painel-premium .tb-market-info{
+    display:flex !important;
+    flex-direction:column !important;
+    gap:4px !important;
+}
+
+body.tb-premium-nav-active #painel-premium .tb-market-info strong{
+    color:#071f31 !important;
+    font-size:12px !important;
+    font-weight:900 !important;
+}
+
+body.tb-premium-nav-active #painel-premium .tb-market-info small{
+    color:#687c8c !important;
+    font-size:10px !important;
+}
+
+body.tb-premium-nav-active #painel-premium .tb-market-track{
+    width:100% !important;
+    height:9px !important;
+    background:#dfe7ed !important;
+    border-radius:99px !important;
+    overflow:hidden !important;
+}
+
+body.tb-premium-nav-active #painel-premium .tb-market-fill{
+    height:100% !important;
+    border-radius:99px !important;
+    background:linear-gradient(
+        90deg,
+        #087fc1,
+        #16a9f5
+    ) !important;
+}
+
+body.tb-premium-nav-active #painel-premium .tb-market-row > b{
+    color:#071f31 !important;
+    font-size:12px !important;
+    font-weight:900 !important;
+    text-align:right !important;
+}
+
+@media(max-width:700px){
+    body.tb-premium-nav-active #painel-premium .tb-market-row{
+        grid-template-columns:1fr 50px !important;
+    }
+
+    body.tb-premium-nav-active #painel-premium .tb-market-info{
+        grid-column:1 / -1 !important;
+    }
+}
 </style>
 
   <!-- THE BEST V6 Premium -->
