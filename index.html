@@ -7995,6 +7995,42 @@ body.tb-premium-nav-active.tb-single-module #pedidos-erp-teste.tb-module-visible
 body.tb-premium-nav-active.tb-single-module #area-cliente.tb-module-visible{padding-top:82px!important}
 body.tb-premium-nav-active #pedidos-erp-teste.tb-module-visible{display:block!important;margin-left:218px!important;width:auto!important;max-width:none!important;padding-left:24px!important;padding-right:24px!important}
 @media(max-width:900px){body.tb-premium-nav-active .tb-premium-top-tabs{display:none!important}body.tb-premium-nav-active .tb-premium-sidebar{padding-top:0}body.tb-premium-nav-active #pedidos-erp-teste.tb-module-visible{margin-left:0!important;width:100%!important;padding:14px 8px 90px!important}}
+/* ===== CORREÇÃO BARRA SUPERIOR THE BEST ===== */
+
+body.tb-premium-nav-active{
+  padding-top:68px !important;
+}
+
+body.tb-premium-nav-active .tb-premium-top-tabs{
+  position:fixed;
+  top:0;
+  left:218px;
+  right:0;
+  height:58px;
+  box-sizing:border-box;
+  z-index:10020;
+}
+
+/* Conteúdo começa abaixo da barra */
+body.tb-premium-nav-active #painel-premium,
+body.tb-premium-nav-active #calculadora,
+body.tb-premium-nav-active #controle-vendas,
+body.tb-premium-nav-active #controle-estoque,
+body.tb-premium-nav-active #controle-metas,
+body.tb-premium-nav-active #relatorios-premium,
+body.tb-premium-nav-active #financeiro-premium,
+body.tb-premium-nav-active #meus-produtos,
+body.tb-premium-nav-active #pedidos-erp-teste,
+body.tb-premium-nav-active #area-cliente{
+  scroll-margin-top:78px;
+}
+
+/* Celular continua usando a navegação própria */
+@media(max-width:900px){
+  body.tb-premium-nav-active{
+    padding-top:0 !important;
+  }
+}
 </style>
 <script id="tb-v851-layered-nav-js">
 (function(){
