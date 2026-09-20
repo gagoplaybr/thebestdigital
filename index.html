@@ -5171,8 +5171,12 @@ document.addEventListener('DOMContentLoaded', function(){
     <div class="tb-kpi-grid">
 
   <div class="tb-kpi-card">
-    <div class="tb-kpi-icon tb-icon-blue">
-  <span class="tb-icon-symbol" style="color:#fff !important;">$</span>
+   <div class="tb-kpi-icon tb-icon-blue">
+  <svg viewBox="0 0 24 24" aria-hidden="true">
+    <circle cx="12" cy="12" r="9"></circle>
+    <path d="M16 8.5c-.8-.8-2-1.3-3.5-1.3-2 0-3.5 1-3.5 2.5 0 3.8 7 1.7 7 5.4 0 1.5-1.5 2.7-3.8 2.7-1.7 0-3.1-.5-4.2-1.5"></path>
+    <path d="M12 5v14"></path>
+  </svg>
 </div>
     
     <div class="tb-kpi-content">
@@ -5933,6 +5937,24 @@ body.tb-premium-nav-active #painel-premium .tb-kpi-icon{
     font-weight:900 !important;
     line-height:1 !important;
 }
+  #painel-premium .tb-icon-symbol{
+    color:#ffffff !important;
+    font-size:30px !important;
+    font-weight:900 !important;
+    line-height:1 !important;
+}
+
+/* SVG DOS ÍCONES KPI */
+#painel-premium .tb-kpi-icon svg{
+    width:30px !important;
+    height:30px !important;
+    fill:none !important;
+    stroke:#ffffff !important;
+    stroke-width:1.8 !important;
+    stroke-linecap:round !important;
+    stroke-linejoin:round !important;
+}
+
 </style>
 
 }
