@@ -8566,7 +8566,57 @@ if(mEl){
 }
     const now=new Date();const goal=G.find(x=>Number(x.period_month)===now.getMonth()+1&&Number(x.period_year)===now.getFullYear())||G[0];
     const goalEl=document.getElementById("tbGoals");if(goalEl){if(!goal){goalEl.innerHTML='<div class="tb-empty-chart">Cadastre uma meta mensal para acompanhar o progresso.</div>'}else{const gp=(v,t)=>t?Math.min(100,Math.max(0,v/t*100)):0;const rows=[["Faturamento",revenue,Number(goal.revenue_goal||0)],["Lucro",profit,Number(goal.profit_goal||0)],["Vendas",S.length,Number(goal.sales_goal||0)]];goalEl.innerHTML=rows.map(([n,v,t])=>`<div class="tb-goal-line"><small>${n}</small><b>${gp(v,t).toFixed(0)}%</b><div class="tb-progress"><span style="width:${gp(v,t)}%"></span></div></div>`).join("");}}
-    const products={};S.forEach(x=>{const k=x.product_name||"Produto";products[k]=(products[k]||0)+Number(x.quantity||1)});const top=Object.entries(products).sort((a,b)=>b[1]-a[1]).slice(0,5);const topEl=document.getElementById("tbTopProducts");if(topEl)topEl.innerHTML=top.length?top.map(([n,q],i)=>`<div class="tb-stock-alert"><span>${i+1}. ${esc(n)}</span><b>${q} un.</b></div>`).join(""):'<div class="tb-empty-chart">O ranking aparece após registrar vendas.</div>';
+    const products={};
+
+S.forEach(x=>{
+  const k=x.product_name || "Produto";
+  products[k]=(products[k]||0)+Number(x.quantity||1);
+});
+
+const top=Object.entries(products)
+  .sort((a,b)=>b[1]-a[1])
+  .slice(0,5);
+
+const topEl=document.getElementById("tbTopProducts");
+
+if(topEl){
+
+  const maior=top.length ? Math.max(...top.map(x=>x[1])) : 1;
+
+  topEl.innerHTML=top.length
+    ? top.map(([n,q],i)=>{
+
+        const percentual=(q/maior)*100;
+
+        return `
+          <div class="tb-top-product">
+
+            <div class="tb-top-rank">
+              ${i+1}
+            </div>
+
+            <div class="tb-top-info">
+
+              <div class="tb-top-name">
+                <strong>${esc(n)}</strong>
+                <b>${q} un.</b>
+              </div>
+
+              <div class="tb-top-track">
+                <div
+                  class="tb-top-fill"
+                  style="width:${percentual}%">
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        `;
+
+      }).join("")
+    : '<div class="tb-empty-chart">O ranking aparece após registrar vendas.</div>';
+}
     const alertEl=document.getElementById("tbStockAlerts");if(alertEl)alertEl.innerHTML=low.length?low.slice(0,6).map(x=>`<div class="tb-stock-alert"><span>${esc(x.product_name)}</span><b class="tb-stock-low">${Number(x.quantity||0)} un.</b></div>`).join(""):'<div class="tb-empty-chart">Nenhum alerta de estoque baixo.</div>';
   };
 
