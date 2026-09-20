@@ -2468,6 +2468,125 @@ body.tb-premium-nav-active #painel-premium.tb-system-dashboard{
 #painel-premium .tb-lower-grid small{
   color:#526a7b !important;
 }
+    /* ===== THE BEST • KPI PREMIUM V2 ===== */
+
+#painel-premium .tb-kpi-grid{
+  display:grid !important;
+  grid-template-columns:repeat(7,minmax(0,1fr)) !important;
+  gap:14px !important;
+  margin-top:20px !important;
+}
+
+/* CARD */
+#painel-premium .tb-kpi-card{
+  position:relative !important;
+  overflow:hidden !important;
+
+  min-height:122px !important;
+  padding:18px 16px 15px !important;
+
+  background:#ffffff !important;
+  border:1px solid #e2e8f0 !important;
+  border-radius:14px !important;
+
+  box-shadow:
+    0 7px 22px rgba(23,43,58,.07),
+    0 1px 3px rgba(23,43,58,.04) !important;
+
+  transition:
+    transform .18s ease,
+    box-shadow .18s ease,
+    border-color .18s ease !important;
+}
+
+#painel-premium .tb-kpi-card:hover{
+  transform:translateY(-3px);
+  border-color:#b8d9ed !important;
+  box-shadow:
+    0 12px 28px rgba(23,43,58,.11),
+    0 2px 5px rgba(23,43,58,.05) !important;
+}
+
+/* Remove a bolha antiga */
+#painel-premium .tb-kpi-card::after{
+  display:none !important;
+}
+
+/* Faixa decorativa inferior */
+#painel-premium .tb-kpi-card::before{
+  content:"";
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:0;
+  height:4px;
+  background:linear-gradient(
+    90deg,
+    #087fc1,
+    #16a9f5
+  );
+  opacity:.9;
+}
+
+/* TÍTULO */
+#painel-premium .tb-kpi-label{
+  display:block !important;
+  margin-bottom:10px !important;
+
+  color:#607487 !important;
+
+  font-size:10px !important;
+  font-weight:900 !important;
+  letter-spacing:.6px !important;
+  text-transform:uppercase !important;
+}
+
+/* VALOR */
+#painel-premium .tb-kpi-value{
+  display:block !important;
+
+  color:#0b2340 !important;
+
+  font-size:25px !important;
+  line-height:1.1 !important;
+  font-weight:900 !important;
+  letter-spacing:-.5px !important;
+}
+
+/* TEXTO INFERIOR */
+#painel-premium .tb-kpi-note{
+  display:block !important;
+  margin-top:10px !important;
+
+  color:#087fc1 !important;
+
+  font-size:9px !important;
+  font-weight:700 !important;
+}
+
+/* Resultado negativo */
+#painel-premium #tbOperationalResult{
+  color:#e5485d !important;
+}
+
+/* RESPONSIVO */
+@media(max-width:1400px){
+  #painel-premium .tb-kpi-grid{
+    grid-template-columns:repeat(4,minmax(0,1fr)) !important;
+  }
+}
+
+@media(max-width:900px){
+  #painel-premium .tb-kpi-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+  }
+}
+
+@media(max-width:560px){
+  #painel-premium .tb-kpi-grid{
+    grid-template-columns:1fr !important;
+  }
+}
 </style>
 
   <!-- THE BEST V6 Premium -->
