@@ -4919,13 +4919,71 @@ document.addEventListener('DOMContentLoaded', function(){
       <button class="tb-dash-refresh" type="button" onclick="loadMarketplaceDashboard()">↻ ATUALIZAR PAINEL</button>
     </div>
     <div class="tb-kpi-grid">
-      <div class="tb-kpi-card"><span class="tb-kpi-label">Faturamento</span><b class="tb-kpi-value" id="tbRevenue">R$ 0,00</b><span class="tb-kpi-note">Vendas registradas</span></div>
-      <div class="tb-kpi-card"><span class="tb-kpi-label">Lucro das vendas</span><b class="tb-kpi-value" id="tbProfit">R$ 0,00</b><span class="tb-kpi-note" id="tbMargin">Margem 0%</span></div>
-      <div class="tb-kpi-card"><span class="tb-kpi-label">Despesas</span><b class="tb-kpi-value" id="tbExpenses">R$ 0,00</b><span class="tb-kpi-note">Despesas cadastradas</span></div>
-      <div class="tb-kpi-card"><span class="tb-kpi-label">Resultado operacional</span><b class="tb-kpi-value" id="tbOperationalResult">R$ 0,00</b><span class="tb-kpi-note" id="tbRealMargin">Margem real 0%</span></div>
-      <div class="tb-kpi-card"><span class="tb-kpi-label">Vendas</span><b class="tb-kpi-value" id="tbSales">0</b><span class="tb-kpi-note" id="tbUnits">0 unidades</span></div>
-      <div class="tb-kpi-card"><span class="tb-kpi-label">Valor em estoque</span><b class="tb-kpi-value" id="tbStockValue">R$ 0,00</b><span class="tb-kpi-note" id="tbStockUnits">0 unidades</span></div>
-      <div class="tb-kpi-card"><span class="tb-kpi-label">Estoque baixo</span><b class="tb-kpi-value" id="tbLowStock">0</b><span class="tb-kpi-note">Produtos em atenção</span></div>
+
+  <div class="tb-kpi-card">
+    <div class="tb-kpi-icon tb-icon-blue">💰</div>
+    <div class="tb-kpi-content">
+      <span class="tb-kpi-label">Faturamento</span>
+      <b class="tb-kpi-value" id="tbRevenue">R$ 0,00</b>
+      <span class="tb-kpi-note">Vendas registradas</span>
+    </div>
+  </div>
+
+  <div class="tb-kpi-card">
+    <div class="tb-kpi-icon tb-icon-green">📈</div>
+    <div class="tb-kpi-content">
+      <span class="tb-kpi-label">Lucro das vendas</span>
+      <b class="tb-kpi-value" id="tbProfit">R$ 0,00</b>
+      <span class="tb-kpi-note" id="tbMargin">Margem 0%</span>
+    </div>
+  </div>
+
+  <div class="tb-kpi-card">
+    <div class="tb-kpi-icon tb-icon-orange">💳</div>
+    <div class="tb-kpi-content">
+      <span class="tb-kpi-label">Despesas</span>
+      <b class="tb-kpi-value" id="tbExpenses">R$ 0,00</b>
+      <span class="tb-kpi-note">Despesas cadastradas</span>
+    </div>
+  </div>
+
+  <div class="tb-kpi-card">
+    <div class="tb-kpi-icon tb-icon-purple">📊</div>
+    <div class="tb-kpi-content">
+      <span class="tb-kpi-label">Resultado operacional</span>
+      <b class="tb-kpi-value" id="tbOperationalResult">R$ 0,00</b>
+      <span class="tb-kpi-note" id="tbRealMargin">Margem real 0%</span>
+    </div>
+  </div>
+
+  <div class="tb-kpi-card">
+    <div class="tb-kpi-icon tb-icon-cyan">🛒</div>
+    <div class="tb-kpi-content">
+      <span class="tb-kpi-label">Vendas</span>
+      <b class="tb-kpi-value" id="tbSales">0</b>
+      <span class="tb-kpi-note" id="tbUnits">0 unidades</span>
+    </div>
+  </div>
+
+  <div class="tb-kpi-card">
+    <div class="tb-kpi-icon tb-icon-indigo">📦</div>
+    <div class="tb-kpi-content">
+      <span class="tb-kpi-label">Valor em estoque</span>
+      <b class="tb-kpi-value" id="tbStockValue">R$ 0,00</b>
+      <span class="tb-kpi-note" id="tbStockUnits">0 unidades</span>
+    </div>
+  </div>
+
+  <div class="tb-kpi-card">
+    <div class="tb-kpi-icon tb-icon-red">⚠️</div>
+    <div class="tb-kpi-content">
+      <span class="tb-kpi-label">Estoque baixo</span>
+      <b class="tb-kpi-value" id="tbLowStock">0</b>
+      <span class="tb-kpi-note">Produtos em atenção</span>
+    </div>
+  </div>
+
+</div>
     </div>
     <div class="tb-chart-grid">
       <div class="tb-chart-card tb-evolution-card">
@@ -5155,6 +5213,90 @@ document.addEventListener('DOMContentLoaded', function(){
 #painel-premium .tb-kpi-note{
   color:#687c8c !important;
   opacity:1 !important;
+}
+  /* ===== THE BEST • KPI COM ÍCONES ===== */
+
+#painel-premium .tb-kpi-card{
+  display:flex !important;
+  align-items:center !important;
+  gap:14px !important;
+}
+
+#painel-premium .tb-kpi-content{
+  min-width:0;
+  flex:1;
+}
+
+/* ÍCONE */
+#painel-premium .tb-kpi-icon{
+  width:48px;
+  height:48px;
+  min-width:48px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  border-radius:12px;
+
+  font-size:22px;
+  line-height:1;
+
+  box-shadow:0 5px 14px rgba(15,45,70,.12);
+}
+
+/* Cores individuais */
+
+#painel-premium .tb-icon-blue{
+  background:linear-gradient(145deg,#087fc1,#16a9f5);
+}
+
+#painel-premium .tb-icon-green{
+  background:linear-gradient(145deg,#00a86b,#12d68b);
+}
+
+#painel-premium .tb-icon-orange{
+  background:linear-gradient(145deg,#f59e0b,#ffc83d);
+}
+
+#painel-premium .tb-icon-purple{
+  background:linear-gradient(145deg,#7c3aed,#a855f7);
+}
+
+#painel-premium .tb-icon-cyan{
+  background:linear-gradient(145deg,#0284c7,#22d3ee);
+}
+
+#painel-premium .tb-icon-indigo{
+  background:linear-gradient(145deg,#3949ab,#667eea);
+}
+
+#painel-premium .tb-icon-red{
+  background:linear-gradient(145deg,#e5485d,#ff7384);
+}
+
+/* Ajuste dos textos */
+
+#painel-premium .tb-kpi-label{
+  margin-bottom:6px !important;
+}
+
+#painel-premium .tb-kpi-value{
+  font-size:23px !important;
+}
+
+#painel-premium .tb-kpi-note{
+  margin-top:6px !important;
+}
+
+/* Tela menor */
+@media(max-width:1400px){
+  #painel-premium .tb-kpi-icon{
+    width:44px;
+    height:44px;
+    min-width:44px;
+    font-size:20px;
+  }
 }
 </style>
 
