@@ -4954,11 +4954,41 @@ document.addEventListener('DOMContentLoaded', function(){
 
 
 <section id="painel-premium" class="tb-system-dashboard" hidden aria-label="Dashboard THE BEST Marketplace">
-  <div class="tb-dash-shell">
-    <div class="tb-dash-head">
-      <div><h2>THE BEST <span>MARKETPLACE</span></h2><p>Visão geral da sua operação em tempo real.</p></div>
-      <button class="tb-dash-refresh" type="button" onclick="loadMarketplaceDashboard()">↻ ATUALIZAR PAINEL</button>
+<div class="tb-dash-head tb-dash-head-premium">
+
+  <div class="tb-dash-welcome">
+    <span class="tb-welcome-label">BEM-VINDO(A) AO SEU ERP</span>
+
+    <h2>
+      THE BEST <span>MARKETPLACE</span>
+    </h2>
+
+    <p>
+      Acompanhe seus resultados e gerencie sua operação em um só lugar.
+    </p>
+  </div>
+
+  <div class="tb-dash-head-actions">
+
+    <div class="tb-report-period">
+      <div class="tb-report-icon">▣</div>
+
+      <div>
+        <small>Período do Relatório</small>
+        <strong>Últimos 30 dias</strong>
+      </div>
     </div>
+
+    <button
+      class="tb-dash-refresh tb-refresh-premium"
+      type="button"
+      onclick="loadMarketplaceDashboard()">
+      ↻ <span>ATUALIZAR PAINEL</span>
+    </button>
+
+  </div>
+
+</div>
     <div class="tb-kpi-grid">
 
   <div class="tb-kpi-card">
@@ -5337,6 +5367,170 @@ document.addEventListener('DOMContentLoaded', function(){
     height:44px;
     min-width:44px;
     font-size:20px;
+  }
+}
+  /* ===== DASHBOARD • CABEÇALHO PREMIUM ===== */
+
+#painel-premium .tb-dash-head-premium{
+  display:flex !important;
+  align-items:center !important;
+  justify-content:space-between !important;
+  gap:30px !important;
+
+  margin-bottom:8px !important;
+  padding:8px 4px 2px !important;
+}
+
+/* BEM-VINDO */
+#painel-premium .tb-welcome-label{
+  display:block;
+
+  margin-bottom:5px;
+
+  color:#71849a !important;
+
+  font-size:11px;
+  font-weight:900;
+  letter-spacing:.7px;
+}
+
+/* Título */
+#painel-premium .tb-dash-welcome h2{
+  margin:0 !important;
+
+  color:#0b2340 !important;
+
+  font-size:34px !important;
+  line-height:1.05 !important;
+  font-weight:900 !important;
+  letter-spacing:-1px;
+}
+
+#painel-premium .tb-dash-welcome h2 span{
+  color:#087fc1 !important;
+}
+
+/* Subtítulo */
+#painel-premium .tb-dash-welcome p{
+  margin:8px 0 0 !important;
+
+  color:#71849a !important;
+
+  font-size:13px !important;
+}
+
+/* Lado direito */
+#painel-premium .tb-dash-head-actions{
+  display:flex;
+  align-items:stretch;
+  gap:12px;
+}
+
+/* PERÍODO */
+#painel-premium .tb-report-period{
+  min-width:190px;
+  height:62px;
+
+  display:flex;
+  align-items:center;
+  gap:12px;
+
+  padding:0 16px;
+
+  background:#fff;
+  border:1px solid #e0e7ed;
+  border-radius:12px;
+
+  box-shadow:0 5px 18px rgba(25,55,80,.08);
+}
+
+#painel-premium .tb-report-icon{
+  width:36px;
+  height:36px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  border-radius:9px;
+
+  background:#e8f5fd;
+  color:#087fc1;
+
+  font-size:20px;
+  font-weight:900;
+}
+
+#painel-premium .tb-report-period > div:last-child{
+  display:flex;
+  flex-direction:column;
+  gap:3px;
+}
+
+#painel-premium .tb-report-period small{
+  color:#71849a !important;
+  font-size:9px !important;
+  font-weight:700;
+}
+
+#painel-premium .tb-report-period strong{
+  color:#172b3a;
+  font-size:12px;
+  font-weight:900;
+}
+
+/* ATUALIZAR */
+#painel-premium .tb-refresh-premium{
+  min-width:180px !important;
+  height:62px !important;
+
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  gap:8px !important;
+
+  padding:0 20px !important;
+
+  border:0 !important;
+  border-radius:12px !important;
+
+  background:linear-gradient(
+    135deg,
+    #087fc1,
+    #139df0
+  ) !important;
+
+  color:#fff !important;
+
+  font-size:11px !important;
+  font-weight:900 !important;
+
+  box-shadow:0 7px 18px rgba(8,127,193,.24) !important;
+
+  cursor:pointer;
+  transition:.18s ease;
+}
+
+#painel-premium .tb-refresh-premium:hover{
+  transform:translateY(-2px);
+  box-shadow:0 10px 24px rgba(8,127,193,.30) !important;
+}
+
+/* RESPONSIVO */
+@media(max-width:900px){
+
+  #painel-premium .tb-dash-head-premium{
+    flex-direction:column !important;
+    align-items:flex-start !important;
+  }
+
+  #painel-premium .tb-dash-head-actions{
+    width:100%;
+  }
+
+  #painel-premium .tb-report-period,
+  #painel-premium .tb-refresh-premium{
+    flex:1;
   }
 }
 </style>
