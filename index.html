@@ -2628,6 +2628,122 @@ body.tb-premium-nav-active #painel-premium.tb-system-dashboard{
   font-size:10px !important;
   margin-top:8px !important;
 }
+    /* ===== CABEÇALHO PREMIUM • CORREÇÃO FORÇADA ===== */
+
+#painel-premium .tb-dash-head-premium{
+  min-height:105px !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:space-between !important;
+  gap:30px !important;
+}
+
+#painel-premium .tb-dash-head-actions{
+  display:flex !important;
+  flex-direction:row !important;
+  align-items:center !important;
+  justify-content:flex-end !important;
+  gap:14px !important;
+  flex-shrink:0 !important;
+}
+
+/* CARD PERÍODO */
+#painel-premium .tb-report-period{
+  display:flex !important;
+  flex-direction:row !important;
+  align-items:center !important;
+  gap:12px !important;
+
+  width:210px !important;
+  height:68px !important;
+  min-width:210px !important;
+
+  padding:0 16px !important;
+
+  background:#ffffff !important;
+  border:1px solid #dde5eb !important;
+  border-radius:14px !important;
+
+  box-shadow:0 7px 20px rgba(23,43,58,.09) !important;
+}
+
+/* ÍCONE DO PERÍODO */
+#painel-premium .tb-report-icon{
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+
+  width:42px !important;
+  height:42px !important;
+  min-width:42px !important;
+
+  background:#e7f4fd !important;
+  color:#087fc1 !important;
+
+  border-radius:10px !important;
+
+  font-size:0 !important;
+}
+
+/* cria um calendário sem depender de emoji */
+#painel-premium .tb-report-icon::before{
+  content:"▣";
+  font-size:25px !important;
+  color:#087fc1 !important;
+}
+
+/* TEXTO DO PERÍODO */
+#painel-premium .tb-report-period > div:last-child{
+  display:flex !important;
+  flex-direction:column !important;
+  align-items:flex-start !important;
+  justify-content:center !important;
+  gap:3px !important;
+}
+
+#painel-premium .tb-report-period small{
+  display:block !important;
+  color:#71849a !important;
+  font-size:10px !important;
+  line-height:1.1 !important;
+}
+
+#painel-premium .tb-report-period strong{
+  display:block !important;
+  color:#172b3a !important;
+  font-size:13px !important;
+  line-height:1.2 !important;
+  font-weight:900 !important;
+}
+
+/* BOTÃO ATUALIZAR */
+#painel-premium .tb-refresh-premium{
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  gap:9px !important;
+
+  width:190px !important;
+  min-width:190px !important;
+  height:68px !important;
+
+  padding:0 20px !important;
+
+  background:linear-gradient(135deg,#087fc1,#159ff1) !important;
+  color:#ffffff !important;
+
+  border:0 !important;
+  border-radius:14px !important;
+
+  font-size:11px !important;
+  font-weight:900 !important;
+
+  box-shadow:0 8px 20px rgba(8,127,193,.25) !important;
+}
+
+#painel-premium .tb-refresh-premium span{
+  color:#ffffff !important;
+}
 </style>
 
   <!-- THE BEST V6 Premium -->
