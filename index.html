@@ -2812,6 +2812,53 @@ body.tb-premium-nav-active #painel-premium .tb-dash-head h2{
 #painel-premium .tb-refresh-premium span{
   color:#ffffff !important;
 }
+    /* ===== GRÁFICOS • VISUAL PREMIUM ===== */
+
+body.tb-premium-nav-active #painel-premium .tb-chart-grid{
+    display:grid !important;
+    grid-template-columns:1.6fr 1fr !important;
+    gap:18px !important;
+    margin-top:18px !important;
+}
+
+body.tb-premium-nav-active #painel-premium .tb-chart-card{
+    background:#ffffff !important;
+    border:1px solid #dce5ec !important;
+    border-radius:18px !important;
+    padding:20px !important;
+    min-height:300px !important;
+
+    box-shadow:
+        0 8px 25px rgba(23,43,58,.06),
+        0 1px 3px rgba(23,43,58,.04) !important;
+}
+
+body.tb-premium-nav-active #painel-premium .tb-chart-card h3{
+    margin:0 0 5px !important;
+    color:#071f31 !important;
+    font-size:15px !important;
+    font-weight:900 !important;
+}
+
+body.tb-premium-nav-active #painel-premium .tb-chart-card > p{
+    margin:0 !important;
+    color:#687c8c !important;
+    font-size:11px !important;
+}
+
+body.tb-premium-nav-active #painel-premium .tb-bars-live{
+    margin-top:18px !important;
+    min-height:215px !important;
+    background:#f8fafc !important;
+    border:1px solid #e3eaf0 !important;
+    border-radius:14px !important;
+}
+
+@media(max-width:1000px){
+    body.tb-premium-nav-active #painel-premium .tb-chart-grid{
+        grid-template-columns:1fr !important;
+    }
+}
 </style>
 
   <!-- THE BEST V6 Premium -->
