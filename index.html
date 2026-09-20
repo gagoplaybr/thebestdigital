@@ -2595,10 +2595,29 @@ body.tb-premium-nav-active #painel-premium.tb-system-dashboard{
 }
 
 #painel-premium .tb-kpi-card{
-  min-height:138px !important;
-  padding:20px 16px !important;
-  gap:15px !important;
-  border-radius:16px !important;
+    position:relative !important;
+    overflow:hidden !important;
+
+    display:flex !important;
+    flex-direction:row !important;
+    align-items:center !important;
+    gap:18px !important;
+
+    min-height:122px !important;
+    padding:18px 20px !important;
+
+    background:#ffffff !important;
+    border:1px solid #e2e8f0 !important;
+    border-radius:14px !important;
+
+    box-shadow:
+        0 7px 22px rgba(23,43,58,.07),
+        0 1px 3px rgba(23,43,58,.04) !important;
+
+    transition:
+        transform .18s ease,
+        box-shadow .18s ease,
+        border-color .18s ease !important;
 }
 
 /* Ícones maiores */
