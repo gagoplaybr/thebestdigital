@@ -10050,30 +10050,25 @@ body.tb-premium-nav-active .tb-premium-top-tabs{
   pointer-events:none;
 }
 
-..tb-top-tab{
+.tb-top-tab{
   appearance:none;
   border:1px solid rgba(255,255,255,.06);
-  background:rgba(3,35,64,.55);
+  background:transparent;
   color:#ffffff;
   font:800 12px/1 system-ui;
   letter-spacing:.15px;
   min-height:48px;
   padding:0 18px;
-  border-radius:11px;
+  border-radius:10px;
   cursor:pointer;
   display:flex;
   align-items:center;
   justify-content:center;
-  gap:8px;
+  gap:7px;
   white-space:nowrap;
-  transition:
-    background .18s ease,
-   .tb-top-tab:hover{
-  color:#ffffff;
-  background:rgba(7,72,117,.85);
-  border-color:rgba(54,181,255,.35);
-  transform:translateY(-1px);
+  transition:background .18s ease,border-color .18s ease,transform .18s ease;
 }
+
 .tb-top-tab:hover{
   color:#ffffff;
   background:rgba(255,255,255,.09);
@@ -10084,28 +10079,12 @@ body.tb-premium-nav-active .tb-premium-top-tabs{
   color:#ffffff;
   background:linear-gradient(180deg,#159bea,#087fc1);
   border-color:#22aef5;
-  box-shadow:
-    0 5px 15px rgba(0,139,220,.30),
-    inset 0 -2px 0 rgba(255,255,255,.10);
+  box-shadow:0 5px 15px rgba(0,139,220,.30),inset 0 -2px 0 rgba(255,255,255,.10);
 }
 
-.tb-top-tab span{
-  font-size:11px;
-  color:inherit;
-  margin-left:0;
-}
-
-.tb-top-tab span b{
-  color:#ffd34e;
-  font-size:9px;
-  margin-left:3px;
-}
-
-.tb-top-arrow{
-  color:#bcd7ea;
-  font-size:12px;
-  margin-left:1px;
-}
+.tb-top-tab span{font-size:11px;color:inherit;margin-left:0;}
+.tb-top-tab span b{color:#ffd34e;font-size:9px;margin-left:3px;}
+.tb-top-arrow{color:#bcd7ea;font-size:12px;margin-left:1px;}
 body.tb-premium-nav-active .tb-premium-sidebar{padding-top:86px}
 body.tb-premium-nav-active .tb-side-menu .tb-side-link{display:none}
 body.tb-premium-nav-active .tb-side-menu .tb-side-link.tb-cat-visible{display:flex}
@@ -10310,6 +10289,94 @@ body.tb-premium-nav-active #area-cliente{
 #pedidos-erp-teste .tb-order-history summary{
   color:#526a7b !important;
 }
+
+
+/* ===== V8.5.7 • ACABAMENTO FINAL TOPBAR + ERP CLARO ===== */
+@media (min-width:901px){
+  body.tb-premium-nav-active .tb-premium-top-tabs{
+    display:flex!important;
+    position:fixed!important;
+    left:218px!important;
+    right:0!important;
+    top:0!important;
+    height:76px!important;
+    padding:0 22px!important;
+    align-items:center!important;
+    gap:8px!important;
+    background:linear-gradient(90deg,#062b4b 0%,#064b83 55%,#063b6b 100%)!important;
+    border:0!important;
+    border-bottom:1px solid rgba(50,180,255,.35)!important;
+    border-radius:0!important;
+    box-shadow:0 5px 18px rgba(0,34,66,.22)!important;
+    z-index:10050!important;
+  }
+  body.tb-premium-nav-active .tb-premium-top-tabs::before{
+    content:"";position:absolute;left:0;right:0;bottom:100%;height:24px;background:#062b4b;pointer-events:none;
+  }
+  .tb-top-brand{width:190px!important;min-width:190px!important;display:flex!important;align-items:center!important;}
+  .tb-top-logo{width:170px!important;height:54px!important;max-width:170px!important;max-height:54px!important;object-fit:contain!important;}
+  .tb-top-menu{display:flex!important;align-items:center!important;gap:5px!important;min-width:0!important;}
+  .tb-top-menu .tb-top-tab{min-height:40px!important;padding:0 13px!important;border-radius:8px!important;font-size:10px!important;}
+  body.tb-premium-nav-active .tb-premium-sidebar{padding-top:86px!important;}
+  body.tb-premium-nav-active.tb-single-module #painel-premium.tb-module-visible,
+  body.tb-premium-nav-active.tb-single-module #calculadora.tb-module-visible,
+  body.tb-premium-nav-active.tb-single-module #controle-vendas.tb-module-visible,
+  body.tb-premium-nav-active.tb-single-module #controle-estoque.tb-module-visible,
+  body.tb-premium-nav-active.tb-single-module #controle-metas.tb-module-visible,
+  body.tb-premium-nav-active.tb-single-module #relatorios-premium.tb-module-visible,
+  body.tb-premium-nav-active.tb-single-module #financeiro-premium.tb-module-visible,
+  body.tb-premium-nav-active.tb-single-module #meus-produtos.tb-module-visible,
+  body.tb-premium-nav-active.tb-single-module #pedidos-erp-teste.tb-module-visible,
+  body.tb-premium-nav-active.tb-single-module #area-cliente.tb-module-visible{padding-top:96px!important;}
+  body.tb-premium-nav-active #pedidos-erp-teste.tb-module-visible{margin-left:218px!important;width:auto!important;max-width:none!important;padding-left:24px!important;padding-right:24px!important;}
+}
+
+/* ERP: mesma linguagem clara do dashboard */
+#pedidos-erp-teste{background:#f4f6f8!important;color:#172b3a!important;}
+#pedidos-erp-teste .tb-erp-test-shell{background:#f4f6f8!important;color:#172b3a!important;border:0!important;box-shadow:none!important;}
+#pedidos-erp-teste .tb-erp-test-head{background:transparent!important;color:#172b3a!important;}
+#pedidos-erp-teste .tb-erp-test-head h2,#pedidos-erp-teste h3,#pedidos-erp-teste b,#pedidos-erp-teste strong{color:#172b3a!important;}
+#pedidos-erp-teste .tb-erp-test-head h2 span{color:#087fc1!important;}
+#pedidos-erp-teste .tb-erp-test-head p,#pedidos-erp-teste small,#pedidos-erp-teste .tb-flow-note{color:#687c8c!important;}
+#pedidos-erp-teste .tb-test-badge{background:#fff4d6!important;color:#8a5a00!important;border:1px solid #e7c66c!important;}
+#pedidos-erp-teste .tb-erp-warning{background:#fff8e8!important;border:1px solid #f0cf78!important;color:#765713!important;}
+#pedidos-erp-teste .tb-erp-card{background:#fff!important;border:1px solid #dbe4ea!important;color:#172b3a!important;box-shadow:0 5px 18px rgba(25,55,80,.06)!important;}
+#pedidos-erp-teste .tb-erp-field label,#pedidos-erp-teste label{color:#526a7b!important;}
+#pedidos-erp-teste input,#pedidos-erp-teste select,#pedidos-erp-teste textarea{background:#fff!important;color:#172b3a!important;border:1px solid #cfdbe4!important;}
+#pedidos-erp-teste input:focus,#pedidos-erp-teste select:focus,#pedidos-erp-teste textarea:focus{border-color:#16a9f5!important;box-shadow:0 0 0 3px rgba(22,169,245,.10)!important;outline:none!important;}
+#pedidos-erp-teste .tb-stock-kpi{background:#f7fafc!important;border:1px solid #dbe4ea!important;color:#172b3a!important;}
+#pedidos-erp-teste .tb-stock-kpi small{color:#687c8c!important;}
+#pedidos-erp-teste .tb-stock-kpi strong{color:#087fc1!important;}
+#pedidos-erp-teste .tb-stock-kpi.warn strong{color:#b87800!important;}
+#pedidos-erp-teste .tb-stock-kpi.danger strong{color:#d94b5b!important;}
+#pedidos-erp-teste .tb-order-card{background:#fff!important;border:1px solid #dbe4ea!important;color:#172b3a!important;box-shadow:0 3px 12px rgba(25,55,80,.04)!important;}
+#pedidos-erp-teste .tb-order-card:hover{background:#f9fbfc!important;border-color:#87bddc!important;}
+#pedidos-erp-teste .tb-order-top,#pedidos-erp-teste .tb-order-flow{border-color:#e5ebef!important;}
+#pedidos-erp-teste .tb-order-meta,#pedidos-erp-teste .tb-order-history,#pedidos-erp-teste .tb-order-history summary{color:#526a7b!important;}
+#pedidos-erp-teste #tbErpOrderSearch{background:#fff!important;color:#172b3a!important;border:1px solid #cfdbe4!important;}
+#pedidos-erp-teste #tbErpOrderSearch::placeholder{color:#8da0ae!important;}
+#pedidos-erp-teste .tb-order-tab{background:#eef3f6!important;color:#526a7b!important;border:1px solid #dbe4ea!important;}
+#pedidos-erp-teste .tb-order-tab:hover{background:#e5f3fb!important;color:#087fc1!important;border-color:#87c9ed!important;}
+#pedidos-erp-teste .tb-order-tab.active{background:#087fc1!important;color:#fff!important;border-color:#087fc1!important;}
+#pedidos-erp-teste .tb-processing-mode>span{color:#687c8c!important;}
+#pedidos-erp-teste .tb-processing-switch{background:#edf2f5!important;border:1px solid #d4dfe6!important;}
+#pedidos-erp-teste .tb-processing-switch button{color:#687c8c!important;background:transparent!important;}
+#pedidos-erp-teste .tb-processing-switch button:hover{background:#e2edf4!important;color:#087fc1!important;}
+#pedidos-erp-teste .tb-processing-switch button.active{background:#087fc1!important;color:#fff!important;box-shadow:0 3px 10px rgba(0,127,193,.22)!important;}
+#pedidos-erp-teste .tb-erp-btn{background:linear-gradient(180deg,#159bea,#087fc1)!important;color:#fff!important;border:1px solid #087fc1!important;}
+#pedidos-erp-teste .tb-erp-btn.secondary{background:#eef3f6!important;color:#315268!important;border:1px solid #cbd9e2!important;}
+#pedidos-erp-teste .tb-erp-btn.warn{background:#fff3e4!important;color:#9b5b00!important;border:1px solid #efc47f!important;}
+#pedidos-erp-teste .tb-label-preview{background:#fff!important;color:#111!important;border:1px solid #d6dde2!important;box-shadow:0 8px 22px rgba(25,55,80,.08)!important;}
+#pedidos-erp-teste .tb-label-preview b,#pedidos-erp-teste .tb-label-preview strong{color:#111!important;}
+#pedidos-erp-teste .tb-flow-step{background:#eef3f6!important;color:#526a7b!important;border:1px solid #dbe4ea!important;}
+#pedidos-erp-teste .tb-flow-step.active,#pedidos-erp-teste .tb-flow-step.done{background:#e7f6fd!important;color:#087fc1!important;border-color:#9bd7f3!important;}
+#pedidos-erp-teste .tb-flow-locked{background:#f1f4f6!important;color:#778b99!important;border:1px solid #dbe4ea!important;}
+#pedidos-erp-teste .tb-empty-orders{background:#f7fafc!important;color:#687c8c!important;border-color:#dbe4ea!important;}
+#pedidos-erp-teste .tb-order-photo-zoom{background:#fff!important;border-color:#cfdce5!important;}
+
+@media(max-width:900px){
+  body.tb-premium-nav-active #pedidos-erp-teste.tb-module-visible{margin-left:0!important;width:100%!important;padding:14px 8px 90px!important;}
+}
 </style>
 <script id="tb-v851-layered-nav-js">
 (function(){
@@ -10350,37 +10417,3 @@ body.tb-premium-nav-active #area-cliente{
 
 </body>
 </html>
-
-<!-- V8.5.2 • acabamento da navegação superior -->
-<style id="tb-v852-topbar-finish">
-@media (min-width:901px){
-  body.tb-premium-nav-active .tb-premium-top-tabs{
-    left:244px!important;
-    right:12px!important;
-    top:12px!important;
-    height:46px!important;
-    padding:0 14px!important;
-    border:1px solid rgba(74,190,255,.18)!important;
-    border-radius:14px!important;
-    box-shadow:0 10px 28px rgba(0,0,0,.20), inset 0 1px 0 rgba(255,255,255,.025)!important;
-  }
-  body.tb-premium-nav-active .tb-premium-sidebar{
-    padding-top:14px!important;
-  }
-  body.tb-premium-nav-active.tb-single-module #painel-premium.tb-module-visible,
-  body.tb-premium-nav-active.tb-single-module #calculadora.tb-module-visible,
-  body.tb-premium-nav-active.tb-single-module #controle-vendas.tb-module-visible,
-  body.tb-premium-nav-active.tb-single-module #controle-estoque.tb-module-visible,
-  body.tb-premium-nav-active.tb-single-module #controle-metas.tb-module-visible,
-  body.tb-premium-nav-active.tb-single-module #relatorios-premium.tb-module-visible,
-  body.tb-premium-nav-active.tb-single-module #financeiro-premium.tb-module-visible,
-  body.tb-premium-nav-active.tb-single-module #meus-produtos.tb-module-visible,
-  body.tb-premium-nav-active.tb-single-module #pedidos-erp-teste.tb-module-visible,
-  body.tb-premium-nav-active.tb-single-module #area-cliente.tb-module-visible{
-    padding-top:74px!important;
-  }
-  body.tb-premium-nav-active #pedidos-erp-teste.tb-module-visible{
-    margin-left:232px!important;
-  }
-}
-</style>
