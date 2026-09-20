@@ -4871,6 +4871,9 @@ document.querySelectorAll('.tb-order-tab').forEach(tab=>{
    if(o.status==='DEVOLUÇÃO RECEBIDA') return `<button class="tb-erp-btn secondary" onclick="tbErpFinishReturn(${i},'ESTOQUE')">✓ APROVADO → ESTOQUE</button><button class="tb-erp-btn danger" onclick="tbErpFinishReturn(${i},'GARANTIA/AVARIA')">⚠ AVARIA → GARANTIA</button>`;
    if(isNormal(o.status)){
      const canAdvance=o.status!=='ENTREGUE';
+     if(o.status==='ENVIADO'){
+  return `<button class="tb-erp-btn secondary" onclick="tbErpConfirmDelivery('${o.id}')">✓ CONFIRMAR ENTREGA</button><span class="tb-flow-note">Aguardando confirmação de entrega.</span>`;
+}
      return `${canAdvance && tbProcessingMode==='MANUAL'
   ? `<button class="tb-erp-btn secondary" onclick="tbErpAdvance(${i})">AVANÇAR STATUS</button>`
   : ''
