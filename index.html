@@ -2128,6 +2128,98 @@ body.tb-user-logged-in #calculadora{
     0 0 0 1px #19b5ff,
     0 3px 10px rgba(0,153,220,.25);
 }
+    /* ===== NOVA BARRA SUPERIOR THE BEST ===== */
+
+body.tb-premium-nav-active .tb-premium-top-tabs{
+  position:relative !important;
+  left:0 !important;
+  right:auto !important;
+  top:auto !important;
+
+  width:100% !important;
+  height:76px !important;
+
+  display:flex !important;
+  align-items:center !important;
+
+  padding:0 28px !important;
+  gap:28px !important;
+
+  background:linear-gradient(90deg,#061d34,#073f78) !important;
+  border:0 !important;
+  border-radius:0 !important;
+
+  box-sizing:border-box !important;
+}
+
+/* LOGO */
+
+.tb-top-brand{
+  width:190px;
+  min-width:190px;
+  display:flex;
+  align-items:center;
+}
+
+.tb-top-logo{
+  display:block !important;
+  width:170px !important;
+  height:54px !important;
+  max-width:170px !important;
+  max-height:54px !important;
+  object-fit:contain !important;
+}
+
+/* MENUS */
+
+.tb-top-menu{
+  flex:1;
+  display:flex;
+  align-items:center;
+  gap:5px;
+  min-width:0;
+}
+
+.tb-top-menu .tb-top-tab,
+.tb-top-extra{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  min-height:40px;
+  padding:0 13px;
+
+  border:0;
+  border-radius:8px;
+
+  background:transparent;
+  color:#dcecff;
+
+  font-size:10px;
+  font-weight:800;
+  text-decoration:none;
+  white-space:nowrap;
+
+  cursor:pointer;
+}
+
+.tb-top-extra:hover,
+.tb-top-menu .tb-top-tab:hover{
+  background:rgba(255,255,255,.08);
+  color:#fff;
+}
+
+.tb-top-menu .tb-top-tab.active{
+  background:#087fc1 !important;
+  color:#fff !important;
+  box-shadow:0 4px 15px rgba(0,127,193,.25);
+}
+
+/* NÃO DEIXAR O CONTEÚDO ESCONDER ATRÁS DA BARRA */
+
+body.tb-premium-nav-active{
+  padding-top:0 !important;
+}
 </style>
 
   <!-- THE BEST V6 Premium -->
