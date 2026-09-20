@@ -8712,7 +8712,41 @@ if(topEl){
       }).join("")
     : '<div class="tb-empty-chart">O ranking aparece após registrar vendas.</div>';
 }
-    const alertEl=document.getElementById("tbStockAlerts");if(alertEl)alertEl.innerHTML=low.length?low.slice(0,6).map(x=>`<div class="tb-stock-alert"><span>${esc(x.product_name)}</span><b class="tb-stock-low">${Number(x.quantity||0)} un.</b></div>`).join(""):'<div class="tb-empty-chart">Nenhum alerta de estoque baixo.</div>';
+    const alertEl=document.getElementById("tbStockAlerts");
+
+if(alertEl){
+
+  alertEl.innerHTML=low.length
+    ? low.slice(0,6).map(x=>`
+        <div class="tb-stock-warning">
+
+          <div class="tb-stock-warning-icon">!</div>
+
+          <div class="tb-stock-warning-info">
+            <strong>${esc(x.product_name)}</strong>
+            <small>Estoque baixo</small>
+          </div>
+
+          <b class="tb-stock-warning-qty">
+            ${Number(x.quantity||0)} un.
+          </b>
+
+        </div>
+      `).join("")
+
+    : `
+        <div class="tb-stock-healthy">
+
+          <div class="tb-stock-healthy-icon">✓</div>
+
+          <div>
+            <strong>Estoque saudável</strong>
+            <span>Nenhum produto com estoque baixo.</span>
+          </div>
+
+        </div>
+      `;
+}
   };
 
 
