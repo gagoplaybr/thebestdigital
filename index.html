@@ -8770,7 +8770,64 @@ if(mEl){
     : '<div class="tb-empty-chart">Os marketplaces aparecerão aqui.</div>';
 }
     const now=new Date();const goal=G.find(x=>Number(x.period_month)===now.getMonth()+1&&Number(x.period_year)===now.getFullYear())||G[0];
-    const goalEl=document.getElementById("tbGoals");if(goalEl){if(!goal){goalEl.innerHTML='<div class="tb-empty-chart">Cadastre uma meta mensal para acompanhar o progresso.</div>'}else{const gp=(v,t)=>t?Math.min(100,Math.max(0,v/t*100)):0;const rows=[["Faturamento",revenue,Number(goal.revenue_goal||0)],["Lucro",profit,Number(goal.profit_goal||0)],["Vendas",S.length,Number(goal.sales_goal||0)]];goalEl.innerHTML=rows.map(([n,v,t])=>`<div class="tb-goal-line"><small>${n}</small><b>${gp(v,t).toFixed(0)}%</b><div class="tb-progress"><span style="width:${gp(v,t)}%"></span></div></div>`).join("");}}
+    const goalEl=document.getElementById("tbGoals");
+
+if(goalEl){
+
+  if(!goal){
+
+    goalEl.innerHTML=`
+      <div class="tb-empty-chart">
+        Cadastre uma meta mensal para acompanhar o progresso.
+      </div>
+    `;
+
+  }else{
+
+    const gp=(v,t)=>
+      t ? Math.min(100,Math.max(0,v/t*100)) : 0;
+
+    const rows=[
+      ["Faturamento",revenue,Number(goal.revenue_goal||0),"money"],
+      ["Lucro",profit,Number(goal.profit_goal||0),"money"],
+      ["Vendas",S.length,Number(goal.sales_goal||0),"number"]
+    ];
+
+    goalEl.innerHTML=rows.map(([n,v,t,type])=>{
+
+      const percent=gp(v,t);
+
+      const atual=type==="money"
+        ? brl(v)
+        : `${Number(v)} vendas`;
+
+      const meta=type==="money"
+        ? brl(t)
+        : `${Number(t)} vendas`;
+
+      return `
+        <div class="tb-goal-premium">
+
+          <div class="tb-goal-head">
+            <strong>${n}</strong>
+            <b>${percent.toFixed(0)}%</b>
+          </div>
+
+          <div class="tb-goal-values">
+            <span>${atual}</span>
+            <small>Meta: ${meta}</small>
+          </div>
+
+          <div class="tb-progress">
+            <span style="width:${percent}%"></span>
+          </div>
+
+        </div>
+      `;
+
+    }).join("");
+  }
+}
     const products={};
 
 S.forEach(x=>{
