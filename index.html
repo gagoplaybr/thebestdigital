@@ -8443,7 +8443,54 @@ window.refreshPremiumAccess=async function(){
     if(op)op.style.color=operationalResult>=0?"#52e6a0":"#ff8d98";
     renderSalesEvolutionChart(S);
     const market={};S.forEach(x=>{const k=(x.marketplace||"Não informado").trim()||"Não informado";market[k]=(market[k]||0)+Number(x.gross_revenue||Number(x.unit_price||0)*Number(x.quantity||1));});
-    const mEl=document.getElementById("tbMarketplaces");if(mEl){const arr=Object.entries(market).sort((a,b)=>b[1]-a[1]).slice(0,6);const max=Math.max(1,...arr.map(x=>x[1]));mEl.innerHTML=arr.length?arr.map(([k,v])=>`<div class="tb-market-row"><span>${esc(k)}</span><div class="tb-market-track"><div class="tb-market-fill" style="width:${(v/max)*100}%"></div></div><b>${Math.round(revenue?v/revenue*100:0)}%</b></div>`).join(""):'<div class="tb-empty-chart">Os marketplaces aparecerão aqui.</div>';}
+    const mEl = document.getElementById("tbMarketplaces");
+
+if(mEl){
+
+  const arr = Object.entries(market)
+    .sort((a,b)=>b[1]-a[1])
+    .slice(0,6);
+
+  const max = Math.max(1,...arr.map(x=>x[1]));
+
+  mEl.innerHTML = arr.length
+    ? arr.map(([k,v])=>{
+
+        const percentual =
+          Math.round(revenue ? v / revenue * 100 : 0);
+
+        const quantidade =
+          S.filter(x =>
+            String(x.marketplace || 'Não informado') === String(k)
+          ).length;
+
+        return `
+          <div class="tb-market-row">
+
+            <div class="tb-market-info">
+              <strong>${esc(k)}</strong>
+
+              <small>
+                ${brl(v)} •
+                ${quantidade} ${quantidade === 1 ? 'venda' : 'vendas'}
+              </small>
+            </div>
+
+            <div class="tb-market-track">
+              <div
+                class="tb-market-fill"
+                style="width:${(v/max)*100}%">
+              </div>
+            </div>
+
+            <b>${percentual}%</b>
+
+          </div>
+        `;
+
+      }).join("")
+    : '<div class="tb-empty-chart">Os marketplaces aparecerão aqui.</div>';
+}
     const now=new Date();const goal=G.find(x=>Number(x.period_month)===now.getMonth()+1&&Number(x.period_year)===now.getFullYear())||G[0];
     const goalEl=document.getElementById("tbGoals");if(goalEl){if(!goal){goalEl.innerHTML='<div class="tb-empty-chart">Cadastre uma meta mensal para acompanhar o progresso.</div>'}else{const gp=(v,t)=>t?Math.min(100,Math.max(0,v/t*100)):0;const rows=[["Faturamento",revenue,Number(goal.revenue_goal||0)],["Lucro",profit,Number(goal.profit_goal||0)],["Vendas",S.length,Number(goal.sales_goal||0)]];goalEl.innerHTML=rows.map(([n,v,t])=>`<div class="tb-goal-line"><small>${n}</small><b>${gp(v,t).toFixed(0)}%</b><div class="tb-progress"><span style="width:${gp(v,t)}%"></span></div></div>`).join("");}}
     const products={};S.forEach(x=>{const k=x.product_name||"Produto";products[k]=(products[k]||0)+Number(x.quantity||1)});const top=Object.entries(products).sort((a,b)=>b[1]-a[1]).slice(0,5);const topEl=document.getElementById("tbTopProducts");if(topEl)topEl.innerHTML=top.length?top.map(([n,q],i)=>`<div class="tb-stock-alert"><span>${i+1}. ${esc(n)}</span><b>${q} un.</b></div>`).join(""):'<div class="tb-empty-chart">O ranking aparece após registrar vendas.</div>';
