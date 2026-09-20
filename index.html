@@ -10106,13 +10106,30 @@ body.tb-premium-nav-active{
 }
 
 body.tb-premium-nav-active .tb-premium-top-tabs{
-  position:absolute;
-  top:0;
-  left:218px;
-  right:0;
-  height:58px;
-  box-sizing:border-box;
-  z-index:10020;
+  position:fixed !important;
+  top:0 !important;
+  left:218px !important;
+  right:0 !important;
+  height:76px !important;
+
+  display:flex !important;
+  align-items:center !important;
+
+  padding:0 22px !important;
+  gap:8px !important;
+
+  box-sizing:border-box !important;
+  z-index:10020 !important;
+
+  background:linear-gradient(
+    90deg,
+    #062b4b 0%,
+    #064b83 55%,
+    #063b6b 100%
+  ) !important;
+
+  border-bottom:1px solid rgba(50,180,255,.35) !important;
+  box-shadow:0 5px 18px rgba(0,34,66,.22) !important;
 }
 
 /* Conteúdo começa abaixo da barra */
