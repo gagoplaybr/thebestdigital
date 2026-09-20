@@ -10050,24 +10050,30 @@ body.tb-premium-nav-active .tb-premium-top-tabs{
   pointer-events:none;
 }
 
-.tb-top-tab{
+..tb-top-tab{
   appearance:none;
-  border:1px solid transparent;
-  background:transparent;
+  border:1px solid rgba(255,255,255,.06);
+  background:rgba(3,35,64,.55);
   color:#ffffff;
   font:800 12px/1 system-ui;
   letter-spacing:.15px;
-  padding:14px 15px;
-  border-radius:10px;
+  min-height:48px;
+  padding:0 18px;
+  border-radius:11px;
   cursor:pointer;
-  transition:.18s ease;
   display:flex;
   align-items:center;
   justify-content:center;
-  gap:7px;
+  gap:8px;
   white-space:nowrap;
+  transition:
+    background .18s ease,
+   .tb-top-tab:hover{
+  color:#ffffff;
+  background:rgba(7,72,117,.85);
+  border-color:rgba(54,181,255,.35);
+  transform:translateY(-1px);
 }
-
 .tb-top-tab:hover{
   color:#ffffff;
   background:rgba(255,255,255,.09);
