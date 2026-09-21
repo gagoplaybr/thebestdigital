@@ -10881,6 +10881,23 @@ document.addEventListener('DOMContentLoaded', function(){
         e.stopPropagation();
     });
 
+  const minhaConta = document.getElementById('tbDropdownMinhaConta');
+
+if(minhaConta){
+    minhaConta.addEventListener('click', function(){
+
+        const contaOriginal = document.querySelector(
+            '.tb-top-tab[data-tb-topcat="conta"]'
+        );
+
+        if(contaOriginal){
+            closeUserMenu();
+            contaOriginal.click();
+        }
+
+    });
+}
+
     document.addEventListener('click', function(){
         closeUserMenu();
     });
