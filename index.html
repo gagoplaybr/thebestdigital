@@ -10879,16 +10879,11 @@ document.addEventListener('DOMContentLoaded', function(){
 
 if(minhaConta){
     minhaConta.addEventListener('click', function(){
+        closeUserMenu();
 
-        const contaOriginal = document.querySelector(
-            '.tb-top-tab[data-tb-topcat="conta"]'
-        );
-
-        if(contaOriginal){
-            closeUserMenu();
-            contaOriginal.click();
+        if(typeof window.tbSetPremiumCategory === 'function'){
+            window.tbSetPremiumCategory('conta');
         }
-
     });
 }
 
