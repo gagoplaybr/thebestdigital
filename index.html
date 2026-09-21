@@ -8683,7 +8683,18 @@ window.refreshPremiumAccess=async function(){
     !error &&
     data.premium===true &&
     data.purchase_status==="approved";
+  
+/* TROCA AUTOMÁTICA DAS BARRAS */
+const publicTopbar=document.getElementById('tbPublicTopbar');
+const premiumTopbar=document.getElementById('tbPremiumTopTabs');
 
+if(publicTopbar){
+  publicTopbar.style.display=premiumActive ? 'none' : 'flex';
+}
+
+if(premiumTopbar){
+  premiumTopbar.style.display=premiumActive ? 'flex' : 'none';
+}
   tbUpdatePremiumSidebarState();
   tbUpdateInstalledAppLoginState();
 
