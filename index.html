@@ -2466,6 +2466,17 @@ body.tb-premium-nav-active .tb-premium-top-tabs{
 
     flex-shrink:0;
 }
+    .tb-top-menu .tb-nav-icon svg{
+    width:25px;
+    height:25px;
+    display:block;
+
+    fill:none;
+    stroke:currentColor;
+    stroke-width:2;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+}
 
 .tb-top-menu .tb-top-arrow{
     display:inline-flex;
@@ -5481,7 +5492,13 @@ document.addEventListener('DOMContentLoaded', function(){
     <button type="button"
             class="tb-top-tab active"
             data-tb-topcat="visao">
-      <span class="tb-nav-icon">🏠</span>
+      <span class="tb-nav-icon">
+  <svg viewBox="0 0 24 24" aria-hidden="true">
+    <path d="M3 10.5 12 3l9 7.5"/>
+    <path d="M5.5 9.5V21h13V9.5"/>
+    <path d="M9.5 21v-7h5v7"/>
+  </svg>
+</span>
       <span>VISÃO GERAL</span>
     </button>
 
