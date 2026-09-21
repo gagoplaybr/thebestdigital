@@ -10878,11 +10878,14 @@ document.addEventListener('DOMContentLoaded', function(){
   const minhaConta = document.getElementById('tbDropdownMinhaConta');
 
 if(minhaConta){
-    minhaConta.addEventListener('click', function(){
+    minhaConta.addEventListener('click', function(e){
+        e.preventDefault();
+        e.stopPropagation();
+
         closeUserMenu();
 
-        if(typeof window.tbSetPremiumCategory === 'function'){
-            window.tbSetPremiumCategory('conta');
+        if(typeof window.tbOpenMinhaConta === 'function'){
+            window.tbOpenMinhaConta(e);
         }
     });
 }
