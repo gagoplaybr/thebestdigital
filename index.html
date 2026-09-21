@@ -2221,25 +2221,35 @@ body.tb-premium-nav-active .tb-premium-top-tabs{
 
 .tb-top-search{
     margin-left:auto;
-    width:280px;
-    height:54px;
+    width:290px;
+    height:46px;
     flex-shrink:0;
 
     display:flex;
     align-items:center;
-    gap:12px;
+    gap:11px;
 
-    padding:0 18px;
+    padding:0 16px;
 
-    background:rgba(255,255,255,.10);
-    border:1px solid rgba(255,255,255,.10);
-    border-radius:12px;
+    background:rgba(255,255,255,.09);
+    border:1px solid rgba(255,255,255,.14);
+    border-radius:10px;
+
+    box-sizing:border-box;
+    transition:.2s ease;
 }
 
 .tb-top-search-icon{
-    font-size:17px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:18px;
     line-height:1;
     flex-shrink:0;
+
+    color:#ffffff;
+    opacity:.9;
 }
 
 .tb-top-search input{
@@ -2252,18 +2262,19 @@ body.tb-premium-nav-active .tb-premium-top-tabs{
     background:transparent;
 
     color:#ffffff;
-    font-size:12px;
-    font-weight:600;
+    font-size:13px;
+    font-weight:500;
 }
 
 .tb-top-search input::placeholder{
-    color:#b9cee0;
+    color:#a9bfd1;
     opacity:1;
 }
 
 .tb-top-search:focus-within{
-    background:rgba(255,255,255,.14);
-    border-color:rgba(56,189,248,.55);
+    background:rgba(255,255,255,.12);
+    border-color:#16a9f5;
+    box-shadow:0 0 0 2px rgba(22,169,245,.12);
 }
 
     /* ===== USUÁRIO BARRA SUPERIOR ===== */
