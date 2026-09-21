@@ -2349,6 +2349,84 @@ body.tb-premium-nav-active .tb-premium-top-tabs{
     color:#c5d8e8;
     font-size:15px;
 }
+
+    /* ===== MENU SUSPENSO DO USUÁRIO ===== */
+
+.tb-user-dropdown{
+    position:absolute;
+    top:78px;
+    right:24px;
+
+    width:220px;
+    padding:8px;
+
+    background:#ffffff;
+    border:1px solid #dce6ee;
+    border-radius:12px;
+
+    box-shadow:0 14px 35px rgba(12,42,66,.22);
+
+    z-index:10100;
+}
+
+.tb-user-dropdown[hidden]{
+    display:none !important;
+}
+
+.tb-user-dropdown-item{
+    width:100%;
+    height:44px;
+
+    display:flex;
+    align-items:center;
+    gap:11px;
+
+    padding:0 12px;
+
+    border:0;
+    border-radius:8px;
+
+    background:transparent;
+    color:#172b3a;
+
+    font-size:13px;
+    font-weight:600;
+
+    text-align:left;
+    cursor:pointer;
+
+    transition:.15s ease;
+}
+
+.tb-user-dropdown-item:hover{
+    background:#eef7fd;
+    color:#087fc1;
+}
+
+.tb-user-dropdown-item > span:first-child{
+    width:24px;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:17px;
+}
+
+.tb-user-dropdown-divider{
+    height:1px;
+    margin:6px 4px;
+
+    background:#e5ebf0;
+}
+
+.tb-user-dropdown-logout{
+    color:#e4475b;
+}
+
+.tb-user-dropdown-logout:hover{
+    background:#fff1f3;
+    color:#d93449;
+}
     
 .tb-top-menu .tb-top-tab,
 .tb-top-extra{
