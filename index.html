@@ -10854,6 +10854,43 @@ body.tb-premium-nav-active #area-cliente{
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
 })();
 </script>
+<script>
+document.addEventListener('DOMContentLoaded', function(){
 
+    const userButton = document.getElementById('tbTopUser');
+    const userMenu = document.getElementById('tbUserDropdown');
+
+    if(!userButton || !userMenu) return;
+
+    function closeUserMenu(){
+        userMenu.hidden = true;
+        userButton.classList.remove('open');
+    }
+
+    userButton.addEventListener('click', function(e){
+        e.stopPropagation();
+
+        const willOpen = userMenu.hidden;
+
+        userMenu.hidden = !willOpen;
+        userButton.classList.toggle('open', willOpen);
+    });
+
+    userMenu.addEventListener('click', function(e){
+        e.stopPropagation();
+    });
+
+    document.addEventListener('click', function(){
+        closeUserMenu();
+    });
+
+    document.addEventListener('keydown', function(e){
+        if(e.key === 'Escape'){
+            closeUserMenu();
+        }
+    });
+
+});
+</script>
 </body>
 </html>
