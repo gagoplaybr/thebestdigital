@@ -8300,7 +8300,15 @@ if ("serviceWorker" in navigator) {
     premiumUser=null;premiumActive=false;premiumProducts=[];document.body.classList.remove('tb-show-account','tb-single-module');TB_PREMIUM_MODULES.forEach(id=>document.getElementById(id)?.classList.remove('tb-module-visible'));tbUpdateCommercialOfferVisibility();tbUpdatePremiumSidebarState();tbUpdateInstalledAppLoginState();showPremiumState();renderProdutos();renderSalesHistory();
     const login=document.getElementById("premiumLoginBox"),acc=document.getElementById("premiumAccountBox"); if(login)login.hidden=false;if(acc)acc.hidden=true;
     setPremiumStatus("Aguardando login","");
-  };
+
+const areaCliente=document.getElementById('area-cliente');
+if(areaCliente){
+    areaCliente.scrollIntoView({
+        behavior:'smooth',
+        block:'start'
+    });
+}
+};
 
 
 
