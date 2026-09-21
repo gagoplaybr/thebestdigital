@@ -5483,7 +5483,9 @@ document.addEventListener('DOMContentLoaded', function(){
     <span>👤</span>
     <span>Minha conta</span>
 </button>
-    <button type="button" class="tb-user-dropdown-item">
+    <button type="button"
+        class="tb-user-dropdown-item"
+        onclick="refreshPremiumAccess(); document.getElementById('tbUserDropdown').hidden=true;">
         <span>🔄</span>
         <span>Atualizar acesso</span>
     </button>
