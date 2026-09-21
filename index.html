@@ -2251,7 +2251,16 @@ body.tb-premium-nav-active .tb-premium-top-tabs{
     color:#ffffff;
     opacity:.9;
 }
-
+.tb-top-search-icon svg{
+    width:23px;
+    height:23px;
+    display:block;
+    fill:none;
+    stroke:#ffffff;
+    stroke-width:2.4;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+}
 .tb-top-search input{
     width:100%;
     min-width:0;
@@ -5562,7 +5571,12 @@ document.addEventListener('DOMContentLoaded', function(){
 
   </div>
 <div class="tb-top-search">
-  <span class="tb-top-search-icon">🔍</span>
+  <span class="tb-top-search-icon">
+  <svg viewBox="0 0 24 24" aria-hidden="true">
+    <circle cx="11" cy="11" r="7"></circle>
+    <path d="M16.5 16.5L21 21"></path>
+  </svg>
+</span>
 
   <input
     type="search"
