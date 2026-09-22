@@ -5911,6 +5911,13 @@ document.addEventListener('DOMContentLoaded', function(){
 
 <section class="site-premium-section" id="area-cliente" aria-label="Área exclusiva para clientes" hidden>
   <div class="client-hero">
+    <button
+  type="button"
+  class="tb-client-close"
+  onclick="document.getElementById('area-cliente').hidden=true;document.getElementById('tbPublicTopbar')?.scrollIntoView({behavior:'smooth',block:'start'});"
+  aria-label="Fechar login">
+  ✕
+</button>
     <div class="client-lock">🔐</div>
     <h2>Área do Cliente Premium</h2>
     <p>Use o mesmo e-mail informado na compra do THE BEST MARKETPLACE PREMIUM. O acesso Premium libera os recursos exclusivos no site e no aplicativo.</p>
