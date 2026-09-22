@@ -7403,9 +7403,8 @@ if(term){
     <div class="tb-order-card">
 
       <div class="tb-order-top">
-        <b>${esc(o.market)} • #${esc(o.id)}</b>
-        <span class="tb-order-status ${o.status==='CANCELADO'?'tb-order-status-cancelled':''}">${esc(o.status)}</span>
-      </div>
+  <b>${esc(o.market)} • #${esc(o.id)}</b>
+</div>
 
 ${o.status==='CANCELADO' && o.cancelledFrom==='ENVIADO'
   ? `<div class="tb-order-return-alert">↩ AGUARDANDO RETORNO DO PRODUTO</div>`
@@ -7434,6 +7433,12 @@ ${o.status==='CANCELADO' && o.cancelledFrom==='ENVIADO'
       <div class="tb-erp-actions">
         ${actionsHtml(o,i)}
       </div>
+
+<div class="tb-order-status-area">
+  <span class="tb-order-status ${o.status==='CANCELADO'?'tb-order-status-cancelled':''}">
+    ${esc(o.status)}
+  </span>
+</div>
 
       ${historyHtml(o)}
 
