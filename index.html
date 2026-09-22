@@ -7633,6 +7633,15 @@ window.tbErpAdvance=function(i,automatic=false){
    if(o.stockDebited&&!o.stockRestored){
      if(['PAGO','FATURAMENTO','ETIQUETA'].includes(previous)){stockMove(o.sku,'Cancelamento #'+o.id+': +'+o.qty+' un. devolvida ao disponível',{available:o.qty,processed:-o.qty});o.stockRestored=true;addHistory(o,'Estoque teste restaurado após cancelamento','ESTOQUE +'+o.qty)}
      else if(previous==='ENVIADO'){
+  stockMove(
+    o.sku,
+    'Cancelamento #'+o.id+' após envio: '+o.qty+' un. aguardando retorno',
+    {
+      processed:-o.qty,
+      returning:o.qty
+    }
+  );
+
   addHistory(
     o,
     'Cancelamento após envio: produto permanece fora do estoque disponível. Aguardando retorno físico.',
