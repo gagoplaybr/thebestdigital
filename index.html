@@ -1947,6 +1947,12 @@ body.tb-user-logged-in #calculadora{
   font-weight:900;
   letter-spacing:.4px;
 }
+    .tb-order-status-cancelled{
+  background:#fee2e2 !important;
+  color:#dc2626 !important;
+  border:1px solid #fca5a5 !important;
+  box-shadow:0 0 0 1px rgba(220,38,38,.06);
+}
 
 .tb-order-card p{
   margin:4px 0;
@@ -7381,7 +7387,7 @@ if(term){
 
       <div class="tb-order-top">
         <b>${esc(o.market)} • #${esc(o.id)}</b>
-        <span class="tb-order-status">${esc(o.status)}</span>
+        <span class="tb-order-status ${o.status==='CANCELADO'?'tb-order-status-cancelled':''}">${esc(o.status)}</span>
       </div>
 
       <div class="tb-order-product-line">
