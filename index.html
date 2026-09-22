@@ -1192,6 +1192,37 @@
   backdrop-filter:blur(18px);
   overflow:hidden;
 }
+    .tb-client-close{
+  position:absolute;
+  top:18px;
+  right:18px;
+  width:34px;
+  height:34px;
+  padding:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  border:1px solid rgba(255,255,255,.16);
+  border-radius:9px;
+  background:rgba(255,255,255,.07);
+  color:#a9c4d8;
+
+  font-size:16px;
+  font-weight:700;
+  line-height:1;
+
+  cursor:pointer;
+  transition:.18s ease;
+  z-index:10;
+}
+
+.tb-client-close:hover{
+  background:#e5484d;
+  border-color:#ff6469;
+  color:#fff;
+  transform:translateY(-1px);
+}
 body.tb-premium-nav-active .tb-premium-sidebar{display:flex;flex-direction:column}
 .tb-side-brand{
   display:flex;align-items:center;gap:10px;
