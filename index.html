@@ -7390,6 +7390,11 @@ if(term){
         <span class="tb-order-status ${o.status==='CANCELADO'?'tb-order-status-cancelled':''}">${esc(o.status)}</span>
       </div>
 
+${o.status==='CANCELADO' && o.cancelledFrom==='ENVIADO'
+  ? `<div class="tb-order-return-alert">↩ AGUARDANDO RETORNO DO PRODUTO</div>`
+  : ''
+}
+
       <div class="tb-order-product-line">
 
         ${photoHtml}
