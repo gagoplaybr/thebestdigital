@@ -7578,8 +7578,13 @@ window.tbErpAdvance=function(i,automatic=false){
    o.status='CANCELADO';addHistory(o,'Pedido cancelado a partir do estágio '+previous,'CANCELADO');
    if(o.stockDebited&&!o.stockRestored){
      if(['PAGO','FATURAMENTO','ETIQUETA'].includes(previous)){stockMove(o.sku,'Cancelamento #'+o.id+': +'+o.qty+' un. devolvida ao disponível',{available:o.qty,processed:-o.qty});o.stockRestored=true;addHistory(o,'Estoque teste restaurado após cancelamento','ESTOQUE +'+o.qty)}
-     else if(previous==='ENVIADO'){stockMove(o.sku,'Cancelamento #'+o.id+' após envio: '+o.qty+' un. aguardando retorno',{processed:-o.qty,returning:o.qty});addHistory(o,'Produto enviado: estoque não restaurado. Aguardando retorno físico','AGUARDANDO RETORNO')}
-   }
+     else if(previous==='ENVIADO'){
+  addHistory(
+    o,
+    'Cancelamento após envio: produto permanece fora do estoque disponível. Aguardando retorno físico.',
+    'AGUARDANDO RETORNO'
+  );
+}
    if(['FATURAMENTO','ETIQUETA','ENVIADO'].includes(previous)) addHistory(o,'ATENÇÃO DE TESTE: revisar impacto fiscal/logístico antes da integração real','REVISÃO NECESSÁRIA');
    save(a)
  }
