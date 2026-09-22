@@ -7593,7 +7593,16 @@ window.tbErpAdvance=function(i,automatic=false){
    save(a)
  }
  window.tbErpRequestReturn=function(i){
-   const a=get(),o=a[i];if(!o||o.status!=='ENTREGUE')return alert('A devolução só pode ser iniciada neste teste após a entrega.');
+   const a=get(),o=a[i];
+if(!o)return;
+
+const podeDevolver =
+  o.status==='ENTREGUE' ||
+  (o.status==='CANCELADO' && o.cancelledFrom==='ENVIADO');
+
+if(!podeDevolver){
+  return alert('A devolução só pode ser iniciada após a entrega ou quando um pedido enviado foi cancelado.');
+}
    o.status='DEVOLUÇÃO SOLICITADA';
    if(o.stockDebited){stockMove(o.sku,'Devolução #'+o.id+' solicitada: '+o.qty+' un. aguardando retorno',{processed:-o.qty,returning:o.qty});addHistory(o,'Item transferido para aguardando retorno no estoque teste','AGUARDANDO RETORNO')}
    addHistory(o,'Devolução solicitada. Aguardando retorno físico do produto',o.status);save(a)
