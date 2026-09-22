@@ -7262,7 +7262,21 @@ document.querySelectorAll('.tb-order-tab').forEach(tab=>{
    if(isNormal(o.status)){
      const canAdvance=o.status!=='ENTREGUE';
      if(o.status==='ENVIADO'){
-  return `<button class="tb-erp-btn secondary" onclick="tbErpConfirmDelivery('${o.id}')">✓ CONFIRMAR ENTREGA</button><span class="tb-flow-note">Aguardando confirmação de entrega.</span>`;
+  return `
+    <button class="tb-erp-btn secondary"
+      onclick="tbErpConfirmDelivery('${o.id}')">
+      ✓ CONFIRMAR ENTREGA
+    </button>
+
+    <button class="tb-erp-btn warn"
+      onclick="tbErpCancel(${i})">
+      CANCELAR
+    </button>
+
+    <span class="tb-flow-note">
+      Aguardando confirmação de entrega.
+    </span>
+  `;
 }
      return `${canAdvance && tbProcessingMode==='MANUAL'
   ? `<button class="tb-erp-btn secondary" onclick="tbErpAdvance(${i})">AVANÇAR STATUS</button>`
