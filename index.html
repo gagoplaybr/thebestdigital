@@ -3747,16 +3747,26 @@ body.tb-premium-nav-active #painel-premium .tb-goal-premium .tb-progress span{
   grid-template-columns:
     minmax(150px, .8fr)
     minmax(230px, 1.4fr)
-    minmax(180px, 1fr);
+    minmax(180px, 1fr)
+    minmax(105px, auto);
+
   grid-template-areas:
-    "top product actions"
-    "flow flow flow"
-    "history history history";
+    "top product actions status"
+    "flow flow flow flow"
+    "history history history history";
+
   align-items:center;
-  column-gap:18px;
-  row-gap:8px;
+  column-gap:14px;
+  row-gap:7px;
 }
 
+  .tb-order-status-area{
+  grid-area:status;
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
+}
+  
 .tb-order-top{
   grid-area:top;
   margin:0;
