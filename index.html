@@ -5645,7 +5645,7 @@ document.addEventListener('DOMContentLoaded', function(){
         <button
             type="button"
             class="tb-public-login-btn"
-            onclick="document.getElementById('area-cliente')?.scrollIntoView({behavior:'smooth',block:'start'});">
+            onclick="const a=document.getElementById('area-cliente');if(a){a.hidden=false;a.scrollIntoView({behavior:'smooth',block:'start'});}">
             👤 LOGIN
         </button>
 
