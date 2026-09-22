@@ -7574,7 +7574,9 @@ window.tbErpAdvance=function(i,automatic=false){
  window.tbErpCancel=function(i){
    const a=get(),o=a[i];if(!o)return;
    if(!isNormal(o.status)||o.status==='ENTREGUE')return alert('Cancelamento bloqueado neste estado.');
-   const previous=o.status;if(!confirm('Simular cancelamento do pedido #'+o.id+' no estágio '+previous+'?'))return;
+   const previous=o.status;
+   o.cancelledFrom=previous;
+   if(!confirm('Simular cancelamento do pedido #'+o.id+' no estágio '+previous+'?'))return;
    o.status='CANCELADO';addHistory(o,'Pedido cancelado a partir do estágio '+previous,'CANCELADO');
    if(o.stockDebited&&!o.stockRestored){
      if(['PAGO','FATURAMENTO','ETIQUETA'].includes(previous)){stockMove(o.sku,'Cancelamento #'+o.id+': +'+o.qty+' un. devolvida ao disponível',{available:o.qty,processed:-o.qty});o.stockRestored=true;addHistory(o,'Estoque teste restaurado após cancelamento','ESTOQUE +'+o.qty)}
