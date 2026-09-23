@@ -6341,6 +6341,45 @@ document.addEventListener('DOMContentLoaded', function(){
     grid-column:1;
 }
 
+  /* LAYOUT DEFINITIVO DO ERP */
+.tb-erp-grid{
+    display:grid !important;
+    grid-template-columns:1fr 1fr !important;
+    grid-template-areas:
+        "stock stock"
+        "orders orders"
+        "tools tools" !important;
+    gap:14px !important;
+    align-items:start !important;
+}
+
+/* ESTOQUE */
+.tb-erp-grid > .tb-erp-stock{
+    grid-area:stock !important;
+    width:100% !important;
+    box-sizing:border-box;
+}
+
+/* CENTRAL DE PEDIDOS */
+.tb-erp-grid > .tb-erp-orders-main{
+    grid-area:orders !important;
+    grid-column:auto !important;
+    width:100% !important;
+    min-width:0 !important;
+    max-width:none !important;
+    box-sizing:border-box;
+}
+
+/* SIMULADOR + ETIQUETA */
+.tb-erp-grid > .tb-erp-tools{
+    grid-area:tools !important;
+    width:100% !important;
+    min-width:0 !important;
+    display:grid !important;
+    grid-template-columns:1fr 1fr !important;
+    gap:14px !important;
+    align-items:start !important;
+}
 /* LISTA DE PEDIDOS */
 .tb-erp-orders-main #tbErpTestOrders{
     width:100%;
