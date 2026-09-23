@@ -11472,6 +11472,36 @@ body.tb-premium-nav-active #area-cliente{
     border-color:#19bfff;
     box-shadow:0 0 0 3px rgba(25,191,255,.08);
 }
+
+  /* ERP SIDEBAR - OCULTA FORA DO MODULO ERP */
+.tb-erp-side-filters{
+    display:none !important;
+}
+
+/* MOSTRA SOMENTE QUANDO PEDIDOS ERP ESTIVER ABERTO */
+body.tb-premium-nav-active.tb-single-module
+.tb-premium-sidebar .tb-erp-side-filters{
+    display:none !important;
+}
+
+body.tb-premium-nav-active.tb-single-module:has(#pedidos-erp-teste.tb-module-visible)
+.tb-premium-sidebar .tb-erp-side-filters{
+    display:flex !important;
+}
+
+  /* ===== FILTROS LATERAIS • SOMENTE NO ERP ===== */
+
+/* Escondido por padrão */
+.tb-erp-side-filters{
+    display:none !important;
+}
+
+/* Aparece somente quando o módulo PEDIDOS ERP estiver aberto */
+body.tb-premium-nav-active.tb-single-module:has(#pedidos-erp-teste.tb-module-visible)
+.tb-erp-side-filters{
+    display:flex !important;
+    flex-direction:column !important;
+}
 </style>
 <script id="tb-v851-layered-nav-js">
 (function(){
