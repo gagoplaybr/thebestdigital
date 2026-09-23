@@ -11312,6 +11312,125 @@ body.tb-premium-nav-active #area-cliente{
   }
 }
 
+  /* ===== ERP • FILTROS NA SIDEBAR ===== */
+
+.tb-erp-side-filters{
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+    margin-top:16px;
+    padding-top:14px;
+    border-top:1px solid rgba(255,255,255,.08);
+}
+
+.tb-erp-side-title{
+    margin:4px 8px 6px;
+    color:#6f8da6;
+    font-size:9px;
+    font-weight:900;
+    letter-spacing:1.1px;
+}
+
+.tb-erp-side-filter{
+    width:100%;
+    min-height:38px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+
+    padding:0 12px;
+
+    border:1px solid transparent;
+    border-radius:10px;
+
+    background:transparent;
+    color:#a9bfd0;
+
+    font-size:11px;
+    font-weight:800;
+    text-align:left;
+
+    cursor:pointer;
+    transition:.18s ease;
+}
+
+.tb-erp-side-filter span{
+    width:22px;
+    height:22px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:7px;
+
+    background:rgba(255,255,255,.05);
+    color:#65d8ff;
+
+    font-size:11px;
+}
+
+.tb-erp-side-filter:hover{
+    color:#fff;
+    background:rgba(0,174,255,.08);
+    border-color:rgba(52,196,255,.15);
+}
+
+.tb-erp-side-filter.active{
+    color:#fff;
+    background:linear-gradient(
+        90deg,
+        rgba(0,142,220,.30),
+        rgba(0,174,255,.10)
+    );
+    border-color:rgba(44,196,255,.45);
+
+    box-shadow:
+        inset 3px 0 0 #19bfff,
+        0 8px 20px rgba(0,0,0,.10);
+}
+
+.tb-erp-side-filter.active span{
+    background:#078cca;
+    color:#fff;
+}
+
+/* BUSCA */
+
+.tb-erp-side-search{
+    margin-top:12px;
+    padding-top:14px;
+    border-top:1px solid rgba(255,255,255,.08);
+}
+
+.tb-erp-side-search input{
+    width:100%;
+    height:38px;
+    box-sizing:border-box;
+
+    padding:0 11px;
+
+    border-radius:9px;
+    border:1px solid rgba(89,190,245,.18);
+
+    outline:none;
+
+    background:#071d31;
+    color:#eaf7ff;
+
+    font-size:10px;
+
+    transition:.18s ease;
+}
+
+.tb-erp-side-search input::placeholder{
+    color:#66859d;
+}
+
+.tb-erp-side-search input:focus{
+    border-color:#19bfff;
+    box-shadow:0 0 0 3px rgba(25,191,255,.08);
+}
 </style>
 <script id="tb-v851-layered-nav-js">
 (function(){
