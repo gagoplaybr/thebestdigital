@@ -6099,6 +6099,55 @@ document.addEventListener('DOMContentLoaded', function(){
       <span class="tb-side-ico">🧪</span><span class="tb-side-label">PEDIDOS ERP</span>
     </a>
 
+    <div class="tb-erp-side-filters">
+
+  <div class="tb-erp-side-title">FILTRAR PEDIDOS</div>
+
+  <button type="button" class="tb-erp-side-filter active" data-status="TODOS">
+    <span>▦</span> Todos
+  </button>
+
+  <button type="button" class="tb-erp-side-filter" data-status="RECEBIDOS">
+    <span>↓</span> Recebidos
+  </button>
+
+  <button type="button" class="tb-erp-side-filter" data-status="PAGOS">
+    <span>✓</span> Pagos
+  </button>
+
+  <button type="button" class="tb-erp-side-filter" data-status="FATURAMENTO">
+    <span>▤</span> Faturamento
+  </button>
+
+  <button type="button" class="tb-erp-side-filter" data-status="ETIQUETA">
+    <span>▣</span> Etiqueta
+  </button>
+
+  <button type="button" class="tb-erp-side-filter" data-status="ENVIADOS">
+    <span>➜</span> Enviados
+  </button>
+
+  <button type="button" class="tb-erp-side-filter" data-status="ENTREGUES">
+    <span>✓</span> Entregues
+  </button>
+
+  <button type="button" class="tb-erp-side-filter" data-status="DEVOLUÇÕES">
+    <span>↩</span> Devoluções
+  </button>
+
+  <div class="tb-erp-side-search">
+    <div class="tb-erp-side-title">BUSCAR</div>
+
+    <input
+      type="search"
+      id="tbErpSidebarSearch"
+      placeholder="Pedido, produto ou SKU..."
+      autocomplete="off"
+    >
+  </div>
+
+</div>
+    
     <a class="tb-side-link" href="#area-cliente" data-premium-section="area-cliente" data-tb-category="conta" title="Minha conta" onclick="tbOpenMinhaConta(event)">
       <span class="tb-side-ico">👤</span><span class="tb-side-label">MINHA CONTA</span>
     </a>
