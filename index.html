@@ -8124,9 +8124,9 @@ if(!podeDevolver){
  window.tbErpReturn=function(i,d){alert('Fluxo atualizado: primeiro solicite e receba a devolução antes de definir o destino.')}
  window.tbErpResetTests=function(){if(confirm('Apagar todos os pedidos fictícios deste navegador?')){localStorage.removeItem(KEY);render()}}
  window.tbErpResetStock=function(){if(confirm('Reiniciar o estoque fictício para 10 unidades e zerar garantia/retornos?')){localStorage.removeItem(STOCK_KEY);renderStock()}}
- window.tbErpPreviewLabel=function(){const sel=document.getElementById('tbTestProduct');const products=Array.isArray(window.TB_PREMIUM_PRODUCTS)?window.TB_PREMIUM_PRODUCTS:[];const p=products.find(x=>String(x.id)===String(sel?.value));document.getElementById('tbLabelProduct').textContent=p?.name||'Produto Teste';document.getElementById('tbLabelSku').textContent='SKU: '+(document.getElementById('tbTestSku')?.value||'TESTE-001');document.getElementById('tbLabelOrder').textContent='Pedido: '+(document.getElementById('tbTestOrderId')?.value||'ML-TESTE-0001')}
+ window.tbErpPreviewLabel=function(){const sel=document.getElementById('tbTestProduct');const products=Array.isArray(window.TB_PREMIUM_PRODUCTS)?window.TB_PREMIUM_PRODUCTS:[];const p=products.find(x=>String(x.id)===String(sel?.value));document.getElementById('tbLabelProduct').textContent=p?.name||'Produto Teste';document.getElementById('tbLabelSku').textContent='SKU: '+(document.getElementById('tbTestSku')?.value||'TESTE-001');document.getElementById('tbLabelOrder').textContent='Pedido: '+(document.getElementById('tbTestOrderId')?.value||'ML-TESTE-0001')
+};
   
-  /* ===== ETIQUETA DE UM PEDIDO ESPECÍFICO ===== */
 /* ===== ABRIR ETIQUETA DE UM PEDIDO ===== */
 let tbCurrentLabelOrderId = null;
 
@@ -8203,21 +8203,6 @@ window.tbPrintCurrentOrderLabel=function(){
   window.print();
 
 };
-
-  if(!order){
-    alert('Pedido não encontrado.');
-    return;
-  }
-
-  console.log('Etiqueta do pedido:', order);
-
-  alert(
-    'Etiqueta liberada para teste:\n\n' +
-    'Pedido: ' + order.id + '\n' +
-    'Produto: ' + (order.product || 'Produto') + '\n' +
-    'SKU: ' + (order.sku || 'SEM-SKU') + '\n' +
-    'Quantidade: ' + (order.qty || 1)
-  );
 
 };
   window.renderTbErpTestOrders=render;document.addEventListener('DOMContentLoaded',()=>{render();renderStock();tbErpRefreshProductOptions();setTimeout(()=>tbErpRefreshProductOptions(),1200)});
