@@ -7804,8 +7804,24 @@ if(term){
     <div class="tb-order-card">
 
       <div class="tb-order-top">
-  <b>${esc(o.market)} • #${esc(o.id)}</b>
-</div>
+
+        <div class="tb-order-title">
+          ${o.status==='ETIQUETA' ? `
+            <label class="tb-label-select">
+              <input
+                type="checkbox"
+                class="tb-label-checkbox"
+                value="${esc(o.id)}"
+                onchange="tbUpdateLabelSelection()"
+              >
+              <span></span>
+            </label>
+          ` : ''}
+
+          <b>${esc(o.market)} • #${esc(o.id)}</b>
+        </div>
+
+      </div>
 
 ${o.status==='CANCELADO' && o.cancelledFrom==='ENVIADO'
   ? `<div class="tb-order-return-alert">↩ AGUARDANDO RETORNO DO PRODUTO</div>`
@@ -8125,6 +8141,21 @@ if(!podeDevolver){
  window.tbErpResetTests=function(){if(confirm('Apagar todos os pedidos fictícios deste navegador?')){localStorage.removeItem(KEY);render()}}
  window.tbErpResetStock=function(){if(confirm('Reiniciar o estoque fictício para 10 unidades e zerar garantia/retornos?')){localStorage.removeItem(STOCK_KEY);renderStock()}}
  window.tbErpPreviewLabel=function(){const sel=document.getElementById('tbTestProduct');const products=Array.isArray(window.TB_PREMIUM_PRODUCTS)?window.TB_PREMIUM_PRODUCTS:[];const p=products.find(x=>String(x.id)===String(sel?.value));document.getElementById('tbLabelProduct').textContent=p?.name||'Produto Teste';document.getElementById('tbLabelSku').textContent='SKU: '+(document.getElementById('tbTestSku')?.value||'TESTE-001');document.getElementById('tbLabelOrder').textContent='Pedido: '+(document.getElementById('tbTestOrderId')?.value||'ML-TESTE-0001')
+};
+
+  /* ===== SELEÇÃO DE ETIQUETAS PARA IMPRESSÃO EM LOTE ===== */
+
+window.tbUpdateLabelSelection=function(){
+
+  const selecionadas=[
+    ...document.querySelectorAll('.tb-label-checkbox:checked')
+  ];
+
+  console.log(
+    'Etiquetas selecionadas:',
+    selecionadas.map(cb=>cb.value)
+  );
+
 };
   
 /* ===== ABRIR ETIQUETA DE UM PEDIDO ===== */
