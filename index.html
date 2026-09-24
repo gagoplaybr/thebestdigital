@@ -7308,7 +7308,7 @@ body.tb-premium-nav-active #painel-premium .tb-kpi-icon{
 </div>
     <div id="tbErpTestOrders"></div>
 </div>
-  <div class="tb-erp-tools">
+  <div class="tb-erp-tools" id="tbTestOrderModal">
     <div class="tb-erp-card"><h3>📦 Simular novo pedido</h3><div class="tb-erp-fields">
      <div class="tb-erp-field"><label>MARKETPLACE</label><select id="tbTestMarket"><option>Mercado Livre</option></select></div>
      <div class="tb-erp-field"><label>Nº PEDIDO</label><input id="tbTestOrderId" value="ML-TESTE-0001"></div>
@@ -7470,6 +7470,15 @@ window.tbSetProcessingMode=function(mode){
   }
   
   render();
+};
+
+  /* ===== ABRIR / FECHAR NOVO PEDIDO TESTE ===== */
+window.tbToggleTestOrderPanel=function(){
+  const modal=document.getElementById('tbTestOrderModal');
+
+  if(!modal) return;
+
+  modal.classList.toggle('tb-open');
 };
 
 setTimeout(()=>{
@@ -11553,8 +11562,37 @@ body.tb-premium-nav-active.tb-single-module
     display:none !important;
 }
 
-  /* ===== OCULTAR FERRAMENTAS DE SIMULAÇÃO DA CENTRAL ERP ===== */
+/* ===== MODAL NOVO PEDIDO TESTE ===== */
+
 #pedidos-erp-teste .tb-erp-tools{
+    display:none;
+    position:fixed;
+    inset:0;
+    z-index:99999;
+    background:rgba(5,20,34,.55);
+    backdrop-filter:blur(4px);
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+}
+
+#pedidos-erp-teste .tb-erp-tools.tb-open{
+    display:flex !important;
+}
+
+/* MOSTRA SOMENTE O FORMULÁRIO DO PEDIDO */
+#pedidos-erp-teste .tb-erp-tools > .tb-erp-card:first-child{
+    display:block;
+    width:min(520px,94vw);
+    margin:0 !important;
+    padding:22px;
+    border-radius:18px;
+    background:#fff;
+    box-shadow:0 25px 70px rgba(0,0,0,.28);
+}
+
+/* MANTÉM A ETIQUETA ESCONDIDA */
+#pedidos-erp-teste .tb-erp-tools > .tb-erp-card:nth-child(2){
     display:none !important;
 }
 
