@@ -8127,6 +8127,9 @@ if(!podeDevolver){
  window.tbErpPreviewLabel=function(){const sel=document.getElementById('tbTestProduct');const products=Array.isArray(window.TB_PREMIUM_PRODUCTS)?window.TB_PREMIUM_PRODUCTS:[];const p=products.find(x=>String(x.id)===String(sel?.value));document.getElementById('tbLabelProduct').textContent=p?.name||'Produto Teste';document.getElementById('tbLabelSku').textContent='SKU: '+(document.getElementById('tbTestSku')?.value||'TESTE-001');document.getElementById('tbLabelOrder').textContent='Pedido: '+(document.getElementById('tbTestOrderId')?.value||'ML-TESTE-0001')}
   
   /* ===== ETIQUETA DE UM PEDIDO ESPECÍFICO ===== */
+/* ===== ABRIR ETIQUETA DE UM PEDIDO ===== */
+let tbCurrentLabelOrderId = null;
+
 window.tbErpOpenOrderLabel=function(orderId){
 
   const orders=get();
@@ -8134,6 +8137,72 @@ window.tbErpOpenOrderLabel=function(orderId){
   const order=orders.find(o=>
     String(o.id)===String(orderId)
   );
+
+  if(!order){
+    alert('Pedido não encontrado.');
+    return;
+  }
+
+  tbCurrentLabelOrderId=order.id;
+
+  const modal=document.getElementById('tbOrderLabelModal');
+
+  const subtitle=document.getElementById('tbOrderLabelSubtitle');
+  const product=document.getElementById('tbOrderLabelProduct');
+  const sku=document.getElementById('tbOrderLabelSku');
+  const qty=document.getElementById('tbOrderLabelQty');
+  const number=document.getElementById('tbOrderLabelNumber');
+
+  if(subtitle){
+    subtitle.textContent='Pedido '+order.id;
+  }
+
+  if(product){
+    product.textContent=order.product || 'Produto';
+  }
+
+  if(sku){
+    sku.textContent='SKU: '+(order.sku || 'SEM-SKU');
+  }
+
+  if(qty){
+    qty.textContent='Quantidade: '+(order.qty || 1);
+  }
+
+  if(number){
+    number.textContent='Pedido: '+order.id;
+  }
+
+  if(modal){
+    modal.classList.add('tb-open');
+  }
+
+};
+
+
+/* ===== FECHAR ETIQUETA ===== */
+window.tbCloseOrderLabel=function(){
+
+  const modal=document.getElementById('tbOrderLabelModal');
+
+  if(modal){
+    modal.classList.remove('tb-open');
+  }
+
+};
+
+
+/* ===== IMPRESSÃO INDIVIDUAL ===== */
+window.tbPrintCurrentOrderLabel=function(){
+
+  if(!tbCurrentLabelOrderId){
+    alert('Nenhuma etiqueta selecionada.');
+    return;
+  }
+
+  window.print();
+
+};
 
   if(!order){
     alert('Pedido não encontrado.');
