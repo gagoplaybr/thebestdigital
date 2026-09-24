@@ -9399,7 +9399,15 @@ if(premiumTopbar){
   if(premiumActive){
     document.body.classList.remove('tb-show-account');
     tbUpdatePremiumSidebarState();
-    setTimeout(()=>tbShowPremiumModule('painel-premium',{scroll:false}),0);
+    const tbCurrentModule =
+  location.hash &&
+  TB_PREMIUM_MODULES.includes(location.hash.substring(1))
+    ? location.hash.substring(1)
+    : 'painel-premium';
+
+setTimeout(()=>{
+  tbShowPremiumModule(tbCurrentModule,{scroll:false});
+},0);
     const dash=document.getElementById("painel-premium"),dashLink=document.getElementById("premiumDashboardLink"); if(dash)dash.hidden=false;if(dashLink)dashLink.hidden=false;
     await loadMarketplaceDashboard();
     await renderProdutos();
