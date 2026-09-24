@@ -7611,10 +7611,33 @@ if(tbErpSidebarSearch){
     </span>
   `;
 }
-     return `${canAdvance && tbProcessingMode==='MANUAL'
-  ? `<button class="tb-erp-btn secondary" onclick="tbErpAdvance(${i})">AVANÇAR STATUS</button>`
-  : ''
-}<button class="tb-erp-btn warn" onclick="tbErpCancel(${i})">CANCELAR</button>`;
+     const labelReady =
+  o.status === 'ETIQUETA' ||
+  o.status === 'ENVIADO' ||
+  o.status === 'ENTREGUE';
+
+const labelButton = labelReady
+  ? `<button
+       class="tb-erp-btn tb-label-order-btn"
+       onclick="tbErpOpenOrderLabel('${String(o.id).replace(/'/g,"\\'")}')">
+       🖨️ ETIQUETA
+     </button>`
+  : '';
+     
+  return `
+  ${labelButton}
+
+  ${canAdvance && tbProcessingMode==='MANUAL'
+    ? `<button class="tb-erp-btn secondary" onclick="tbErpAdvance(${i})">AVANÇAR STATUS</button>`
+    : ''
+  }
+
+  <button
+    class="tb-erp-btn warn"
+    onclick="tbErpCancel(${i})">
+    CANCELAR
+  </button>
+`;
    }
    return '<span class="tb-flow-locked">🔒 ESTADO BLOQUEADO</span>';
  }
