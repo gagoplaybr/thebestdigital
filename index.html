@@ -7495,6 +7495,20 @@ window.tbToggleTestOrderPanel=function(){
   modal.classList.toggle('tb-open');
 };
 
+  /* FECHA O MODAL CLICANDO FORA DA JANELA */
+document.addEventListener('click', function(e){
+
+  const modal = document.getElementById('tbTestOrderModal');
+
+  if(!modal || !modal.classList.contains('tb-open')){
+    return;
+  }
+
+  if(e.target === modal){
+    modal.classList.remove('tb-open');
+  }
+
+});
 setTimeout(()=>{
   tbSetProcessingMode(tbProcessingMode);
 },0);
