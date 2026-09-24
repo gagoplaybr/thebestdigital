@@ -8232,19 +8232,202 @@ window.tbToggleAllLabels=function(checked){
 
 window.tbPrintSelectedLabels=function(){
 
-  const selecionadas=[
+  const ids=[
     ...document.querySelectorAll('.tb-label-checkbox:checked')
-  ].map(cb=>cb.value);
+  ].map(cb=>String(cb.value));
 
-  if(!selecionadas.length){
+  if(!ids.length){
     alert('Selecione pelo menos uma etiqueta.');
     return;
   }
 
-  alert(
-    selecionadas.length +
-    ' etiqueta(s) preparada(s) para impressão em lote.'
+  const orders=get();
+
+  const selecionados=ids
+    .map(id=>orders.find(o=>String(o.id)===id))
+    .filter(Boolean)
+    .filter(o=>String(o.status).toUpperCase()==='ETIQUETA');
+
+  if(!selecionados.length){
+    alert('Nenhuma etiqueta liberada foi encontrada.');
+    return;
+  }
+
+  const printWindow=window.open(
+    '',
+    'TB_LABEL_BATCH_PRINT',
+    'width=600,height=800'
   );
+
+  if(!printWindow){
+    alert('O navegador bloqueou a janela de impressão. Libere os pop-ups para este site.');
+    return;
+  }
+
+  const etiquetas=selecionados.map(o=>`
+
+    <section class="tb-batch-label">
+
+      <b>THE BEST • TESTE</b>
+
+      <small>Etiqueta interna de simulação</small>
+
+      <hr>
+
+      <b class="tb-product-name">
+        ${esc(o.product || 'Produto')}
+      </b>
+
+      <small>
+        SKU: ${esc(o.sku || 'SEM-SKU')}
+      </small>
+
+      <small>
+        Quantidade: ${Number(o.qty) || 1}
+      </small>
+
+      <div class="tb-label-barcode"></div>
+
+      <small>
+        Pedido: ${esc(o.id)}
+      </small>
+
+      <strong>SEM VALIDADE PARA ENVIO</strong>
+
+    </section>
+
+  `).join('');
+
+  printWindow.document.open();
+
+  printWindow.document.write(`
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="UTF-8">
+
+<title>Etiquetas em lote - ${selecionados.length}</title>
+
+<style>
+
+@page{
+  size:100mm 150mm;
+  margin:0;
+}
+
+*{
+  box-sizing:border-box;
+}
+
+html,
+body{
+  margin:0;
+  padding:0;
+  background:#fff;
+  font-family:Arial,sans-serif;
+  color:#000;
+}
+
+.tb-batch-label{
+  width:100mm;
+  height:150mm;
+
+  margin:0;
+  padding:6mm;
+
+  background:#fff;
+  color:#000;
+
+  page-break-after:always;
+  break-after:page;
+
+  overflow:hidden;
+}
+
+.tb-batch-label:last-child{
+  page-break-after:auto;
+  break-after:auto;
+}
+
+.tb-batch-label > b{
+  display:block;
+  font-size:16px;
+  margin-bottom:3px;
+}
+
+.tb-batch-label .tb-product-name{
+  font-size:16px;
+  margin-top:5px;
+}
+
+.tb-batch-label small{
+  display:block;
+  margin:5px 0;
+  font-size:12px;
+}
+
+.tb-batch-label strong{
+  display:block;
+  margin-top:10px;
+  font-size:11px;
+}
+
+.tb-batch-label hr{
+  border:0;
+  border-top:1px solid #999;
+  margin:6px 0;
+}
+
+
+/* CÓDIGO DE BARRAS DE TESTE */
+
+.tb-label-barcode{
+
+  width:100%;
+  height:58px;
+
+  margin:18px 0;
+
+  background:
+    repeating-linear-gradient(
+      90deg,
+      #000 0px,
+      #000 2px,
+      transparent 2px,
+      transparent 5px,
+      #000 5px,
+      #000 7px,
+      transparent 7px,
+      transparent 10px
+    );
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+${etiquetas}
+
+</body>
+
+</html>
+  `);
+
+  printWindow.document.close();
+
+  printWindow.focus();
+
+  setTimeout(()=>{
+    printWindow.print();
+  },300);
+
+};
 
   console.log(
     'Pedidos para impressão:',
