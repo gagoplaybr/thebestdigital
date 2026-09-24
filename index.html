@@ -7779,6 +7779,13 @@ ${o.status==='CANCELADO' && o.cancelledFrom==='ENVIADO'
      const isFallback=!selectedProduct;
      const o={market:document.getElementById('tbTestMarket')?.value||'Mercado Livre',id,product:selectedProduct?.name||'Produto Teste',productId:selectedProduct?.id||null,sku:(document.getElementById('tbTestSku')?.value||'').trim()||(isFallback?'TESTE-001':'SEM-SKU'),qty:Math.max(1,Number(document.getElementById('tbTestQty')?.value)||1),price:Math.max(0,Number(document.getElementById('tbTestPrice')?.value)||0),status:'RECEBIDO',history:[],stockDebited:false,stockRestored:false};
      addHistory(o,'Pedido recebido pelo simulador','RECEBIDO');a.unshift(o);save(a);tbErpPreviewLabel();
+     
+     /* FECHA O MODAL APÓS RECEBER O PEDIDO */
+const modal = document.getElementById('tbTestOrderModal');
+if(modal){
+  modal.classList.remove('tb-open');
+}
+     
      if(tbProcessingMode === 'AUTO'){
   setTimeout(()=>{
     tbErpAutoProcess(o.id);
