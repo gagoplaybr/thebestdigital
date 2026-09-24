@@ -11502,6 +11502,35 @@ body.tb-premium-nav-active.tb-single-module:has(#pedidos-erp-teste.tb-module-vis
     display:flex !important;
     flex-direction:column !important;
 }
+
+  /* ===== SIDEBAR ERP • TELAS COM MENOR ALTURA ===== */
+
+@media (max-height:800px){
+
+    body.tb-premium-nav-active .tb-premium-sidebar{
+        overflow-y:auto !important;
+        overflow-x:hidden !important;
+        scrollbar-width:thin;
+        scrollbar-color:rgba(49,190,255,.45) transparent;
+    }
+
+    body.tb-premium-nav-active .tb-premium-sidebar::-webkit-scrollbar{
+        width:5px;
+    }
+
+    body.tb-premium-nav-active .tb-premium-sidebar::-webkit-scrollbar-track{
+        background:transparent;
+    }
+
+    body.tb-premium-nav-active .tb-premium-sidebar::-webkit-scrollbar-thumb{
+        background:rgba(49,190,255,.40);
+        border-radius:10px;
+    }
+
+    body.tb-premium-nav-active .tb-premium-sidebar::-webkit-scrollbar-thumb:hover{
+        background:rgba(49,190,255,.65);
+    }
+}
 </style>
 <script id="tb-v851-layered-nav-js">
 (function(){
