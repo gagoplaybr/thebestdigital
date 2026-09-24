@@ -7306,6 +7306,36 @@ body.tb-premium-nav-active #painel-premium .tb-kpi-icon{
   </div>
 
 </div>
+
+      <!-- ===== BARRA DE IMPRESSÃO DE ETIQUETAS EM LOTE ===== -->
+<div id="tbLabelBatchBar" class="tb-label-batch-bar">
+
+  <label class="tb-label-select-all">
+    <input
+      type="checkbox"
+      id="tbSelectAllLabels"
+      onchange="tbToggleAllLabels(this.checked)"
+    >
+    <span>SELECIONAR TODAS</span>
+  </label>
+
+  <div class="tb-label-batch-info">
+    <b id="tbLabelSelectedCount">0</b>
+    <span>etiqueta(s) selecionada(s)</span>
+  </div>
+
+  <button
+    type="button"
+    class="tb-erp-btn"
+    id="tbPrintBatchLabelsBtn"
+    onclick="tbPrintSelectedLabels()"
+    disabled
+  >
+    🖨 IMPRIMIR ETIQUETAS
+  </button>
+
+</div>
+      
     <div id="tbErpTestOrders"></div>
 </div>
   <div class="tb-erp-tools" id="tbTestOrderModal">
