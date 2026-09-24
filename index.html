@@ -8177,13 +8177,78 @@ if(!podeDevolver){
 
 window.tbUpdateLabelSelection=function(){
 
-  const selecionadas=[
-    ...document.querySelectorAll('.tb-label-checkbox:checked')
+  const todas=[
+    ...document.querySelectorAll('.tb-label-checkbox')
   ];
+
+  const selecionadas=todas.filter(cb=>cb.checked);
+
+  const contador=document.getElementById('tbLabelSelectedCount');
+  const botao=document.getElementById('tbPrintBatchLabelsBtn');
+  const selecionarTodas=document.getElementById('tbSelectAllLabels');
+
+  if(contador){
+    contador.textContent=selecionadas.length;
+  }
+
+  if(botao){
+    botao.disabled=selecionadas.length===0;
+  }
+
+  if(selecionarTodas){
+    selecionarTodas.checked=
+      todas.length>0 &&
+      selecionadas.length===todas.length;
+
+    selecionarTodas.indeterminate=
+      selecionadas.length>0 &&
+      selecionadas.length<todas.length;
+  }
 
   console.log(
     'Etiquetas selecionadas:',
     selecionadas.map(cb=>cb.value)
+  );
+
+};
+
+
+/* ===== SELECIONAR / DESMARCAR TODAS ===== */
+
+window.tbToggleAllLabels=function(checked){
+
+  document
+    .querySelectorAll('.tb-label-checkbox')
+    .forEach(cb=>{
+      cb.checked=checked;
+    });
+
+  tbUpdateLabelSelection();
+
+};
+
+
+/* ===== IMPRESSÃO EM LOTE - TESTE ===== */
+
+window.tbPrintSelectedLabels=function(){
+
+  const selecionadas=[
+    ...document.querySelectorAll('.tb-label-checkbox:checked')
+  ].map(cb=>cb.value);
+
+  if(!selecionadas.length){
+    alert('Selecione pelo menos uma etiqueta.');
+    return;
+  }
+
+  alert(
+    selecionadas.length +
+    ' etiqueta(s) preparada(s) para impressão em lote.'
+  );
+
+  console.log(
+    'Pedidos para impressão:',
+    selecionadas
   );
 
 };
