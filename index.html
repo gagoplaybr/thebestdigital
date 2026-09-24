@@ -8200,7 +8200,111 @@ window.tbPrintCurrentOrderLabel=function(){
     return;
   }
 
-  window.print();
+  const label=document.getElementById('tbOrderLabelPreview');
+
+  if(!label){
+    alert('Não foi possível localizar a etiqueta.');
+    return;
+  }
+
+  const printWindow=window.open(
+    '',
+    'TB_LABEL_PRINT',
+    'width=500,height=750'
+  );
+
+  if(!printWindow){
+    alert('O navegador bloqueou a janela de impressão. Libere os pop-ups para este site.');
+    return;
+  }
+
+  printWindow.document.open();
+
+  printWindow.document.write(`
+    <!DOCTYPE html>
+    <html>
+    <head>
+
+      <meta charset="UTF-8">
+
+      <title>Etiqueta ${tbCurrentLabelOrderId}</title>
+
+      <style>
+
+        @page{
+          size:100mm 150mm;
+          margin:0;
+        }
+
+        *{
+          box-sizing:border-box;
+        }
+
+        html,
+        body{
+          width:100mm;
+          height:150mm;
+          margin:0;
+          padding:0;
+          background:#fff;
+          font-family:Arial,sans-serif;
+          color:#000;
+        }
+
+        #tbOrderLabelPreview{
+          width:100mm;
+          height:150mm;
+          margin:0;
+          padding:6mm;
+          border:0;
+          border-radius:0;
+          box-shadow:none;
+          background:#fff;
+          color:#000;
+        }
+
+        #tbOrderLabelPreview > b{
+          display:block;
+          font-size:16px;
+          margin-bottom:3px;
+        }
+
+        #tbOrderLabelPreview small{
+          display:block;
+          margin:5px 0;
+          font-size:12px;
+        }
+
+        #tbOrderLabelPreview strong{
+          display:block;
+          margin-top:10px;
+          font-size:11px;
+        }
+
+        .tb-label-barcode{
+          height:58px;
+          margin:18px 0;
+        }
+
+      </style>
+
+    </head>
+
+    <body>
+
+      ${label.outerHTML}
+
+    </body>
+    </html>
+  `);
+
+  printWindow.document.close();
+
+  printWindow.focus();
+
+  setTimeout(()=>{
+    printWindow.print();
+  },300);
 
 };
 
@@ -11988,7 +12092,7 @@ body.tb-premium-nav-active.tb-single-module
   }
 }
 
-  /* ===== IMPRESSÃO DA ETIQUETA ERP ===== */
+/* ===== IMPRESSÃO INDIVIDUAL DA ETIQUETA ERP ===== */
 
 @media print {
 
@@ -11997,19 +12101,58 @@ body.tb-premium-nav-active.tb-single-module
     margin:0;
   }
 
-  body *{
-    visibility:hidden !important;
+  html,
+  body{
+    width:100mm !important;
+    height:150mm !important;
+    margin:0 !important;
+    padding:0 !important;
+    overflow:hidden !important;
+    background:#fff !important;
   }
 
-  #tbOrderLabelPreview,
-  #tbOrderLabelPreview *{
-    visibility:visible !important;
+  body > *{
+    display:none !important;
+  }
+
+  #tbOrderLabelModal{
+    display:block !important;
+    position:static !important;
+    width:100mm !important;
+    height:150mm !important;
+    margin:0 !important;
+    padding:0 !important;
+    background:#fff !important;
+    backdrop-filter:none !important;
+  }
+
+  #tbOrderLabelModal > *{
+    display:none !important;
+  }
+
+  #tbOrderLabelModal .tb-order-label-window{
+    display:block !important;
+    position:static !important;
+    width:100mm !important;
+    height:150mm !important;
+    max-width:none !important;
+    max-height:none !important;
+    overflow:hidden !important;
+    margin:0 !important;
+    padding:0 !important;
+    border:0 !important;
+    border-radius:0 !important;
+    box-shadow:none !important;
+  }
+
+  #tbOrderLabelModal .tb-order-label-head,
+  #tbOrderLabelModal .tb-order-label-actions{
+    display:none !important;
   }
 
   #tbOrderLabelPreview{
-    position:fixed !important;
-    left:0 !important;
-    top:0 !important;
+    display:block !important;
+    position:static !important;
 
     width:100mm !important;
     height:150mm !important;
@@ -12020,16 +12163,15 @@ body.tb-premium-nav-active.tb-single-module
     margin:0 !important;
     padding:6mm !important;
 
-    border:none !important;
+    box-sizing:border-box !important;
+
+    border:0 !important;
     border-radius:0 !important;
     box-shadow:none !important;
 
     background:#fff !important;
     color:#000 !important;
-
-    box-sizing:border-box !important;
   }
-
 }
   
 </style>
