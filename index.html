@@ -8281,25 +8281,40 @@ window.tbPrintCurrentOrderLabel=function(){
           font-size:11px;
         }
 
-     .tb-label-barcode{
+ .tb-label-barcode{
   display:block;
   width:100%;
   height:58px;
   margin:18px 0;
-  background:
-    repeating-linear-gradient(
-      90deg,
-      #000 0px,
-      #000 1px,
-      transparent 1px,
-      transparent 3px,
-      #000 3px,
-      #000 5px,
-      transparent 5px,
-      transparent 7px
-    );
+
+  background:none !important;
+
+  border-left:2px solid #000;
+
+  background-image:none !important;
+
+  position:relative;
 }
 
+.tb-label-barcode::before{
+  content:"||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||";
+  display:block;
+
+  width:100%;
+  height:58px;
+
+  overflow:hidden;
+  white-space:nowrap;
+
+  font-family:Arial, sans-serif;
+  font-size:58px;
+  line-height:48px;
+  font-weight:900;
+
+  letter-spacing:-3px;
+
+  color:#000 !important;
+}
       </style>
 
     </head>
