@@ -7309,7 +7309,21 @@ body.tb-premium-nav-active #painel-premium .tb-kpi-icon{
     <div id="tbErpTestOrders"></div>
 </div>
   <div class="tb-erp-tools" id="tbTestOrderModal">
-    <div class="tb-erp-card"><h3>📦 Simular novo pedido</h3><div class="tb-erp-fields">
+    <div class="tb-erp-card">
+
+  <div class="tb-test-modal-head">
+    <h3>📦 Simular novo pedido</h3>
+
+    <button
+      type="button"
+      class="tb-test-modal-close"
+      onclick="tbToggleTestOrderPanel()"
+      aria-label="Fechar">
+      ✕
+    </button>
+  </div>
+
+  <div class="tb-erp-fields">
      <div class="tb-erp-field"><label>MARKETPLACE</label><select id="tbTestMarket"><option>Mercado Livre</option></select></div>
      <div class="tb-erp-field"><label>Nº PEDIDO</label><input id="tbTestOrderId" value="ML-TESTE-0001"></div>
      <div class="tb-erp-field"><label>PRODUTO DO MEU CATÁLOGO</label><select id="tbTestProduct" onchange="tbErpTestProductChanged()"><option value="">Carregando produtos...</option></select></div>
@@ -11622,6 +11636,43 @@ body.tb-premium-nav-active.tb-single-module
 
 .tb-new-test-order-btn:active{
     transform:translateY(0);
+}
+
+  /* ===== CABEÇALHO DO MODAL ===== */
+
+.tb-test-modal-head{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:16px;
+    margin-bottom:16px;
+}
+
+.tb-test-modal-head h3{
+    margin:0 !important;
+}
+
+.tb-test-modal-close{
+    width:34px;
+    height:34px;
+    flex:0 0 34px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border:1px solid #d7e2ea;
+    border-radius:9px;
+    background:#f2f6f9;
+    color:#49677c;
+    font-size:15px;
+    font-weight:900;
+    cursor:pointer;
+    transition:.18s ease;
+}
+
+.tb-test-modal-close:hover{
+    background:#e8f4fb;
+    color:#0787c8;
+    border-color:#8bcdec;
 }
   
 </style>
