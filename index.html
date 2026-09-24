@@ -7342,6 +7342,74 @@ body.tb-premium-nav-active #painel-premium .tb-kpi-icon{
   </div>
  </div>
 </section>
+  <!-- ===== MODAL DE ETIQUETA DO PEDIDO ===== -->
+<div id="tbOrderLabelModal" class="tb-order-label-modal">
+
+  <div class="tb-order-label-window">
+
+    <div class="tb-order-label-head">
+      <div>
+        <h3>🖨️ Etiqueta do pedido</h3>
+        <small id="tbOrderLabelSubtitle">Pré-visualização da etiqueta</small>
+      </div>
+
+      <button
+        type="button"
+        class="tb-test-modal-close"
+        onclick="tbCloseOrderLabel()"
+        aria-label="Fechar">
+        ×
+      </button>
+    </div>
+
+    <div class="tb-order-label-preview">
+
+      <b>THE BEST • TESTE</b>
+      <small>Etiqueta interna de simulação</small>
+
+      <hr>
+
+      <b id="tbOrderLabelProduct">Produto</b>
+
+      <small id="tbOrderLabelSku">
+        SKU:
+      </small>
+
+      <small id="tbOrderLabelQty">
+        Quantidade:
+      </small>
+
+      <div class="tb-label-barcode"></div>
+
+      <small id="tbOrderLabelNumber">
+        Pedido:
+      </small>
+
+      <strong>SEM VALIDADE PARA ENVIO</strong>
+
+    </div>
+
+    <div class="tb-order-label-actions">
+
+      <button
+        type="button"
+        class="tb-erp-btn secondary"
+        onclick="tbCloseOrderLabel()">
+        FECHAR
+      </button>
+
+      <button
+        type="button"
+        class="tb-erp-btn"
+        onclick="tbPrintCurrentOrderLabel()">
+        🖨️ IMPRIMIR ETIQUETA
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
 <script id="tb-v855-erp-stock-simulator-js">
 (function(){
  const KEY='tb_erp_test_orders_v850';
@@ -11743,6 +11811,120 @@ body.tb-premium-nav-active.tb-single-module
     background:#e8f4fb;
     color:#0787c8;
     border-color:#8bcdec;
+}
+
+  /* ===== MODAL ETIQUETA DO PEDIDO ===== */
+
+.tb-order-label-modal{
+  display:none;
+  position:fixed;
+  inset:0;
+  z-index:99999;
+  background:rgba(5,25,42,.62);
+  backdrop-filter:blur(4px);
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+}
+
+.tb-order-label-modal.tb-open{
+  display:flex;
+}
+
+.tb-order-label-window{
+  width:100%;
+  max-width:520px;
+  max-height:92vh;
+  overflow:auto;
+  background:#fff;
+  border:1px solid #d8e3eb;
+  border-radius:18px;
+  padding:22px;
+  box-sizing:border-box;
+  box-shadow:0 25px 70px rgba(0,0,0,.28);
+}
+
+.tb-order-label-head{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:15px;
+  margin-bottom:18px;
+}
+
+.tb-order-label-head h3{
+  margin:0 0 4px;
+  color:#172b3a;
+  font-size:16px;
+}
+
+.tb-order-label-head small{
+  color:#687c8c;
+  font-size:10px;
+}
+
+.tb-order-label-preview{
+  width:280px;
+  min-height:420px;
+  margin:0 auto;
+  padding:16px;
+  box-sizing:border-box;
+  background:#fff;
+  color:#111;
+  border:1px solid #cad7e0;
+  border-radius:7px;
+  font-family:Arial,sans-serif;
+  box-shadow:0 8px 25px rgba(20,50,70,.08);
+}
+
+.tb-order-label-preview > b{
+  display:block;
+  font-size:16px;
+  margin-bottom:3px;
+}
+
+.tb-order-label-preview small{
+  display:block;
+  margin:5px 0;
+  font-size:12px;
+}
+
+.tb-order-label-preview strong{
+  display:block;
+  margin-top:10px;
+  font-size:11px;
+  color:#536a7b;
+}
+
+.tb-order-label-preview .tb-label-barcode{
+  height:58px;
+  margin:18px 0;
+}
+
+.tb-order-label-actions{
+  display:flex;
+  justify-content:center;
+  gap:8px;
+  margin-top:18px;
+}
+
+@media(max-width:600px){
+  .tb-order-label-window{
+    padding:16px;
+  }
+
+  .tb-order-label-preview{
+    width:100%;
+    max-width:280px;
+  }
+
+  .tb-order-label-actions{
+    flex-direction:column;
+  }
+
+  .tb-order-label-actions button{
+    width:100%;
+  }
 }
   
 </style>
