@@ -7486,30 +7486,36 @@ document.querySelectorAll('.tb-order-tab').forEach(tab=>{
     render();
   });
 });
-  /* ===== FILTROS ERP PELA SIDEBAR ===== */
-document.querySelectorAll('.tb-erp-side-filter').forEach(btn=>{
-  btn.addEventListener('click', ()=>{
+/* ===== FILTROS ERP PELA SIDEBAR ===== */
+document.addEventListener('click', function(e){
 
-    document.querySelectorAll('.tb-erp-side-filter').forEach(b=>{
-      b.classList.remove('active');
-    });
+  const btn = e.target.closest('.tb-erp-side-filter');
 
-    btn.classList.add('active');
+  if(!btn) return;
 
-    tbErpStatusFilter = btn.dataset.status || 'TODOS';
-
-    /* sincroniza com os filtros antigos */
-    document.querySelectorAll('.tb-order-tab').forEach(tab=>{
-      const status = tab.textContent.trim().toUpperCase();
-
-      tab.classList.toggle(
-        'active',
-        status === tbErpStatusFilter
-      );
-    });
-
-    render();
+  document.querySelectorAll('.tb-erp-side-filter').forEach(b=>{
+    b.classList.remove('active');
   });
+
+  btn.classList.add('active');
+
+  tbErpStatusFilter =
+    (btn.dataset.status || 'TODOS').toUpperCase();
+
+  /* sincroniza a barra antiga */
+  document.querySelectorAll('.tb-order-tab').forEach(tab=>{
+
+    const status =
+      tab.textContent.trim().toUpperCase();
+
+    tab.classList.toggle(
+      'active',
+      status === tbErpStatusFilter
+    );
+
+  });
+
+  render();
 });
   const tbErpSidebarSearch =
   document.getElementById('tbErpSidebarSearch');
