@@ -8057,7 +8057,6 @@ if(!podeDevolver){
  window.tbErpResetTests=function(){if(confirm('Apagar todos os pedidos fictícios deste navegador?')){localStorage.removeItem(KEY);render()}}
  window.tbErpResetStock=function(){if(confirm('Reiniciar o estoque fictício para 10 unidades e zerar garantia/retornos?')){localStorage.removeItem(STOCK_KEY);renderStock()}}
  window.tbErpPreviewLabel=function(){const sel=document.getElementById('tbTestProduct');const products=Array.isArray(window.TB_PREMIUM_PRODUCTS)?window.TB_PREMIUM_PRODUCTS:[];const p=products.find(x=>String(x.id)===String(sel?.value));document.getElementById('tbLabelProduct').textContent=p?.name||'Produto Teste';document.getElementById('tbLabelSku').textContent='SKU: '+(document.getElementById('tbTestSku')?.value||'TESTE-001');document.getElementById('tbLabelOrder').textContent='Pedido: '+(document.getElementById('tbTestOrderId')?.value||'ML-TESTE-0001')}
-};
   
   /* ===== ETIQUETA DE UM PEDIDO ESPECÍFICO ===== */
 window.tbErpOpenOrderLabel=function(orderId){
