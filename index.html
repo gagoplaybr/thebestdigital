@@ -8812,6 +8812,340 @@ window.tbPrintCurrentOrderLabel=function(){
 
 };
 
+  /* ===== VISUALIZAR NF-E SIMULADA ===== */
+
+window.tbErpViewInvoice = function(orderId){
+
+  const orders = get();
+
+  const order = orders.find(o =>
+    String(o.id) === String(orderId)
+  );
+
+  if(!order){
+    alert('Pedido não encontrado.');
+    return;
+  }
+
+  if(!order.invoiceIssued){
+    alert('Este pedido ainda não possui NF-e emitida.');
+    return;
+  }
+
+  const total =
+    Number(order.qty || 0) *
+    Number(order.price || 0);
+
+  const issuedAt = order.invoiceIssuedAt
+    ? new Date(order.invoiceIssuedAt).toLocaleString('pt-BR')
+    : '-';
+
+  const invoiceWindow = window.open(
+    '',
+    'TB_INVOICE_VIEW',
+    'width=950,height=800'
+  );
+
+  if(!invoiceWindow){
+    alert('O navegador bloqueou a janela da NF-e. Libere os pop-ups para este site.');
+    return;
+  }
+
+  invoiceWindow.document.open();
+
+  invoiceWindow.document.write(`
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="UTF-8">
+
+<title>NF-e ${esc(order.invoiceNumber || '')}</title>
+
+<style>
+
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  padding:30px;
+  background:#eef3f7;
+  font-family:Arial,sans-serif;
+  color:#172b3a;
+}
+
+.danfe{
+  max-width:850px;
+  margin:auto;
+  background:#fff;
+  border:2px solid #172b3a;
+  padding:20px;
+}
+
+.top{
+  display:flex;
+  justify-content:space-between;
+  gap:20px;
+  border-bottom:2px solid #172b3a;
+  padding-bottom:15px;
+}
+
+.brand h1{
+  margin:0;
+  font-size:24px;
+}
+
+.brand p{
+  margin:5px 0 0;
+  font-size:12px;
+}
+
+.danfe-title{
+  text-align:right;
+}
+
+.danfe-title h2{
+  margin:0;
+  font-size:28px;
+}
+
+.danfe-title strong{
+  display:block;
+  margin-top:5px;
+  color:#c0392b;
+  font-size:11px;
+}
+
+.info-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin-top:15px;
+}
+
+.info{
+  border:1px solid #b8c4cc;
+  padding:10px;
+}
+
+.info small{
+  display:block;
+  color:#657786;
+  font-size:9px;
+  text-transform:uppercase;
+  margin-bottom:4px;
+}
+
+.info b{
+  font-size:13px;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  margin-top:20px;
+}
+
+th,
+td{
+  border:1px solid #aebbc5;
+  padding:9px;
+  font-size:11px;
+  text-align:left;
+}
+
+th{
+  background:#edf3f7;
+}
+
+.total{
+  margin-top:15px;
+  display:flex;
+  justify-content:flex-end;
+}
+
+.total-box{
+  border:2px solid #172b3a;
+  padding:12px 18px;
+  min-width:220px;
+  text-align:right;
+}
+
+.total-box small{
+  display:block;
+  font-size:9px;
+}
+
+.total-box b{
+  font-size:20px;
+}
+
+.warning{
+  margin-top:25px;
+  padding:12px;
+  border:1px dashed #c0392b;
+  color:#c0392b;
+  text-align:center;
+  font-weight:bold;
+  font-size:12px;
+}
+
+.actions{
+  max-width:850px;
+  margin:15px auto;
+  text-align:right;
+}
+
+.actions button{
+  border:0;
+  border-radius:7px;
+  background:#087ea4;
+  color:#fff;
+  padding:10px 18px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+@media print{
+
+  body{
+    background:#fff;
+    padding:0;
+  }
+
+  .actions{
+    display:none;
+  }
+
+  .danfe{
+    border:1px solid #000;
+    max-width:none;
+  }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="actions">
+  <button onclick="window.print()">
+    🖨 IMPRIMIR / SALVAR PDF
+  </button>
+</div>
+
+<div class="danfe">
+
+  <div class="top">
+
+    <div class="brand">
+      <h1>THE BEST DIGITAL</h1>
+      <p>Documento auxiliar de NF-e simulada</p>
+    </div>
+
+    <div class="danfe-title">
+      <h2>DANFE</h2>
+      <div>NF-e nº ${esc(order.invoiceNumber || '')}</div>
+      <strong>SEM VALIDADE FISCAL</strong>
+    </div>
+
+  </div>
+
+  <div class="info-grid">
+
+    <div class="info">
+      <small>Pedido</small>
+      <b>${esc(order.id)}</b>
+    </div>
+
+    <div class="info">
+      <small>Marketplace</small>
+      <b>${esc(order.market || '-')}</b>
+    </div>
+
+    <div class="info">
+      <small>Data de emissão</small>
+      <b>${esc(issuedAt)}</b>
+    </div>
+
+    <div class="info">
+      <small>Status da NF-e</small>
+      <b>${esc(order.invoiceStatus || 'EMITIDA')}</b>
+    </div>
+
+  </div>
+
+  <table>
+
+    <thead>
+      <tr>
+        <th>Produto</th>
+        <th>SKU</th>
+        <th>Qtd.</th>
+        <th>Valor unit.</th>
+        <th>Total</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr>
+
+        <td>${esc(order.product || '-')}</td>
+
+        <td>${esc(order.sku || '-')}</td>
+
+        <td>${Number(order.qty || 0)}</td>
+
+        <td>
+          R$ ${Number(order.price || 0)
+            .toFixed(2)
+            .replace('.',',')}
+        </td>
+
+        <td>
+          R$ ${total
+            .toFixed(2)
+            .replace('.',',')}
+        </td>
+
+      </tr>
+    </tbody>
+
+  </table>
+
+  <div class="total">
+
+    <div class="total-box">
+      <small>VALOR TOTAL DA NOTA</small>
+
+      <b>
+        R$ ${total
+          .toFixed(2)
+          .replace('.',',')}
+      </b>
+    </div>
+
+  </div>
+
+  <div class="warning">
+    DOCUMENTO GERADO EM AMBIENTE DE TESTE • SEM VALIDADE FISCAL
+  </div>
+
+</div>
+
+</body>
+</html>
+  `);
+
+  invoiceWindow.document.close();
+  invoiceWindow.focus();
+
+};
+  
   window.renderTbErpTestOrders=render;document.addEventListener('DOMContentLoaded',()=>{render();renderStock();tbErpRefreshProductOptions();setTimeout(()=>tbErpRefreshProductOptions(),1200)});
 })();
 </script>
