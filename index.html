@@ -7882,6 +7882,32 @@ if(term){
        </div>`
     : `<div class="tb-order-product-photo tb-no-photo">📦</div>`;
 
+     const invoiceHtml = o.invoiceIssued
+  ? `
+    <div class="tb-order-invoice">
+      <div class="tb-order-invoice-info">
+        <span class="tb-order-invoice-icon">🧾</span>
+
+        <div>
+          <b>NF-e ${esc(o.invoiceNumber || '')}</b>
+          <small>Nota fiscal de teste</small>
+        </div>
+      </div>
+
+      <span class="tb-order-invoice-status">
+        ${esc(o.invoiceStatus || 'EMITIDA')}
+      </span>
+
+      <button
+        type="button"
+        class="tb-erp-btn secondary"
+        onclick="tbErpViewInvoice('${esc(o.id)}')">
+        VER NOTA
+      </button>
+    </div>
+  `
+  : '';
+     
   return `
     <div class="tb-order-card">
 
@@ -7928,6 +7954,8 @@ ${o.status==='CANCELADO' && o.cancelledFrom==='ENVIADO'
       <div class="tb-order-flow">
         ${flowHtml(o)}
       </div>
+
+${invoiceHtml}
 
       <div class="tb-erp-actions">
         ${actionsHtml(o,i)}
