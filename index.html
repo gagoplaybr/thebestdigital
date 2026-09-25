@@ -7998,6 +7998,25 @@ window.tbErpAdvance=function(i,automatic=false){
     );
   }
 
+  /* ===== FATURAMENTO / NF-E SIMULADA ===== */
+if(next==='FATURAMENTO' && !o.invoiceIssued){
+
+  const numeroNF = String(
+    Math.floor(100000 + Math.random() * 900000)
+  );
+
+  o.invoiceIssued = true;
+  o.invoiceNumber = numeroNF;
+  o.invoiceStatus = 'EMITIDA';
+  o.invoiceIssuedAt = new Date().toISOString();
+
+  addHistory(
+    o,
+    'NF-e de teste nº '+numeroNF+' emitida com sucesso.',
+    'NF-E EMITIDA'
+  );
+
+}
   /* VENDA ENTREGUE */
   if(next==='ENTREGUE' && !o.stockCompleted){
 
