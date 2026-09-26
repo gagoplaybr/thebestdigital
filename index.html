@@ -8053,19 +8053,19 @@ else if(dashboardFilter === 'PROCESSANDO'){
   );
 }
 
-else if(dashboardFilter === 'ENVIADOS'){
+else if(dashboardFilter === 'ENVIADO'){
   a = a.filter(o =>
     o.status === 'ENVIADO'
   );
 }
 
-else if(dashboardFilter === 'ENTREGUES'){
+else if(dashboardFilter === 'ENTREGUE'){
   a = a.filter(o =>
     o.status === 'ENTREGUE'
   );
 }
 
-else if(dashboardFilter === 'DEVOLUCOES'){
+else if(dashboardFilter === 'DEVOLUCAO'){
   a = a.filter(o =>
     [
       'DEVOLUÇÃO SOLICITADA',
@@ -10261,35 +10261,28 @@ if(areaCliente){
 
 window.tbOpenOrdersDashboard=function(filter){
 
-  // Guarda qual card do Dashboard foi clicado
+  // Guarda o filtro escolhido no Dashboard
   window.tbDashboardOrderFilter = filter;
 
-  // Abre o módulo de Pedidos
+  // Limpa qualquer pesquisa antiga
+  const search = document.getElementById('tbErpOrderSearch');
+  if(search){
+    search.value = '';
+  }
+
+  // Abre a tela de Pedidos
   window.tbShowPremiumModule('pedidos-erp-teste');
 
+  // Renderiza novamente já com o filtro escolhido
   setTimeout(()=>{
 
-    const search = document.getElementById('tbErpOrderSearch');
-
-    if(search){
-
-      // Limpa a pesquisa anterior
-      search.value = '';
-
-      // Para filtros simples podemos mostrar o status na busca
-      if(filter === 'ENVIADO') search.value = 'ENVIADO';
-      if(filter === 'ENTREGUE') search.value = 'ENTREGUE';
-      if(filter === 'DEVOLUCAO') search.value = 'DEVOLUÇÃO';
-      if(filter === 'GARANTIA') search.value = 'GARANTIA';
-
+    if(typeof window.renderTbErpTestOrders === 'function'){
+      window.renderTbErpTestOrders();
     }
 
-    // Atualiza os pedidos
-    if(typeof render === 'function'){
-      render();
-    }
+    const searchBox = document.getElementById('tbErpOrderSearch');
 
-    search?.scrollIntoView({
+    searchBox?.scrollIntoView({
       behavior:'smooth',
       block:'start'
     });
