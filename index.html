@@ -1023,6 +1023,103 @@
 @media(max-width:1000px){.tb-kpi-grid{grid-template-columns:repeat(2,1fr)}.tb-chart-grid,.tb-lower-grid{grid-template-columns:1fr}.tb-kpi-card:last-child{grid-column:1/-1}}
 @media(max-width:560px){.tb-system-dashboard{padding:18px 12px 90px}.tb-dash-shell{padding:14px;border-radius:20px}.tb-dash-head{align-items:flex-start;flex-direction:column}.tb-dash-head h2{font-size:25px}.tb-kpi-grid{grid-template-columns:1fr 1fr}.tb-kpi-value{font-size:20px}.tb-market-row{grid-template-columns:72px 1fr 45px}}
 
+    /* ===== OPERAÇÃO DE PEDIDOS - DASHBOARD ===== */
+
+.tb-orders-dashboard{
+  margin-top:18px;
+  padding:18px;
+  background:#ffffff;
+  border:1px solid #d7e3ef;
+  border-radius:18px;
+  box-shadow:0 8px 24px rgba(15,45,70,.08);
+}
+
+.tb-orders-dashboard-title{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:16px;
+}
+
+.tb-orders-dashboard-title h3{
+  margin:0;
+  font-size:18px;
+  color:#183b56;
+  font-weight:900;
+}
+
+.tb-orders-dashboard-title p{
+  margin:4px 0 0;
+  font-size:11px;
+  color:#718096;
+}
+
+.tb-orders-kpi-grid{
+  display:grid;
+  grid-template-columns:repeat(6,minmax(0,1fr));
+  gap:10px;
+}
+
+.tb-orders-kpi{
+  position:relative;
+  background:#f8fbfe;
+  border:1px solid #d9e7f2;
+  border-radius:14px;
+  padding:14px 15px;
+  min-height:76px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  transition:.2s ease;
+}
+
+.tb-orders-kpi:hover{
+  transform:translateY(-2px);
+  box-shadow:0 8px 18px rgba(20,80,120,.10);
+}
+
+.tb-orders-kpi span{
+  display:block;
+  font-size:10px;
+  font-weight:800;
+  text-transform:uppercase;
+  letter-spacing:.4px;
+  color:#60788c;
+  margin-bottom:7px;
+}
+
+.tb-orders-kpi b{
+  display:block;
+  font-size:24px;
+  line-height:1;
+  font-weight:900;
+  color:#102b3e;
+}
+
+.tb-orders-kpi:nth-child(3) b,
+.tb-orders-kpi:nth-child(4) b{
+  color:#008acb;
+}
+
+.tb-orders-kpi:nth-child(5) b{
+  color:#b7791f;
+}
+
+.tb-orders-kpi:nth-child(6) b{
+  color:#c53030;
+}
+
+@media(max-width:1200px){
+  .tb-orders-kpi-grid{
+    grid-template-columns:repeat(3,1fr);
+  }
+}
+
+@media(max-width:700px){
+  .tb-orders-kpi-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+}
 
 /* ===== V2: CONTROLE DE VENDAS ===== */
 .tb-sales-section{max-width:1360px;margin:0 auto;padding:18px 22px 64px;}
