@@ -8195,18 +8195,6 @@ if(next === 'ETIQUETA' && !o.shippingLabelGenerated){
 
 }
 
-/* ===== PEDIDO DESPACHADO / ENVIADO ===== */
-if(next === 'ENVIADO' && !o.shippedAt){
-
-  o.shippedAt = new Date().toISOString();
-
-  addHistory(
-    o,
-    'Pedido despachado para a transportadora.',
-    'PEDIDO ENVIADO'
-  );
-
-}
 
   /* ===== PEDIDO DESPACHADO / ENVIADO ===== */
 if(next === 'ENVIADO' && !o.shippedAt){
@@ -8221,16 +8209,6 @@ if(next === 'ENVIADO' && !o.shippedAt){
 
 }
   
-  o.shippingLabelGenerated = true;
-  o.shippingLabelGeneratedAt = new Date().toISOString();
-
-  addHistory(
-    o,
-    'Etiqueta de envio gerada para o pedido.',
-    'ETIQUETA GERADA'
-  );
-
-}
   
   addHistory(
     o,
