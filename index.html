@@ -8032,11 +8032,12 @@ if(term){
     const produto=String(o.product || o.productName || o.name || '').toLowerCase();
     const sku=String(o.sku || '').toLowerCase();
     const marketplace=String(o.market || '').toLowerCase();
-
+    const status=String(o.status || '').toLowerCase();
     return pedido.includes(term) ||
-           produto.includes(term) ||
-           sku.includes(term) ||
-           marketplace.includes(term);
+       produto.includes(term) ||
+       sku.includes(term) ||
+       marketplace.includes(term) ||
+       status.includes(term);
   });
 }
    if(tbErpStatusFilter !== 'TODOS'){
