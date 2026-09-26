@@ -8029,6 +8029,8 @@ let a=get();
 
 const dashboardFilter = window.tbDashboardOrderFilter || '';
 
+   console.log('RENDER RECEBEU:', dashboardFilter, 'PEDIDOS ANTES:', a.length);
+
 if(dashboardFilter === 'ATIVOS'){
   a = a.filter(o =>
     [
@@ -8085,6 +8087,7 @@ else if(dashboardFilter === 'GARANTIA'){
 
 /* ===== FIM FILTRO DASHBOARD ===== */
 
+   console.log('PEDIDOS DEPOIS DO FILTRO:', a.length);
    
 const search=document.getElementById('tbErpOrderSearch');
 const term=String(search?.value || '').trim().toLowerCase();
