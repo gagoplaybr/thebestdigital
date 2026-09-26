@@ -6538,39 +6538,45 @@ document.addEventListener('DOMContentLoaded', function(){
     </div>
   </div>
 
-  <div class="tb-orders-kpi-grid">
+ <div class="tb-orders-kpi-grid">
 
-    <div class="tb-orders-kpi">
-      <span>Pedidos ativos</span>
-      <b id="tbOrdersActive">0</b>
-    </div>
-
-    <div class="tb-orders-kpi">
-      <span>Em processamento</span>
-      <b id="tbOrdersProcessing">0</b>
-    </div>
-
-    <div class="tb-orders-kpi">
-      <span>Enviados</span>
-      <b id="tbOrdersShipped">0</b>
-    </div>
-
-    <div class="tb-orders-kpi">
-      <span>Entregues</span>
-      <b id="tbOrdersDelivered">0</b>
-    </div>
-
-    <div class="tb-orders-kpi">
-      <span>Devoluções</span>
-      <b id="tbOrdersReturns">0</b>
-    </div>
-
-    <div class="tb-orders-kpi">
-      <span>Garantia / Avaria</span>
-      <b id="tbOrdersWarranty">0</b>
-    </div>
-
+  <div class="tb-orders-kpi tb-orders-kpi-click"
+       onclick="tbOpenOrdersDashboard('ATIVOS')">
+    <span>Pedidos ativos</span>
+    <b id="tbOrdersActive">0</b>
   </div>
+
+  <div class="tb-orders-kpi tb-orders-kpi-click"
+       onclick="tbOpenOrdersDashboard('PROCESSANDO')">
+    <span>Em processamento</span>
+    <b id="tbOrdersProcessing">0</b>
+  </div>
+
+  <div class="tb-orders-kpi tb-orders-kpi-click"
+       onclick="tbOpenOrdersDashboard('ENVIADO')">
+    <span>Enviados</span>
+    <b id="tbOrdersShipped">0</b>
+  </div>
+
+  <div class="tb-orders-kpi tb-orders-kpi-click"
+       onclick="tbOpenOrdersDashboard('ENTREGUE')">
+    <span>Entregues</span>
+    <b id="tbOrdersDelivered">0</b>
+  </div>
+
+  <div class="tb-orders-kpi tb-orders-kpi-click"
+       onclick="tbOpenOrdersDashboard('DEVOLUCAO')">
+    <span>Devoluções</span>
+    <b id="tbOrdersReturns">0</b>
+  </div>
+
+  <div class="tb-orders-kpi tb-orders-kpi-click"
+       onclick="tbOpenOrdersDashboard('GARANTIA')">
+    <span>Garantia / Avaria</span>
+    <b id="tbOrdersWarranty">0</b>
+  </div>
+
+</div>
 </div>
   
 <!-- ===== FIM OPERAÇÃO DE PEDIDOS ===== -->
