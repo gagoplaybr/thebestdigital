@@ -8117,6 +8117,21 @@ if(term){
 
     switch(tbErpStatusFilter){
 
+      case 'ATIVOS':
+  return [
+    'RECEBIDO',
+    'PAGO',
+    'FATURAMENTO',
+    'ETIQUETA'
+  ].includes(status);
+
+case 'PROCESSANDO':
+  return [
+    'PAGO',
+    'FATURAMENTO',
+    'ETIQUETA'
+  ].includes(status);
+        
       case 'RECEBIDOS':
         return status === 'RECEBIDO';
 
