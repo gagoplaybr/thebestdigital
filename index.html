@@ -8023,6 +8023,35 @@ if(!box)return;
 
 let a=get();
 
+   /* ===== FILTRO VINDO DO DASHBOARD ===== */
+
+const dashboardFilter = window.tbDashboardOrderFilter || '';
+
+if(dashboardFilter === 'ATIVOS'){
+
+  a = a.filter(o =>
+    [
+      'RECEBIDO',
+      'PAGO',
+      'FATURAMENTO',
+      'ETIQUETA'
+    ].includes(o.status)
+  );
+
+}
+
+if(dashboardFilter === 'PROCESSANDO'){
+
+  a = a.filter(o =>
+    [
+      'PAGO',
+      'FATURAMENTO',
+      'ETIQUETA'
+    ].includes(o.status)
+  );
+
+}
+   
 const search=document.getElementById('tbErpOrderSearch');
 const term=String(search?.value || '').trim().toLowerCase();
 
@@ -10198,57 +10227,37 @@ if(areaCliente){
     'area-cliente'
   ];
 
-  window.tbOpenOrdersDashboard=function(filter){
+window.tbOpenOrdersDashboard=function(filter){
 
-  // Guarda o filtro escolhido no Dashboard
+  // Guarda qual card do Dashboard foi clicado
   window.tbDashboardOrderFilter = filter;
 
   // Abre o módulo de Pedidos
   window.tbShowPremiumModule('pedidos-erp-teste');
 
-  // Aguarda a tela abrir
   setTimeout(()=>{
 
     const search = document.getElementById('tbErpOrderSearch');
 
-    if(!search)return;
+    if(search){
 
-    let text = '';
+      // Limpa a pesquisa anterior
+      search.value = '';
 
-    switch(filter){
+      // Para filtros simples podemos mostrar o status na busca
+      if(filter === 'ENVIADO') search.value = 'ENVIADO';
+      if(filter === 'ENTREGUE') search.value = 'ENTREGUE';
+      if(filter === 'DEVOLUCAO') search.value = 'DEVOLUÇÃO';
+      if(filter === 'GARANTIA') search.value = 'GARANTIA';
 
-      case 'ATIVOS':
-        text = '';
-        break;
-
-      case 'PROCESSANDO':
-        text = '';
-        break;
-
-      case 'ENVIADO':
-        text = 'ENVIADO';
-        break;
-
-      case 'ENTREGUE':
-        text = 'ENTREGUE';
-        break;
-
-      case 'DEVOLUCAO':
-        text = 'DEVOLUÇÃO';
-        break;
-
-      case 'GARANTIA':
-        text = 'GARANTIA';
-        break;
     }
 
-    search.value = text;
+    // Atualiza os pedidos
+    if(typeof render === 'function'){
+      render();
+    }
 
-    search.dispatchEvent(
-      new Event('input',{bubbles:true})
-    );
-
-    search.scrollIntoView({
+    search?.scrollIntoView({
       behavior:'smooth',
       block:'start'
     });
