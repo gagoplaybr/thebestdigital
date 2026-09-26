@@ -7897,6 +7897,8 @@ document.addEventListener('click', function(e){
 
   if(!btn) return;
 
+  window.tbDashboardOrderFilter = '';
+  
   document.querySelectorAll('.tb-erp-side-filter').forEach(b=>{
     b.classList.remove('active');
   });
