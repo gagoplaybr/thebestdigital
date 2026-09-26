@@ -10310,10 +10310,12 @@ window.tbOpenOrdersDashboard=function(filter){
 
     // Define qual botão da sidebar deve ficar destacado
     const sidebarMap = {
-      'ENVIADO': 'ENVIADOS',
-      'ENTREGUE': 'ENTREGUES',
-      'DEVOLUCAO': 'DEVOLUÇÕES'
-    };
+  'ATIVOS': 'ATIVOS',
+  'PROCESSANDO': 'PROCESSANDO',
+  'ENVIADO': 'ENVIADOS',
+  'ENTREGUE': 'ENTREGUES',
+  'DEVOLUCAO': 'DEVOLUÇÕES'
+};
 
     const sidebarStatus = sidebarMap[filter] || '';
 
