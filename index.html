@@ -10266,6 +10266,9 @@ window.tbOpenOrdersDashboard=function(filter){
   // Guarda o filtro escolhido no Dashboard
   window.tbDashboardOrderFilter = filter;
 
+  // Quando vier do Dashboard, deixa a sidebar em TODOS
+tbErpStatusFilter = 'TODOS';
+
   // Limpa qualquer pesquisa antiga
   const search = document.getElementById('tbErpOrderSearch');
   if(search){
