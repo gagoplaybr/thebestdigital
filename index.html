@@ -10197,6 +10197,65 @@ if(areaCliente){
     'area-cliente'
   ];
 
+  window.tbOpenOrdersDashboard=function(filter){
+
+  // Guarda o filtro escolhido no Dashboard
+  window.tbDashboardOrderFilter = filter;
+
+  // Abre o módulo de Pedidos
+  window.tbShowPremiumModule('pedidos-erp-teste');
+
+  // Aguarda a tela abrir
+  setTimeout(()=>{
+
+    const search = document.getElementById('tbErpOrderSearch');
+
+    if(!search)return;
+
+    let text = '';
+
+    switch(filter){
+
+      case 'ATIVOS':
+        text = '';
+        break;
+
+      case 'PROCESSANDO':
+        text = '';
+        break;
+
+      case 'ENVIADO':
+        text = 'ENVIADO';
+        break;
+
+      case 'ENTREGUE':
+        text = 'ENTREGUE';
+        break;
+
+      case 'DEVOLUCAO':
+        text = 'DEVOLUÇÃO';
+        break;
+
+      case 'GARANTIA':
+        text = 'GARANTIA';
+        break;
+    }
+
+    search.value = text;
+
+    search.dispatchEvent(
+      new Event('input',{bubbles:true})
+    );
+
+    search.scrollIntoView({
+      behavior:'smooth',
+      block:'start'
+    });
+
+  },100);
+
+};
+  
   window.tbShowPremiumModule=function(sectionId,opts={}){
     if(!TB_PREMIUM_MODULES.includes(sectionId))sectionId='painel-premium';
 
