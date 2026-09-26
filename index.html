@@ -8083,15 +8083,6 @@ else if(dashboardFilter === 'GARANTIA'){
 
 /* ===== FIM FILTRO DASHBOARD ===== */
 
-  a = a.filter(o =>
-    [
-      'PAGO',
-      'FATURAMENTO',
-      'ETIQUETA'
-    ].includes(o.status)
-  );
-
-}
    
 const search=document.getElementById('tbErpOrderSearch');
 const term=String(search?.value || '').trim().toLowerCase();
