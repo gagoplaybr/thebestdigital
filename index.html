@@ -8181,6 +8181,20 @@ if(next==='FATURAMENTO' && !o.invoiceIssued){
 
   o.status=next;
 
+  /* ===== ETIQUETA DE ENVIO GERADA ===== */
+if(next === 'ETIQUETA' && !o.shippingLabelGenerated){
+
+  o.shippingLabelGenerated = true;
+  o.shippingLabelGeneratedAt = new Date().toISOString();
+
+  addHistory(
+    o,
+    'Etiqueta de envio gerada para o pedido.',
+    'ETIQUETA GERADA'
+  );
+
+}
+  
   addHistory(
     o,
     automatic
