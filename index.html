@@ -8171,7 +8171,8 @@ if(next==='FATURAMENTO' && !o.invoiceIssued){
     saveStock(o.sku,st);
 
     o.stockCompleted=true;
-
+    o.deliveredAt = new Date().toISOString();
+    
     addHistory(
       o,
       'Venda concluída: '+o.qty+' un. removida do reservado/processado.',
