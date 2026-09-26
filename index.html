@@ -11219,6 +11219,68 @@ if(alertEl){
         </div>
       `;
 }
+
+    /* ===== OPERAÇÃO DE PEDIDOS ERP ===== */
+
+let erpOrders = [];
+
+try{
+  erpOrders = JSON.parse(
+    localStorage.getItem('tb_erp_test_orders_v850') || '[]'
+  );
+}catch(e){
+  erpOrders = [];
+}
+
+const activeStatuses = [
+  'RECEBIDO',
+  'PAGO',
+  'FATURAMENTO',
+  'ETIQUETA'
+];
+
+const processingStatuses = [
+  'PAGO',
+  'FATURAMENTO',
+  'ETIQUETA'
+];
+
+const returnStatuses = [
+  'DEVOLUÇÃO SOLICITADA',
+  'DEVOLUÇÃO RECEBIDA'
+];
+
+const activeOrders = erpOrders.filter(o =>
+  activeStatuses.includes(o.status)
+).length;
+
+const processingOrders = erpOrders.filter(o =>
+  processingStatuses.includes(o.status)
+).length;
+
+const shippedOrders = erpOrders.filter(o =>
+  o.status === 'ENVIADO'
+).length;
+
+const deliveredOrders = erpOrders.filter(o =>
+  o.status === 'ENTREGUE'
+).length;
+
+const returnOrders = erpOrders.filter(o =>
+  returnStatuses.includes(o.status)
+).length;
+
+const warrantyOrders = erpOrders.filter(o =>
+  o.status === 'DEVOLVIDO → GARANTIA/AVARIA'
+).length;
+
+set('tbOrdersActive', activeOrders);
+set('tbOrdersProcessing', processingOrders);
+set('tbOrdersShipped', shippedOrders);
+set('tbOrdersDelivered', deliveredOrders);
+set('tbOrdersReturns', returnOrders);
+set('tbOrdersWarranty', warrantyOrders);
+    
   };
 
 
