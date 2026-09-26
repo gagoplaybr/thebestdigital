@@ -8247,7 +8247,7 @@ if(next === 'ENVIADO' && !o.shippedAt){
     if(order.status === 'ENVIADO')return;
     if(order.status === 'ENTREGUE')return;
 
-    const advanced=tbErpAdvance(index,true);
+    const advanced=tbErpAdvance(index,false);
 
     if(!advanced)return;
 
