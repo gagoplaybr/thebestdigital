@@ -10263,26 +10263,45 @@ window.tbOpenOrdersDashboard=function(filter){
 
   // Guarda o filtro escolhido no Dashboard
   window.tbDashboardOrderFilter = filter;
-  console.log('FILTRO DASHBOARD:', filter);
 
-  // Quando vier do Dashboard, deixa a sidebar em TODOS
-tbErpStatusFilter = 'TODOS';
+  // O filtro real continua sendo controlado pelo Dashboard
+  tbErpStatusFilter = 'TODOS';
 
-  // Limpa qualquer pesquisa antiga
+  // Limpa pesquisas antigas
   const search = document.getElementById('tbErpOrderSearch');
-  if(search){
-    search.value = '';
-  }
+  const sideSearch = document.getElementById('tbErpSidebarSearch');
+
+  if(search) search.value = '';
+  if(sideSearch) sideSearch.value = '';
 
   // Abre a tela de Pedidos
   window.tbShowPremiumModule('pedidos-erp-teste');
 
-  // Renderiza novamente já com o filtro escolhido
   setTimeout(()=>{
 
+    // Atualiza os pedidos com o filtro do Dashboard
     if(typeof window.renderTbErpTestOrders === 'function'){
       window.renderTbErpTestOrders();
     }
+
+    // Define qual botão da sidebar deve ficar destacado
+    const sidebarMap = {
+      'ENVIADO': 'ENVIADOS',
+      'ENTREGUE': 'ENTREGUES',
+      'DEVOLUCAO': 'DEVOLUÇÕES'
+    };
+
+    const sidebarStatus = sidebarMap[filter] || '';
+
+    // Remove o destaque anterior
+    document.querySelectorAll('.tb-erp-side-filter').forEach(btn=>{
+      btn.classList.remove('active');
+
+      // Enviados, Entregues e Devoluções têm botão equivalente
+      if(sidebarStatus && btn.dataset.status === sidebarStatus){
+        btn.classList.add('active');
+      }
+    });
 
     const searchBox = document.getElementById('tbErpOrderSearch');
 
