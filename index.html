@@ -8023,12 +8023,26 @@ if(!box)return;
 
 let a=get();
 
-   /* ===== FILTRO VINDO DO DASHBOARD ===== */
+/* ===== FILTRO VINDO DO DASHBOARD ===== */
 
 const dashboardFilter = window.tbDashboardOrderFilter || '';
 
 if(dashboardFilter === 'ATIVOS'){
+  a = a.filter(o =>
+    [
+      'RECEBIDO',
+      'PAGO',
+      'FATURAMENTO',
+      'ETIQUETA',
+      'ENVIADO',
+      'ENTREGUE',
+      'DEVOLUÇÃO SOLICITADA',
+      'DEVOLUÇÃO RECEBIDA'
+    ].includes(o.status)
+  );
+}
 
+else if(dashboardFilter === 'PROCESSANDO'){
   a = a.filter(o =>
     [
       'RECEBIDO',
@@ -8037,10 +8051,37 @@ if(dashboardFilter === 'ATIVOS'){
       'ETIQUETA'
     ].includes(o.status)
   );
-
 }
 
-if(dashboardFilter === 'PROCESSANDO'){
+else if(dashboardFilter === 'ENVIADOS'){
+  a = a.filter(o =>
+    o.status === 'ENVIADO'
+  );
+}
+
+else if(dashboardFilter === 'ENTREGUES'){
+  a = a.filter(o =>
+    o.status === 'ENTREGUE'
+  );
+}
+
+else if(dashboardFilter === 'DEVOLUCOES'){
+  a = a.filter(o =>
+    [
+      'DEVOLUÇÃO SOLICITADA',
+      'DEVOLUÇÃO RECEBIDA',
+      'DEVOLVIDO → ESTOQUE'
+    ].includes(o.status)
+  );
+}
+
+else if(dashboardFilter === 'GARANTIA'){
+  a = a.filter(o =>
+    o.status === 'DEVOLVIDO → GARANTIA/AVARIA'
+  );
+}
+
+/* ===== FIM FILTRO DASHBOARD ===== */
 
   a = a.filter(o =>
     [
