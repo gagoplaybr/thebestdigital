@@ -8038,10 +8038,6 @@ if(dashboardFilter === 'ATIVOS'){
       'PAGO',
       'FATURAMENTO',
       'ETIQUETA',
-      'ENVIADO',
-      'ENTREGUE',
-      'DEVOLUÇÃO SOLICITADA',
-      'DEVOLUÇÃO RECEBIDA'
     ].includes(o.status)
   );
 }
@@ -8049,7 +8045,6 @@ if(dashboardFilter === 'ATIVOS'){
 else if(dashboardFilter === 'PROCESSANDO'){
   a = a.filter(o =>
     [
-      'RECEBIDO',
       'PAGO',
       'FATURAMENTO',
       'ETIQUETA'
