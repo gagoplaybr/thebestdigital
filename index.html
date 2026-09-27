@@ -7682,7 +7682,23 @@ body.tb-premium-nav-active #painel-premium .tb-kpi-icon{
     </div><div class="tb-erp-actions"><button class="tb-erp-btn" onclick="tbErpCreateTestOrder()">+ RECEBER PEDIDO TESTE</button><button class="tb-erp-btn secondary" onclick="tbErpResetTests()">LIMPAR TESTES</button></div></div>
     <div class="tb-erp-card" style="margin-top:14px"><h3>🖨️ Etiqueta de teste</h3><div class="tb-erp-fields"><div class="tb-erp-field"><label>FORMATO</label><select id="tbLabelFormat"><option value="100x150">Térmica 100 × 150 mm</option><option value="100x100">Térmica 100 × 100 mm</option><option value="a4">A4</option></select></div><div class="tb-erp-field"><label>CÓPIAS</label><input id="tbLabelCopies" type="number" min="1" value="1"></div></div><div class="tb-label-preview" id="tbLabelPreview"><b>THE BEST • TESTE</b><small>Etiqueta interna de simulação</small><hr><b id="tbLabelProduct">Produto Teste</b><small id="tbLabelSku">SKU: TESTE-001</small><div class="tb-label-barcode"></div><small id="tbLabelOrder">Pedido: ML-TESTE-0001</small><small>SEM VALIDADE PARA ENVIO</small></div><div class="tb-erp-actions"><button class="tb-erp-btn secondary" onclick="tbErpPreviewLabel()">ATUALIZAR ETIQUETA</button><button class="tb-erp-btn" onclick="window.print()">IMPRIMIR TESTE</button></div></div>
    </div>
- <div class="tb-erp-stock-compact">
+
+  
+  </div>
+ </div>
+</section>
+  <!-- ===== MODAL DE ETIQUETA DO PEDIDO ===== -->
+<div id="tbOrderLabelModal" class="tb-order-label-modal">
+
+  <div class="tb-order-label-window">
+
+    <div class="tb-order-label-head">
+      <div>
+        <h3>🖨️ Etiqueta do pedido</h3>
+        <small id="tbOrderLabelSubtitle">Pré-visualização da etiqueta</small>
+      </div>
+
+       <div class="tb-erp-stock-compact">
 
   <div class="tb-stock-compact-title">
     📦 <strong>Estoque</strong>
@@ -7719,21 +7735,7 @@ body.tb-premium-nav-active #painel-premium .tb-kpi-icon{
   </button>
 
 </div>
-  
-  </div>
- </div>
-</section>
-  <!-- ===== MODAL DE ETIQUETA DO PEDIDO ===== -->
-<div id="tbOrderLabelModal" class="tb-order-label-modal">
-
-  <div class="tb-order-label-window">
-
-    <div class="tb-order-label-head">
-      <div>
-        <h3>🖨️ Etiqueta do pedido</h3>
-        <small id="tbOrderLabelSubtitle">Pré-visualização da etiqueta</small>
-      </div>
-
+      
       <button
         type="button"
         class="tb-test-modal-close"
