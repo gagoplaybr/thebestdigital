@@ -7682,11 +7682,43 @@ body.tb-premium-nav-active #painel-premium .tb-kpi-icon{
     </div><div class="tb-erp-actions"><button class="tb-erp-btn" onclick="tbErpCreateTestOrder()">+ RECEBER PEDIDO TESTE</button><button class="tb-erp-btn secondary" onclick="tbErpResetTests()">LIMPAR TESTES</button></div></div>
     <div class="tb-erp-card" style="margin-top:14px"><h3>🖨️ Etiqueta de teste</h3><div class="tb-erp-fields"><div class="tb-erp-field"><label>FORMATO</label><select id="tbLabelFormat"><option value="100x150">Térmica 100 × 150 mm</option><option value="100x100">Térmica 100 × 100 mm</option><option value="a4">A4</option></select></div><div class="tb-erp-field"><label>CÓPIAS</label><input id="tbLabelCopies" type="number" min="1" value="1"></div></div><div class="tb-label-preview" id="tbLabelPreview"><b>THE BEST • TESTE</b><small>Etiqueta interna de simulação</small><hr><b id="tbLabelProduct">Produto Teste</b><small id="tbLabelSku">SKU: TESTE-001</small><div class="tb-label-barcode"></div><small id="tbLabelOrder">Pedido: ML-TESTE-0001</small><small>SEM VALIDADE PARA ENVIO</small></div><div class="tb-erp-actions"><button class="tb-erp-btn secondary" onclick="tbErpPreviewLabel()">ATUALIZAR ETIQUETA</button><button class="tb-erp-btn" onclick="window.print()">IMPRIMIR TESTE</button></div></div>
    </div>
-   <div class="tb-erp-card tb-erp-stock" style="margin-bottom:14px"><h3>📦 Estoque ERP • Simulação</h3>
-    <div class="tb-test-stock-grid"><div class="tb-stock-kpi"><small id="tbStockSkuLabel">PRODUTO SELECIONADO • DISPONÍVEL</small><strong id="tbStockAvailable">10</strong></div><div class="tb-stock-kpi"><small>RESERVADO / PROCESSADO</small><strong id="tbStockProcessed">0</strong></div><div class="tb-stock-kpi warn"><small>AGUARDANDO RETORNO</small><strong id="tbStockReturn">0</strong></div><div class="tb-stock-kpi danger"><small>GARANTIA / AVARIA</small><strong id="tbStockWarranty">0</strong></div></div>
-    <div style="color:#7897b0;font-size:9px">Estoque fictício inicial: 10 unidades. Movimentações abaixo são isoladas e não alteram o Estoque Premium real.</div><div id="tbStockLog" class="tb-stock-log"></div>
-    <button class="tb-erp-btn secondary tb-stock-reset" onclick="tbErpResetStock()">REINICIAR ESTOQUE TESTE</button>
-   </div>
+ <div class="tb-erp-stock-compact">
+
+  <div class="tb-stock-compact-title">
+    📦 <strong>Estoque</strong>
+  </div>
+
+  <div class="tb-stock-compact-item">
+    <small id="tbStockSkuLabel">DISPONÍVEL</small>
+    <strong id="tbStockAvailable">10</strong>
+  </div>
+
+  <div class="tb-stock-compact-item">
+    <small>PROCESSADO</small>
+    <strong id="tbStockProcessed">0</strong>
+  </div>
+
+  <div class="tb-stock-compact-item warn">
+    <small>RETORNO</small>
+    <strong id="tbStockReturn">0</strong>
+  </div>
+
+  <div class="tb-stock-compact-item danger">
+    <small>GARANTIA</small>
+    <strong id="tbStockWarranty">0</strong>
+  </div>
+
+  <div id="tbStockLog" class="tb-stock-log"></div>
+
+  <button
+    type="button"
+    class="tb-stock-compact-reset"
+    onclick="tbErpResetStock()"
+    title="Reiniciar estoque teste">
+    ↻
+  </button>
+
+</div>
   
   </div>
  </div>
@@ -8787,6 +8819,90 @@ window.tbPrintSelectedLabels=function(){
 <meta charset="UTF-8">
 
 <title>Etiquetas em lote - ${selecionados.length}</title>
+/* ===== ESTOQUE ERP COMPACTO ===== */
+
+.tb-erp-stock-compact{
+  display:flex;
+  align-items:center;
+  gap:8px;
+
+  min-height:54px;
+  padding:7px 10px;
+  margin-bottom:12px;
+
+  background:#fff;
+  border:1px solid #d6e2ec;
+  border-radius:12px;
+  box-shadow:0 5px 16px rgba(16,52,80,.06);
+}
+
+.tb-stock-compact-title{
+  display:flex;
+  align-items:center;
+  gap:5px;
+
+  padding:0 10px 0 4px;
+  border-right:1px solid #dbe6ee;
+
+  color:#173b57;
+  font-size:12px;
+  white-space:nowrap;
+}
+
+.tb-stock-compact-item{
+  min-width:92px;
+  padding:6px 10px;
+
+  background:#f5f9fc;
+  border:1px solid #dce8f0;
+  border-radius:8px;
+}
+
+.tb-stock-compact-item small{
+  display:block;
+  color:#657f94;
+  font-size:8px;
+  font-weight:800;
+  white-space:nowrap;
+}
+
+.tb-stock-compact-item strong{
+  display:block;
+  margin-top:2px;
+
+  color:#078ed0;
+  font-size:17px;
+  line-height:1;
+}
+
+.tb-stock-compact-item.warn strong{
+  color:#b97900;
+}
+
+.tb-stock-compact-item.danger strong{
+  color:#d63243;
+}
+
+.tb-stock-compact-reset{
+  width:32px;
+  height:32px;
+  margin-left:auto;
+
+  border:1px solid #cbdce8;
+  border-radius:8px;
+  background:#f3f7fa;
+
+  color:#315a76;
+  font-size:18px;
+  font-weight:900;
+  cursor:pointer;
+}
+
+.tb-stock-compact-reset:hover{
+  background:#e8f4fb;
+  border-color:#18a8ef;
+}
+
 
 <style>
 
