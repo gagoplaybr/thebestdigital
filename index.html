@@ -7617,6 +7617,44 @@ body.tb-premium-nav-active #painel-premium .tb-kpi-icon{
     <small>Gerencie os pedidos recebidos e acompanhe o processamento.</small>
   </div>
 
+      <div class="tb-erp-stock-compact">
+
+  <div class="tb-stock-compact-title">
+    📦 <strong>Estoque</strong>
+  </div>
+
+  <div class="tb-stock-compact-item">
+    <small id="tbStockSkuLabel">DISPONÍVEL</small>
+    <strong id="tbStockAvailable">10</strong>
+  </div>
+
+  <div class="tb-stock-compact-item">
+    <small>PROCESSADO</small>
+    <strong id="tbStockProcessed">0</strong>
+  </div>
+
+  <div class="tb-stock-compact-item warn">
+    <small>RETORNO</small>
+    <strong id="tbStockReturn">0</strong>
+  </div>
+
+  <div class="tb-stock-compact-item danger">
+    <small>GARANTIA</small>
+    <strong id="tbStockWarranty">0</strong>
+  </div>
+
+  <div id="tbStockLog" class="tb-stock-log"></div>
+
+  <button
+    type="button"
+    class="tb-stock-compact-reset"
+    onclick="tbErpResetStock()"
+    title="Reiniciar estoque teste">
+    ↻
+  </button>
+
+</div>
+     
      <button
   type="button"
   class="tb-new-test-order-btn"
@@ -7744,44 +7782,7 @@ body.tb-premium-nav-active #painel-premium .tb-kpi-icon{
         <small id="tbOrderLabelSubtitle">Pré-visualização da etiqueta</small>
       </div>
 
-       <div class="tb-erp-stock-compact">
-
-  <div class="tb-stock-compact-title">
-    📦 <strong>Estoque</strong>
-  </div>
-
-  <div class="tb-stock-compact-item">
-    <small id="tbStockSkuLabel">DISPONÍVEL</small>
-    <strong id="tbStockAvailable">10</strong>
-  </div>
-
-  <div class="tb-stock-compact-item">
-    <small>PROCESSADO</small>
-    <strong id="tbStockProcessed">0</strong>
-  </div>
-
-  <div class="tb-stock-compact-item warn">
-    <small>RETORNO</small>
-    <strong id="tbStockReturn">0</strong>
-  </div>
-
-  <div class="tb-stock-compact-item danger">
-    <small>GARANTIA</small>
-    <strong id="tbStockWarranty">0</strong>
-  </div>
-
-  <div id="tbStockLog" class="tb-stock-log"></div>
-
-  <button
-    type="button"
-    class="tb-stock-compact-reset"
-    onclick="tbErpResetStock()"
-    title="Reiniciar estoque teste">
-    ↻
-  </button>
-
-</div>
-      
+            
       <button
         type="button"
         class="tb-test-modal-close"
