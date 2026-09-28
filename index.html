@@ -5155,6 +5155,233 @@ body.tb-desktop-program.tb-app-authenticated .app-bottom-nav{
   .tb-product-detail-main-photo{width:80px;height:80px}
   .tb-product-gallery{grid-template-columns:repeat(3,1fr)}
 }
+
+  /* =====================================================
+   MEUS PRODUTOS • VISUAL DASHBOARD / ERP
+   ===================================================== */
+
+/* Área principal */
+#produtos-premium,
+#produtos-premium .premium-products-wrap{
+    color:#17324b;
+}
+
+/* ===== FORMULÁRIO DE PRODUTO ===== */
+
+#produtos-premium .tb-product-form-card{
+    background:#ffffff !important;
+    border:1px solid #d7e4ee !important;
+    border-radius:16px !important;
+    box-shadow:0 5px 18px rgba(25,55,80,.06) !important;
+    padding:20px !important;
+}
+
+/* Título formulário */
+#produtos-premium .tb-product-form-title b{
+    color:#17324b !important;
+}
+
+#produtos-premium .tb-product-form-title span{
+    color:#6d8498 !important;
+}
+
+/* Badge nuvem */
+#produtos-premium .tb-product-cloud{
+    background:#eef8ff !important;
+    border:1px solid #bcdff3 !important;
+    color:#087fc1 !important;
+}
+
+/* Labels */
+#produtos-premium .tb-product-form-grid label{
+    color:#536b80 !important;
+    font-weight:800 !important;
+}
+
+/* Inputs */
+#produtos-premium .tb-product-form-grid input,
+#produtos-premium .tb-product-form-grid textarea{
+    background:#f7fafc !important;
+    color:#17324b !important;
+    border:1px solid #cfdee9 !important;
+}
+
+#produtos-premium .tb-product-form-grid input:focus,
+#produtos-premium .tb-product-form-grid textarea:focus{
+    background:#ffffff !important;
+    border-color:#149fe5 !important;
+    box-shadow:0 0 0 3px rgba(20,159,229,.10) !important;
+}
+
+/* Fotos */
+#produtos-premium .tb-product-photo-box{
+    background:#f7fafc !important;
+    border:1px solid #d5e3ed !important;
+}
+
+#produtos-premium .tb-product-photo-head b{
+    color:#17324b !important;
+}
+
+#produtos-premium .tb-product-photo-head span,
+#produtos-premium .tb-product-upload small{
+    color:#7890a4 !important;
+}
+
+#produtos-premium .tb-product-upload{
+    background:#ffffff !important;
+    border-color:#bcd8e9 !important;
+    color:#17324b !important;
+}
+
+
+/* =====================================================
+   BOTÃO CADASTRAR NOVO PRODUTO
+   ===================================================== */
+
+#produtos-premium .tb-products-catalog-actions{
+    display:flex !important;
+    justify-content:flex-end !important;
+    margin:12px 0 4px !important;
+}
+
+#produtos-premium .tb-products-new-btn{
+    border:0 !important;
+    border-radius:10px !important;
+    padding:12px 18px !important;
+
+    background:#0797dc !important;
+    color:#ffffff !important;
+
+    font-size:11px !important;
+    font-weight:900 !important;
+
+    cursor:pointer !important;
+
+    box-shadow:0 7px 18px rgba(7,151,220,.18) !important;
+}
+
+#produtos-premium .tb-products-new-btn:hover{
+    background:#087fc1 !important;
+}
+
+
+/* =====================================================
+   PESQUISA / TOOLBAR
+   ===================================================== */
+
+#produtos-premium .tb-product-toolbar{
+    display:flex !important;
+    align-items:center !important;
+    gap:10px !important;
+
+    margin-top:16px !important;
+}
+
+#produtos-premium .tb-product-search{
+    flex:1 !important;
+}
+
+#produtos-premium .tb-product-search-wrap{
+    background:#ffffff !important;
+    border:1px solid #d0e0eb !important;
+    border-radius:10px !important;
+}
+
+#produtos-premium #productSearchInput{
+    background:#ffffff !important;
+    color:#17324b !important;
+}
+
+#produtos-premium #productSearchInput::placeholder{
+    color:#8397a8 !important;
+}
+
+
+/* =====================================================
+   LISTA / CARDS DOS PRODUTOS
+   ===================================================== */
+
+#produtos-premium .tb-product-list{
+    display:flex !important;
+    flex-direction:column !important;
+    gap:10px !important;
+}
+
+#produtos-premium .tb-product-list .v5-item{
+    background:#ffffff !important;
+    border:1px solid #d6e3ed !important;
+    border-radius:14px !important;
+
+    box-shadow:0 4px 14px rgba(25,55,80,.045) !important;
+
+    padding:12px !important;
+}
+
+/* Cada linha */
+#produtos-premium .tb-product-row{
+    color:#17324b !important;
+}
+
+/* Foto */
+#produtos-premium .tb-product-thumb{
+    background:#f4f8fb !important;
+    border:1px solid #d4e2ec !important;
+    border-radius:10px !important;
+}
+
+/* Nome produto */
+#produtos-premium .tb-product-main a{
+    color:#17324b !important;
+    font-weight:900 !important;
+}
+
+/* EAN */
+#produtos-premium .tb-product-main small{
+    color:#7a91a5 !important;
+}
+
+/* SKU */
+#produtos-premium .tb-product-code a{
+    color:#087fc1 !important;
+}
+
+/* Rótulos */
+#produtos-premium .tb-product-cell span{
+    color:#71879a !important;
+}
+
+/* Valores */
+#produtos-premium .tb-product-cell b{
+    color:#17324b !important;
+}
+
+
+/* =====================================================
+   INFORMAÇÃO DA PESQUISA
+   ===================================================== */
+
+#produtos-premium .tb-product-search-info{
+    color:#70879a !important;
+}
+
+
+/* =====================================================
+   RESPONSIVO
+   ===================================================== */
+
+@media(max-width:1100px){
+
+    #produtos-premium .tb-product-toolbar{
+        flex-direction:column !important;
+        align-items:stretch !important;
+    }
+
+    #produtos-premium .tb-product-toolbar-actions{
+        justify-content:flex-end !important;
+    }
+}
+  
 </style>
 
 
@@ -8868,6 +9095,7 @@ window.tbPrintSelectedLabels=function(){
 <meta charset="UTF-8">
 
 <title>Etiquetas em lote - ${selecionados.length}</title>
+
 
 <style>
 
