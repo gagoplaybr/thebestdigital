@@ -9900,7 +9900,7 @@ th{
 </div>
       
     <div id="premiumProductsPanel" class="premium-products-wrap">
-      <div class="tb-product-form-card">
+      <div class="tb-product-form-card" id="tbProductFormPage" hidden>
         <div class="tb-product-form-title">
           <div>
             <b id="tbProductFormTitle">Novo produto</b>
@@ -10484,7 +10484,21 @@ window.tbOpenOrdersDashboard=function(filter){
   },100);
 
 };
-  
+
+  window.tbOpenProductForm = function(){
+
+  const form = document.getElementById('tbProductFormPage');
+
+  if(!form) return;
+
+  form.hidden = false;
+
+  form.scrollIntoView({
+    behavior:'smooth',
+    block:'start'
+  });
+
+};
   window.tbShowPremiumModule=function(sectionId,opts={}){
     if(!TB_PREMIUM_MODULES.includes(sectionId))sectionId='painel-premium';
 
