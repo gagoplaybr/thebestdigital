@@ -9901,13 +9901,25 @@ th{
       
     <div id="premiumProductsPanel" class="premium-products-wrap">
       <div class="tb-product-form-card" id="tbProductFormPage" hidden>
-        <div class="tb-product-form-title">
-          <div>
-            <b id="tbProductFormTitle">Novo produto</b>
-            <span id="tbProductFormSubtitle">Preencha os dados principais do item.</span>
-          </div>
-          <span class="tb-product-cloud">☁ NUVEM</span>
-        </div>
+<div class="tb-product-form-title">
+
+  <div>
+    <button
+      type="button"
+      class="tb-product-back-btn"
+      onclick="tbCloseProductForm()">
+      ← VOLTAR AOS PRODUTOS
+    </button>
+
+    <b id="tbProductFormTitle">Novo produto</b>
+    <span id="tbProductFormSubtitle">
+      Preencha os dados principais do item.
+    </span>
+  </div>
+
+  <span class="tb-product-cloud">☁ NUVEM</span>
+
+</div>
 
         <div class="v5-form-grid tb-product-form-grid">
           <div class="full"><label>Nome / título do produto *</label><input id="v5ProdutoNome" type="text" placeholder="Ex.: Fone Bluetooth Premium"></div>
@@ -10499,6 +10511,25 @@ window.tbOpenOrdersDashboard=function(filter){
   });
 
 };
+  window.tbCloseProductForm = function(){
+
+  const form = document.getElementById('tbProductFormPage');
+
+  if(form){
+    form.hidden = true;
+  }
+
+  const panel = document.getElementById('premiumProductsPanel');
+
+  if(panel){
+    panel.scrollIntoView({
+      behavior:'smooth',
+      block:'start'
+    });
+  }
+
+};
+  
   window.tbShowPremiumModule=function(sectionId,opts={}){
     if(!TB_PREMIUM_MODULES.includes(sectionId))sectionId='painel-premium';
 
@@ -11072,6 +11103,7 @@ setTimeout(()=>{
       const message=editing?"Produto atualizado com sucesso.":"Produto completo salvo na nuvem.";
       limparFormularioProduto();
       await renderProdutos();
+      tbCloseProductForm();
       toast(message);
       trackV5(editing?"editar_produto_premium":"salvar_produto_premium_completo");
     }catch(err){
