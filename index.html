@@ -5858,6 +5858,73 @@ body.tb-desktop-program.tb-app-authenticated .app-bottom-nav{
 #tbProductFormPage .tb-product-back-btn{
     font-size:12px !important;
 }
+
+  /* =====================================================
+   CATÁLOGO • ORDENAÇÃO
+   ===================================================== */
+
+#meus-produtos .tb-product-sort{
+    display:flex !important;
+    align-items:center !important;
+    gap:8px !important;
+    flex:0 0 auto !important;
+}
+
+#meus-produtos .tb-product-sort label{
+    font-size:10px !important;
+    font-weight:900 !important;
+    color:#526f86 !important;
+    white-space:nowrap !important;
+    letter-spacing:.3px !important;
+}
+
+#meus-produtos .tb-product-sort select{
+    height:42px !important;
+    min-width:145px !important;
+    padding:0 34px 0 12px !important;
+
+    border:1px solid #b9d9ee !important;
+    border-radius:10px !important;
+
+    background:#f5f9fc !important;
+    color:#17324b !important;
+
+    font-size:11px !important;
+    font-weight:800 !important;
+
+    outline:none !important;
+    cursor:pointer !important;
+
+    transition:.18s ease !important;
+}
+
+#meus-produtos .tb-product-sort select:hover{
+    border-color:#65bff0 !important;
+    background:#fff !important;
+}
+
+#meus-produtos .tb-product-sort select:focus{
+    border-color:#0799e5 !important;
+    box-shadow:0 0 0 3px rgba(7,153,229,.10) !important;
+}
+
+/* Toolbar alinhada */
+#meus-produtos .tb-product-toolbar{
+    align-items:center !important;
+}
+
+/* Notebook */
+@media(max-width:1200px){
+
+    #meus-produtos .tb-product-sort{
+        flex:1 1 200px !important;
+    }
+
+    #meus-produtos .tb-product-sort select{
+        flex:1 !important;
+        min-width:130px !important;
+    }
+}
   
 </style>
 
