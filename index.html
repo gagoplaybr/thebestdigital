@@ -12626,14 +12626,58 @@ set('tbOrdersWarranty', warrantyOrders);
   }
 
   window.filtrarProdutosPremium=function(){
-    const termo=(document.getElementById("productSearchInput")?.value||"").trim().toLowerCase();
-    if(!termo){renderProdutosPremiumLista(premiumProducts);return;}
-    const filtrados=premiumProducts.filter(x=>
-      [x.name,x.sku,x.ean,x.ncm].some(v=>String(v||"").toLowerCase().includes(termo))
-    );
-    renderProdutosPremiumLista(filtrados);
-  };
 
+    const termo=(document.getElementById("productSearchInput")?.value||"")
+        .trim()
+        .toLowerCase();
+
+    let produtos=[...premiumProducts];
+
+    /* FILTRO DA PESQUISA */
+    if(termo){
+        produtos=produtos.filter(x=>
+            [x.name,x.sku,x.ean,x.ncm].some(v=>
+                String(v||"").toLowerCase().includes(termo)
+            )
+        );
+    }
+
+    /* ORDENAÇÃO */
+    const ordem=document.getElementById("tbProductSort")?.value || "nome-az";
+
+    produtos.sort((a,b)=>{
+
+        const nomeA=String(a.name||"").trim();
+        const nomeB=String(b.name||"").trim();
+
+        const skuA=String(a.sku||"").trim();
+        const skuB=String(b.sku||"").trim();
+
+        if(ordem==="nome-az"){
+            return nomeA.localeCompare(nomeB,"pt-BR",{numeric:true});
+        }
+
+        if(ordem==="nome-za"){
+            return nomeB.localeCompare(nomeA,"pt-BR",{numeric:true});
+        }
+
+        if(ordem==="sku-az"){
+            return skuA.localeCompare(skuB,"pt-BR",{numeric:true});
+        }
+
+        if(ordem==="sku-za"){
+            return skuB.localeCompare(skuA,"pt-BR",{numeric:true});
+        }
+
+        return 0;
+    });
+
+    renderProdutosPremiumLista(produtos);
+};
+
+  window.ordenarProdutosPremium=function(){
+    filtrarProdutosPremium();
+};
   window.limparBuscaProdutos=function(){
     const input=document.getElementById("productSearchInput");
     if(input){input.value="";input.focus();}
