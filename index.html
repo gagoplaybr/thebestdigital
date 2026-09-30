@@ -10678,6 +10678,18 @@ th{
           </div>
           <button type="button" onclick="limparBuscaProdutos()">LIMPAR BUSCA</button>
         </div>
+
+        <div class="tb-product-sort">
+  <label for="tbProductSort">ORDENAR POR</label>
+
+  <select id="tbProductSort" onchange="ordenarProdutosPremium()">
+    <option value="nome-az">Nome A → Z</option>
+    <option value="nome-za">Nome Z → A</option>
+    <option value="sku-az">SKU A → Z</option>
+    <option value="sku-za">SKU Z → A</option>
+  </select>
+</div>
+        
         <div class="tb-product-toolbar-actions">
           <button class="v5-mini" onclick="baixarProdutosCSV()">📥 CSV</button>
           <button class="v5-mini" onclick="renderProdutos()">↻ ATUALIZAR</button>
