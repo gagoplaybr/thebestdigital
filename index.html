@@ -5925,6 +5925,37 @@ body.tb-desktop-program.tb-app-authenticated .app-bottom-nav{
         min-width:130px !important;
     }
 }
+  /* =====================================================
+   CATÁLOGO • GRID COM COLUNA DE ESTOQUE
+   ===================================================== */
+
+#meus-produtos .tb-product-row{
+    display:grid !important;
+
+    grid-template-columns:
+        58px
+        minmax(220px, 1.8fr)
+        minmax(110px, .75fr)
+        minmax(85px, .55fr)
+        minmax(85px, .55fr)
+        minmax(75px, .50fr)
+        minmax(80px, .55fr)
+        auto !important;
+
+    align-items:center !important;
+    gap:10px !important;
+    width:100% !important;
+    box-sizing:border-box !important;
+}
+
+#meus-produtos .tb-product-row-actions{
+    display:flex !important;
+    align-items:center !important;
+    justify-content:flex-end !important;
+    gap:5px !important;
+    min-width:max-content !important;
+}
+  
   
 </style>
 
