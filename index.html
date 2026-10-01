@@ -12677,6 +12677,7 @@ if(stockQty <= 0){
           <div class="tb-product-row-actions">
             <button class="v5-mini edit-product" onclick="editarProdutoV5('${x.id}')">EDITAR</button>
             <button class="v5-mini" onclick="usarProdutoV5('${x.id}')">CALCULADORA</button>
+            <button class="v5-mini stock-product" onclick="tbOpenProductStock('${x.id}')">ESTOQUE</button>
             <button class="v5-mini danger" onclick="excluirProdutoV5('${x.id}')">EXCLUIR</button>
           </div>
         </div>
@@ -12734,6 +12735,70 @@ if(stockQty <= 0){
     renderProdutosPremiumLista(produtos);
 };
 
+  window.tbOpenProductStock=function(productId){
+
+    const product=premiumProducts.find(x=>
+        String(x.id)===String(productId)
+    );
+
+    if(!product){
+        toast("Produto não encontrado.");
+        return;
+    }
+
+    /* Abre o módulo Controle de Estoque */
+    if(typeof window.tbShowPremiumModule==="function"){
+        window.tbShowPremiumModule("controle-estoque");
+    }
+
+    /*
+      Aguarda a tela abrir e as opções do estoque
+      estarem disponíveis.
+    */
+    setTimeout(()=>{
+
+        const select=document.getElementById("stockProduct");
+
+        if(!select)return;
+
+        /*
+          Primeiro tenta localizar pelo ID do produto.
+          Isso acompanha a forma como stockProductOptions()
+          normalmente relaciona catálogo e estoque.
+        */
+        let option=[...select.options].find(opt=>
+            String(opt.value)===String(product.id)
+        );
+
+        /*
+          Caso a opção esteja usando SKU como value,
+          temos este segundo caminho.
+        */
+        if(!option){
+            option=[...select.options].find(opt=>
+                String(opt.value).trim().toLowerCase()===
+                String(product.sku||"").trim().toLowerCase()
+            );
+        }
+
+        if(option){
+            select.value=option.value;
+
+            if(typeof window.stockProductChanged==="function"){
+                window.stockProductChanged();
+            }else if(typeof stockProductChanged==="function"){
+                stockProductChanged();
+            }
+
+            select.scrollIntoView({
+                behavior:"smooth",
+                block:"center"
+            });
+        }
+
+    },150);
+};
+  
   window.ordenarProdutosPremium=function(){
     filtrarProdutosPremium();
 };
