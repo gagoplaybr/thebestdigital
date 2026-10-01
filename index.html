@@ -12781,20 +12781,30 @@ if(stockQty <= 0){
             );
         }
 
-        if(option){
-            select.value=option.value;
+     if(option){
 
-            if(typeof window.stockProductChanged==="function"){
-                window.stockProductChanged();
-            }else if(typeof stockProductChanged==="function"){
-                stockProductChanged();
-            }
+    select.value=option.value;
 
-            select.scrollIntoView({
-                behavior:"smooth",
-                block:"center"
-            });
-        }
+    /* Dispara o mesmo evento de uma seleção manual */
+    select.dispatchEvent(
+        new Event("change",{bubbles:true})
+    );
+
+    /* Garante SKU e custo */
+    if(typeof window.stockProductChanged==="function"){
+        window.stockProductChanged();
+    }
+
+    /* Atualiza os dados do estoque vindos da nuvem */
+    if(typeof window.renderStockControl==="function"){
+        window.renderStockControl();
+    }
+
+    select.scrollIntoView({
+        behavior:"smooth",
+        block:"center"
+    });
+}
 
     },150);
 };
