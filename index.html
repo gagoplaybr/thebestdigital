@@ -6116,6 +6116,32 @@ body.tb-desktop-program.tb-app-authenticated .app-bottom-nav{
     background:#f7fafc !important;
     border-color:#c6ddeb !important;
 }
+
+  /* ===== SKU NO CARD DO PRODUTO ===== */
+
+#meus-produtos .tb-product-code{
+    display:flex !important;
+    flex-direction:column !important;
+    justify-content:center !important;
+    align-items:flex-start !important;
+    gap:3px !important;
+}
+
+#meus-produtos .tb-product-code span{
+    display:block !important;
+    color:#607c94 !important;
+    font-size:10px !important;
+    font-weight:900 !important;
+    text-transform:uppercase !important;
+    letter-spacing:.5px !important;
+}
+
+#meus-produtos .tb-product-code a{
+    color:#008bd0 !important;
+    font-size:12px !important;
+    font-weight:900 !important;
+    line-height:1.2 !important;
+}
   
 </style>
 
@@ -12833,8 +12859,11 @@ if(stockQty <= 0){
             <small>${x.ean?`EAN ${esc(x.ean)}`:"EAN não informado"}${x.ncm?` • NCM ${esc(x.ncm)}`:""}</small>
           </div>
           <div class="tb-product-code">
-            <a href="javascript:void(0)" onclick="tbOpenProductDetail('${x.id}')">${esc(x.sku||"SEM SKU")}</a>
-          </div>
+    <span>SKU</span>
+    <a href="javascript:void(0)" onclick="tbOpenProductDetail('${x.id}')">
+        ${esc(x.sku||"SEM SKU")}
+    </a>
+</div>
           <div class="tb-product-cell"><span>Custo</span><b>${brl(x.cost)}</b></div>
           <div class="tb-product-cell"><span>Venda</span><b>${brl(x.sale_price)}</b></div>
           <div class="tb-product-cell tb-hide-mid"><span>Peso</span><b>${Number(x.weight_kg||0)>0?Number(x.weight_kg).toLocaleString("pt-BR",{maximumFractionDigits:3})+" kg":"-"}</b></div>
