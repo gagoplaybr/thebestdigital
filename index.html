@@ -11849,9 +11849,24 @@ setTimeout(()=>{
     if(clear)clear.hidden=true;
     card?.classList.add("tb-editing-product");
 
-    document.getElementById("meus-produtos")?.scrollIntoView({behavior:"smooth",block:"start"});
-    setTimeout(()=>document.getElementById("v5ProdutoNome")?.focus(),350);
-    toast("Produto carregado para edição.");
+/* ABRE O FORMULÁRIO DE PRODUTO */
+const form=document.getElementById("tbProductFormPage");
+
+if(form){
+    form.hidden=false;
+}
+
+/* LEVA A TELA DIRETAMENTE PARA O FORMULÁRIO */
+setTimeout(()=>{
+    form?.scrollIntoView({
+        behavior:"smooth",
+        block:"start"
+    });
+
+    document.getElementById("v5ProdutoNome")?.focus();
+},150);
+
+toast("Produto carregado para edição.");
   };
 
   window.salvarProdutoV5=async function(){
