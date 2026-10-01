@@ -12767,6 +12767,21 @@ console.log("CATÁLOGO - resultado Supabase:", data, "ERRO:", error);
       return;
     }
 
+    /* ===== CARREGA ESTOQUE PREMIUM DO USUÁRIO ===== */
+
+const {data:inventoryData,error:inventoryError}=await premiumClient
+  .from("inventory")
+  .select("sku,quantity,minimum_stock,average_cost")
+  .eq("user_id",premiumUser.id);
+
+if(inventoryError){
+  console.error("Erro ao carregar estoque no catálogo:",inventoryError);
+  tbPremiumInventoryCache=[];
+}else{
+  tbPremiumInventoryCache=inventoryData||[];
+}
+
+console.log("CATÁLOGO - estoque carregado:",tbPremiumInventoryCache);
     premiumProducts=data||[];
 window.TB_PREMIUM_PRODUCTS=premiumProducts;
     if(typeof window.tbErpRefreshProductOptions==='function') window.tbErpRefreshProductOptions();
